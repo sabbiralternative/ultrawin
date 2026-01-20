@@ -26,7 +26,7 @@ const LiveCasino = () => {
   const handleSearchChange = (e) => {
     setSearchQuery(e.target.value.toLowerCase());
     const searchGames = data.filter((game) =>
-      game.gameName.toLowerCase().includes(e.target.value.toLowerCase())
+      game.gameName.toLowerCase().includes(e.target.value.toLowerCase()),
     );
     setFilteredData(searchGames);
   };
@@ -35,10 +35,10 @@ const LiveCasino = () => {
   useEffect(() => {
     if (data?.length > 0) {
       const subProviderNames = Array.from(
-        new Set(data.map((item) => item.subProviderName))
+        new Set(data.map((item) => item.subProviderName)),
       );
       const categories = Array.from(new Set(data.map((item) => item.category)));
-      console.log(categories);
+
       setCategories(categories);
       setSubProvider(subProviderNames);
     }
@@ -62,7 +62,7 @@ const LiveCasino = () => {
     if (data?.length > 0) {
       if (selectedCategory !== "all" && searchQuery === "") {
         const filterByCategory = data?.filter(
-          (d) => d.category === selectedCategory
+          (d) => d.category === selectedCategory,
         );
         return setFilteredData(filterByCategory);
       }
@@ -74,7 +74,7 @@ const LiveCasino = () => {
     if (data?.length > 0) {
       if (selectedSubProvider !== "all" && searchQuery === "") {
         const filterByCategory = data?.filter(
-          (d) => d.subProviderName === selectedSubProvider
+          (d) => d.subProviderName === selectedSubProvider,
         );
         return setFilteredData(filterByCategory);
       }

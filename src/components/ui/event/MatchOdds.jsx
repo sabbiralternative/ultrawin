@@ -1,41 +1,105 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
-import useExposer from "../../../hooks/useExposure";
 import assets from "../../../assets";
 import isOddSuspended, { isGameSuspended } from "../../../utils/isOddSuspended";
 import BetSlip from "./BetSlip";
-import { handleDesktopBetSlip } from "../../../utils/handleDesktopBetSlip";
 import { settings } from "../../../api";
-import { handleCashoutBetMobile } from "../../../utils/handleCashoutBetMobile";
+import useExposer from "../../../hooks/useExposure";
+import {
+  setPlaceBetValues,
+  setRunnerId,
+} from "../../../redux/features/events/eventSlice";
+import { handleCashOutPlaceBet } from "../../../utils/handleCashoutPlaceBet";
+import SpeedCashOut from "../../modal/SpeedCashOut/SpeedCashOut";
 
-const MatchOddsBookmaker = ({ data }) => {
-  const { eventId } = useParams();
-  const [selectedRunner, setSelectedRunner] = useState("");
-  const { exposer } = useExposer(eventId);
-  const { predictOdd, stake } = useSelector((state) => state?.event);
-  const { token } = useSelector((state) => state?.auth);
+const MatchOdds = ({ data }) => {
   const navigate = useNavigate();
-  const dispatch = useDispatch();
+  const [speedCashOut, setSpeedCashOut] = useState(null);
+  const { eventId } = useParams();
   const [teamProfit, setTeamProfit] = useState([]);
-  let pnlBySelection;
-  if (exposer?.pnlBySelection) {
-    const obj = exposer?.pnlBySelection;
-    pnlBySelection = Object?.values(obj);
-  }
+  const dispatch = useDispatch();
+  const { runnerId, stake, predictOdd } = useSelector((state) => state.event);
+  const { token } = useSelector((state) => state.auth);
+  const { data: exposure } = useExposer(eventId);
 
-  const handleOpenBetSlip = (betType, games, runner, price) => {
-    handleDesktopBetSlip(
-      betType,
-      games,
-      runner,
-      exposer,
-      dispatch,
-      price,
-      token,
-      setSelectedRunner,
-      navigate
-    );
+  const handleBetSlip = (betType, games, runner, price) => {
+    if (token) {
+      let selectionId;
+      let runnerId;
+      let eventTypeId;
+      if (!price) {
+        return;
+      }
+
+      let pnlBySelection;
+      const updatedPnl = [];
+
+      if (exposure?.pnlBySelection) {
+        const obj = exposure?.pnlBySelection;
+        pnlBySelection = Object?.values(obj);
+      }
+
+      if (games?.btype == "FANCY") {
+        selectionId = games?.id;
+        runnerId = games?.id;
+        eventTypeId = games?.eventTypeId;
+      } else if (games?.btype && games?.btype !== "FANCY") {
+        selectionId = runner?.id;
+        runnerId = games.runners.map((runner) => runner.id);
+        eventTypeId = games?.eventTypeId;
+        games?.runners?.forEach((rnr) => {
+          const pnl = pnlBySelection?.find((p) => p?.RunnerId === rnr?.id);
+          if (pnl) {
+            updatedPnl.push({
+              exposure: pnl?.pnl,
+              id: pnl?.RunnerId,
+              isBettingOnThisRunner: rnr?.id === runner?.id,
+            });
+          } else {
+            updatedPnl.push({
+              exposure: 0,
+              id: rnr?.id,
+              isBettingOnThisRunner: rnr?.id === runner?.id,
+            });
+          }
+        });
+      }
+
+      const betData = {
+        price,
+        side: betType === "back" ? 0 : 1,
+        selectionId,
+        btype: games?.btype,
+        eventTypeId,
+        betDelay: games?.betDelay,
+        marketId: games?.id,
+        lay: betType === "lay",
+        back: betType === "back",
+        selectedBetName: runner?.name,
+        name: games.runners.map((runner) => runner.name),
+        runnerId,
+        isWeak: games?.isWeak,
+        maxLiabilityPerMarket: games?.maxLiabilityPerMarket,
+        isBettable: games?.isBettable,
+        maxLiabilityPerBet: games?.maxLiabilityPerBet,
+        exposure: updatedPnl,
+        marketName: games?.name,
+        eventId: games?.eventId,
+        totalSize: 0,
+      };
+      if (games?.btype == "FANCY") {
+        dispatch(setRunnerId(games?.id));
+      } else if (games?.btype && games?.btype !== "FANCY") {
+        dispatch(setRunnerId(runner?.id));
+      } else {
+        dispatch(setRunnerId(runner?.selectionId));
+      }
+
+      dispatch(setPlaceBetValues(betData));
+    } else {
+      navigate("/login");
+    }
   };
 
   const computeExposureAndStake = (
@@ -43,9 +107,14 @@ const MatchOddsBookmaker = ({ data }) => {
     exposureB,
     runner1,
     runner2,
-    game
+    gameId,
   ) => {
-    let runner, largerExposure, layValue, oppositeLayValue, lowerExposure;
+    let runner,
+      largerExposure,
+      layValue,
+      oppositeLayValue,
+      lowerExposure,
+      speedCashOut;
 
     const pnlArr = [exposureA, exposureB];
     const isOnePositiveExposure = onlyOnePositive(pnlArr);
@@ -54,30 +123,23 @@ const MatchOddsBookmaker = ({ data }) => {
       // Team A has a larger exposure.
       runner = runner1;
       largerExposure = exposureA;
-      layValue =
-        game?.btype === "MATCH_ODDS"
-          ? runner1?.lay?.[0]?.price
-          : 1 + Number(runner1?.lay?.[0]?.price) / 100;
-      oppositeLayValue =
-        game?.btype === "MATCH_ODDS"
-          ? runner2?.lay?.[0]?.price
-          : 1 + Number(runner2?.lay?.[0]?.price) / 100;
+      layValue = runner1?.lay?.[0]?.price;
+      oppositeLayValue = runner2?.lay?.[0]?.price;
       lowerExposure = exposureB;
     } else {
       // Team B has a larger exposure.
       runner = runner2;
       largerExposure = exposureB;
-      layValue =
-        game?.btype === "MATCH_ODDS"
-          ? runner2?.lay?.[0]?.price
-          : 1 + Number(runner2?.lay?.[0]?.price) / 100;
-      oppositeLayValue =
-        game?.btype === "MATCH_ODDS"
-          ? runner1?.lay?.[0]?.price
-          : 1 + Number(runner1?.lay?.[0]?.price) / 100;
+      layValue = runner2?.lay?.[0]?.price;
+      oppositeLayValue = runner1?.lay?.[0]?.price;
       lowerExposure = exposureA;
     }
-
+    if (exposureA > 0 && exposureB > 0) {
+      const difference = exposureA - exposureB;
+      if (difference <= 10) {
+        speedCashOut = true;
+      }
+    }
     // Compute the absolute value of the lower exposure.
     let absLowerExposure = Math.abs(lowerExposure);
 
@@ -100,8 +162,13 @@ const MatchOddsBookmaker = ({ data }) => {
       profit,
       newStakeValue,
       oppositeLayValue,
-      gameId: game?.id,
+      gameId,
       isOnePositiveExposure,
+      exposureA,
+      exposureB,
+      runner1,
+      runner2,
+      speedCashOut,
     };
   };
   function onlyOnePositive(arr) {
@@ -112,8 +179,8 @@ const MatchOddsBookmaker = ({ data }) => {
     let results = [];
     if (
       data?.length > 0 &&
-      exposer?.pnlBySelection &&
-      Object.keys(exposer?.pnlBySelection)?.length > 0
+      exposure?.pnlBySelection &&
+      Object.keys(exposure?.pnlBySelection)?.length > 0
     ) {
       data.forEach((game) => {
         const runners = game?.runners || [];
@@ -121,32 +188,19 @@ const MatchOddsBookmaker = ({ data }) => {
           const runner1 = runners[0];
           const runner2 = runners[1];
           const pnl1 = pnlBySelection?.find(
-            (pnl) => pnl?.RunnerId === runner1?.id
+            (pnl) => pnl?.RunnerId === runner1?.id,
           )?.pnl;
           const pnl2 = pnlBySelection?.find(
-            (pnl) => pnl?.RunnerId === runner2?.id
+            (pnl) => pnl?.RunnerId === runner2?.id,
           )?.pnl;
-          const runner1back = runner1?.back?.[0]?.price;
-          const runner1Lay = runner1?.lay?.[0]?.price;
-          const runner2back = runner2?.back?.[0]?.price;
-          const runner2Lay = runner2?.lay?.[0]?.price;
 
-          if (
-            pnl1 &&
-            pnl2 &&
-            runner1 &&
-            runner2 &&
-            runner1back &&
-            runner1Lay &&
-            runner2back &&
-            runner2Lay
-          ) {
+          if (pnl1 && pnl2 && runner1 && runner2) {
             const result = computeExposureAndStake(
               pnl1,
               pnl2,
               runner1,
               runner2,
-              game
+              game?.id,
             );
             results.push(result);
           }
@@ -157,14 +211,26 @@ const MatchOddsBookmaker = ({ data }) => {
       setTeamProfit([]);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [data, eventId]);
+  }, [eventId, data]);
+
+  let pnlBySelection;
+  if (exposure?.pnlBySelection) {
+    const obj = exposure?.pnlBySelection;
+    pnlBySelection = Object?.values(obj);
+  }
 
   return (
     <>
+      {speedCashOut && (
+        <SpeedCashOut
+          speedCashOut={speedCashOut}
+          setSpeedCashOut={setSpeedCashOut}
+        />
+      )}
       {data?.map((games) => {
         const teamProfitForGame = teamProfit?.find(
           (profit) =>
-            profit?.gameId === games?.id && profit?.isOnePositiveExposure
+            profit?.gameId === games?.id && profit?.isOnePositiveExposure,
         );
 
         return (
@@ -194,72 +260,81 @@ const MatchOddsBookmaker = ({ data }) => {
                                 title="Add To Multi Markets "
                               />{" "}
                               {games?.name}
-                              {(settings.betFairCashOut &&
+                              {settings.betFairCashOut &&
                                 games?.runners?.length !== 3 &&
                                 games?.status === "OPEN" &&
-                                games?.btype === "MATCH_ODDS") ||
-                              (settings.bookmakerCashOut &&
+                                games?.name !== "toss" &&
+                                !speedCashOut && (
+                                  <div className="cashout-option">
+                                    <button
+                                      style={{
+                                        cursor: `${
+                                          !teamProfitForGame
+                                            ? "not-allowed"
+                                            : "pointer"
+                                        }`,
+                                        opacity: `${!teamProfitForGame ? "0.6" : "1"}`,
+                                      }}
+                                      onClick={() =>
+                                        handleCashOutPlaceBet(
+                                          games,
+                                          "lay",
+                                          dispatch,
+                                          pnlBySelection,
+                                          token,
+                                          teamProfitForGame,
+                                          navigate,
+                                        )
+                                      }
+                                      className={`MuiButtonBase-root MuiButton-root MuiButton-contained btn cashout-btn   MuiButton-containedPrimary MuiButton-containedSizeSmall MuiButton-sizeSmall ${
+                                        teamProfitForGame?.profit > 0
+                                          ? "profit"
+                                          : "loss"
+                                      }`}
+                                      type="button"
+                                    >
+                                      <span className="MuiButton-label">
+                                        Cashout{" "}
+                                        {teamProfitForGame?.profit &&
+                                          `(${teamProfitForGame.profit.toFixed(2)})`}
+                                      </span>
+                                      <span className="MuiTouchRipple-root"></span>
+                                    </button>
+                                  </div>
+                                )}
+                              {settings.betFairCashOut &&
                                 games?.runners?.length !== 3 &&
                                 games?.status === "OPEN" &&
-                                games?.btype === "BOOKMAKER") ? (
-                                <div className="cashout-option">
-                                  <button
-                                    style={{
-                                      cursor: `${
-                                        !teamProfitForGame ||
-                                        isGameSuspended(games) ||
-                                        teamProfitForGame?.profit === 0
-                                          ? "not-allowed"
-                                          : "pointer"
-                                      }`,
-                                      opacity: `${
-                                        !teamProfitForGame ||
-                                        isGameSuspended(games) ||
-                                        teamProfitForGame?.profit === 0
-                                          ? "0.6"
-                                          : "1"
-                                      }`,
-                                    }}
-                                    disabled={
-                                      !teamProfitForGame ||
-                                      isGameSuspended(games) ||
-                                      teamProfitForGame?.profit === 0
-                                    }
-                                    onClick={() =>
-                                      handleCashoutBetMobile(
-                                        games,
-                                        "lay",
-                                        dispatch,
-                                        setSelectedRunner,
-                                        pnlBySelection,
-                                        token,
-                                        teamProfitForGame,
-                                        navigate
-                                      )
-                                    }
-                                    className={`MuiButtonBase-root MuiButton-root MuiButton-contained btn cashout-btn   MuiButton-containedPrimary MuiButton-containedSizeSmall MuiButton-sizeSmall ${
-                                      teamProfitForGame?.profit > 0
-                                        ? "profit"
-                                        : "loss"
-                                    }`}
-                                    type="button"
-                                  >
-                                    <span className="MuiButton-label">
-                                      Cashout{" "}
-                                      {teamProfitForGame?.profit &&
-                                        teamProfitForGame?.profit !== 0 && (
-                                          <>
-                                            : ₹{" "}
-                                            {teamProfitForGame?.profit?.toFixed(
-                                              2
-                                            )}
-                                          </>
-                                        )}
-                                    </span>
-                                    <span className="MuiTouchRipple-root"></span>
-                                  </button>
-                                </div>
-                              ) : null}
+                                games?.name !== "toss" &&
+                                speedCashOut && (
+                                  <div className="cashout-option">
+                                    <button
+                                      onClick={() =>
+                                        setSpeedCashOut({
+                                          ...speedCashOut,
+                                          market_name: games?.name,
+                                          event_name: games?.eventName,
+                                        })
+                                      }
+                                      style={{
+                                        cursor: `${
+                                          !teamProfitForGame
+                                            ? "not-allowed"
+                                            : "pointer"
+                                        }`,
+                                        opacity: `${!teamProfitForGame ? "0.6" : "1"}`,
+                                      }}
+                                      disabled={isGameSuspended(games)}
+                                      className={`px-4 py-1.5 rounded-lg !bg-[#82371b] `}
+                                      type="button"
+                                    >
+                                      <span className="MuiButton-label">
+                                        Speed Cashout
+                                      </span>
+                                      <span className="MuiTouchRipple-root"></span>
+                                    </button>
+                                  </div>
+                                )}
                             </span>
 
                             <span className="web-view bet-limits-section">
@@ -295,12 +370,11 @@ const MatchOddsBookmaker = ({ data }) => {
                         </td>
                       </tr>
                       {games?.runners?.map((runner) => {
-                        const pnl =
-                          pnlBySelection?.filter(
-                            (pnl) => pnl?.RunnerId === runner?.id
-                          ) || [];
-                        const predictOddValues = predictOdd?.filter(
-                          (val) => val?.id === runner?.id
+                        const pnl = pnlBySelection?.find(
+                          (pnl) => pnl?.RunnerId === runner?.id,
+                        );
+                        const predictOddValues = predictOdd?.find(
+                          (val) => val?.id === runner?.id,
                         );
                         return (
                           <>
@@ -314,37 +388,32 @@ const MatchOddsBookmaker = ({ data }) => {
                                 >
                                   {" "}
                                   {runner?.name}
-                                  {pnl &&
-                                    pnl?.map(({ pnl }, i) => {
-                                      return (
-                                        <span
-                                          style={{ backgroundColor: "white" }}
-                                          key={i}
-                                          className={` ${
-                                            pnl > 0 ? "profit" : "loss"
-                                          }`}
-                                        >
-                                          {pnl > 0 && "+"}
-                                          {pnl}
-                                        </span>
-                                      );
-                                    })}
+                                  {pnl && (
+                                    <span
+                                      style={{ backgroundColor: "white" }}
+                                      className={` ${
+                                        pnl?.pnl > 0 ? "profit" : "loss"
+                                      }`}
+                                    >
+                                      {pnl?.pnl > 0 && "+"}
+                                      {pnl?.pnl}
+                                    </span>
+                                  )}
                                 </div>
-                                {stake &&
-                                  selectedRunner &&
-                                  predictOddValues?.map(({ odd, id }) => {
-                                    return (
-                                      <div key={id} className="profit-loss-box">
-                                        <span
-                                          className={`${
-                                            odd > 0 ? "profit" : "loss"
-                                          }`}
-                                        >
-                                          {odd > 0 && "+"} {stake && odd}
-                                        </span>
-                                      </div>
-                                    );
-                                  })}
+                                {stake && runnerId && predictOddValues && (
+                                  <div className="profit-loss-box">
+                                    <span
+                                      className={`${
+                                        predictOddValues?.exposure > 0
+                                          ? "profit"
+                                          : "loss"
+                                      }`}
+                                    >
+                                      {predictOddValues?.exposure > 0 && "+"}{" "}
+                                      {predictOddValues?.exposure}
+                                    </span>
+                                  </div>
+                                )}
                               </td>
                               <td className="MuiTableCell-root MuiTableCell-body odds-cell">
                                 <div className="odds-block web-view back-odds-block">
@@ -366,11 +435,11 @@ const MatchOddsBookmaker = ({ data }) => {
                                       ) : (
                                         <div
                                           onClick={() =>
-                                            handleOpenBetSlip(
+                                            handleBetSlip(
                                               "back",
                                               games,
                                               runner,
-                                              runner?.back?.[0]?.price
+                                              runner?.back?.[0]?.price,
                                             )
                                           }
                                           className="exch-odd-button-content"
@@ -405,11 +474,11 @@ const MatchOddsBookmaker = ({ data }) => {
                                       ) : (
                                         <div
                                           onClick={() =>
-                                            handleOpenBetSlip(
+                                            handleBetSlip(
                                               "back",
                                               games,
                                               runner,
-                                              runner?.back?.[1]?.price
+                                              runner?.back?.[1]?.price,
                                             )
                                           }
                                           className="exch-odd-button-content"
@@ -444,11 +513,11 @@ const MatchOddsBookmaker = ({ data }) => {
                                       ) : (
                                         <div
                                           onClick={() =>
-                                            handleOpenBetSlip(
+                                            handleBetSlip(
                                               "back",
                                               games,
                                               runner,
-                                              runner?.back?.[2]?.price
+                                              runner?.back?.[2]?.price,
                                             )
                                           }
                                           className="exch-odd-button-content"
@@ -485,11 +554,11 @@ const MatchOddsBookmaker = ({ data }) => {
                                       ) : (
                                         <div
                                           onClick={() =>
-                                            handleOpenBetSlip(
+                                            handleBetSlip(
                                               "back",
                                               games,
                                               runner,
-                                              runner?.back?.[0]?.price
+                                              runner?.back?.[0]?.price,
                                             )
                                           }
                                           className="exch-odd-button-content"
@@ -528,11 +597,11 @@ const MatchOddsBookmaker = ({ data }) => {
                                       ) : (
                                         <div
                                           onClick={() =>
-                                            handleOpenBetSlip(
+                                            handleBetSlip(
                                               "lay",
                                               games,
                                               runner,
-                                              runner?.lay?.[0]?.price
+                                              runner?.lay?.[0]?.price,
                                             )
                                           }
                                           className="exch-odd-button-content"
@@ -567,11 +636,11 @@ const MatchOddsBookmaker = ({ data }) => {
                                       ) : (
                                         <div
                                           onClick={() =>
-                                            handleOpenBetSlip(
+                                            handleBetSlip(
                                               "lay",
                                               games,
                                               runner,
-                                              runner?.lay?.[1]?.price
+                                              runner?.lay?.[1]?.price,
                                             )
                                           }
                                           className="exch-odd-button-content"
@@ -606,11 +675,11 @@ const MatchOddsBookmaker = ({ data }) => {
                                       ) : (
                                         <div
                                           onClick={() =>
-                                            handleOpenBetSlip(
+                                            handleBetSlip(
                                               "lay",
                                               games,
                                               runner,
-                                              runner?.lay?.[2]?.price
+                                              runner?.lay?.[2]?.price,
                                             )
                                           }
                                           className="exch-odd-button-content"
@@ -647,11 +716,11 @@ const MatchOddsBookmaker = ({ data }) => {
                                       ) : (
                                         <div
                                           onClick={() =>
-                                            handleOpenBetSlip(
+                                            handleBetSlip(
                                               "lay",
                                               games,
                                               runner,
-                                              runner?.lay?.[0]?.price
+                                              runner?.lay?.[0]?.price,
                                             )
                                           }
                                           className="exch-odd-button-content"
@@ -671,8 +740,8 @@ const MatchOddsBookmaker = ({ data }) => {
                                 </div>
                               </td>
                             </tr>
-                            {runner?.id === selectedRunner && (
-                              <BetSlip setSelectedRunner={setSelectedRunner} />
+                            {runner?.id === runnerId && (
+                              <BetSlip currentPlaceBetEvent={games} />
                             )}
                           </>
                         );
@@ -689,4 +758,4 @@ const MatchOddsBookmaker = ({ data }) => {
   );
 };
 
-export default MatchOddsBookmaker;
+export default MatchOdds;

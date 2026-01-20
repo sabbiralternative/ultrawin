@@ -7,6 +7,11 @@ const initialState = {
   showLeftSidebar: false,
   showRightSidebar: false,
   showForgetModal: false,
+  showNotification: false,
+  showBanner: false,
+  showAppPopUp: false,
+  showAPKModal: false,
+  windowWidth: window.innerWidth,
 };
 
 const globalSlice = createSlice({
@@ -36,6 +41,21 @@ const globalSlice = createSlice({
     setShowForgetModal: (state, action) => {
       state.showForgetModal = action.payload;
     },
+    setShowNotification: (state, action) => {
+      state.showNotification = action.payload;
+    },
+    setShowBanner: (state, action) => {
+      state.showBanner = action.payload;
+    },
+    setShowAppPopUp: (state, action) => {
+      state.showAppPopUp = action.payload;
+    },
+    setShowAPKModal: (state, action) => {
+      state.showAPKModal = action.payload;
+    },
+    setWindowWidth: (state, action) => {
+      state.windowWidth = action.payload;
+    },
   },
 });
 
@@ -47,6 +67,11 @@ export const {
   setShowLeftSidebar,
   setShowRightSidebar,
   setShowForgetModal,
+  setShowAPKModal,
+  setShowAppPopUp,
+  setShowBanner,
+  setShowNotification,
+  setWindowWidth,
 } = globalSlice.actions;
 
 export default globalSlice.reducer;

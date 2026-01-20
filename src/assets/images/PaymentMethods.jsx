@@ -113,7 +113,7 @@ const PaymentMethods = ({
         token: generatedToken,
         site: Settings.siteUrl,
       };
-      console.log(depositDetail);
+
       const encryptedData = handleEncryptData(depositDetail);
       const res = await axios.post(API.bankAccount, encryptedData, {
         headers: {

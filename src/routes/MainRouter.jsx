@@ -19,6 +19,14 @@ import Cricket from "../pages/Cricket/Cricket";
 import Football from "../pages/Football/Football";
 import Tennis from "../pages/Tennis/Tennis";
 import ChangePassword from "../pages/ChangePassword/ChangePassword";
+import Promotions from "../pages/Promotions/Promotions";
+import LossBackClaims from "../pages/LossBackClaims/LossBackClaims";
+import APK from "../pages/APK/APK";
+import NotFound from "../pages/NotFound/NotFound";
+import Affiliate from "../pages/Affiliate/Affiliate";
+import AffiliateUserProfitLoss from "../pages/AffiliateUserProfitLoss/AffiliateUserProfitLoss";
+import AffiliateUserStatement from "../pages/AffiliateUserStatement/AffiliateUserStatement";
+import TermsConditions from "../pages/TermsConditions/TermsConditions";
 
 const MainRouter = () => {
   const router = createBrowserRouter(
@@ -26,6 +34,7 @@ const MainRouter = () => {
       {
         path: "/",
         element: <App />,
+        errorElement: <NotFound />,
         children: [
           {
             index: true,
@@ -88,6 +97,34 @@ const MainRouter = () => {
             path: "/deposit-withdraw-report",
             element: <DepositWithdrawReport />,
           },
+          {
+            path: "/promotions",
+            element: <Promotions />,
+          },
+          {
+            path: "/lossback-claims",
+            element: <LossBackClaims />,
+          },
+          {
+            path: "/apk",
+            element: <APK />,
+          },
+          {
+            path: "/affiliate",
+            element: <Affiliate />,
+          },
+          {
+            path: "/affiliate/user-profit-loss",
+            element: <AffiliateUserProfitLoss />,
+          },
+          {
+            path: "/affiliate/user-statement",
+            element: <AffiliateUserStatement />,
+          },
+          {
+            path: "/terms-conditions",
+            element: <TermsConditions />,
+          },
         ],
       },
       {
@@ -109,7 +146,7 @@ const MainRouter = () => {
     ],
     {
       basename: import.meta.env.BASE_URL ?? "/",
-    }
+    },
   );
 
   return <RouterProvider router={router} />;

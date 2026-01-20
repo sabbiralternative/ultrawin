@@ -1,13 +1,17 @@
 // import assets from "../../../assets";
 import useBannerImage from "../../../hooks/useBannerImage";
+import useGetSocialLink from "../../../hooks/useGetSocialLink";
+import CryptoReferTab from "./CryptoReferTab";
 import LiveCasinoGames from "./LiveCasinoGames";
 import PopularGames from "./PopularGames";
+import Promotion from "./Promotion";
 import RecommendedGames from "./RecommendedGames";
 import Sponsors from "./Sponsors";
 import TopRatedGames from "./TopRatedGames";
 import TrendingGames from "./TrendingGames";
 
 const Home = () => {
+  const { socialLink } = useGetSocialLink();
   const { bannerImage } = useBannerImage();
   return (
     <div className="md hydrated">
@@ -48,6 +52,8 @@ const Home = () => {
       <div className="router-ctn">
         <div className="home-page-ctn">
           <div className="home-container">
+            <Promotion />
+            {socialLink?.referral && <CryptoReferTab />}
             {bannerImage?.banner?.length > 0 && (
               <div className="banner-container mt-12">
                 <div className="banner-cards">

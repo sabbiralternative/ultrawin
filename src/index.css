@@ -1,3 +1,7 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 @media screen and (max-width: 720px) {
   .card-add-bank-position {
     bottom: 70px;
@@ -1165,7 +1169,10 @@
   background-size: cover;
   color: #fff;
   z-index: 1;
-  font-family: Helvetica Neue, sans-serif, BBAlpha Sans;
+  font-family:
+    Helvetica Neue,
+    sans-serif,
+    BBAlpha Sans;
   /* margin-left: 4px;
   margin-right: 4px; */
 }
@@ -1296,10 +1303,9 @@ div:where(.swal2-container).swal2-noanimation {
     "top-start top top-end"
     "center-start center center-end"
     "bottom-start bottom-center bottom-end";
-  grid-template-rows: minmax(min-content, auto) minmax(min-content, auto) minmax(
-      min-content,
-      auto
-    );
+  grid-template-rows:
+    minmax(min-content, auto) minmax(min-content, auto)
+    minmax(min-content, auto);
   height: 100%;
   padding: 0.625em;
   overflow-x: hidden;
@@ -1440,4 +1446,250 @@ div:where(.swal2-container) div:where(.swal2-actions) {
 
 .ion-app .support::-webkit-scrollbar {
   display: none;
+}
+
+.bg-bg_color_popUpParentBg {
+  background-color: #00000066;
+}
+.bg-bg_color_LoginPopUpBg {
+  background-color: var(--table-container);
+}
+
+.popUpOpenAnimation {
+  animation: popUpOpenAnimation 0.3s ease-in-out;
+}
+
+@keyframes popUpOpenAnimation {
+  0% {
+    opacity: 0.5;
+    transform: scale(0);
+  }
+
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/*! Download apk css start  */
+
+.promo-card {
+  max-width: 500px;
+  color: #000;
+  border-radius: 12px;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+}
+
+.header-content {
+  display: flex;
+  align-items: center;
+  padding: 5px 20px;
+  background: var(--bg-color-headerBg);
+}
+
+.header-content img {
+  width: 70px;
+}
+
+.main-title {
+  font-size: 18px;
+  color: var(--primary-color);
+  line-height: 1.2;
+}
+
+.promo-body {
+  padding: 5px 20px;
+}
+
+.intro-text,
+.closing-text {
+  font-size: 14px;
+  line-height: 1.5;
+  margin-bottom: 5px;
+  color: #fff;
+}
+
+.benefits-title {
+  font-size: 14px;
+  margin-bottom: 10px;
+  color: #fff;
+}
+
+.benefits-list {
+  list-style: none;
+  padding: 0;
+}
+
+.benefits-list li {
+  margin-bottom: 3px;
+  padding-left: 30px;
+  position: relative;
+  font-size: 14px;
+  color: #fff;
+}
+
+/* Custom Checkmark */
+.benefits-list li::before {
+  content: "✓";
+  position: absolute;
+  left: 0;
+  background: var(--primary-color);
+  color: #000;
+  width: 18px;
+  height: 18px;
+  border-radius: 3px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  font-size: 12px;
+}
+
+.benefits-list strong {
+  color: #fff;
+  font-weight: 700;
+}
+
+.download-button {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--primary-color);
+  text-decoration: none;
+  padding: 10px;
+  font-size: 12px;
+  border-radius: 8px;
+  font-weight: bold;
+  margin-top: 5px;
+  margin-bottom: 10px;
+  transition: transform 0.2s;
+}
+
+.download-button:hover {
+  transform: scale(1.02);
+}
+
+.android-icon {
+  width: 16px;
+  margin-right: 10px;
+}
+
+@media (max-width: 768px) {
+  .benefits-list li {
+    font-size: 12px;
+  }
+  .benefits-title {
+    font-size: 12px;
+  }
+  .main-title {
+    font-size: 16px;
+  }
+  .intro-text,
+  .closing-text {
+    font-size: 12px;
+  }
+  .download-button {
+    margin-bottom: 5px;
+  }
+}
+/*! Download apk css end  */
+
+.bg_color_secondary {
+  background-color: var(--table-bg);
+}
+
+.border_color_secondary {
+  border-color: var(--table-bg);
+}
+
+.text_color_white {
+  color: white;
+}
+
+.bg_primary {
+  background: var(--primary-color);
+}
+.animate-shake {
+  animation: shake 1s ease-in-out infinite;
+}
+
+.hover\:animate-shake:hover {
+  animation: shake 1s ease-in-out infinite;
+}
+.group:hover .group-hover\:animate-shake {
+  animation: shake 1s ease-in-out infinite;
+}
+
+@keyframes shake {
+  10%,
+  90% {
+    transform: translate3d(-1px, 0, 0);
+  }
+  20%,
+  80% {
+    transform: translate3d(2px, 0, 0);
+  }
+  30%,
+  50%,
+  70% {
+    transform: translate3d(-4px, 0, 0);
+  }
+  40%,
+  60% {
+    transform: translate3d(4px, 0, 0);
+  }
+}
+
+.bg-bg_color_bonusInfo {
+  background-image: linear-gradient(91deg, #535252 -1.96%, #312626 110.45%);
+}
+
+.bg-bg_color_lossback_card_bg {
+  background-image: linear-gradient(90deg, #15803d, #000, #000);
+}
+
+.text-text_color_lossback_amt {
+  color: #facc15;
+}
+
+.bg-bg_color_avlnowLossback {
+  background-color: #eab30833;
+}
+
+.bg-bg_color_lossbackSeeAll {
+  background-color: #16a34a;
+}
+
+.bg-bg_color_GiftCardBg {
+  background-image: linear-gradient(90deg, #743899, #9b1d39);
+}
+
+.bg-bg_color_giftCardInputBg {
+  background-color: #ffffff26;
+}
+
+.bg-bg_color_quaternary2 {
+  background-color: #545454;
+}
+
+.bg-bg_color_tertiary {
+  background-color: #48494b;
+}
+
+.bg-bg_color_quaternary {
+  background-color: #545454;
+}
+
+.bg-primary {
+  background-color: var(--primary-color);
+}
+
+.bg-bg_color_input_bg {
+  background-color: white;
+}
+.border-border_color_primary1 {
+  border-color: #545454;
 }

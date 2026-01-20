@@ -2,24 +2,75 @@ import { useDispatch, useSelector } from "react-redux";
 import assets from "../../../assets";
 import {
   setGroupType,
+  setShowAPKModal,
+  setShowAppPopUp,
   setShowLeftSidebar,
 } from "../../../redux/features/global/globalSlice";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import useBalance from "../../../hooks/useBalance";
 import useBonusBalance from "../../../hooks/useBonusBalance";
 import useContextState from "../../../hooks/useContextState";
+import { useEffect, useState } from "react";
+import moment from "moment";
+import { settings } from "../../../api";
+import AppPopup from "./AppPopUp";
+import Notification from "./Notification";
+import DownloadAPK from "../../modal/DownloadAPK/DownloadAPK";
 // import Dropdown from "./Dropdown";
 
 const Header = () => {
+  const { showAppPopUp, windowWidth, showAPKModal } = useSelector(
+    (state) => state?.global,
+  );
   const { logo } = useContextState();
   const { balance } = useBalance();
   const { bonusBalance } = useBonusBalance();
   const { token, user } = useSelector((state) => state.auth);
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const { pathname } = useLocation();
+  const location = useLocation();
+  const [time, setTime] = useState();
+
+  useEffect(() => {
+    setTimeout(() => {
+      setTime(moment().format("h:mm:ss a"));
+    }, 1000);
+  }, [time]);
+
+  useEffect(() => {
+    const closePopupForForever = localStorage.getItem("closePopupForForever");
+    const apk_modal_shown = sessionStorage.getItem("apk_modal_shown");
+    if (location?.state?.pathname === "/apk" || location.pathname === "/apk") {
+      sessionStorage.setItem("apk_modal_shown", true);
+      localStorage.setItem("closePopupForForever", true);
+      localStorage.removeItem("installPromptExpiryTime");
+    } else {
+      if (!apk_modal_shown) {
+        dispatch(setShowAPKModal(true));
+      }
+      if (!closePopupForForever) {
+        const expiryTime = localStorage.getItem("installPromptExpiryTime");
+        const currentTime = new Date().getTime();
+
+        if ((!expiryTime || currentTime > expiryTime) && settings?.apkLink) {
+          localStorage.removeItem("installPromptExpiryTime");
+
+          dispatch(setShowAppPopUp(true));
+        }
+      }
+    }
+  }, [
+    dispatch,
+    windowWidth,
+    showAppPopUp,
+    location?.state?.pathname,
+    location.pathname,
+  ]);
   return (
     <>
+      {settings?.apkLink && showAPKModal && <DownloadAPK />}
+      <Notification />
+      {settings?.apkLink && showAppPopUp && windowWidth < 1040 && <AppPopup />}
       <div className="app-sub-header">
         <div className="MuiTabs-root actions-list web-view">
           <div
@@ -39,7 +90,7 @@ const Header = () => {
             <div className="MuiTabs-flexContainer" role="tablist">
               <Link
                 aria-current="page"
-                className={`nav-link  ${pathname === "/" ? "active" : ""}`}
+                className={`nav-link  ${location.pathname === "/" ? "active" : ""}`}
                 to="/"
               >
                 <button
@@ -52,7 +103,7 @@ const Header = () => {
               </Link>
               <Link
                 className={`nav-link  ${
-                  pathname === "/in-play" ? "active" : ""
+                  location.pathname === "/in-play" ? "active" : ""
                 }`}
                 value="1"
                 to="/in-play"
@@ -68,7 +119,7 @@ const Header = () => {
 
               <Link
                 className={`nav-link  ${
-                  pathname === "/live-casino" ? "active" : ""
+                  location.pathname === "/live-casino" ? "active" : ""
                 }`}
                 value="3"
                 to="/live-casino"

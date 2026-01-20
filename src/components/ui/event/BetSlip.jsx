@@ -2,32 +2,44 @@ import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import useBalance from "../../../hooks/useBalance";
 import useExposer from "../../../hooks/useExposure";
-import { useOrderMutation } from "../../../redux/features/events/events";
 import { v4 as uuidv4 } from "uuid";
 import { useEffect, useState } from "react";
-import { setPrice, setStake } from "../../../redux/features/events/eventSlice";
-import handleRandomToken from "../../../utils/handleRandomToken";
-import handleEncryptData from "../../../utils/handleEncryptData";
-import { settings } from "../../../api";
+import {
+  setPlaceBetValues,
+  setPrice,
+  setRunnerId,
+  setStake,
+} from "../../../redux/features/events/eventSlice";
+import { API, settings } from "../../../api";
 import toast from "react-hot-toast";
 import { handleIncreasePrice } from "../../../utils/handleIncreasePrice";
 import { handleDecreasePrice } from "../../../utils/handleDecreasePrice";
 import useCurrentBets from "../../../hooks/useCurrentBets";
+import useGetSocialLink from "../../../hooks/useGetSocialLink";
+import { AxiosJSEncrypt } from "../../../lib/AxiosJSEncrypt";
 
-const BetSlip = ({ setSelectedRunner }) => {
+const BetSlip = ({ currentPlaceBetEvent }) => {
+  const [isCashOut, setIsCashOut] = useState(false);
+  const [profit, setProfit] = useState(0);
+  const { eventTypeId } = useParams();
   const dispatch = useDispatch();
+  const [loading, setLoading] = useState(false);
   const { eventId } = useParams();
+  const { socialLink } = useGetSocialLink();
+  const { refetchCurrentBets } = useCurrentBets(eventId);
   const { refetchBalance } = useBalance();
   const { refetchExposure } = useExposer(eventId);
-  const { refetchCurrentBets } = useCurrentBets(eventId);
-  const { placeBetValues, price, stake } = useSelector((state) => state?.event);
-  const [createOrder] = useOrderMutation();
+  const { placeBetValues, price, stake, predictOdd } = useSelector(
+    (state) => state?.event,
+  );
+
+  // const [createOrder] = useOrderMutation();
   const buttonValues = localStorage.getItem("buttonValue");
   let parseButtonValues = [];
   if (buttonValues) {
     parseButtonValues = JSON.parse(buttonValues);
   }
-  const [loader, setLoader] = useState(false);
+
   const [betDelay, setBetDelay] = useState("");
 
   useEffect(() => {
@@ -36,9 +48,10 @@ const BetSlip = ({ setSelectedRunner }) => {
       setStake(
         placeBetValues?.totalSize > 0
           ? placeBetValues?.totalSize?.toFixed(2)
-          : null
-      )
+          : null,
+      ),
     );
+    setIsCashOut(placeBetValues?.cashout || false);
   }, [placeBetValues, dispatch]);
 
   let payload = {};
@@ -51,17 +64,19 @@ const BetSlip = ({ setSelectedRunner }) => {
         btype: placeBetValues?.btype,
         placeName: placeBetValues?.placeName,
         eventTypeId: placeBetValues?.eventTypeId,
-        betDelay: placeBetValues?.betDelay,
+        betDelay: currentPlaceBetEvent?.betDelay,
         marketId: placeBetValues?.marketId,
         maxLiabilityPerMarket: placeBetValues?.maxLiabilityPerMarket,
         maxLiabilityPerBet: placeBetValues?.maxLiabilityPerBet,
         totalSize: stake,
         isBettable: placeBetValues?.isBettable,
         eventId: placeBetValues?.eventId,
+        cashout: isCashOut,
+        b2c: settings.b2c,
       };
     } else {
       payload = {
-        betDelay: placeBetValues?.betDelay,
+        betDelay: currentPlaceBetEvent?.betDelay,
         btype: placeBetValues?.btype,
         eventTypeId: placeBetValues?.eventTypeId,
         marketId: placeBetValues?.marketId,
@@ -73,64 +88,137 @@ const BetSlip = ({ setSelectedRunner }) => {
         isBettable: placeBetValues?.isBettable,
         maxLiabilityPerBet: placeBetValues?.maxLiabilityPerBet,
         eventId: placeBetValues?.eventId,
+        cashout: isCashOut,
+        b2c: settings.b2c,
       };
     }
   }
 
   /* Handle bets */
+
   const handleOrderBets = async () => {
-    const generatedToken = handleRandomToken();
-    const encryptedData = handleEncryptData([
+    setLoading(true);
+    const payloadData = [
       {
         ...payload,
-        token: generatedToken,
         site: settings.siteUrl,
         nounce: uuidv4(),
-        isbetDelay: settings.betDelay,
+        isbetDelay: socialLink?.bet_delay,
       },
-    ]);
-    const delay = settings.betDelay ? placeBetValues?.betDelay * 1000 : 0;
+    ];
+    let delay = 0;
+    if (
+      (eventTypeId == 4 || eventTypeId == 2) &&
+      placeBetValues?.btype === "MATCH_ODDS" &&
+      price > 3 &&
+      placeBetValues?.name?.length === 2
+    ) {
+      delay = 9000;
+    }
+    if (
+      (eventTypeId == 4 || eventTypeId == 2) &&
+      placeBetValues?.btype === "MATCH_ODDS" &&
+      price > 7 &&
+      placeBetValues?.name?.length === 3
+    ) {
+      delay = 9000;
+    } else {
+      setBetDelay(currentPlaceBetEvent?.betDelay);
+      delay = socialLink?.bet_delay ? currentPlaceBetEvent?.betDelay * 1000 : 0;
+    }
 
-    setLoader(true);
-    setBetDelay(placeBetValues?.betDelay);
+    // Introduce a delay before calling the API
     setTimeout(async () => {
-      const res = await createOrder(encryptedData).unwrap();
-
-      if (res?.success) {
-        setLoader(false);
-        refetchExposure();
-        refetchBalance();
-        setSelectedRunner("");
-        refetchCurrentBets();
+      try {
+        // const res = await createOrder(payloadData).unwrap();
+        const { data } = await AxiosJSEncrypt.post(API.order, payloadData);
+        if (data?.success) {
+          setLoading(false);
+          refetchExposure();
+          refetchBalance();
+          dispatch(setRunnerId(null));
+          dispatch(setPlaceBetValues(null));
+          refetchCurrentBets();
+          setBetDelay("");
+          dispatch(setStake(null));
+          toast.success(data?.result?.result?.placed?.[0]?.message);
+        } else {
+          setLoading(false);
+          toast.error(
+            data?.error?.status?.[0]?.description || data?.error?.errorMessage,
+          );
+          setBetDelay("");
+          setBetDelay(false);
+        }
+      } catch (err) {
+        console.log(err);
+        toast.error("Something went wrong. Please try again.");
         setBetDelay("");
-        toast.success(res?.result?.result?.placed?.[0]?.message);
-      } else {
-        toast.error(
-          res?.error?.status?.[0]?.description || res?.error?.errorMessage
-        );
-        setBetDelay("");
-        setBetDelay(false);
-        setLoader(false);
-        // refetchExposure();
-        // refetchBalance();
-        // refetchCurrentBets();
       }
     }, delay);
   };
+
   useEffect(() => {
-    if (betDelay > 0) {
-      setTimeout(() => {
-        setBetDelay((prev) => prev - 1);
-      }, 1000);
-    } else {
-      setBetDelay(null);
+    if (
+      price &&
+      stake &&
+      placeBetValues?.back &&
+      placeBetValues?.btype === "MATCH_ODDS"
+    ) {
+      const multiply = price * stake;
+      setProfit(formatNumber(multiply - stake));
+    } else if (
+      price &&
+      stake &&
+      placeBetValues?.back &&
+      (placeBetValues?.btype === "BOOKMAKER" ||
+        placeBetValues?.btype === "BOOKMAKER2")
+    ) {
+      const bookmaker = 1 + price / 100;
+      const total = bookmaker * stake - stake;
+
+      setProfit(formatNumber(total));
+    } else if (price && stake && placeBetValues?.btype === "FANCY") {
+      const profit =
+        (parseFloat(placeBetValues?.bottomValue) * parseFloat(stake)) /
+        parseFloat(stake);
+      setProfit(profit);
     }
-  }, [setBetDelay, betDelay]);
+  }, [price, stake, profit, placeBetValues, setProfit]);
+
+  /* Format number */
+  const formatNumber = (value) => {
+    const hasDecimal = value % 1 !== 0;
+    // value?.toFixed(2)
+    return hasDecimal ? parseFloat(value?.toFixed(2)) : value;
+  };
+
+  const handleCancelBet = () => {
+    dispatch(setRunnerId(null));
+    dispatch(setPlaceBetValues(null));
+    dispatch(setStake(null));
+  };
+
+  const handleButtonValue = (value) => {
+    setIsCashOut(false);
+    const buttonValue = Number(value);
+    const prevStake = !stake ? null : Number(stake);
+
+    if (prevStake === null) {
+      dispatch(setStake(buttonValue));
+    }
+    if (prevStake >= 0) {
+      dispatch(setStake(buttonValue + prevStake));
+    }
+  };
+  const selectedEvent = predictOdd?.find(
+    (odd) => odd?.id === placeBetValues?.selectionId,
+  );
   return (
     <tr className="MuiTableRow-root inline-betslip mobile-betslip">
       <td className="MuiTableCell-root MuiTableCell-body" colSpan="4">
         <div className="exch-betslip-ctn">
-          {!loader && (
+          {loading && (
             <div className="betslip-progress">
               <span
                 style={{
@@ -170,7 +258,7 @@ const BetSlip = ({ setSelectedRunner }) => {
                   </div>
                 </div>
                 <button
-                  onClick={() => setSelectedRunner("")}
+                  onClick={handleCancelBet}
                   className="MuiButtonBase-root MuiIconButton-root bet-del-btn"
                   type="button"
                   aria-label="close"
@@ -199,38 +287,45 @@ const BetSlip = ({ setSelectedRunner }) => {
                         justifyContent: "center",
                       }}
                     >
-                      <button
-                        onClick={() =>
-                          handleDecreasePrice(
-                            price,
-                            placeBetValues,
-                            dispatch,
-                            setPrice
-                          )
-                        }
-                        className="MuiButtonBase-root MuiButton-root MuiButton-contained odds-btns MuiButton-containedPrimary"
-                        type="button"
-                      >
-                        <span className="MuiButton-label">
-                          <span className="MuiButton-startIcon MuiButton-iconSizeMedium">
-                            <svg
-                              className="MuiSvgIcon-root"
-                              focusable="false"
-                              viewBox="0 0 24 24"
-                              aria-hidden="true"
-                            >
-                              <path d="M19 13H5v-2h14v2z"></path>
-                            </svg>
+                      {!placeBetValues?.isWeak && (
+                        <button
+                          onClick={() => {
+                            handleDecreasePrice(
+                              price,
+                              placeBetValues,
+                              dispatch,
+                              setPrice,
+                            );
+                            setIsCashOut(false);
+                          }}
+                          className="MuiButtonBase-root MuiButton-root MuiButton-contained odds-btns MuiButton-containedPrimary"
+                          type="button"
+                        >
+                          <span className="MuiButton-label">
+                            <span className="MuiButton-startIcon MuiButton-iconSizeMedium">
+                              <svg
+                                className="MuiSvgIcon-root"
+                                focusable="false"
+                                viewBox="0 0 24 24"
+                                aria-hidden="true"
+                              >
+                                <path d="M19 13H5v-2h14v2z"></path>
+                              </svg>
+                            </span>
                           </span>
-                        </span>
-                        <span className="MuiTouchRipple-root"></span>
-                      </button>
+                          <span className="MuiTouchRipple-root"></span>
+                        </button>
+                      )}
+
                       <div className="sc-ion-input-md-h sc-ion-input-md-s md has-value hydrated">
                         <input
                           style={{
                             width: "100%",
                           }}
-                          onChange={(e) => dispatch(setPrice(e.target.value))}
+                          onChange={(e) => {
+                            dispatch(setPrice(e.target.value));
+                            setIsCashOut(false);
+                          }}
                           className="native-input sc-ion-input-md"
                           aria-labelledby="ion-input-1-lbl"
                           name="ion-input-1"
@@ -238,43 +333,49 @@ const BetSlip = ({ setSelectedRunner }) => {
                           value={price}
                         />
                       </div>
-                      <button
-                        onClick={() =>
-                          handleIncreasePrice(
-                            price,
-                            placeBetValues,
-                            dispatch,
-                            setPrice
-                          )
-                        }
-                        className="MuiButtonBase-root MuiButton-root MuiButton-contained odds-btns MuiButton-containedPrimary"
-                        type="button"
-                      >
-                        <span className="MuiButton-label">
-                          <span className="MuiButton-startIcon MuiButton-iconSizeMedium">
-                            <svg
-                              className="MuiSvgIcon-root"
-                              focusable="false"
-                              viewBox="0 0 24 24"
-                              aria-hidden="true"
-                            >
-                              <path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"></path>
-                            </svg>
+                      {!placeBetValues?.isWeak && (
+                        <button
+                          onClick={() => {
+                            handleIncreasePrice(
+                              price,
+                              placeBetValues,
+                              dispatch,
+                              setPrice,
+                            );
+                            setIsCashOut(false);
+                          }}
+                          className="MuiButtonBase-root MuiButton-root MuiButton-contained odds-btns MuiButton-containedPrimary"
+                          type="button"
+                        >
+                          <span className="MuiButton-label">
+                            <span className="MuiButton-startIcon MuiButton-iconSizeMedium">
+                              <svg
+                                className="MuiSvgIcon-root"
+                                focusable="false"
+                                viewBox="0 0 24 24"
+                                aria-hidden="true"
+                              >
+                                <path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"></path>
+                              </svg>
+                            </span>
                           </span>
-                        </span>
-                        <span className="MuiTouchRipple-root"></span>
-                      </button>
+                          <span className="MuiTouchRipple-root"></span>
+                        </button>
+                      )}
                     </div>
                   </div>
                   <div className="input-row-ctn stake-ctn">
                     <div className="row-header">Amount</div>
                     <input
-                      onChange={(e) => dispatch(setStake(e.target.value))}
+                      onChange={(e) => {
+                        dispatch(setStake(e.target.value));
+                        setIsCashOut(false);
+                      }}
                       className="row-input"
                       type="text"
-                      placeholder={`Max : ${placeBetValues?.maxLiabilityPerBet}`}
+                      placeholder={`Max bet: ${placeBetValues?.maxLiabilityPerBet}`}
+                      value={stake !== null && stake}
                       style={{ height: "39px", border: "0px", padding: "10px" }}
-                      value={stake || ""}
                     />
                     <div
                       onClick={() => dispatch(setStake(""))}
@@ -296,7 +397,7 @@ const BetSlip = ({ setSelectedRunner }) => {
                   {parseButtonValues?.map((button, idx) => {
                     return (
                       <button
-                        onClick={() => dispatch(setStake(button?.value))}
+                        onClick={() => handleButtonValue(button?.value)}
                         key={idx}
                         className="MuiButtonBase-root MuiButton-root MuiButton-text qb-btn"
                         type="button"
@@ -309,7 +410,7 @@ const BetSlip = ({ setSelectedRunner }) => {
                     );
                   })}
                 </div>
-                <div className="quick-bet">
+                {/* <div className="quick-bet">
                   <button
                     className="MuiButtonBase-root MuiButton-root MuiButton-text qb-btn-allin"
                     type="button"
@@ -322,8 +423,8 @@ const BetSlip = ({ setSelectedRunner }) => {
                       dispatch(
                         setStake(
                           parseButtonValues[parseButtonValues?.length - 1]
-                            ?.value
-                        )
+                            ?.value,
+                        ),
                       )
                     }
                     className="MuiButtonBase-root MuiButton-root MuiButton-text qb-btn-allin"
@@ -332,18 +433,25 @@ const BetSlip = ({ setSelectedRunner }) => {
                     <span className="MuiButton-label">MAX</span>
                     <span className="MuiTouchRipple-root"></span>
                   </button>
-                </div>
+                </div> */}
                 <div className="d-flex-row">
                   <div className="width-mob-100">
                     <div className="profit-loss">
                       <div className="info">
-                        Your profit/loss as per placed bet
+                        {placeBetValues?.back ? "Profit :" : "Liability : "}
                       </div>
                       <div className="returns">
-                        <div className="amt">0.00</div>
+                        <div className="amt">
+                          {" "}
+                          {placeBetValues?.back
+                            ? profit
+                            : placeBetValues?.btype === "FANCY"
+                              ? profit
+                              : selectedEvent?.exposure}
+                        </div>
                       </div>
                     </div>
-                    <div className="profit-loss-pts">
+                    {/* <div className="profit-loss-pts">
                       <div className="info">
                         <div className="profit-loss">
                           <div className="info">Total Amount (in PTS)</div>
@@ -352,7 +460,7 @@ const BetSlip = ({ setSelectedRunner }) => {
                       <div className="returns">
                         <div className="amt">0.00</div>
                       </div>
-                    </div>
+                    </div> */}
                   </div>
                   <div className="place-section mob-view">
                     <button

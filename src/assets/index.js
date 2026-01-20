@@ -2,7 +2,6 @@ import theme from "./images/theme_svg.49ae77af.svg";
 import telegram from "./images/Vector (2).945df162.svg";
 import instagram from "./images/Vector (4).0d0eae75.svg";
 import joining_bonus from "./images/joining_bonus.d41ed7a1.webp";
-import affiliate from "./images/affiliate.1f60e6c1.webp";
 import group from "./images/Group.3d586777.svg";
 import playteck from "./images/playtech 1.cc8dce96.svg";
 import sidebarIcon from "./images/mobSidebarIcon.31d64579.svg";
@@ -39,8 +38,49 @@ import minus from "./images/minus.4b583620.svg";
 import whatsapp from "./images/whatsapp.png";
 import default_notification from "./images/default_notification.svg";
 import warning from "./images/warning-yellow.svg";
+import install_android from "./images/header_image.png";
+import promotionBanner from "./images/promotionBanner.webp";
+import cashBundle from "./images/cash-bundle.webp";
+import giftCard from "./images/giftCard.webp";
+import redeemCardGift from "./images/redeemCardGift.svg";
+import usdt from "./images/usdt.svg";
+import elipBg from "./images/ellip-bg.2ee3d7a6.svg";
+import affiInvite from "./images/affi-invite-img.ac7efafa.svg";
+import affiAddUser from "./images/affi-add-user.e0201da7.svg";
+import affiInviteGift from "./images/invite-gift.66579aaa.svg";
+import affiCopy from "./images/affi-copy.6ddf100b.svg";
+import affiBonus1 from "./images/affi-bonus-1.4907c6fe.svg";
+import affiBonus2 from "./images/affi-bonus-2.b3bc4c43.svg";
+import dashboard from "./images/dashboard-ft.02d913bd.svg";
+import graph from "./images/graph-ft.01703183.svg";
+import userList from "./images/user-list-ft.ad2d77b8.svg";
+import calendar from "./images/affi-calendar.57b07b6a.svg";
+import commission from "./images/affi-commision-icon.ddf556a3.svg";
+import user from "./images/affi-user-icn.b08f83a6.svg";
+import share from "./images/af-share-img.51df8801.svg";
+import affiliate from "./images/affiliate.png";
 
 export default {
+  share,
+  calendar,
+  commission,
+  user,
+  dashboard,
+  graph,
+  userList,
+  affiBonus1,
+  affiBonus2,
+  affiCopy,
+  affiInviteGift,
+  affiAddUser,
+  affiInvite,
+  elipBg,
+  usdt,
+  cashBundle,
+  giftCard,
+  redeemCardGift,
+  promotionBanner,
+  install_android,
   theme,
   telegram,
   instagram,

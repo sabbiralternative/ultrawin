@@ -104,7 +104,12 @@
       "popularGames": "https://api7.live/api/exchange/diamond/ultra_lobby.php?id=monk88",
       "recommendedGames": "https://api7.live/api/exchange/diamond/ultra_lobby.php?id=mac88",
       "topRatedGames": "https://api7.live/api/exchange/diamond/ultra_lobby.php?id=rg",
-      "liveCasinoGames": "https://api7.live/api/exchange/diamond/ultra_lobby.php?id=evolution"
+      "liveCasinoGames": "https://api7.live/api/exchange/diamond/ultra_lobby.php?id=evolution",
+      "bonus": "https://api7.live/api/exchange/diamond/bonus",
+      "sb_cashout": "https://api7.live/api/exchange/diamond/sb_cashout",
+      "fast_cashout": "https://api7.live/api/exchange/diamond/fast_cashout",
+      "otpless": "https://api7.live/api/exchange/diamond/otpless",
+      "index": "https://api7.live/api/exchange/diamond/index"
     }
   },
   "success": true

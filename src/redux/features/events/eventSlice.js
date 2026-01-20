@@ -5,10 +5,8 @@ const initialState = {
   showBetSlip: false,
   price: null,
   stake: null,
-  firstOdd: null,
-  secondOdd: null,
-  thirdOdd: null,
   predictOdd: [],
+  runnerId: null,
 };
 
 const eventSlice = createSlice({
@@ -30,17 +28,12 @@ const eventSlice = createSlice({
     setStake: (state, action) => {
       state.stake = action.payload;
     },
-    setFirstOdd: (state, action) => {
-      state.firstOdd = action.payload;
-    },
-    setSecondOdd: (state, action) => {
-      state.secondOdd = action.payload;
-    },
-    setThirdOdd: (state, action) => {
-      state.thirdOdd = action.payload;
-    },
+
     setPredictOdd: (state, action) => {
       state.predictOdd = action.payload;
+    },
+    setRunnerId: (state, action) => {
+      state.runnerId = action.payload;
     },
   },
 });
@@ -51,10 +44,8 @@ export const {
   setPlaceBetValues,
   setPrice,
   setStake,
-  setFirstOdd,
   setPredictOdd,
-  setSecondOdd,
-  setThirdOdd,
+  setRunnerId,
 } = eventSlice.actions;
 
 export default eventSlice.reducer;

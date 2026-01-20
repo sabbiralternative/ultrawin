@@ -50,6 +50,11 @@ export const API = {
   recommendedGames: "",
   topRatedGames: "",
   liveCasinoGames: "",
+  bonus: "",
+  sb_cashout: "",
+  fast_cashout: "",
+  otpless: "",
+  index: "",
 };
 
 export const settings = {
