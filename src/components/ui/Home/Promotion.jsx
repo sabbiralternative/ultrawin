@@ -6,7 +6,7 @@ const Promotion = () => {
   return (
     <div
       onClick={() => navigate("/promotions")}
-      className="w-full px-[6px] flex flex-col gap-y-2 my-4"
+      className="w-full flex flex-col gap-y-2 my-4"
     >
       <div
         className="w-full min-h-[70px] max-h-full  shadow-sm  md:col-span-1 rounded-[10px] pl-[17px] overflow-hidden  bg-cover bg-center bg-no-repeat cursor-pointer active:scale-[0.97] md:hover:scale-[101%] transition-all duration-300 flex items-center"

@@ -1,4 +1,6 @@
 // import assets from "../../../assets";
+import { useNavigate } from "react-router-dom";
+import assets from "../../../assets";
 import useBannerImage from "../../../hooks/useBannerImage";
 import useGetSocialLink from "../../../hooks/useGetSocialLink";
 import CryptoReferTab from "./CryptoReferTab";
@@ -9,8 +11,13 @@ import RecommendedGames from "./RecommendedGames";
 import Sponsors from "./Sponsors";
 import TopRatedGames from "./TopRatedGames";
 import TrendingGames from "./TrendingGames";
+import { useSelector } from "react-redux";
+import { Fragment } from "react";
+import BottomTab from "./BottomTab";
 
 const Home = () => {
+  const navigate = useNavigate();
+  const { token } = useSelector((state) => state.auth);
   const { socialLink } = useGetSocialLink();
   const { bannerImage } = useBannerImage();
   return (
@@ -54,50 +61,66 @@ const Home = () => {
           <div className="home-container">
             <Promotion />
             {socialLink?.referral && <CryptoReferTab />}
-            {bannerImage?.banner?.length > 0 && (
-              <div className="banner-container mt-12">
-                <div className="banner-cards">
-                  {bannerImage?.banner?.slice(0, 2).map((img) => {
-                    return (
-                      <>
-                        <div
-                          style={{ borderRadius: "5px" }}
-                          key={img}
-                          className="inplay-bg banner-card-div"
-                        >
-                          <div className="banner-image">
-                            <img
-                              style={{ borderRadius: "5px" }}
-                              src={img}
-                              alt="Deposit now"
-                            />
-                          </div>
-                        </div>
-                      </>
-                    );
-                  })}
-                </div>
-              </div>
-              // <div className="banner-container mt-12">
-              //   <div className="banner-cards">
 
-              //     {/* <div className="inplay-bg banner-card-div">
-              //       <div className="banner-image">
-              //         <img src={assets.affiliate} alt="Affiliate" />
-              //       </div>
-              //     </div> */}
-              //   </div>
-              // </div>
-            )}
+            <div className="banner-container">
+              <div className="banner-cards">
+                {token && (
+                  <Fragment>
+                    <button
+                      onClick={() => navigate("/deposit")}
+                      className="MuiButtonBase-root MuiButton-root MuiButton-text deposit-btn"
+                      type="button"
+                    >
+                      <span className="MuiButton-label">
+                        <img src={assets.depositIcon} alt="deposit" />
+                        Deposit{" "}
+                      </span>
+                      <span className="MuiTouchRipple-root"></span>
+                    </button>
+                    <button
+                      onClick={() => navigate("/withdraw")}
+                      className="MuiButtonBase-root MuiButton-root MuiButton-text withdraw-btn"
+                      type="button"
+                    >
+                      <span className="MuiButton-label">
+                        <img src={assets.withdrawIcon} alt="withdraw" />
+                        Withdraw
+                      </span>
+                      <span className="MuiTouchRipple-root"></span>
+                    </button>
+                  </Fragment>
+                )}
+
+                {bannerImage?.banner?.slice(0, 2).map((img) => {
+                  return (
+                    <div
+                      style={{ borderRadius: "5px" }}
+                      key={img}
+                      className="inplay-bg banner-card-div"
+                    >
+                      <div className="banner-image">
+                        <img
+                          style={{ borderRadius: "5px" }}
+                          src={img}
+                          alt="Deposit now"
+                        />
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
 
             <PopularGames />
             <TrendingGames />
             <RecommendedGames />
             <TopRatedGames />
             <LiveCasinoGames />
+
             <div className="banner-container pb-0" />
           </div>
           <Sponsors />
+          <BottomTab />
         </div>
       </div>
     </div>

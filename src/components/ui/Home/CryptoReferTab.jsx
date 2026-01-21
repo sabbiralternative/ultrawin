@@ -11,7 +11,7 @@ const CryptoReferTab = () => {
     token ? navigate("/affiliate") : dispatch(setShowLoginModal(true));
 
   return (
-    <div className="w-full px-[6px] grid  gap-2 grid-cols-2">
+    <div className="w-full grid  gap-2 grid-cols-2">
       <div>
         <div
           onClick={() => {

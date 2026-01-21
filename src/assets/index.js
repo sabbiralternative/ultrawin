@@ -59,8 +59,16 @@ import commission from "./images/affi-commision-icon.ddf556a3.svg";
 import user from "./images/affi-user-icn.b08f83a6.svg";
 import share from "./images/af-share-img.51df8801.svg";
 import affiliate from "./images/affiliate.png";
+import depositIcon from "./images/depositIcon.ff67171b.svg";
+import withdrawIcon from "./images/withdrawIcon.50f38a04.svg";
+import no_multi_market_icon from "./images/no_multi_market_icon.faa05662.svg";
+import secure from "./images/secure.e824a057.png";
 
 export default {
+  secure,
+  no_multi_market_icon,
+  depositIcon,
+  withdrawIcon,
   share,
   calendar,
   commission,

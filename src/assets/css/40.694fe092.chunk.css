@@ -458,7 +458,7 @@ ion-icon {
 }
 .app-sub-header .actions-list .nav-link {
   text-decoration: none;
-  max-height: 36px;
+  max-height: 100%;
   line-height: 20px;
 }
 .app-sub-header .actions-list .nav-link .MuiButton-root .newlacunch-menu {

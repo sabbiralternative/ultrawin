@@ -1,3 +1,5 @@
+import "./login.scss";
+import { HiArrowNarrowDown } from "react-icons/hi";
 import assets from "../../assets";
 import { useDispatch } from "react-redux";
 import { useLoginMutation } from "../../redux/features/auth/authApi";
@@ -19,12 +21,7 @@ const Login = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [handleLogin] = useLoginMutation();
-  const { register, handleSubmit } = useForm({
-    // defaultValues: {
-    //   username: "8888884000",
-    //   password: "avinya123",
-    // },
-  });
+  const { register, handleSubmit } = useForm({});
 
   const onSubmit = async ({ username, password }) => {
     const generatedToken = handleRandomToken();
@@ -82,6 +79,17 @@ const Login = () => {
     } else {
       toast.error(result?.error);
     }
+  };
+
+  const handleDownloadAPK = (e) => {
+    e.preventDefault();
+    const fileUrl = settings.apkLink;
+    const link = document.createElement("a");
+    link.href = fileUrl;
+    link.setAttribute("download", "site.apk");
+    document.body.appendChild(link);
+    link.click();
+    link.parentNode.removeChild(link);
   };
   return (
     <div className="login-ctn">
@@ -214,6 +222,21 @@ const Login = () => {
               Sign Up
             </span>
           </div>
+          {settings.apkLink && (
+            <div onClick={handleDownloadAPK} className="download-apk">
+              <svg
+                className="MuiSvgIcon-root android-icon"
+                focusable="false"
+                viewBox="0 0 24 24"
+                aria-hidden="true"
+              >
+                <path d="M6 18c0 .55.45 1 1 1h1v3.5c0 .83.67 1.5 1.5 1.5s1.5-.67 1.5-1.5V19h2v3.5c0 .83.67 1.5 1.5 1.5s1.5-.67 1.5-1.5V19h1c.55 0 1-.45 1-1V8H6v10zM3.5 8C2.67 8 2 8.67 2 9.5v7c0 .83.67 1.5 1.5 1.5S5 17.33 5 16.5v-7C5 8.67 4.33 8 3.5 8zm17 0c-.83 0-1.5.67-1.5 1.5v7c0 .83.67 1.5 1.5 1.5s1.5-.67 1.5-1.5v-7c0-.83-.67-1.5-1.5-1.5zm-4.97-5.84l1.3-1.3c.2-.2.2-.51 0-.71-.2-.2-.51-.2-.71 0l-1.48 1.48C13.85 1.23 12.95 1 12 1c-.96 0-1.86.23-2.66.63L7.85.15c-.2-.2-.51-.2-.71 0-.2.2-.2.51 0 .71l1.31 1.31C6.97 3.26 6 5.01 6 7h12c0-1.99-.97-3.75-2.47-4.84zM10 5H9V4h1v1zm5 0h-1V4h1v1z"></path>
+              </svg>
+              <span className="donwload-txt">Download .apk</span>
+              <HiArrowNarrowDown className="ml-1" color="#fff" />
+            </div>
+          )}
+
           <div className="socialMedia-login">
             <div className="sm-new-ctn">
               <div className="sm-new-links">

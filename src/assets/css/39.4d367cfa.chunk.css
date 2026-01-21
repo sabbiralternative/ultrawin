@@ -474,7 +474,7 @@ ion-icon {
 }
 .app-sub-header .actions-list .nav-link {
   text-decoration: none;
-  max-height: 36px;
+  max-height: auto;
   line-height: 20px;
 }
 .app-sub-header .actions-list .nav-link .MuiButton-root .newlacunch-menu {
@@ -532,7 +532,7 @@ ion-icon {
   margin-left: 20px;
   background-color: #fff;
   color: #000 !important;
-  animation: blink 2s infinite;
+  animation: global-blink 2s infinite;
   transition: background-color 2s;
 }
 .app-sub-header .actions-list .nav-link .check-bonus-btn .MuiButton-label {
@@ -921,5 +921,25 @@ ion-icon {
 .theme-menu-popup .MuiPaper-root .MuiMenu-list .MuiMenuItem-root:hover {
   color: #000;
   background: transparent;
+}
+
+.check-bt-blink-animation {
+  animation: global-blink 2s infinite;
+  transition: background-color 2s;
+}
+
+@keyframes global-blink {
+  0% {
+    opacity: 1;
+    background-color: gold;
+  }
+  50% {
+    background-color: #fff;
+  }
+
+  100% {
+    opacity: 1;
+    background-color: gold;
+  }
 }
 /*# sourceMappingURL=39.4d367cfa.chunk.css.map */

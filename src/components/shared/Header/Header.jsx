@@ -16,12 +16,15 @@ import { settings } from "../../../api";
 import AppPopup from "./AppPopUp";
 import Notification from "./Notification";
 import DownloadAPK from "../../modal/DownloadAPK/DownloadAPK";
+import WarningCondition from "../../ui/WarningCondition/WarningCondition";
 // import Dropdown from "./Dropdown";
 
 const Header = () => {
   const { showAppPopUp, windowWidth, showAPKModal } = useSelector(
     (state) => state?.global,
   );
+  const [showWarning, setShowWarning] = useState(false);
+  const [gameInfo, setGameInfo] = useState({ gameName: "", gameId: "" });
   const { logo } = useContextState();
   const { balance } = useBalance();
   const { bonusBalance } = useBonusBalance();
@@ -66,8 +69,25 @@ const Header = () => {
     location?.state?.pathname,
     location.pathname,
   ]);
+
+  const handleNavigateToIFrame = (name, id) => {
+    if (token) {
+      if (settings.casinoCurrency !== "AED") {
+        navigate(`/casino/${name}/${id}`);
+      } else {
+        setGameInfo({ gameName: "", gameId: "" });
+        setGameInfo({ gameName: name, gameId: id });
+        setShowWarning(true);
+      }
+    } else {
+      navigate("/login");
+    }
+  };
   return (
     <>
+      {showWarning && (
+        <WarningCondition gameInfo={gameInfo} setShowWarning={setShowWarning} />
+      )}
       {settings?.apkLink && showAPKModal && <DownloadAPK />}
       <Notification />
       {settings?.apkLink && showAppPopUp && windowWidth < 1040 && <AppPopup />}
@@ -87,7 +107,11 @@ const Header = () => {
             className="MuiTabs-scroller MuiTabs-scrollable"
             style={{ marginBottom: "0px" }}
           >
-            <div className="MuiTabs-flexContainer" role="tablist">
+            <div
+              className="MuiTabs-flexContainer"
+              role="tablist"
+              style={{ marginTop: "0px", height: "100%" }}
+            >
               <Link
                 aria-current="page"
                 className={`nav-link  ${location.pathname === "/" ? "active" : ""}`}
@@ -116,6 +140,21 @@ const Header = () => {
                   <span className="MuiTouchRipple-root"></span>
                 </button>
               </Link>
+              <Link
+                className={`nav-link  ${
+                  location.pathname === "/sports-book" ? "active" : ""
+                }`}
+                value="1"
+                onClick={() => handleNavigateToIFrame("sportsbook", "550000")}
+              >
+                <button
+                  className="MuiButtonBase-root MuiButton-root MuiButton-text nav-link-btn"
+                  type="button"
+                >
+                  <span className="MuiButton-label">Sportsbook</span>
+                  <span className="MuiTouchRipple-root"></span>
+                </button>
+              </Link>
 
               <Link
                 className={`nav-link  ${
@@ -129,6 +168,36 @@ const Header = () => {
                   type="button"
                 >
                   <span className="MuiButton-label">Live Casino</span>
+                  <span className="MuiTouchRipple-root"></span>
+                </button>
+              </Link>
+
+              <Link
+                className={`nav-link  ${
+                  location.pathname === "/multi-markets" ? "active" : ""
+                }`}
+                value="1"
+                to="/multi-markets"
+              >
+                <button
+                  className="MuiButtonBase-root MuiButton-root MuiButton-text nav-link-btn"
+                  type="button"
+                >
+                  <span className="MuiButton-label">Multi Markets</span>
+                  <span className="MuiTouchRipple-root"></span>
+                </button>
+              </Link>
+              <Link
+                className="nav-link"
+                textcolor="inherit"
+                value="5"
+                to="/promotions"
+              >
+                <button
+                  className="MuiButtonBase-root MuiButton-root MuiButton-text check-bonus-btn check-bt-blink-animation"
+                  type="button"
+                >
+                  <span className="MuiButton-label">Check Bonuses</span>
                   <span className="MuiTouchRipple-root"></span>
                 </button>
               </Link>

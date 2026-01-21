@@ -1,8 +1,13 @@
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import WhatsApp from "../../ui/WhatsApp/WhatsApp";
 import { useSelector } from "react-redux";
+import { useState } from "react";
+import { settings } from "../../../api";
+import WarningCondition from "../../ui/WarningCondition/WarningCondition";
 
 const MobileHeader = () => {
+  const [showWarning, setShowWarning] = useState(false);
+  const [gameInfo, setGameInfo] = useState({ gameName: "", gameId: "" });
   const { pathname } = useLocation();
   const { token } = useSelector((state) => state.auth);
   const navigate = useNavigate();
@@ -14,8 +19,25 @@ const MobileHeader = () => {
       navigate("/login");
     }
   };
+
+  const handleNavigateToIFrame = (name, id) => {
+    if (token) {
+      if (settings.casinoCurrency !== "AED") {
+        navigate(`/casino/${name}/${id}`);
+      } else {
+        setGameInfo({ gameName: "", gameId: "" });
+        setGameInfo({ gameName: name, gameId: id });
+        setShowWarning(true);
+      }
+    } else {
+      navigate("/login");
+    }
+  };
   return (
     <>
+      {showWarning && (
+        <WarningCondition gameInfo={gameInfo} setShowWarning={setShowWarning} />
+      )}
       {!pathname?.includes("/casino" && <WhatsApp />)}
       <div className="rules-regulations-footer web-view">
         <div>Rules &amp; Regulations © 2024</div>
@@ -24,7 +46,10 @@ const MobileHeader = () => {
       {!pathname?.includes("/casino") && (
         <div className="mob-header" style={{ zIndex: 9999 }}>
           <div className="exch-mob-header-ctn">
-            <Link className="exch-mob-nav-link mob-link-btn">
+            <Link
+              onClick={() => handleNavigateToIFrame("sportsbook", "550000")}
+              className="exch-mob-nav-link mob-link-btn"
+            >
               <div className="exch-nav-item-ctn">
                 <div className="exch-nav-item-icon sport-icon">
                   <svg

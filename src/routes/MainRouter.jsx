@@ -27,6 +27,7 @@ import Affiliate from "../pages/Affiliate/Affiliate";
 import AffiliateUserProfitLoss from "../pages/AffiliateUserProfitLoss/AffiliateUserProfitLoss";
 import AffiliateUserStatement from "../pages/AffiliateUserStatement/AffiliateUserStatement";
 import TermsConditions from "../pages/TermsConditions/TermsConditions";
+import MultiMarkets from "../pages/MultiMarkets/MultiMarkets";
 
 const MainRouter = () => {
   const router = createBrowserRouter(
@@ -125,6 +126,14 @@ const MainRouter = () => {
             path: "/terms-conditions",
             element: <TermsConditions />,
           },
+          {
+            path: "/multi-markets",
+            element: <MultiMarkets />,
+          },
+          {
+            path: "/change-password",
+            element: <ChangePassword />,
+          },
         ],
       },
       {
@@ -138,10 +147,6 @@ const MainRouter = () => {
       {
         path: "/forgot-password",
         element: <ForgotPassword />,
-      },
-      {
-        path: "/change-password",
-        element: <ChangePassword />,
       },
     ],
     {

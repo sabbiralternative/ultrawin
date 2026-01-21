@@ -58,7 +58,10 @@ const Account = () => {
                 </div>
               </div>
               <div className="reports-header">Reports Menu</div>
-              <div className="dashboard-cards-ctn ios hydrated">
+              <div
+                style={{ gap: "5px" }}
+                className="dashboard-cards-ctn ios hydrated"
+              >
                 <div className="dashboard-item ios hydrated">
                   <Link className="dashboard-item-link" to="/deposit">
                     <svg
@@ -144,9 +147,7 @@ const Account = () => {
                         fill="white"
                       />
                     </svg>
-                    <span className="dashboard-item-text">
-                      Deposit Withdraw Report
-                    </span>
+                    <span className="dashboard-item-text">D/W Report</span>
                   </Link>
                 </div>
                 <div className="dashboard-item ios hydrated">

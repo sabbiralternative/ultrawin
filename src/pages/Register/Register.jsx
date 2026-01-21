@@ -149,7 +149,7 @@ const Register = () => {
                     maxLength={10}
                     onChange={(e) => handleMobileInputChange(e)}
                     style={{
-                      paddingLeft: "5px",
+                      padding: "0px 5px",
                       width: "100%",
                       height: "100%",
                     }}
@@ -163,11 +163,23 @@ const Register = () => {
                 </div>
                 <button
                   onClick={handleOTP}
-                  style={{ position: "absolute", right: 5, top: "5px" }}
+                  style={{
+                    position: "absolute",
+                    right: "10px",
+                    top: "10px",
+                    background: "var(--custom-btn-bg-variant-2)",
+                    borderRadius: "2px",
+                    padding: "1px 2px",
+                  }}
                   className="MuiButtonBase-root MuiButton-root MuiButton-contained login-form-btn-demo MuiButton-containedPrimary"
                   type="button"
                 >
-                  <span className="MuiButton-label">Get OTP</span>
+                  <span
+                    className="MuiButton-label"
+                    style={{ fontSize: "12px", color: "white" }}
+                  >
+                    Get OTP
+                  </span>
                   <span className="MuiTouchRipple-root"></span>
                 </button>
               </div>
@@ -183,7 +195,7 @@ const Register = () => {
                 >
                   <input
                     style={{
-                      paddingLeft: "5px",
+                      padding: "0px 5px",
                       width: "100%",
                       height: "100%",
                     }}
@@ -208,7 +220,7 @@ const Register = () => {
                 >
                   <input
                     style={{
-                      paddingLeft: "5px",
+                      padding: "0px 5px",
                       width: "100%",
                       height: "100%",
                     }}
@@ -252,7 +264,7 @@ const Register = () => {
                 >
                   <input
                     style={{
-                      paddingLeft: "5px",
+                      padding: "0px 5px",
                       width: "100%",
                       height: "100%",
                     }}
