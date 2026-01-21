@@ -21,7 +21,7 @@ const MatchOdds = ({ data }) => {
   const dispatch = useDispatch();
   const { runnerId, stake, predictOdd } = useSelector((state) => state.event);
   const { token } = useSelector((state) => state.auth);
-  const { data: exposure } = useExposer(eventId);
+  const { exposer } = useExposer(eventId);
 
   const handleBetSlip = (betType, games, runner, price) => {
     if (token) {
@@ -35,8 +35,8 @@ const MatchOdds = ({ data }) => {
       let pnlBySelection;
       const updatedPnl = [];
 
-      if (exposure?.pnlBySelection) {
-        const obj = exposure?.pnlBySelection;
+      if (exposer?.pnlBySelection) {
+        const obj = exposer?.pnlBySelection;
         pnlBySelection = Object?.values(obj);
       }
 
@@ -179,8 +179,8 @@ const MatchOdds = ({ data }) => {
     let results = [];
     if (
       data?.length > 0 &&
-      exposure?.pnlBySelection &&
-      Object.keys(exposure?.pnlBySelection)?.length > 0
+      exposer?.pnlBySelection &&
+      Object.keys(exposer?.pnlBySelection)?.length > 0
     ) {
       data.forEach((game) => {
         const runners = game?.runners || [];
@@ -214,8 +214,8 @@ const MatchOdds = ({ data }) => {
   }, [eventId, data]);
 
   let pnlBySelection;
-  if (exposure?.pnlBySelection) {
-    const obj = exposure?.pnlBySelection;
+  if (exposer?.pnlBySelection) {
+    const obj = exposer?.pnlBySelection;
     pnlBySelection = Object?.values(obj);
   }
 
@@ -232,7 +232,9 @@ const MatchOdds = ({ data }) => {
           (profit) =>
             profit?.gameId === games?.id && profit?.isOnePositiveExposure,
         );
-
+        const speedCashOut = teamProfit?.find(
+          (profit) => profit?.gameId === games?.id && profit?.speedCashOut,
+        );
         return (
           <div key={games?.id} className="hydrated md eam-table-section">
             <div className="matchodds-table-ctn">
@@ -316,14 +318,6 @@ const MatchOdds = ({ data }) => {
                                           event_name: games?.eventName,
                                         })
                                       }
-                                      style={{
-                                        cursor: `${
-                                          !teamProfitForGame
-                                            ? "not-allowed"
-                                            : "pointer"
-                                        }`,
-                                        opacity: `${!teamProfitForGame ? "0.6" : "1"}`,
-                                      }}
                                       disabled={isGameSuspended(games)}
                                       className={`px-4 py-1.5 rounded-lg !bg-[#82371b] `}
                                       type="button"

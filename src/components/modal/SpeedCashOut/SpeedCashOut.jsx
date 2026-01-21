@@ -51,6 +51,8 @@ const SpeedCashOut = ({ speedCashOut, setSpeedCashOut }) => {
       },
     });
   };
+
+  console.log(speedCashOut);
   return (
     <div
       id="popup-modal"
@@ -95,7 +97,10 @@ const SpeedCashOut = ({ speedCashOut, setSpeedCashOut }) => {
             title="mobileLogin"
             className="flex flex-col items-start gap-y-4 w-full"
           >
-            <div className="mdc-dialog__container">
+            <div
+              className="mdc-dialog__container"
+              style={{ width: "100%", transform: "scale(1)", opacity: 1 }}
+            >
               <div
                 style={{ borderRadius: "10px", width: "100%" }}
                 className="mat-mdc-dialog-surface mdc-dialog__surface"
@@ -106,7 +111,7 @@ const SpeedCashOut = ({ speedCashOut, setSpeedCashOut }) => {
                       _ngcontent-ng-c526813732=""
                       className="modal-header"
                       style={{
-                        backgroundColor: "transparent",
+                        // backgroundColor: "transparent",
                         alignItems: "start",
                         justifyContent: "start",
                         paddingLeft: "10px",
@@ -114,7 +119,11 @@ const SpeedCashOut = ({ speedCashOut, setSpeedCashOut }) => {
                       }}
                     >
                       <h3
-                        style={{ margin: "0px", fontSize: "18px" }}
+                        style={{
+                          margin: "0px",
+                          fontSize: "18px",
+                          color: "white",
+                        }}
                         _ngcontent-ng-c526813732=""
                         className=""
                       >
@@ -206,7 +215,7 @@ const SpeedCashOut = ({ speedCashOut, setSpeedCashOut }) => {
                         We are deducting 3% fee on speed cashout
                       </p>
                       <div
-                        style={{ padding: "0px" }}
+                        style={{ padding: "0px", borderRadius: "0px" }}
                         _ngcontent-ng-c526813732=""
                         className="referral-code"
                       >
@@ -215,12 +224,13 @@ const SpeedCashOut = ({ speedCashOut, setSpeedCashOut }) => {
                             position: "static",
                             width: "100%",
                             fontWeight: "600",
-
                             fontSize: "14px",
+                            background: "var(--primary-color)",
+                            borderRadius: "0px",
                           }}
                           onClick={handleSpeedCashOut}
                           _ngcontent-ng-c526813732=""
-                          className="btn secondary-btn text-primary bg-bg_color_LoginBtnBgColor"
+                          className="btn secondary-btn text-primary bg-primary"
                         >
                           Speed Cash - {amount}
                         </button>

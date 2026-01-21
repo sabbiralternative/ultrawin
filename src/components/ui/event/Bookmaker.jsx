@@ -234,6 +234,9 @@ const Bookmaker = ({ data }) => {
           (profit) =>
             profit?.gameId === games?.id && profit?.isOnePositiveExposure,
         );
+        const speedCashOut = teamProfit?.find(
+          (profit) => profit?.gameId === games?.id && profit?.speedCashOut,
+        );
 
         return (
           <div key={games?.id} className="hydrated md eam-table-section">
@@ -318,14 +321,6 @@ const Bookmaker = ({ data }) => {
                                           event_name: games?.eventName,
                                         })
                                       }
-                                      style={{
-                                        cursor: `${
-                                          !teamProfitForGame
-                                            ? "not-allowed"
-                                            : "pointer"
-                                        }`,
-                                        opacity: `${!teamProfitForGame ? "0.6" : "1"}`,
-                                      }}
                                       disabled={isGameSuspended(games)}
                                       className={`px-4 py-1.5 rounded-lg !bg-[#82371b] `}
                                       type="button"
