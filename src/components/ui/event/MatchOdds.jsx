@@ -135,7 +135,7 @@ const MatchOdds = ({ data }) => {
       lowerExposure = exposureA;
     }
     if (exposureA > 0 && exposureB > 0) {
-      const difference = exposureA - exposureB;
+      const difference = Math.abs(exposureA - exposureB);
       if (difference <= 10) {
         speedCashOut = true;
       }
