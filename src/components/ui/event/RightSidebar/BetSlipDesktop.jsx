@@ -21,6 +21,7 @@ import useGetSocialLink from "../../../../hooks/useGetSocialLink";
 import { AxiosJSEncrypt } from "../../../../lib/AxiosJSEncrypt";
 
 const BetSlipDesktop = () => {
+  const closePopupForForever = localStorage.getItem("closePopupForForever");
   const [tab, setTab] = useState("betSlip");
   const { pathname } = useLocation();
   const [isCashOut, setIsCashOut] = useState(false);
@@ -121,6 +122,7 @@ const BetSlipDesktop = () => {
         site: settings.siteUrl,
         nounce: uuidv4(),
         isbetDelay: socialLink?.bet_delay,
+        apk: closePopupForForever ? true : false,
       },
     ];
     setLoading(true);

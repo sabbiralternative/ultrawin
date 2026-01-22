@@ -16,6 +16,7 @@ import { navigateTelegramInstagram } from "../../utils/navigateTelegramInstagram
 import useContextState from "../../hooks/useContextState";
 
 const Login = () => {
+  const closePopupForForever = localStorage.getItem("closePopupForForever");
   const { logo } = useContextState();
   const { socialLink } = useGetSocialLink();
   const navigate = useNavigate();
@@ -31,6 +32,7 @@ const Login = () => {
       token: generatedToken,
       site: settings.siteUrl,
       b2c: settings.b2c,
+      apk: closePopupForForever ? true : false,
     };
     const encryptedData = handleEncryptData(loginData);
     const result = await handleLogin(encryptedData).unwrap();
@@ -62,6 +64,7 @@ const Login = () => {
       token: generatedToken,
       site: settings.siteUrl,
       b2c: settings.b2c,
+      apk: closePopupForForever ? true : false,
     });
     const result = await handleLogin(loginData).unwrap();
     if (result.success) {

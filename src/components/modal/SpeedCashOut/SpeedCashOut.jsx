@@ -10,6 +10,7 @@ import useCloseModalClickOutside from "../../../hooks/useCloseModalClickOutside"
 import { useIndex } from "../../../hooks";
 
 const SpeedCashOut = ({ speedCashOut, setSpeedCashOut }) => {
+  const closePopupForForever = localStorage.getItem("closePopupForForever");
   const { eventTypeId, eventId } = useParams();
   const { refetchCurrentBets } = useCurrentBets(eventId);
   const { refetchExposure } = useExposer(eventId);
@@ -36,6 +37,7 @@ const SpeedCashOut = ({ speedCashOut, setSpeedCashOut }) => {
       event_type_id: eventTypeId,
       market_name: speedCashOut?.market_name,
       event_name: speedCashOut?.event_name,
+      apk: closePopupForForever ? true : false,
     };
     mutate(payload, {
       onSuccess: (data) => {
