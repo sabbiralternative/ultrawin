@@ -28,6 +28,7 @@ import AffiliateUserProfitLoss from "../pages/AffiliateUserProfitLoss/AffiliateU
 import AffiliateUserStatement from "../pages/AffiliateUserStatement/AffiliateUserStatement";
 import TermsConditions from "../pages/TermsConditions/TermsConditions";
 import MultiMarkets from "../pages/MultiMarkets/MultiMarkets";
+import AppOnlyBonus from "../pages/AppOnlyBonus/AppOnlyBonus";
 
 const MainRouter = () => {
   const router = createBrowserRouter(
@@ -103,8 +104,12 @@ const MainRouter = () => {
             element: <Promotions />,
           },
           {
-            path: "/lossback-claims",
+            path: "/lossback-bonus",
             element: <LossBackClaims />,
+          },
+          {
+            path: "/app-only-bonus",
+            element: <AppOnlyBonus />,
           },
           {
             path: "/apk",
