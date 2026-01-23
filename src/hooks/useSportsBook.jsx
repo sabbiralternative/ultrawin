@@ -19,8 +19,11 @@ const useSportsBook = (group) => {
         },
       });
       const data = res.data;
-      const decryptionData = await handleDecryptData(JSON.stringify(data));
-      return decryptionData;
+      if (data?.ct) {
+        return handleDecryptData(JSON.stringify(data));
+      } else {
+        return data;
+      }
     },
 
     refetchInterval: 2000,

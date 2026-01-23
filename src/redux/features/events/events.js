@@ -16,8 +16,11 @@ export const eventsApi = baseApi.injectEndpoints({
         };
       },
       transformResponse: (data) => {
-        const decryptionData = handleDecryptData(JSON.stringify(data));
-        return decryptionData;
+        if (data?.ct) {
+          return handleDecryptData(JSON.stringify(data));
+        } else {
+          return data;
+        }
       },
     }),
     getAllOddsEvents: builder.query({
@@ -32,8 +35,11 @@ export const eventsApi = baseApi.injectEndpoints({
         };
       },
       transformResponse: (data) => {
-        const decryptionData = handleDecryptData(JSON.stringify(data));
-        return decryptionData;
+        if (data?.ct) {
+          return handleDecryptData(JSON.stringify(data));
+        } else {
+          return data;
+        }
       },
     }),
     order: builder.mutation({
