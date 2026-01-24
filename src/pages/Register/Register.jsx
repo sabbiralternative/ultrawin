@@ -80,6 +80,7 @@ const Register = () => {
       const user = result?.result?.loginName;
       const game = result?.result?.buttonValue?.game;
       dispatch(setUser({ user, token, bonusToken }));
+      localStorage.setItem("token", token);
       localStorage.setItem("buttonValue", JSON.stringify(game));
       if (token && user) {
         refetchBalance();

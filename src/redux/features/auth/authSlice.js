@@ -12,11 +12,17 @@ export const authSlice = createSlice({
   reducers: {
     setUser: (state, { payload }) => {
       const { user, token, bonusToken } = payload;
-      (state.user = user),
+      ((state.user = user),
         (state.token = token),
-        (state.bonusToken = bonusToken);
+        (state.bonusToken = bonusToken));
     },
     logout: (state) => {
+      const nonRemovalKey = ["closePopupForForever", "build_version"];
+      Object.keys(localStorage).forEach((key) => {
+        if (!nonRemovalKey.includes(key)) {
+          localStorage.removeItem(key);
+        }
+      });
       state.user = null;
       state.token = null;
       state.bonusToken = null;

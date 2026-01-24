@@ -63,8 +63,10 @@ import depositIcon from "./images/depositIcon.ff67171b.svg";
 import withdrawIcon from "./images/withdrawIcon.50f38a04.svg";
 import no_multi_market_icon from "./images/no_multi_market_icon.faa05662.svg";
 import secure from "./images/secure.e824a057.png";
+import info from "./images/info-icon-svgrepo-com.svg";
 
 export default {
+  info,
   secure,
   no_multi_market_icon,
   depositIcon,

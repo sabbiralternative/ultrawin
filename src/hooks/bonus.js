@@ -7,6 +7,7 @@ export const useBonusQuery = (payload) => {
     queryKey: ["bonus", payload],
     queryFn: async () => {
       const { data } = await AxiosSecure.post(API.bonus, payload);
+      console.log(data);
       if (data?.success) {
         return data?.result;
       }

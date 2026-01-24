@@ -43,6 +43,7 @@ const Login = () => {
       const user = result?.result?.loginName;
       const game = result?.result?.buttonValue?.game;
       dispatch(setUser({ user, token }));
+      localStorage.setItem("token", token);
       localStorage.setItem("buttonValue", JSON.stringify(game));
       localStorage.setItem("bonusToken", bonusToken);
       if (token && user) {
@@ -74,6 +75,7 @@ const Login = () => {
       const game = result?.result?.buttonValue?.game;
       dispatch(setUser({ user, token }));
       localStorage.setItem("buttonValue", JSON.stringify(game));
+      localStorage.setItem("token", token);
       localStorage.setItem("bonusToken", bonusToken);
       if (token && user) {
         toast.success("Login successful");

@@ -1,7 +1,6 @@
 import { useEffect } from "react";
 import disableDevtool from "disable-devtool";
 import { logout } from "./redux/features/auth/authSlice";
-import { settings } from "./api";
 import MainLayout from "./components/layout/MainLayout";
 import { useDispatch } from "react-redux";
 import { useLocation, useNavigate } from "react-router-dom";
@@ -10,7 +9,7 @@ import { setWindowWidth } from "./redux/features/global/globalSlice";
 
 const App = () => {
   const { socialLink } = useGetSocialLink();
-  const disabledDevtool = settings.disabledDevtool;
+  const disabledDevtool = socialLink?.disabledDevtool;
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const location = useLocation();
