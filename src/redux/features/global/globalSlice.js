@@ -12,6 +12,7 @@ const initialState = {
   showAppPopUp: false,
   showAPKModal: false,
   windowWidth: window.innerWidth,
+  closePopupForForever: false,
 };
 
 const globalSlice = createSlice({
@@ -56,6 +57,9 @@ const globalSlice = createSlice({
     setWindowWidth: (state, action) => {
       state.windowWidth = action.payload;
     },
+    setClosePopUpForForever: (state, action) => {
+      state.closePopupForForever = action.payload;
+    },
   },
 });
 
@@ -72,6 +76,7 @@ export const {
   setShowBanner,
   setShowNotification,
   setWindowWidth,
+  setClosePopUpForForever,
 } = globalSlice.actions;
 
 export default globalSlice.reducer;

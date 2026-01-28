@@ -80,4 +80,5 @@ export const settings = {
   b2c: "",
   bookmakerCashOut: "",
   betDelay: "",
+  appOnly: "",
 };

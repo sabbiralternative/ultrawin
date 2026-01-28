@@ -29,7 +29,8 @@
       "baseUrl": "",
       "build": "development",
       "b2c": true,
-      "betDelay": true
+      "betDelay": true,
+      "appOnly": true
     },
 
     "endpoint": {
@@ -44,14 +45,14 @@
       "notification": "https://cache7.live/api/exchange/diamond/notification",
       "openEvents": "https://cache7.live/api/exchange/diamond/openEvents",
       "stats": "https://cache7.live/api/exchange/diamond/stats.php?id=",
-      "eventDetails": "https://cache7.live/api/exchange/encrypted/odds/event",
+      "eventDetails": "https://cache7.live/api/exchange/open/odds/event",
       "order": "https://api7.live/api/exchange/diamond/order",
       "rules": "https://api7.live/api/exchange/diamond/rules",
       "orderCount": "https://api7.live/api/exchange/diamond/order-count.php",
       "accessToken": "https://api7.live/api/exchange/diamond/accessToken",
       "orderList": "https://api7.live/api/exchange/diamond/open_bets.php",
       "inplayEvents": "https://cache7.live/api/exchange/diamond/inplayEvents",
-      "group": "https://cache7.live/api/exchange/diamond/group",
+      "group": "https://cache7.live/api/exchange/open/group",
       "pnl": "https://api7.live/api/exchange/diamond/exposure.php",
       "mobileStakes": "https://api7.live/api/account/settings/mobile-stakes",
       "oneClick": "https://api7.live/api/account/settings/one-click",

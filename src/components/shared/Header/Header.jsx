@@ -1,6 +1,7 @@
 import { useDispatch, useSelector } from "react-redux";
 import assets from "../../../assets";
 import {
+  setClosePopUpForForever,
   setGroupType,
   setShowAPKModal,
   setShowAppPopUp,
@@ -17,12 +18,12 @@ import AppPopup from "./AppPopUp";
 import Notification from "./Notification";
 import DownloadAPK from "../../modal/DownloadAPK/DownloadAPK";
 import WarningCondition from "../../ui/WarningCondition/WarningCondition";
+import Error from "../../modal/Error/Error";
 // import Dropdown from "./Dropdown";
 
 const Header = () => {
-  const { showAppPopUp, windowWidth, showAPKModal } = useSelector(
-    (state) => state?.global,
-  );
+  const { showAppPopUp, windowWidth, showAPKModal, closePopupForForever } =
+    useSelector((state) => state?.global);
   const [showWarning, setShowWarning] = useState(false);
   const [gameInfo, setGameInfo] = useState({ gameName: "", gameId: "" });
   const { logo } = useContextState();
@@ -42,10 +43,12 @@ const Header = () => {
 
   useEffect(() => {
     const closePopupForForever = localStorage.getItem("closePopupForForever");
+    dispatch(setClosePopUpForForever(closePopupForForever ? true : false));
     const apk_modal_shown = sessionStorage.getItem("apk_modal_shown");
     if (location?.state?.pathname === "/apk" || location.pathname === "/apk") {
       sessionStorage.setItem("apk_modal_shown", true);
       localStorage.setItem("closePopupForForever", true);
+      dispatch(setClosePopUpForForever(true));
       localStorage.removeItem("installPromptExpiryTime");
     } else {
       if (!apk_modal_shown) {
@@ -83,6 +86,10 @@ const Header = () => {
       navigate("/login");
     }
   };
+
+  if (settings.appOnly && !closePopupForForever) {
+    return <Error />;
+  }
   return (
     <>
       {showWarning && (

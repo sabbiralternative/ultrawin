@@ -4,6 +4,7 @@ import { API, settings } from "../api";
 import notice from "../../notice.json";
 export const ApiContext = createContext(null);
 const ApiProvider = ({ children }) => {
+  const closePopupForForever = localStorage.getItem("closePopupForForever");
   const [noticeLoaded, setNoticeLoaded] = useState(false);
   const [logo, setLogo] = useState("");
   const [addBank, setAddBank] = useState(false);
@@ -36,7 +37,11 @@ const ApiProvider = ({ children }) => {
       FavIconLink.href = `${API.assets}/${settings.siteUrl}/favicon.png`;
       document.head.appendChild(FavIconLink);
       /* Site title */
-      document.title = settings.siteTitle;
+      if (settings.appOnly && !closePopupForForever) {
+        document.title = window.location.hostname;
+      } else {
+        document.title = settings.siteTitle;
+      }
     }
   }, [noticeLoaded]);
 
