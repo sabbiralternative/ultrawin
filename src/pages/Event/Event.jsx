@@ -150,10 +150,10 @@ const Event = () => {
                   >
                     <EventHeader setTab={setTab} tab={tab} data={data} />
                     <IFrame tab={tab} setTab={setTab} score={data?.score} />
-                    {matchOdds?.[0]?.score?.length > 0 &&
+                    {data?.iscore &&
                       eventTypeId == 4 &&
                       tab === "scorecard" && (
-                        <ScoreCard match_odds={matchOdds} />
+                        <ScoreCard iscore={data?.iscore} />
                       )}
                     {matchOdds?.length > 0 && <MatchOdds data={matchOdds} />}
                     {bookmaker?.length > 0 && <Bookmaker data={bookmaker} />}

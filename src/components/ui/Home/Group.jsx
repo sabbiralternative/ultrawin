@@ -4,8 +4,10 @@ import { formatDate } from "../../../utils/formateDate";
 import Suspended from "../../shared/Suspended/Suspended";
 import MobileGroup from "./MobileGroup";
 import { useEffect, useState } from "react";
+import { useLatestEvent } from "../../../hooks/latestEvent";
 
 const Group = ({ data }) => {
+  const { data: latestEvent } = useLatestEvent();
   const [categories, setCategories] = useState([]);
   const navigate = useNavigate();
   const navigateGameList = (keys) => {
@@ -55,6 +57,42 @@ const Group = ({ data }) => {
       <div className="md hydrated">
         <div className="router-ctn">
           <div className="ds-view-ctn">
+            <div className="MuiTabs-root favourite-events">
+              <div
+                className="MuiButtonBase-root MuiTabScrollButton-root MuiTabs-scrollButtons MuiTabs-scrollButtonsDesktop Mui-disabled"
+                aria-disabled="false"
+              >
+                <svg
+                  className="MuiSvgIcon-root MuiSvgIcon-fontSizeSmall"
+                  focusable="false"
+                  viewBox="0 0 24 24"
+                  aria-hidden="true"
+                >
+                  <path d="M15.41 16.09l-4.58-4.59 4.58-4.59L14 5.5l-6 6 6 6z" />
+                </svg>
+                <span className="MuiTouchRipple-root" />
+              </div>
+
+              <div
+                className="MuiTabs-scroller MuiTabs-scrollable"
+                style={{ marginBottom: "0px" }}
+              >
+                <div className="MuiTabs-flexContainer" role="tablist">
+                  {latestEvent?.map((item, index) => (
+                    <button
+                      onClick={() =>
+                        navigate(`/${item?.eventTypeId}/${item?.eventId}`)
+                      }
+                      key={index}
+                      className="favourite-event-item"
+                      value={0}
+                    >
+                      <span className="event-name">{item?.eventName}</span>
+                    </button>
+                  ))}
+                </div>
+              </div>
+            </div>
             {categories?.map((category) => {
               const filteredData = Object.entries(data)
                 .filter(([, value]) => value.eventTypeId === category)

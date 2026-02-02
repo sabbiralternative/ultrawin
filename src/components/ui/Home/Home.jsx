@@ -4,23 +4,38 @@ import assets from "../../../assets";
 import useBannerImage from "../../../hooks/useBannerImage";
 // import useGetSocialLink from "../../../hooks/useGetSocialLink";
 // import CryptoReferTab from "./CryptoReferTab";
-import LiveCasinoGames from "./LiveCasinoGames";
-import PopularGames from "./PopularGames";
+// import LiveCasinoGames from "./LiveCasinoGames";
+import CasinoThumbnailSlider from "./CasinoThumbnailSlider";
 // import Promotion from "./Promotion";
-import RecommendedGames from "./RecommendedGames";
+// import RecommendedGames from "./RecommendedGames";
 import Sponsors from "./Sponsors";
-import TopRatedGames from "./TopRatedGames";
-import TrendingGames from "./TrendingGames";
+// import TopRatedGames from "./TopRatedGames";
+// import TrendingGames from "./TrendingGames";
 import { useSelector } from "react-redux";
 import { Fragment } from "react";
 import BottomTab from "./BottomTab";
 import TopMatches from "./TopMatches";
+import { useGetIndex } from "../../../hooks";
+import CricketBattle from "./CricketBattle";
 
 const Home = () => {
+  const { data } = useGetIndex({
+    type: "ultrawin_homepage_casino",
+  });
   const navigate = useNavigate();
   const { token } = useSelector((state) => state.auth);
   // const { socialLink } = useGetSocialLink();
   const { bannerImage } = useBannerImage();
+
+  const new_launch = data?.filter((item) => item?.tag === "new_launch");
+  const slot = data?.filter((item) => item?.tag === "slot");
+  const recommended_games = data?.filter(
+    (item) => item?.tag === "recommended_games",
+  );
+  const live_casino_games = data?.filter(
+    (item) => item?.tag === "live_casino_games",
+  );
+
   return (
     <div className="md hydrated">
       <div slot="fixed" className="md refresher-md hydrated refresher-native">
@@ -114,11 +129,30 @@ const Home = () => {
               </div>
             </div>
             <TopMatches />
-            <PopularGames />
-            <TrendingGames />
-            <RecommendedGames />
+            <CricketBattle />
+            {new_launch?.length > 0 && (
+              <CasinoThumbnailSlider data={new_launch} title="New Launch" />
+            )}
+            {recommended_games?.length > 0 && (
+              <CasinoThumbnailSlider
+                data={recommended_games}
+                title="Recommended Games"
+              />
+            )}
+            {live_casino_games?.length > 0 && (
+              <CasinoThumbnailSlider
+                data={live_casino_games}
+                title="Live Casino Games"
+              />
+            )}
+            {slot?.length > 0 && (
+              <CasinoThumbnailSlider data={slot} title="Slots" />
+            )}
+
+            {/* <TrendingGames /> */}
+            {/* <RecommendedGames />
             <TopRatedGames />
-            <LiveCasinoGames />
+            <LiveCasinoGames /> */}
 
             <div className="banner-container pb-0" />
           </div>

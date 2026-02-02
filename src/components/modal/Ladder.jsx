@@ -10,7 +10,11 @@ const Ladder = ({ setLadderData, ladderData, eventName }) => {
     <div
       role="presentation"
       className="MuiDialog-root fancy-book-dialog"
-      style={{ position: "fixed", zIndex: 999999999, inset: "0px" }}
+      style={{
+        position: "fixed",
+        zIndex: 999999999,
+        inset: "0px",
+      }}
     >
       <div
         className="MuiBackdrop-root"
@@ -27,6 +31,7 @@ const Ladder = ({ setLadderData, ladderData, eventName }) => {
         style={{
           opacity: 1,
           transition: "opacity 225ms cubic-bezier(0.4, 0, 0.2, 1)",
+          background: "#000000ba",
         }}
       >
         <div

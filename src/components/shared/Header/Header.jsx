@@ -147,11 +147,12 @@ const Header = () => {
                   <span className="MuiTouchRipple-root"></span>
                 </button>
               </Link>
-              <Link
+              <a
                 className={`nav-link  ${
-                  location.pathname === "/sports-book" ? "active" : ""
+                  location.pathname === "/casino/sportsbook/550000"
+                    ? "active"
+                    : ""
                 }`}
-                value="1"
                 onClick={() => handleNavigateToIFrame("sportsbook", "550000")}
               >
                 <button
@@ -161,7 +162,7 @@ const Header = () => {
                   <span className="MuiButton-label">Sportsbook</span>
                   <span className="MuiTouchRipple-root"></span>
                 </button>
-              </Link>
+              </a>
 
               <Link
                 className={`nav-link  ${

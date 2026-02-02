@@ -276,7 +276,7 @@ const Fancy = ({ data }) => {
                                         justifyContent: "center",
                                       }}
                                     >
-                                      {pnl?.length > 0 ? (
+                                      {pnl?.pnl ? (
                                         <button
                                           onClick={() =>
                                             handleGetLadder(pnl, games?.name)

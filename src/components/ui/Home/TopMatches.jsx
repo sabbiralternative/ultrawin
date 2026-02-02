@@ -3,6 +3,7 @@ import { useGetIndex } from "../../../hooks";
 import { useNavigate } from "react-router-dom";
 import cricket from "../../../assets/images/cricket.1d9c2d59.webp";
 import football from "../../../assets/images/football.2fdc311b.webp";
+import tennis from "../../../assets/images/tennis.8553c42e.webp";
 import assets from "../../../assets";
 import moment from "moment";
 
@@ -55,14 +56,27 @@ const TopMatches = () => {
                             <img
                               style={{ height: "25px" }}
                               src={football}
-                              alt="Cricket"
+                              alt="Football"
+                              className="sport-icon"
+                              height={25}
+                              loading="lazy"
+                            />
+                          )}
+                          {item?.sportId === "2" && (
+                            <img
+                              style={{ height: "25px" }}
+                              src={tennis}
+                              alt="Tennis"
                               className="sport-icon"
                               height={25}
                               loading="lazy"
                             />
                           )}
 
-                          <div className="sport-name-top-matches">
+                          <div
+                            className="sport-name-top-matches"
+                            style={{ color: "var(--primary-color)" }}
+                          >
                             {item?.sportName}
                           </div>
                         </div>
@@ -85,7 +99,10 @@ const TopMatches = () => {
                         </div>
                       </div>
                     </div>
-                    <div className="competition-name-top-matches">
+                    <div
+                      className="competition-name-top-matches"
+                      style={{ color: "var(--primary-color)" }}
+                    >
                       {item?.competitionName}
                     </div>
                     <div className="event-details">

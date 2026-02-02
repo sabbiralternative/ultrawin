@@ -251,7 +251,13 @@ const BetSlip = ({ currentPlaceBetEvent }) => {
               }`}
             >
               <div className="header-row">
-                <div className="header-event-market-div">
+                <div
+                  className="header-event-market-div"
+                  style={{
+                    height: "100%",
+                    marginTop: "5px",
+                  }}
+                >
                   <div className="event">{placeBetValues?.eventName}</div>
                   <div className="market">
                     {placeBetValues?.selectedBetName ||
@@ -373,8 +379,30 @@ const BetSlip = ({ currentPlaceBetEvent }) => {
                         dispatch(setStake(e.target.value));
                         setIsCashOut(false);
                       }}
+                      onInput={(e) => {
+                        const raw = e.target.value;
+
+                        if (raw === "") {
+                          dispatch(setStake(null));
+                          return;
+                        }
+
+                        const value = Number(raw);
+
+                        if (value >= 1) {
+                          dispatch(setStake(raw));
+                        } else {
+                          e.target.value = null;
+                        }
+                      }}
+                      onKeyDown={(e) => {
+                        if (e.key === "-" || e.key === "e" || e.key === "E") {
+                          e.preventDefault();
+                        }
+                      }}
+                      min={1}
                       className="row-input"
-                      type="text"
+                      type="number"
                       placeholder={`Max bet: ${placeBetValues?.maxLiabilityPerBet}`}
                       value={stake !== null && stake}
                       style={{ height: "39px", border: "0px", padding: "10px" }}
@@ -412,12 +440,34 @@ const BetSlip = ({ currentPlaceBetEvent }) => {
                     );
                   })}
                 </div>
-                {/* <div className="quick-bet">
+                <div className="quick-bet">
                   <button
-                    className="MuiButtonBase-root MuiButton-root MuiButton-text qb-btn-allin"
+                    className="MuiButtonBase-root MuiButton-root MuiButton-text qb-btn-allin min-btn"
                     type="button"
                   >
-                    <span className="MuiButton-label">All IN</span>
+                    <span className="MuiButton-label">Min Stake</span>
+                    <span className="MuiTouchRipple-root"></span>
+                  </button>
+                  <button
+                    className="MuiButtonBase-root MuiButton-root MuiButton-text qb-btn-allin max-btn"
+                    type="button"
+                  >
+                    <span className="MuiButton-label">Max Stake</span>
+                    <span className="MuiTouchRipple-root"></span>
+                  </button>
+                  {/* <button
+                    className="MuiButtonBase-root MuiButton-root MuiButton-text qb-btn-allin edit-btn"
+                    tabindex="0"
+                    type="button"
+                  >
+                    <span className="MuiButton-label">Edit Stake</span>
+                    <span className="MuiTouchRipple-root"></span>
+                  </button> */}
+                  <button
+                    className="MuiButtonBase-root MuiButton-root MuiButton-text qb-btn-allin clear-btn"
+                    type="button"
+                  >
+                    <span className="MuiButton-label">Clear</span>
                     <span className="MuiTouchRipple-root"></span>
                   </button>
                   <button
@@ -435,7 +485,7 @@ const BetSlip = ({ currentPlaceBetEvent }) => {
                     <span className="MuiButton-label">MAX</span>
                     <span className="MuiTouchRipple-root"></span>
                   </button>
-                </div> */}
+                </div>
                 <div className="d-flex-row">
                   <div className="width-mob-100">
                     <div className="profit-loss">

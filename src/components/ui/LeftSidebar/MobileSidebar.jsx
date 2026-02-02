@@ -55,7 +55,7 @@ const MobileSidebar = () => {
       className="MuiDrawer-root MuiDrawer-modal"
       style={{
         position: "fixed",
-        zIndex: isVisible ? 1300 : -1,
+        zIndex: isVisible ? 99999 : -1,
         inset: "0px",
         visibility: isVisible || showLeftSidebar ? "visible" : "hidden",
       }}
@@ -676,7 +676,6 @@ const MobileSidebar = () => {
                 <div className="sh-tab-label">tennis</div>
               </button>
 
-              {/*               
               <button className=" sh-btn">
                 <svg
                   width={18}
@@ -1468,7 +1467,7 @@ const MobileSidebar = () => {
                   />
                 </svg>
                 <div className="sh-tab-label">Multi markets</div>
-              </button> */}
+              </button>
             </div>
             {token && (
               <div className="sh-sub-menu">

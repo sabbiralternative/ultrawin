@@ -201,7 +201,7 @@
   font-weight: 700;
   background-color: var(--primary-color);
   border-radius: 50%;
-  color: var(--active-footer-color);
+  color: #000;
 }
 
 .market-enabled.bg-none {

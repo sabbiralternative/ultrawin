@@ -46,7 +46,7 @@ const MobileHeader = () => {
       {!pathname?.includes("/casino") && (
         <div className="mob-header" style={{ zIndex: 9999 }}>
           <div className="exch-mob-header-ctn">
-            <Link
+            <a
               onClick={() => handleNavigateToIFrame("sportsbook", "550000")}
               className="exch-mob-nav-link mob-link-btn"
             >
@@ -99,7 +99,7 @@ const MobileHeader = () => {
                 </div>
                 <div className="exch-nav-item-label">Sportsbook</div>
               </div>{" "}
-            </Link>
+            </a>
             <Link
               className={`exch-mob-nav-link mob-link-btn ${
                 pathname === "/in-play" ? "active" : ""

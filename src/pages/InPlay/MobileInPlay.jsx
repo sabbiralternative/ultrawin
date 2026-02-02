@@ -1,14 +1,17 @@
 import { useEffect, useState } from "react";
-import useGetNotification from "../../hooks/useGetNotification";
 import useSportsBook from "../../hooks/useSportsBook";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import assets from "../../assets";
 import InPlayIcon from "./InPlayIcon";
 import SuspendedMobile from "../../components/shared/Suspended/SuspendedMobile";
+import InPlayHeaderMobile from "./InPlayHeaderMobile";
 
 const MobileInPlay = () => {
-  const { notification } = useGetNotification();
-  const { data } = useSportsBook(0);
+  const location = useLocation();
+  const params = new URLSearchParams(location.search);
+  const group = params.get("group");
+
+  const { data } = useSportsBook(group ? Number(group) : 0);
   const [categories, setCategories] = useState([]);
   const eventName = { 4: "Cricket", 2: "Tennis", 1: "Football" };
   const navigate = useNavigate();
@@ -20,7 +23,7 @@ const MobileInPlay = () => {
   useEffect(() => {
     if (data) {
       const categories = Array.from(
-        new Set(Object.values(data).map((item) => item.eventTypeId))
+        new Set(Object.values(data).map((item) => item.eventTypeId)),
       );
       const sortedCategories = categories.sort((a, b) => {
         const order = { 4: 0, 1: 1, 2: 2 };
@@ -29,105 +32,30 @@ const MobileInPlay = () => {
       setCategories(sortedCategories);
     }
   }, [data]);
+
+  if (!data) return;
+
   return (
     <div className="ios overscroll hydrated">
-      <div slot="fixed" className="ios refresher-ios hydrated">
-        <div className="ios hydrated">
-          <div className="refresher-pulling">
-            <div className="refresher-pulling-icon">
-              <ion-icon
-                role="img"
-                className="ios hydrated"
-                aria-label="arrow down"
-              />
-            </div>
-          </div>
-          <div className="refresher-refreshing">
-            <div className="refresher-refreshing-icon">
-              <ion-spinner
-                className="ios spinner-circular hydrated"
-                role="progressbar"
-                style={{ animationDuration: "1400ms" }}
-              />
-            </div>
-          </div>{" "}
-        </div>
-      </div>
       <div className="router-ctn">
         <div className="ds-view-ctn">
           <div className="punter-view" id="main-content">
             <div className="sports-view-ctn">
               <div>
-                <div className="exch-inplay-events-view ios hydrated">
+                <div className="exch-inplay-events-view md hydrated">
                   <div
-                    className="exch-inplay-events-table-section ios hydrated"
+                    className="exch-inplay-events-table-section md hydrated"
                     style={{
-                      flex: "0 0calc(calc(12 / var(--ion-grid-columns, 12)) * 100%)",
+                      flex: "0 0 calc(calc(12 / var(--ion-grid-columns, 12)) * 100%)",
                       width:
                         "calc(calc(12 / var(--ion-grid-columns, 12)) * 100%)",
                       maxWidth:
                         "calc(calc(12 / var(--ion-grid-columns, 12)) * 100%)",
                     }}
                   >
-                    <div className="notifi-live-upcoming-tabs">
-                      <div className="inplay-status-tabs">
-                        <div className="time-tabs">
-                          <button className="inplay-tab selected-inplay-tab">
-                            LIVE MATCH
-                          </button>
-                          <button className="inplay-tab">UPCOMING</button>
-                        </div>
-                        <div className="search-tab">
-                          <div className="search-games-ctn">
-                            <input
-                              className="search-games-input"
-                              placeholder="Search events"
-                              defaultValue
-                            />
-                            <svg
-                              className="MuiSvgIcon-root"
-                              focusable="false"
-                              viewBox="0 0 24 24"
-                              aria-hidden="true"
-                            >
-                              <path d="M12 2C6.47 2 2 6.47 2 12s4.47 10 10 10 10-4.47 10-10S17.53 2 12 2zm4.3 14.3c-.39.39-1.02.39-1.41 0L12 13.41 9.11 16.3c-.39.39-1.02.39-1.41 0a.9959.9959 0 010-1.41L10.59 12 7.7 9.11a.9959.9959 0 010-1.41c.39-.39 1.02-.39 1.41 0L12 10.59l2.89-2.89c.39-.39 1.02-.39 1.41 0 .39.39.39 1.02 0 1.41L13.41 12l2.89 2.89c.38.38.38 1.02 0 1.41z" />
-                            </svg>
-                          </div>
-                        </div>
-                      </div>
-                      {notification?.text && (
-                        <div className="animation-notifi">
-                          <div className="marquee-new">
-                            <div className="notifi-item">
-                              <img
-                                src={assets.notify}
-                                alt=""
-                                className="notifi-scroll-icon"
-                                loading="lazy"
-                                style={{ animationDuration: "57.6s" }}
-                              />
-                              <span
-                                className="notifi-mssage"
-                                style={{ animationDuration: "57.6s" }}
-                              >
-                                {notification?.text}
-                              </span>
-                              <img
-                                src={assets.notify}
-                                alt=""
-                                className="notifi-scroll-icon"
-                                loading="lazy"
-                                style={{
-                                  transform: "scaleX(-1)",
-                                  animationDuration: "57.6s",
-                                }}
-                              />
-                            </div>
-                          </div>
-                        </div>
-                      )}
-                      <div className="search-tab" />
-                    </div>
+                    {/*  */}
+                    <InPlayHeaderMobile />
+                    {/*  */}
                     <div className="events-table-ctn live-events-ctn">
                       {categories?.map((category) => {
                         const filteredData = Object.entries(data)
@@ -193,7 +121,7 @@ const MobileInPlay = () => {
                                         Object.keys(filteredData)
                                           .sort(
                                             (keyA, keyB) =>
-                                              data[keyA].sort - data[keyB].sort
+                                              data[keyA].sort - data[keyB].sort,
                                           )
                                           .map((keys) => {
                                             if (!data?.[keys]?.visible) {

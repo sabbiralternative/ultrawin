@@ -12354,7 +12354,7 @@ img,
   width: 100%;
   background-color: var(--color1);
   /* box-shadow: 0 0 5px #2db261; */
-  color: #fff;
+  color: #000;
   font-family: "Lato";
   font-size: 12px;
   font-style: normal;
@@ -13491,7 +13491,7 @@ img,
 }
 
 .madepay[_ngcontent-kdb-c159] > button[_ngcontent-kdb-c159] {
-  color: var(--white, #fff);
+  color: var(--white, #000);
   font-family: "Lato";
   font-size: 0.875rem;
   font-style: normal;
