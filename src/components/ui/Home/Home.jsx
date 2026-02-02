@@ -2,11 +2,11 @@
 import { useNavigate } from "react-router-dom";
 import assets from "../../../assets";
 import useBannerImage from "../../../hooks/useBannerImage";
-import useGetSocialLink from "../../../hooks/useGetSocialLink";
-import CryptoReferTab from "./CryptoReferTab";
+// import useGetSocialLink from "../../../hooks/useGetSocialLink";
+// import CryptoReferTab from "./CryptoReferTab";
 import LiveCasinoGames from "./LiveCasinoGames";
 import PopularGames from "./PopularGames";
-import Promotion from "./Promotion";
+// import Promotion from "./Promotion";
 import RecommendedGames from "./RecommendedGames";
 import Sponsors from "./Sponsors";
 import TopRatedGames from "./TopRatedGames";
@@ -19,7 +19,7 @@ import TopMatches from "./TopMatches";
 const Home = () => {
   const navigate = useNavigate();
   const { token } = useSelector((state) => state.auth);
-  const { socialLink } = useGetSocialLink();
+  // const { socialLink } = useGetSocialLink();
   const { bannerImage } = useBannerImage();
   return (
     <div className="md hydrated">
@@ -60,14 +60,15 @@ const Home = () => {
       <div className="router-ctn">
         <div className="home-page-ctn">
           <div className="home-container">
-            <Promotion />
-            {socialLink?.referral && <CryptoReferTab />}
+            {/* <Promotion />
+            {socialLink?.referral && <CryptoReferTab />} */}
 
             <div className="banner-container">
               <div className="banner-cards">
                 {token && (
                   <Fragment>
                     <button
+                      style={{ borderRadius: "4px" }}
                       onClick={() => navigate("/deposit")}
                       className="MuiButtonBase-root MuiButton-root MuiButton-text deposit-btn"
                       type="button"
@@ -79,6 +80,7 @@ const Home = () => {
                       <span className="MuiTouchRipple-root"></span>
                     </button>
                     <button
+                      style={{ borderRadius: "4px" }}
                       onClick={() => navigate("/withdraw")}
                       className="MuiButtonBase-root MuiButton-root MuiButton-text withdraw-btn"
                       type="button"

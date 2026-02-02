@@ -21,7 +21,7 @@ const Group = ({ data }) => {
   useEffect(() => {
     if (data) {
       const categories = Array.from(
-        new Set(Object.values(data).map((item) => item.eventTypeId))
+        new Set(Object.values(data).map((item) => item.eventTypeId)),
       );
       const sortedCategories = categories.sort((a, b) => {
         const order = { 4: 0, 1: 1, 2: 2 };
@@ -153,6 +153,7 @@ const Group = ({ data }) => {
                                           return 0;
                                         })
                                         .map((keys, index) => {
+                                          if (!data?.[keys]?.visible) return;
                                           return (
                                             <tr
                                               style={{
@@ -196,7 +197,7 @@ const Group = ({ data }) => {
                                                             {
                                                               formatDate(
                                                                 data,
-                                                                keys
+                                                                keys,
                                                               ).day
                                                             }
                                                           </div>
@@ -205,7 +206,7 @@ const Group = ({ data }) => {
                                                             {
                                                               formatDate(
                                                                 data,
-                                                                keys
+                                                                keys,
                                                               ).time
                                                             }
                                                           </div>

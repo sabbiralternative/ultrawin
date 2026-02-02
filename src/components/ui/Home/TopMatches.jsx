@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import cricket from "../../../assets/images/cricket.1d9c2d59.webp";
 import football from "../../../assets/images/football.2fdc311b.webp";
 import assets from "../../../assets";
+import moment from "moment";
 
 const TopMatches = () => {
   const navigate = useNavigate();
@@ -12,7 +13,13 @@ const TopMatches = () => {
   });
 
   const navigateGameList = (item) => {
-    navigate(`/${item?.eventId}/${item?.sportId}`);
+    navigate(`/${item?.sportId}/${item?.eventId}`);
+  };
+
+  const formatTime = (date) => {
+    const isToday = moment(date).isSame(moment(), "day");
+    const format = moment(date).format("DD MMM hh.mm A");
+    return isToday ? "Today" : format;
   };
 
   return (
@@ -94,7 +101,7 @@ const TopMatches = () => {
                       </div>
                       <div className="event-time-top-matches">
                         <div className="date-display-top-matches">
-                          <div>{item?.openDate}</div>
+                          <div>{formatTime(item?.openDate)}</div>
                         </div>
                       </div>
                     </div>

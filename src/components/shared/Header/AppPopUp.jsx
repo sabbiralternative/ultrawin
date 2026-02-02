@@ -1,11 +1,14 @@
+import { useDispatch } from "react-redux";
 import { settings } from "../../../api";
 import assets from "../../../assets";
+import { setShowAppPopUp } from "../../../redux/features/global/globalSlice";
 
-const AppPopup = ({ setIsModalOpen }) => {
+const AppPopup = () => {
+  const dispatch = useDispatch();
   const closeAppModal = () => {
     const expiryTime = new Date().getTime() + 24 * 60 * 60 * 1000;
     localStorage.setItem("installPromptExpiryTime", expiryTime);
-    setIsModalOpen(false);
+    dispatch(setShowAppPopUp(false));
   };
 
   const handleDownload = (e) => {

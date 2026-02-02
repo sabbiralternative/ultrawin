@@ -240,11 +240,11 @@ const Header = () => {
           </div>
         </div>
         <div className="whatsapp-login-signup ">
-          {token && (
+          {/* {token && (
             <Link to="/deposit" className="deposit-btn-wrapper mob-view">
               <div className="deposit-btn">&nbsp;&nbsp;Deposit&nbsp;&nbsp;</div>
             </Link>
-          )}
+          )} */}
           {!token ? (
             <>
               <button
