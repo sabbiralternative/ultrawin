@@ -1693,3 +1693,407 @@ div:where(.swal2-container) div:where(.swal2-actions) {
 .border-border_color_primary1 {
   border-color: #545454;
 }
+
+/* Home page top matches */
+.top-matches-ctn {
+  margin-top: 4px;
+}
+@media screen and (max-width: 920px) {
+  .top-matches-ctn {
+    margin-top: 0;
+  }
+}
+.top-matches-ctn .top-matches-slider {
+  display: flex;
+  overflow-x: auto;
+  grid-gap: 10px;
+  gap: 10px;
+  -ms-scroll-snap-type: x mandatory;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+}
+@media screen and (max-width: 920px) {
+  .top-matches-ctn .top-matches-slider {
+    grid-gap: 8px;
+    gap: 8px;
+  }
+}
+.top-matches-ctn .top-match-card {
+  background: var(--table-bg);
+  border-radius: 8px;
+  padding: 8px 10px 10px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex !important;
+  align-items: center;
+  justify-content: space-between;
+  min-height: 136px;
+  flex-direction: column;
+  min-width: 30%;
+}
+@media screen and (max-width: 1120px) {
+  .top-matches-ctn .top-match-card {
+    min-width: 40%;
+  }
+}
+@media screen and (max-width: 800px) {
+  .top-matches-ctn .top-match-card {
+    padding: 4px 8px 8px;
+    align-items: flex-start;
+    grid-gap: 8px;
+    gap: 8px;
+    min-width: 60%;
+  }
+}
+@media screen and (max-width: 600px) {
+  .top-matches-ctn .top-match-card {
+    min-width: 78%;
+  }
+}
+@media screen and (max-width: 380px) {
+  .top-matches-ctn .top-match-card {
+    min-width: 82%;
+  }
+}
+.top-matches-ctn .top-match-card .live-img-top-matches {
+  width: 32px;
+  position: relative;
+  top: -4px;
+}
+.top-matches-ctn .top-match-card .match-info {
+  flex: 1 1;
+  display: flex;
+  flex-direction: column;
+  grid-gap: 6px;
+  gap: 6px;
+  width: 100%;
+  margin-bottom: 6px;
+}
+.top-matches-ctn .top-match-card .match-info .category-and-live {
+  display: flex;
+  align-items: center;
+  grid-gap: 8px;
+  gap: 8px;
+  justify-content: space-between;
+}
+.top-matches-ctn
+  .top-match-card
+  .match-info
+  .category-and-live
+  .category-name-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  grid-gap: 8px;
+  gap: 8px;
+  width: 100%;
+}
+.top-matches-ctn
+  .top-match-card
+  .match-info
+  .category-and-live
+  .category-name-container
+  .sport-icon-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  grid-gap: 6px;
+  gap: 6px;
+}
+.top-matches-ctn
+  .top-match-card
+  .match-info
+  .category-and-live
+  .category-name-container
+  .sport-name-top-matches {
+  font-size: 10px;
+  font-weight: 800;
+  color: var(--ion-color-primary);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+.top-matches-ctn .top-match-card .match-info .competition-name-top-matches {
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--ion-color-primary);
+  text-transform: capitalize;
+  letter-spacing: 0.5px;
+  text-wrap: nowrap;
+}
+.top-matches-ctn .top-match-card .match-info .event-details {
+  display: flex;
+  flex-direction: column;
+  grid-gap: 1px;
+  gap: 1px;
+}
+.top-matches-ctn
+  .top-match-card
+  .match-info
+  .event-details
+  .event-name-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.top-matches-ctn
+  .top-match-card
+  .match-info
+  .event-details
+  .event-name-container
+  .team-names {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--ion-text-light);
+  line-height: 1.2;
+}
+@media screen and (max-width: 920px) {
+  .top-matches-ctn
+    .top-match-card
+    .match-info
+    .event-details
+    .event-name-container
+    .team-names {
+    font-size: 12px;
+  }
+}
+.top-matches-ctn
+  .top-match-card
+  .match-info
+  .event-details
+  .event-time-top-matches
+  .date-display-top-matches {
+  font-size: 10px;
+  color: var(--ion-text-light);
+  display: flex;
+  grid-gap: 3px;
+  gap: 3px;
+  font-weight: 600;
+}
+.top-matches-ctn .top-match-card .match-info .market-types {
+  display: flex;
+}
+.top-matches-ctn .top-match-card .odds-section {
+  display: flex;
+  grid-gap: 6px;
+  gap: 6px;
+  align-items: center;
+  width: 100%;
+  justify-content: space-between;
+}
+@media screen and (max-width: 920px) {
+  .top-matches-ctn .top-match-card .odds-section {
+    grid-gap: 5px;
+    gap: 5px;
+  }
+}
+.top-matches-ctn .top-match-card .odds-section .team-odds {
+  display: flex;
+  width: 100%;
+}
+.top-matches-ctn .top-match-card .odds-section .team-odds .exch-odd-view {
+  min-width: unset !important;
+  width: unset !important;
+}
+@media screen and (max-width: 720px) {
+  .top-matches-ctn .top-match-card .odds-section .team-odds .exch-odd-view {
+    min-width: unset !important;
+  }
+}
+.top-matches-ctn
+  .top-match-card
+  .odds-section
+  .team-odds
+  .exch-odd-view
+  .exch-odd-button-content {
+  min-width: unset !important;
+}
+.top-matches-ctn
+  .top-match-card
+  .odds-section
+  .team-odds
+  .exch-odd-view
+  .back-odd {
+  border-radius: 30px 0 0 30px !important;
+}
+.top-matches-ctn
+  .top-match-card
+  .odds-section
+  .team-odds
+  .exch-odd-view
+  .lay-odd {
+  border-radius: 0 30px 30px 0 !important;
+}
+.top-matches-ctn
+  .top-match-card
+  .odds-section
+  .team-odds
+  .exch-odd-view
+  .back-odd,
+.top-matches-ctn
+  .top-match-card
+  .odds-section
+  .team-odds
+  .exch-odd-view
+  .lay-odd {
+  min-width: 100%;
+  max-width: 60px;
+  height: 35px;
+  border-radius: 0;
+  font-size: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+@media screen and (max-width: 920px) {
+  .top-matches-ctn
+    .top-match-card
+    .odds-section
+    .team-odds
+    .exch-odd-view
+    .back-odd,
+  .top-matches-ctn
+    .top-match-card
+    .odds-section
+    .team-odds
+    .exch-odd-view
+    .lay-odd {
+    min-width: 100%;
+    max-width: 55px;
+    height: 32px;
+    font-size: 9px;
+  }
+}
+.top-matches-ctn
+  .top-match-card
+  .odds-section
+  .team-odds
+  .exch-odd-view
+  .back-odd.back-odd {
+  background: var(--back-odd-background);
+  border: 1px solid var(--back-odd-background-light);
+}
+.top-matches-ctn
+  .top-match-card
+  .odds-section
+  .team-odds
+  .exch-odd-view
+  .back-odd.back-odd:hover:not(.disabled) {
+  background: var(--back-odd-background-light);
+}
+.top-matches-ctn
+  .top-match-card
+  .odds-section
+  .team-odds
+  .exch-odd-view
+  .lay-odd.lay-odd {
+  background: var(--lay-odd-background);
+  border: 1px solid var(--lay-odd-background-light);
+}
+.top-matches-ctn
+  .top-match-card
+  .odds-section
+  .team-odds
+  .exch-odd-view
+  .lay-odd.lay-odd:hover:not(.disabled) {
+  background: var(--lay-odd-background-light);
+}
+.top-matches-ctn
+  .top-match-card
+  .odds-section
+  .team-odds
+  .exch-odd-view
+  .back-odd
+  .exch-odd-button-content,
+.top-matches-ctn
+  .top-match-card
+  .odds-section
+  .team-odds
+  .exch-odd-view
+  .lay-odd
+  .exch-odd-button-content {
+  text-align: center;
+}
+.top-matches-ctn
+  .top-match-card
+  .odds-section
+  .team-odds
+  .exch-odd-view
+  .back-odd
+  .exch-odd-button-content
+  .price,
+.top-matches-ctn
+  .top-match-card
+  .odds-section
+  .team-odds
+  .exch-odd-view
+  .lay-odd
+  .exch-odd-button-content
+  .price {
+  font-weight: 700;
+  color: var(--ion-text-dark);
+  font-size: 11px;
+  line-height: 1;
+}
+@media screen and (max-width: 920px) {
+  .top-matches-ctn
+    .top-match-card
+    .odds-section
+    .team-odds
+    .exch-odd-view
+    .back-odd
+    .exch-odd-button-content
+    .price,
+  .top-matches-ctn
+    .top-match-card
+    .odds-section
+    .team-odds
+    .exch-odd-view
+    .lay-odd
+    .exch-odd-button-content
+    .price {
+    font-size: 10px;
+  }
+}
+.top-matches-ctn
+  .top-match-card
+  .odds-section
+  .team-odds
+  .exch-odd-view
+  .back-odd
+  .exch-odd-button-content
+  .size,
+.top-matches-ctn
+  .top-match-card
+  .odds-section
+  .team-odds
+  .exch-odd-view
+  .lay-odd
+  .exch-odd-button-content
+  .size {
+  font-size: 8px;
+  color: var(--ion-text-dark);
+  opacity: 0.8;
+  line-height: 1;
+  margin-top: 1px;
+}
+@media screen and (max-width: 920px) {
+  .top-matches-ctn
+    .top-match-card
+    .odds-section
+    .team-odds
+    .exch-odd-view
+    .back-odd
+    .exch-odd-button-content
+    .size,
+  .top-matches-ctn
+    .top-match-card
+    .odds-section
+    .team-odds
+    .exch-odd-view
+    .lay-odd
+    .exch-odd-button-content
+    .size {
+    font-size: 7px;
+  }
+}
+/* Home page top matches */

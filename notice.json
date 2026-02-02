@@ -30,7 +30,7 @@
       "build": "development",
       "b2c": true,
       "betDelay": true,
-      "appOnly": true
+      "appOnly": false
     },
 
     "endpoint": {

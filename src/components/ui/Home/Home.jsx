@@ -14,6 +14,7 @@ import TrendingGames from "./TrendingGames";
 import { useSelector } from "react-redux";
 import { Fragment } from "react";
 import BottomTab from "./BottomTab";
+import TopMatches from "./TopMatches";
 
 const Home = () => {
   const navigate = useNavigate();
@@ -110,7 +111,7 @@ const Home = () => {
                 })}
               </div>
             </div>
-
+            <TopMatches />
             <PopularGames />
             <TrendingGames />
             <RecommendedGames />
