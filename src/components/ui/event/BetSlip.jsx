@@ -15,7 +15,6 @@ import toast from "react-hot-toast";
 import { handleIncreasePrice } from "../../../utils/handleIncreasePrice";
 import { handleDecreasePrice } from "../../../utils/handleDecreasePrice";
 import useCurrentBets from "../../../hooks/useCurrentBets";
-import useGetSocialLink from "../../../hooks/useGetSocialLink";
 import { AxiosJSEncrypt } from "../../../lib/AxiosJSEncrypt";
 
 const BetSlip = ({ currentPlaceBetEvent }) => {
@@ -26,7 +25,6 @@ const BetSlip = ({ currentPlaceBetEvent }) => {
   const dispatch = useDispatch();
   const [loading, setLoading] = useState(false);
   const { eventId } = useParams();
-  const { socialLink } = useGetSocialLink();
   const { refetchCurrentBets } = useCurrentBets(eventId);
   const { refetchBalance } = useBalance();
   const { refetchExposure } = useExposer(eventId);
@@ -104,7 +102,7 @@ const BetSlip = ({ currentPlaceBetEvent }) => {
         ...payload,
         site: settings.siteUrl,
         nounce: uuidv4(),
-        isbetDelay: socialLink?.bet_delay,
+        isbetDelay: settings?.bet_delay,
         apk: closePopupForForever ? true : false,
       },
     ];
@@ -126,7 +124,7 @@ const BetSlip = ({ currentPlaceBetEvent }) => {
       delay = 9000;
     } else {
       setBetDelay(currentPlaceBetEvent?.betDelay);
-      delay = socialLink?.bet_delay ? currentPlaceBetEvent?.betDelay * 1000 : 0;
+      delay = settings?.bet_delay ? currentPlaceBetEvent?.betDelay * 1000 : 0;
     }
 
     // Introduce a delay before calling the API

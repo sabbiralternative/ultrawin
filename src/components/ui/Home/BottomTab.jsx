@@ -1,18 +1,16 @@
 import { useSelector } from "react-redux";
 import { settings } from "../../../api";
 import assets from "../../../assets";
-import useGetSocialLink from "../../../hooks/useGetSocialLink";
 import "./bottom-tab.scss";
 
 const BottomTab = () => {
   const { token } = useSelector((state) => state.auth);
-  const { socialLink } = useGetSocialLink();
 
   const openWhatsapp = () => {
-    if (token && socialLink?.branchWhatsapplink) {
-      window.open(socialLink?.branchWhatsapplink, "_blank");
+    if (token && settings?.branchWhatsapplink) {
+      window.open(settings?.branchWhatsapplink, "_blank");
     } else {
-      window.open(socialLink?.whatsapplink, "_blank");
+      window.open(settings?.whatsapplink, "_blank");
     }
   };
   return (
@@ -21,7 +19,7 @@ const BottomTab = () => {
         <span className="help-msg">
           Need help? Our 24/7 support team is here for you anytime!
         </span>
-        {(socialLink?.whatsapplink || socialLink?.branchWhatsapplink) && (
+        {(settings?.whatsapplink || settings?.branchWhatsapplink) && (
           <div className="social-icons">
             <button onClick={openWhatsapp} className="sm-link">
               <svg

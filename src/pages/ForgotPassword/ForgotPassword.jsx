@@ -11,11 +11,9 @@ import handleEncryptData from "../../utils/handleEncryptData";
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
-import useGetSocialLink from "../../hooks/useGetSocialLink";
 import { navigateTelegramInstagram } from "../../utils/navigateTelegramInstagram";
 
 const ForgotPassword = () => {
-  const { socialLink } = useGetSocialLink();
   const navigate = useNavigate();
   const [handleForgotPassword] = useForgotPasswordMutation();
   const [passType, setPassType] = useState(true);
@@ -305,10 +303,10 @@ const ForgotPassword = () => {
           <div className="socialMedia-login">
             <div className="sm-new-ctn">
               <div className="sm-new-links">
-                {socialLink?.telegramLink && (
+                {settings?.telegramLink && (
                   <button
                     onClick={() =>
-                      navigateTelegramInstagram(socialLink?.telegramLink)
+                      navigateTelegramInstagram(settings?.telegramLink)
                     }
                     className="sm-new-link"
                   >
@@ -320,10 +318,10 @@ const ForgotPassword = () => {
                     <div className="sm-text">Follow on Telegram</div>
                   </button>
                 )}
-                {socialLink?.instagramLink && (
+                {settings?.instagramLink && (
                   <button
                     onClick={() =>
-                      navigateTelegramInstagram(socialLink?.instagramLink)
+                      navigateTelegramInstagram(settings?.instagramLink)
                     }
                     className="sm-new-link"
                   >

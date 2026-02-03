@@ -4,12 +4,11 @@ import { logout } from "./redux/features/auth/authSlice";
 import MainLayout from "./components/layout/MainLayout";
 import { useDispatch } from "react-redux";
 import { useLocation, useNavigate } from "react-router-dom";
-import useGetSocialLink from "./hooks/useGetSocialLink";
 import { setWindowWidth } from "./redux/features/global/globalSlice";
+import { settings } from "./api";
 
 const App = () => {
-  const { socialLink } = useGetSocialLink();
-  const disabledDevtool = socialLink?.disabledDevtool;
+  const disabledDevtool = settings?.disabledDevtool;
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const location = useLocation();
@@ -49,7 +48,7 @@ const App = () => {
   }, [location.pathname, navigate]);
 
   useEffect(() => {
-    if (socialLink?.pixel) {
+    if (settings?.pixel) {
       // Create fb pixel main script
       const script = document.createElement("script");
       script.innerHTML = `
@@ -61,7 +60,7 @@ const App = () => {
       t.src=v;s=b.getElementsByTagName(e)[0];
       s.parentNode.insertBefore(t,s)}(window, document,'script',
       'https://connect.facebook.net/en_US/fbevents.js');
-      fbq('init', ${socialLink?.pixel});
+      fbq('init', ${settings?.pixel});
       fbq('track', 'PageView');
     `;
       document.head.appendChild(script);
@@ -72,7 +71,7 @@ const App = () => {
       img.height = 1;
       img.width = 1;
       img.style.display = "none";
-      img.src = `https://www.facebook.com/tr?id=${socialLink?.pixel}&ev=PageView&noscript=1`;
+      img.src = `https://www.facebook.com/tr?id=${settings?.pixel}&ev=PageView&noscript=1`;
       noscript.appendChild(img);
 
       document.body.appendChild(noscript);
@@ -83,7 +82,7 @@ const App = () => {
         noscript.remove();
       };
     }
-  }, [socialLink?.pixel]);
+  }, [settings?.pixel]);
 
   return <MainLayout />;
 };

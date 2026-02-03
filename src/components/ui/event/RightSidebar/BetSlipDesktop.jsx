@@ -17,7 +17,6 @@ import { API, settings } from "../../../../api";
 import toast from "react-hot-toast";
 import { handleDecreasePrice } from "../../../../utils/handleDecreasePrice";
 import { handleIncreasePrice } from "../../../../utils/handleIncreasePrice";
-import useGetSocialLink from "../../../../hooks/useGetSocialLink";
 import { AxiosJSEncrypt } from "../../../../lib/AxiosJSEncrypt";
 
 const BetSlipDesktop = () => {
@@ -31,7 +30,6 @@ const BetSlipDesktop = () => {
   const { price, stake, placeBetValues, predictOdd } = useSelector(
     (state) => state.event,
   );
-  const { data: socialLink } = useGetSocialLink();
   const { refetchBalance } = useBalance();
   const { refetchCurrentBets, myBets } = useCurrentBets(eventId);
   const { refetchExposure } = useExposer(eventId);
@@ -121,7 +119,7 @@ const BetSlipDesktop = () => {
         ...payload,
         site: settings.siteUrl,
         nounce: uuidv4(),
-        isbetDelay: socialLink?.bet_delay,
+        isbetDelay: settings?.bet_delay,
         apk: closePopupForForever ? true : false,
       },
     ];
@@ -144,7 +142,7 @@ const BetSlipDesktop = () => {
       delay = 9000;
     } else {
       setBetDelay(currentPlaceBetEvent?.betDelay);
-      delay = socialLink?.bet_delay ? currentPlaceBetEvent?.betDelay * 1000 : 0;
+      delay = settings?.bet_delay ? currentPlaceBetEvent?.betDelay * 1000 : 0;
     }
 
     setTimeout(async () => {

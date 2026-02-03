@@ -11,14 +11,12 @@ import { setUser } from "../../redux/features/auth/authSlice";
 
 import toast from "react-hot-toast";
 import { Link, useNavigate } from "react-router-dom";
-import useGetSocialLink from "../../hooks/useGetSocialLink";
 import { navigateTelegramInstagram } from "../../utils/navigateTelegramInstagram";
 import useContextState from "../../hooks/useContextState";
 
 const Login = () => {
   const closePopupForForever = localStorage.getItem("closePopupForForever");
   const { logo } = useContextState();
-  const { socialLink } = useGetSocialLink();
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [handleLogin] = useLoginMutation();
@@ -245,10 +243,10 @@ const Login = () => {
           <div className="socialMedia-login">
             <div className="sm-new-ctn">
               <div className="sm-new-links">
-                {socialLink?.telegramLink && (
+                {settings?.telegramLink && (
                   <button
                     onClick={() =>
-                      navigateTelegramInstagram(socialLink?.telegramLink)
+                      navigateTelegramInstagram(settings?.telegramLink)
                     }
                     className="sm-new-link"
                   >
@@ -260,10 +258,10 @@ const Login = () => {
                     <div className="sm-text">Follow on Telegram</div>
                   </button>
                 )}
-                {socialLink?.instagramLink && (
+                {settings?.instagramLink && (
                   <button
                     onClick={() =>
-                      navigateTelegramInstagram(socialLink?.instagramLink)
+                      navigateTelegramInstagram(settings?.instagramLink)
                     }
                     className="sm-new-link"
                   >

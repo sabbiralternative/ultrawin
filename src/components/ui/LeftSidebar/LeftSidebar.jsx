@@ -4,13 +4,12 @@ import useContextState from "../../../hooks/useContextState";
 import { setGroupType } from "../../../redux/features/global/globalSlice";
 import { useLocation, useNavigate } from "react-router-dom";
 import { logout } from "../../../redux/features/auth/authSlice";
-import useGetSocialLink from "../../../hooks/useGetSocialLink";
 import { navigateTelegramInstagram } from "../../../utils/navigateTelegramInstagram";
+import { settings } from "../../../api";
 
 const LeftSidebar = () => {
   const closePopupForForever = localStorage.getItem("closePopupForForever");
   const { pathname } = useLocation();
-  const { socialLink } = useGetSocialLink();
   const navigate = useNavigate();
   const { logo } = useContextState();
   const dispatch = useDispatch();
@@ -2083,14 +2082,14 @@ const LeftSidebar = () => {
           )}
         </div>
       </div>
-      {socialLink?.instagramLink || socialLink?.telegramLink ? (
+      {settings?.instagramLink || settings?.telegramLink ? (
         <div className="social-media-side-bar">
           <div className="sm-new-ctn">
             <div className="sm-new-links">
-              {socialLink?.telegramLink && (
+              {settings?.telegramLink && (
                 <button
                   onClick={() =>
-                    navigateTelegramInstagram(socialLink?.telegramLink)
+                    navigateTelegramInstagram(settings?.telegramLink)
                   }
                   className="sm-new-link"
                 >
@@ -2102,10 +2101,10 @@ const LeftSidebar = () => {
                   <div className="sm-text">Follow on Telegram</div>
                 </button>
               )}
-              {socialLink?.instagramLink && (
+              {settings?.instagramLink && (
                 <button
                   onClick={() =>
-                    navigateTelegramInstagram(socialLink?.instagramLink)
+                    navigateTelegramInstagram(settings?.instagramLink)
                   }
                   className="sm-new-link"
                 >

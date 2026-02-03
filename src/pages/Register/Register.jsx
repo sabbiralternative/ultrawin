@@ -14,13 +14,11 @@ import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 import useBalance from "../../hooks/useBalance";
 import { useState } from "react";
-import useGetSocialLink from "../../hooks/useGetSocialLink";
 import { navigateTelegramInstagram } from "../../utils/navigateTelegramInstagram";
 import useContextState from "../../hooks/useContextState";
 
 const Register = () => {
   const { logo } = useContextState();
-  const { socialLink } = useGetSocialLink();
   const navigate = useNavigate();
   const { refetchBalance } = useBalance();
   // const [passType, setPassType] = useState(true);
@@ -324,10 +322,10 @@ const Register = () => {
           <div className="socialMedia-login">
             <div className="sm-new-ctn">
               <div className="sm-new-links">
-                {socialLink?.telegramLink && (
+                {settings?.telegramLink && (
                   <button
                     onClick={() =>
-                      navigateTelegramInstagram(socialLink?.telegramLink)
+                      navigateTelegramInstagram(settings?.telegramLink)
                     }
                     className="sm-new-link"
                   >
@@ -339,10 +337,10 @@ const Register = () => {
                     <div className="sm-text">Follow on Telegram</div>
                   </button>
                 )}
-                {socialLink?.instagramLink && (
+                {settings?.instagramLink && (
                   <button
                     onClick={() =>
-                      navigateTelegramInstagram(socialLink?.instagramLink)
+                      navigateTelegramInstagram(settings?.instagramLink)
                     }
                     className="sm-new-link"
                   >

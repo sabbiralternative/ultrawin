@@ -9,12 +9,11 @@ import {
 import useContextState from "../../../hooks/useContextState";
 import { useNavigate } from "react-router-dom";
 import { logout } from "../../../redux/features/auth/authSlice";
-import useGetSocialLink from "../../../hooks/useGetSocialLink";
 import { navigateTelegramInstagram } from "../../../utils/navigateTelegramInstagram";
+import { settings } from "../../../api";
 
 const MobileSidebar = () => {
   const navigate = useNavigate();
-  const { socialLink } = useGetSocialLink();
   const { showLeftSidebar } = useSelector((state) => state.global);
   const { token } = useSelector((state) => state.auth);
   const { logo } = useContextState();
@@ -1840,14 +1839,14 @@ const MobileSidebar = () => {
               )}
             </div>
           </div>
-          {socialLink?.instagramLink || socialLink?.telegramLink ? (
+          {settings?.instagramLink || settings?.telegramLink ? (
             <div className="social-media-side-bar">
               <div className="sm-new-ctn">
                 <div className="sm-new-links">
-                  {socialLink?.telegramLink && (
+                  {settings?.telegramLink && (
                     <button
                       onClick={() =>
-                        navigateTelegramInstagram(socialLink?.telegramLink)
+                        navigateTelegramInstagram(settings?.telegramLink)
                       }
                       className="sm-new-link"
                     >
@@ -1860,10 +1859,10 @@ const MobileSidebar = () => {
                     </button>
                   )}
 
-                  {socialLink?.instagramLink && (
+                  {settings?.instagramLink && (
                     <button
                       onClick={() =>
-                        navigateTelegramInstagram(socialLink?.instagramLink)
+                        navigateTelegramInstagram(settings?.instagramLink)
                       }
                       className="sm-new-link"
                     >
