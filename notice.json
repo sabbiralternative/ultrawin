@@ -17,7 +17,6 @@
       "apkLink": "https://11xgame.vip/11xgame.apk",
       "withdraw": true,
       "casinoCurrency": "INR",
-      "balanceApiLoop": false,
       "betFairCashOut": true,
       "bookmakerCashOut": true,
       "logo": {
