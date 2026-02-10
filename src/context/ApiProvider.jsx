@@ -10,7 +10,12 @@ const ApiProvider = ({ children }) => {
   const [addBank, setAddBank] = useState(false);
   const baseUrl = notice?.result?.settings?.baseUrl;
   useEffect(() => {
-    getSetApis(setNoticeLoaded, baseUrl);
+    if (!noticeLoaded) {
+      const fetchAPI = () => {
+        getSetApis(setNoticeLoaded, baseUrl);
+      };
+      fetchAPI();
+    }
   }, [noticeLoaded, baseUrl]);
 
   useEffect(() => {
