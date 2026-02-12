@@ -86,7 +86,7 @@ const Login = () => {
 
   const handleDownloadAPK = (e) => {
     e.preventDefault();
-    const fileUrl = settings.apkLink;
+    const fileUrl = settings.apk_link;
     const link = document.createElement("a");
     link.href = fileUrl;
     link.setAttribute("download", "site.apk");
@@ -225,7 +225,7 @@ const Login = () => {
               Sign Up
             </span>
           </div>
-          {settings.apkLink && (
+          {settings.apk_link && (
             <div onClick={handleDownloadAPK} className="download-apk">
               <svg
                 className="MuiSvgIcon-root android-icon"

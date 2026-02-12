@@ -58,6 +58,8 @@ export const API = {
 };
 
 export const settings = {
+  apk_link: "",
+  maintenance_message: "",
   otp: "",
   casino: "",
   siteTitle: "",
@@ -74,7 +76,7 @@ export const settings = {
   logoFormat: "",
   logoHeight: "",
   logoWidth: "",
-  apkLink: "",
+
   betFairCashOut: "",
   build: "",
   b2c: "",

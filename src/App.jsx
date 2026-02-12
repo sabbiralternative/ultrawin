@@ -6,6 +6,7 @@ import { useDispatch } from "react-redux";
 import { useLocation, useNavigate } from "react-router-dom";
 import { setWindowWidth } from "./redux/features/global/globalSlice";
 import { settings } from "./api";
+import MaintenanceMessage from "./components/ui/MaintenanceMessage/MaintenanceMessage";
 
 const App = () => {
   const disabledDevtool = settings?.disabledDevtool;
@@ -83,6 +84,10 @@ const App = () => {
       };
     }
   }, [settings?.pixel]);
+
+  if (settings.maintenance_message) {
+    return <MaintenanceMessage />;
+  }
 
   return <MainLayout />;
 };
