@@ -58,7 +58,7 @@ const Header = () => {
         const expiryTime = localStorage.getItem("installPromptExpiryTime");
         const currentTime = new Date().getTime();
 
-        if ((!expiryTime || currentTime > expiryTime) && settings?.apkLink) {
+        if ((!expiryTime || currentTime > expiryTime) && settings.apk_link) {
           localStorage.removeItem("installPromptExpiryTime");
 
           dispatch(setShowAppPopUp(true));
@@ -95,9 +95,9 @@ const Header = () => {
       {showWarning && (
         <WarningCondition gameInfo={gameInfo} setShowWarning={setShowWarning} />
       )}
-      {settings?.apkLink && showAPKModal && <DownloadAPK />}
+      {settings.apk_link && showAPKModal && <DownloadAPK />}
       <Notification />
-      {settings?.apkLink && showAppPopUp && windowWidth < 1040 && <AppPopup />}
+      {settings.apk_link && showAppPopUp && windowWidth < 1040 && <AppPopup />}
       <div className="app-sub-header">
         <div className="MuiTabs-root actions-list web-view">
           <div
