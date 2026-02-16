@@ -262,7 +262,7 @@ const MatchOdds = ({ data }) => {
                                 title="Add To Multi Markets "
                               />{" "}
                               {games?.name}
-                              {settings.betFairCashOut &&
+                              {settings.cashout &&
                                 games?.runners?.length !== 3 &&
                                 games?.status === "OPEN" &&
                                 games?.name !== "toss" &&
@@ -304,7 +304,7 @@ const MatchOdds = ({ data }) => {
                                     </button>
                                   </div>
                                 )}
-                              {settings.betFairCashOut &&
+                              {settings.cashout &&
                                 games?.runners?.length !== 3 &&
                                 games?.status === "OPEN" &&
                                 games?.name !== "toss" &&

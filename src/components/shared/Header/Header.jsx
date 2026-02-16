@@ -75,7 +75,7 @@ const Header = () => {
 
   const handleNavigateToIFrame = (name, id) => {
     if (token) {
-      if (settings.casinoCurrency !== "AED") {
+      if (settings.casino_currency !== "AED") {
         navigate(`/casino/${name}/${id}`);
       } else {
         setGameInfo({ gameName: "", gameId: "" });
@@ -87,7 +87,7 @@ const Header = () => {
     }
   };
 
-  if (settings.appOnly && !closePopupForForever) {
+  if (settings.app_only && !closePopupForForever) {
     return <Error />;
   }
   return (

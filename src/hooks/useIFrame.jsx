@@ -19,7 +19,7 @@ const useIFrame = (eventTypeId, eventId, hasVideo) => {
         type: "video",
         token: generatedToken,
         site: settings.siteUrl,
-        casinoCurrency: settings.casinoCurrency,
+        casino_currency: settings.casino_currency,
       });
       const res = await axios.post(API.accessToken, encryptedVideoData, {
         headers: {

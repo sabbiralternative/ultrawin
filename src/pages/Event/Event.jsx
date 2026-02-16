@@ -1,6 +1,5 @@
 import { useParams } from "react-router-dom";
 import { useGetAllOddsEventsQuery } from "../../redux/features/events/events";
-import { settings } from "../../api";
 import EventHeader from "../../components/ui/event/EventHeader";
 import Fancy from "../../components/ui/event/Fancy";
 import { useDispatch, useSelector } from "react-redux";
@@ -25,7 +24,7 @@ const Event = () => {
   };
 
   const { data } = useGetAllOddsEventsQuery(payload, {
-    pollingInterval: settings.interval,
+    pollingInterval: 900,
   });
 
   useEffect(() => {

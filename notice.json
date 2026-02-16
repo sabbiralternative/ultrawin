@@ -5,30 +5,8 @@
   },
   "result": {
     "settings": {
-      "otp": true,
-      "siteTitle": "a23money",
       "siteUrl": "magicwin.zip",
-      "interval": "900",
-      "casino": "aura",
-      "registration": true,
-      "forceLogin": false,
-      "demoLogin": true,
-      "deposit": true,
-
-      "withdraw": true,
-      "casinoCurrency": "INR",
-      "betFairCashOut": true,
-      "bookmakerCashOut": true,
-      "logo": {
-        "height": 55,
-        "width": 125,
-        "format": "png"
-      },
-      "baseUrl": "",
-      "build": "development",
-      "b2c": true,
-      "betDelay": true,
-      "appOnly": false
+      "build": "development"
     },
 
     "endpoint": {

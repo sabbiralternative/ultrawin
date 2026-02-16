@@ -87,7 +87,7 @@ const LiveCasino = () => {
       if (bonusToken) {
         return setError("Bonus wallet is available only on sports.");
       }
-      if (settings.casinoCurrency !== "AED") {
+      if (settings.casino_currency !== "AED") {
         navigate(`/casino/${game?.gameName.replace(/ /g, "")}/${game?.gameId}`);
       } else {
         setGameInfo({ gameName: "", gameId: "" });

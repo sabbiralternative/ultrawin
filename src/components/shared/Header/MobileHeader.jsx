@@ -22,7 +22,7 @@ const MobileHeader = () => {
 
   const handleNavigateToIFrame = (name, id) => {
     if (token) {
-      if (settings.casinoCurrency !== "AED") {
+      if (settings.casino_currency !== "AED") {
         navigate(`/casino/${name}/${id}`);
       } else {
         setGameInfo({ gameName: "", gameId: "" });

@@ -22,7 +22,7 @@ export const useSettingsMutation = () => {
             Settings[key] = settings[key];
           });
         }
-        const logo = `${API.assets}/${Settings.siteUrl}/logo.${Settings.logoFormat}`;
+        const logo = `${API.assets}/${Settings.siteUrl}/logo.${Settings.logo_format}`;
         setLogo(logo);
         /* Theme css */
         const link = document.createElement("link");

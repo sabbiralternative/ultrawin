@@ -66,7 +66,7 @@ const BottomTab = () => {
       <div className="copyright">
         <div className="copyright-msgs">
           <span className="cpr msg1">
-            {settings.siteTitle} provides a smooth and secure betting experience
+            {settings.site_name} provides a smooth and secure betting experience
             with a variety of reliable payment options. Whether you’re placing
             bets on casino games or sports, our platform ensures quick and
             hassle-free transactions. Enjoy the convenience of seamless deposits
@@ -74,7 +74,7 @@ const BottomTab = () => {
           </span>
           <span className="cpr msg2">
             © Copyright 2024. All Rights Reserved. Powered by
-            {settings.siteTitle}.
+            {settings.site_name}.
           </span>
         </div>
         <div className="copyright-imgs">
