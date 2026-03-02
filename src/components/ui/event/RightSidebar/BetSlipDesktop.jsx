@@ -552,7 +552,7 @@ const BetSlipDesktop = () => {
                 <p className="MuiTypography-root MuiTypography-body1">
                   <div className="no-bets-div">
                     <div className="no-bets-icon-div">
-                      <img src="/src/assets/images/no-bets-icon.89f8c9c9.svg" />
+                      <img src="/images/no-bets-icon.89f8c9c9.svg" />
                     </div>
                     <div className="no-bet-data">
                       There is no bet placed till now.
@@ -653,7 +653,7 @@ const BetSlipDesktop = () => {
               <p className="MuiTypography-root MuiTypography-body1">
                 <div className="no-bets-div">
                   <div className="no-bets-icon-div">
-                    <img src="/src/assets/images/no-bets-icon.89f8c9c9.svg" />
+                    <img src="/images/no-bets-icon.89f8c9c9.svg" />
                   </div>
                   <div className="no-bet-data">
                     There is no bet placed till now.

@@ -1163,7 +1163,7 @@
 .scorecard {
   /* width: calc(100% - 8px); */
   padding: 5px;
-  background-image: url("/src/assets/images/scorecard-bg.png");
+  background-image: url("/images/scorecard-bg.png");
   position: relative;
   background-repeat: no-repeat;
   background-size: cover;

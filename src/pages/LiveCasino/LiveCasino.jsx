@@ -238,7 +238,7 @@ const LiveCasino = () => {
                       >
                         <div className="tab-icon-ctn">
                           <img
-                            src={`/src/assets/images/all.svg`}
+                            src={`/images/all.svg`}
                             alt=""
                             className="cw-ct-img"
                           />
@@ -267,7 +267,7 @@ const LiveCasino = () => {
                           >
                             <div className="tab-icon-ctn">
                               <img
-                                src={`/src/assets/images/${category
+                                src={`/images/${category
                                   ?.split(" ")
                                   .join("")
                                   .toLowerCase()}.svg`}

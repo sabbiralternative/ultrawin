@@ -105,8 +105,11 @@ button:not(:disabled) {
   padding: 0.375rem 0.75rem;
   font-size: 1rem;
   border-radius: 0.25rem;
-  transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out,
-    border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+  transition:
+    color 0.15s ease-in-out,
+    background-color 0.15s ease-in-out,
+    border-color 0.15s ease-in-out,
+    box-shadow 0.15s ease-in-out;
 }
 @media (prefers-reduced-motion: reduce) {
   .btn {
@@ -144,7 +147,9 @@ button:not(:disabled) {
   padding: 0.5rem 1rem;
   color: #0d6efd;
   text-decoration: none;
-  transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out,
+  transition:
+    color 0.15s ease-in-out,
+    background-color 0.15s ease-in-out,
     border-color 0.15s ease-in-out;
 }
 @media (prefers-reduced-motion: reduce) {
@@ -311,25 +316,25 @@ body.dark-theme ::placeholder {
   margin: 0 5px 0 2px;
 }
 .AU {
-  background-image: url("/src/assets/images/au.svg");
+  background-image: url("/images/au.svg");
 }
 .FR {
-  background-image: url("/src/assets/images/fr.svg");
+  background-image: url("/images/fr.svg");
 }
 .GB {
-  background-image: url("/src/assets/images/gb.svg");
+  background-image: url("/images/gb.svg");
 }
 .IE {
-  background-image: url("/src/assets/images/ie.svg");
+  background-image: url("/images/ie.svg");
 }
 .NZ {
-  background-image: url("/src/assets/images/nz.svg");
+  background-image: url("/images/nz.svg");
 }
 .US {
-  background-image: url("/src/assets/images/us.svg");
+  background-image: url("/images/us.svg");
 }
 .ZA {
-  background-image: url("/src/assets/images/za.svg");
+  background-image: url("/images/za.svg");
 }
 @media (min-width: 1024px) and (max-width: 1365px) {
   .flag_logo {

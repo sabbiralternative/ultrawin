@@ -876,7 +876,7 @@ ion-icon {
 
 @media screen and (max-width: 600px) {
   .login-ctn {
-    /* background-image: url("/src/assets/images/loginMobBG.55828ab4.webp") !important; */
+    /* background-image: url("/images/loginMobBG.55828ab4.webp") !important; */
     background-color: #26133f;
     background-repeat: no-repeat !important;
     background-size: cover !important;
@@ -904,7 +904,7 @@ ion-icon {
 
 @media only screen and (device-width: 360px) {
   .login-ctn {
-    /* background-image: url("/src/assets/images/loginMobBG.55828ab4.webp") !important; */
+    /* background-image: url("/images/loginMobBG.55828ab4.webp") !important; */
     background-color: #26133f;
     background-repeat: no-repeat !important;
     background-size: cover !important;

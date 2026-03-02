@@ -151,7 +151,7 @@
   --deposit_web_banner: url(../media/green_deposit.316302f7.webp);
   --deposit_mob_banner: url(../media/green_mob_deposit.4b1f5f80.webp);
   --provider-banner: url(../media/provider_background.cbbbc95b.webp);
-  --login-background: url("/src/assets/images/loginBG.93cee606.webp");
+  --login-background: url("/images/loginBG.93cee606.webp");
   --login-mob-background: url(../media/loginMobBG.55828ab4.webp);
   --signup-bg: var(--ion-background);
 }
