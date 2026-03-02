@@ -1,4 +1,23 @@
-const WithdrawStatement = ({ withdrawStatement }) => {
+import toast from "react-hot-toast";
+import { useBankMutation } from "../../redux/features/payment/payment.api";
+
+const WithdrawStatement = ({ withdrawStatement, refetch }) => {
+  const [deleteWithdraw] = useBankMutation();
+
+  const handleDeleteWithdraw = async (withdraw_id) => {
+    const payload = {
+      type: "withdrawDelete",
+      withdraw_id,
+    };
+    const res = await deleteWithdraw(payload).unwrap();
+
+    if (res?.success) {
+      refetch();
+      toast.success(res?.result?.message);
+    } else {
+      toast.error(res?.error?.errorMessage);
+    }
+  };
   return (
     <div className="tr-table-ctn md hydrated">
       <div className="reports-ctn my-bets-ctn">
@@ -53,6 +72,12 @@ const WithdrawStatement = ({ withdrawStatement }) => {
                         scope="col"
                       >
                         Payment Method
+                      </th>
+                      <th
+                        className="MuiTableCell-root MuiTableCell-head MuiTableCell-sizeSmall"
+                        scope="col"
+                      >
+                        Action
                       </th>
                     </tr>
 
@@ -125,6 +150,29 @@ const WithdrawStatement = ({ withdrawStatement }) => {
                           <td className="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft MuiTableCell-sizeSmall">
                             N/A
                           </td>
+                          <td className="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft MuiTableCell-sizeSmall">
+                            {data.status === "PENDING" &&
+                              data?.reject_request === 0 && (
+                                <button
+                                  style={{
+                                    backgroundColor: "rgb(255 131 46)",
+                                  }}
+                                  onClick={() =>
+                                    handleDeleteWithdraw(data?.withdraw_id)
+                                  }
+                                  className="px-2 py-1 text-xs xs:text-xs sm:text-sm font-semibold text-text_color_primary2 rounded rounded-tr h-fit tracking-normal"
+                                >
+                                  Delete Withdraw
+                                </button>
+                              )}
+
+                            {data.status === "PENDING" &&
+                              data?.reject_request === 1 && (
+                                <p className="px-2 py-1 text-xs xs:text-xs sm:text-sm font-semibold text-text_color_primary2  rounded-tr h-fit tracking-normal">
+                                  Withdraw delete request sent.
+                                </p>
+                              )}
+                          </td>
                         </tr>
                       );
                     })}
@@ -175,7 +223,7 @@ const WithdrawStatement = ({ withdrawStatement }) => {
                               className="mct-b-c mct-b-c1"
                               style={{ width: "20%" }}
                             >
-                              <div className="p-5">
+                              <div className="">
                                 <div
                                   className={`b-700  ${
                                     data?.status === "APPROVED"

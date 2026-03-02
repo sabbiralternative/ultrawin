@@ -1,10 +1,13 @@
 import OpenBets from "./OpenBets";
 import { useParams } from "react-router-dom";
 import useCurrentBets from "../../../hooks/useCurrentBets";
+import useIFrame from "../../../hooks/useIFrame";
 
 const EventHeader = ({ data, tab, setTab }) => {
-  const { eventId } = useParams();
+  const { eventId, eventTypeId } = useParams();
+  const { iFrameUrl } = useIFrame(eventTypeId, eventId);
   const { myBets } = useCurrentBets(eventId);
+
   return (
     <>
       <div className="hydrated md mob-stream-section">
@@ -62,19 +65,22 @@ const EventHeader = ({ data, tab, setTab }) => {
                 <span className="MuiTab-wrapper">Scorecard</span>
                 <span className="MuiTouchRipple-root" />
               </button>
-              <button
-                style={{ padding: "0px 10px" }}
-                onClick={() => setTab("liveStream")}
-                className={`MuiTab-root MuiButtonBase-root MuiTab-textColorInherit  event-tab ${
-                  tab === "liveStream" ? "Mui-selected" : ""
-                }`}
-                type="button"
-                aria-selected="false"
-                role="tab"
-              >
-                <span className="MuiTab-wrapper">Live Stream</span>
-                <span className="MuiTouchRipple-root" />
-              </button>
+              {iFrameUrl?.url && (
+                <button
+                  style={{ padding: "0px 10px" }}
+                  onClick={() => setTab("liveStream")}
+                  className={`MuiTab-root MuiButtonBase-root MuiTab-textColorInherit  event-tab ${
+                    tab === "liveStream" ? "Mui-selected" : ""
+                  }`}
+                  type="button"
+                  aria-selected="false"
+                  role="tab"
+                >
+                  <span className="MuiTab-wrapper">Live Stream</span>
+                  <span className="MuiTouchRipple-root" />
+                </button>
+              )}
+
               <button
                 style={{ padding: "0px 10px" }}
                 onClick={() => setTab("openBets")}
