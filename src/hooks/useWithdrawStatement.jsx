@@ -1,10 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
-import { API, settings } from "../api";
-import handleRandomToken from "../utils/handleRandomToken";
-import handleEncryptData from "../utils/handleEncryptData";
-import { useSelector } from "react-redux";
-import { userToken } from "../redux/features/auth/authSlice";
+import { API } from "../api";
 
 /* withdraw api */
 const useWithdrawStatement = () => {
@@ -14,28 +10,20 @@ const useWithdrawStatement = () => {
     .split("T")[0];
   /* current date */
   const toDate = new Date().toISOString().split("T")[0];
-  const token = useSelector(userToken);
 
   const { data: withdrawStatement = [] } = useQuery({
     queryKey: ["withdraw-statement"],
     /* enable when token available */
 
     queryFn: async () => {
-      const generatedToken = handleRandomToken();
       /* Encrypt post data */
-      const encryptedData = handleEncryptData({
+      const payload = {
         from: fromDate,
         to: toDate,
         type: "WITHDRAW",
         status: "ALL",
-        token: generatedToken,
-        site: settings.siteUrl,
-      });
-      const res = await axios.post(API.accountStatement, encryptedData, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
+      };
+      const res = await axios.post(API.accountStatement, payload);
       const data = res?.data;
 
       if (data?.success) {

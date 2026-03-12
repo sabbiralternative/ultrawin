@@ -3,7 +3,6 @@ import useBankAccount from "../../hooks/useBankAccount";
 import { API, Settings } from "../../api";
 import handleRandomToken from "../../utils/handleRandomToken";
 import { useEffect, useState } from "react";
-import useContextState from "../../hooks/useContextState";
 import contactOne from "../../../src/assets/img/contact_one.svg";
 import clipboardIcon from "../../../src/assets/img/clipboard_icon.svg";
 import contactTwo from "../../../src/assets/img/contact_two.svg";
@@ -14,12 +13,12 @@ import { FaQrcode } from "react-icons/fa";
 import { CiBank } from "react-icons/ci";
 import { images } from "../../assets";
 import toast from "react-hot-toast";
-import handleEncryptData from "../../utils/handleEncryptData";
 import QRCode from "qrcode.react";
 import { isDesktop, isAndroid } from "react-device-detect";
 import { ProgressBar } from "react-loader-spinner";
 import { useNavigate } from "react-router-dom";
 import useGetPGStatus from "../../hooks/useGetPGStatus";
+import { AxiosInstance } from "../../lib/AxiosInstance";
 
 /* eslint-disable react/no-unknown-property */
 const PaymentMethods = ({
@@ -28,7 +27,6 @@ const PaymentMethods = ({
   setPaymentId,
   amount,
 }) => {
-  const { token } = useContextState();
   const { bankData: depositMethods, refetchBankData } = useBankAccount({
     type: "depositMethods",
     amount,
@@ -85,14 +83,9 @@ const PaymentMethods = ({
       const depositDetailForPg = {
         paymentId: method?.paymentId,
         token: generatedToken,
-        site: Settings.siteUrl,
         amount,
       };
-      const res = await axios.post(API.pg, depositDetailForPg, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
+      const res = await AxiosInstance.post(API.pg, depositDetailForPg);
       const data = res?.data;
       if (data?.success) {
         if (Settings?.paymentIntent) {
@@ -111,15 +104,9 @@ const PaymentMethods = ({
         type: "depositDetails",
         paymentId: method?.paymentId,
         token: generatedToken,
-        site: Settings.siteUrl,
       };
 
-      const encryptedData = handleEncryptData(depositDetail);
-      const res = await axios.post(API.bankAccount, encryptedData, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
+      const res = await axios.post(API.bankAccount, depositDetail);
 
       const data = res?.data;
       if (data?.success) {

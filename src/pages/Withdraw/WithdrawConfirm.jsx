@@ -1,13 +1,11 @@
 import { useState } from "react";
 import WithdrawSuccess from "../../components/modal/WithdrawSuccess";
 import axios from "axios";
-import { API, settings } from "../../api";
-import handleRandomToken from "../../utils/handleRandomToken";
+import { API } from "../../api";
+
 import toast from "react-hot-toast";
-import handleEncryptData from "../../utils/handleEncryptData";
+
 import assets from "../../assets";
-import { useSelector } from "react-redux";
-import { userToken } from "../../redux/features/auth/authSlice";
 
 const WithdrawConfirm = ({
   bank,
@@ -18,27 +16,20 @@ const WithdrawConfirm = ({
   setConfirmWithdraw,
 }) => {
   const [withdrawSuccess, setWithdrawSuccess] = useState(false);
-  const token = useSelector(userToken);
+
   const [disable, setDisable] = useState(false);
   /* handle withdraw function */
   const handleCoinSubmit = async (e) => {
     e.preventDefault();
     setDisable(true);
     if (amount?.length > 0 && bank) {
-      const generatedToken = handleRandomToken();
       const bankData = {
         type: "withdrawCoins",
         amount: amount,
         bankId: bank?.bankId,
-        token: generatedToken,
-        site: settings.siteUrl,
       };
-      const encryptedData = handleEncryptData(bankData);
-      const res = await axios.post(API.bankAccount, encryptedData, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
+
+      const res = await axios.post(API.bankAccount, bankData);
       const data = res?.data;
 
       if (data?.success) {

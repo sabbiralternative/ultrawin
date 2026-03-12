@@ -1,10 +1,8 @@
 import { useQuery } from "@tanstack/react-query";
-import axios from "axios";
-import { API, settings } from "../api";
-import handleRandomToken from "../utils/handleRandomToken";
-import handleEncryptData from "../utils/handleEncryptData";
+import { API } from "../api";
 import { logout, userToken } from "../redux/features/auth/authSlice";
 import { useDispatch, useSelector } from "react-redux";
+import { AxiosSecure } from "../lib/AxiosSecure";
 
 const useBalance = () => {
   const dispatch = useDispatch();
@@ -13,16 +11,7 @@ const useBalance = () => {
     queryKey: ["balance"],
     enabled: token ? true : false,
     queryFn: async () => {
-      const generatedToken = handleRandomToken();
-      const encryptedData = handleEncryptData({
-        token: generatedToken,
-        site: settings.siteUrl,
-      });
-      const res = await axios.post(API.balance, encryptedData, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
+      const res = await AxiosSecure.post(API.balance);
 
       if (res?.data?.success === false && token) {
         dispatch(logout());

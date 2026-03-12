@@ -2,8 +2,6 @@ import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { userToken } from "../../redux/features/auth/authSlice";
-import handleRandomToken from "../../utils/handleRandomToken";
-import handleEncryptData from "../../utils/handleEncryptData";
 import { API, settings } from "../../api";
 import axios from "axios";
 import toast from "react-hot-toast";
@@ -19,20 +17,17 @@ const IFrame = () => {
     window.scrollTo(0, 0);
     const getCasinoVideo = async () => {
       setLoading(true);
-      const generatedToken = handleRandomToken();
-      const encryptedData = handleEncryptData({
+
+      const payload = {
         gameId: gameId,
-        token: generatedToken,
         isHome: false,
         mobileOnly: true,
-        site: settings.siteUrl,
+
         casinoCurrency: settings.casino_currency,
-      });
+      };
 
       try {
-        const res = await axios.post(API.liveCasinoIFrame, encryptedData, {
-          headers: { Authorization: `Bearer ${token}` },
-        });
+        const res = await axios.post(API.liveCasinoIFrame, payload);
         const data = res?.data;
         setIFrame(data?.gameUrl);
         setLoading(false);

@@ -1,11 +1,11 @@
-import axios from "axios";
-import { API, settings } from "../../../api";
-import useContextState from "../../../hooks/useContextState";
+import { API } from "../../../api";
+
 import handleRandomToken from "../../../utils/handleRandomToken";
 import toast from "react-hot-toast";
 import { useRef } from "react";
 import useCloseModalClickOutside from "../../../hooks/useCloseModalClickOutside";
-import handleEncryptData from "../../../utils/handleEncryptData";
+
+import { AxiosInstance } from "../../../lib/AxiosInstance";
 
 const DeleteBank = ({ setRemoveBank, removeBank, refetchBankData }) => {
   /* Close modal click outside */
@@ -14,7 +14,6 @@ const DeleteBank = ({ setRemoveBank, removeBank, refetchBankData }) => {
     setRemoveBank(false);
   });
 
-  const { token } = useContextState();
   /* Handle delete bank account */
   const handleDeleteBank = async () => {
     /* Random token */
@@ -23,14 +22,9 @@ const DeleteBank = ({ setRemoveBank, removeBank, refetchBankData }) => {
       type: "deleteBankAccount",
       bankId: removeBank,
       token: generatedToken,
-      site: settings.siteUrl,
     };
-    const encryptedData = handleEncryptData(bankData);
-    const res = await axios.post(API.bankAccount, encryptedData, {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    });
+
+    const res = await AxiosInstance.post(API.bankAccount, bankData);
     const data = res?.data;
     if (data?.success) {
       setRemoveBank("");

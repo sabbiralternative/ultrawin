@@ -4,9 +4,7 @@ import assets from "../../assets";
 import { useDispatch } from "react-redux";
 import { useLoginMutation } from "../../redux/features/auth/authApi";
 import { useForm } from "react-hook-form";
-import handleRandomToken from "../../utils/handleRandomToken";
 import { settings } from "../../api";
-import handleEncryptData from "../../utils/handleEncryptData";
 import { setUser } from "../../redux/features/auth/authSlice";
 
 import toast from "react-hot-toast";
@@ -23,17 +21,15 @@ const Login = () => {
   const { register, handleSubmit } = useForm({});
 
   const onSubmit = async ({ username, password }) => {
-    const generatedToken = handleRandomToken();
     const loginData = {
       username: username,
       password: password,
-      token: generatedToken,
-      site: settings.siteUrl,
+
       b2c: settings.b2c,
       apk: closePopupForForever ? true : false,
     };
-    const encryptedData = handleEncryptData(loginData);
-    const result = await handleLogin(encryptedData).unwrap();
+
+    const result = await handleLogin(loginData).unwrap();
 
     if (result.success) {
       const token = result?.result?.token;
@@ -55,16 +51,15 @@ const Login = () => {
 
   const loginWithDemo = async () => {
     /* Random token generator */
-    const generatedToken = handleRandomToken();
+
     /* Encrypted the post data */
-    const loginData = handleEncryptData({
+    const loginData = {
       username: "demo",
       password: "",
-      token: generatedToken,
-      site: settings.siteUrl,
+
       b2c: settings.b2c,
       apk: closePopupForForever ? true : false,
-    });
+    };
     const result = await handleLogin(loginData).unwrap();
     if (result.success) {
       const token = result?.result?.token;

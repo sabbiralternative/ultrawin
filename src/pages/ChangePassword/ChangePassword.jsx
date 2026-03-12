@@ -1,8 +1,5 @@
 import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
-import handleRandomToken from "../../utils/handleRandomToken";
-import { settings } from "../../api";
-import handleEncryptData from "../../utils/handleEncryptData";
 import toast from "react-hot-toast";
 import { useChangePasswordMutation } from "../../redux/features/auth/authApi";
 import { useState } from "react";
@@ -22,16 +19,13 @@ const ChangePassword = () => {
 
   /* Change password function */
   const onSubmit = async ({ password, newPassword, newPasswordConfirm }) => {
-    const generatedToken = handleRandomToken();
-    const encryptedData = handleEncryptData({
+    const payload = {
       oldPassword: password,
       password: newPassword,
       passVerify: newPasswordConfirm,
-      token: generatedToken,
-      site: settings.siteUrl,
-    });
+    };
 
-    const res = await handleChangePassword(encryptedData).unwrap();
+    const res = await handleChangePassword(payload).unwrap();
     if (res.success) {
       toast.success(res?.result?.message);
       setTimeout(() => {

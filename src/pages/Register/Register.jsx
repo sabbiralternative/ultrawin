@@ -5,9 +5,9 @@ import {
   useRegisterMutation,
 } from "../../redux/features/auth/authApi";
 import { useForm } from "react-hook-form";
-import handleRandomToken from "../../utils/handleRandomToken";
+
 import { settings } from "../../api";
-import handleEncryptData from "../../utils/handleEncryptData";
+
 import { setUser } from "../../redux/features/auth/authSlice";
 
 import toast from "react-hot-toast";
@@ -36,14 +36,11 @@ const Register = () => {
     }
   };
   const handleOTP = async () => {
-    const generatedToken = handleRandomToken();
     const otpData = {
       mobile,
-      token: generatedToken,
-      site: settings?.siteUrl,
     };
-    const encryptedData = handleEncryptData(otpData);
-    const res = await getOTP(encryptedData).unwrap();
+
+    const res = await getOTP(otpData).unwrap();
     if (res?.success) {
       setOTP({
         orderId: res?.result?.orderId,
@@ -56,22 +53,20 @@ const Register = () => {
   };
 
   const onSubmit = async (data) => {
-    const generatedToken = handleRandomToken();
     const registerData = {
       username: "",
       password: data?.password,
       confirmPassword: data?.confirmPassword,
       mobile: mobile,
-      site: settings.siteUrl,
-      token: generatedToken,
+
       otp: data?.otp,
       isOtpAvailable: settings.otp,
       // referralCode: data?.referralCode,
       orderId: OTP.orderId,
       otpMethod: OTP.otpMethod,
     };
-    const encryptedData = handleEncryptData(registerData);
-    const result = await handleRegister(encryptedData).unwrap();
+
+    const result = await handleRegister(registerData).unwrap();
     if (result.success) {
       const token = result?.result?.token;
       const bonusToken = result?.result?.bonusToken;

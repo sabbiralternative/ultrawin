@@ -1,26 +1,12 @@
 import { useQuery } from "@tanstack/react-query";
-import axios from "axios";
-import { API, settings } from "../api";
-import handleRandomToken from "../utils/handleRandomToken";
-import handleEncryptData from "../utils/handleEncryptData";
-import { useSelector } from "react-redux";
-import { userToken } from "../redux/features/auth/authSlice";
+import { API } from "../api";
+import { AxiosSecure } from "../lib/AxiosSecure";
 /* get withdraw breakdown data */
 const useWithdrawBreakdown = () => {
-  const token = useSelector(userToken);
   const { data: withdrawBreakdown = {} } = useQuery({
     queryKey: ["withdraw-breakdown"],
     queryFn: async () => {
-      const generatedToken = handleRandomToken();
-      const encryptedData = handleEncryptData({
-        token: generatedToken,
-        site: settings.siteUrl,
-      });
-      const res = await axios.post(`${API.withdrawBreakdown}`, encryptedData, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
+      const res = await AxiosSecure.post(`${API.withdrawBreakdown}`);
       const data = res.data;
       if (data.success) {
         return data.result;

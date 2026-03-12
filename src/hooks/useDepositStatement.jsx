@@ -1,13 +1,10 @@
 import { useQuery } from "@tanstack/react-query";
-import axios from "axios";
-import { API, settings } from "../api";
-import handleRandomToken from "../utils/handleRandomToken";
-import handleEncryptData from "../utils/handleEncryptData";
-import { useSelector } from "react-redux";
-import { userToken } from "../redux/features/auth/authSlice";
+
+import { API } from "../api";
+
+import { AxiosSecure } from "../lib/AxiosSecure";
 
 const useDepositStatement = () => {
-  const token = useSelector(userToken);
   const fromDate = new Date(new Date().setDate(new Date().getDate() - 7))
     .toISOString()
     .split("T")[0];
@@ -17,21 +14,14 @@ const useDepositStatement = () => {
   const { data: accountStatement = [] } = useQuery({
     queryKey: ["deposit-statement"],
     queryFn: async () => {
-      const generatedToken = handleRandomToken();
       /* Encrypt post data */
-      const encryptedData = handleEncryptData({
+      const payload = {
         from: fromDate,
         to: toDate,
         type: "DEPOSIT",
         status: "ALL",
-        token: generatedToken,
-        site: settings.siteUrl,
-      });
-      const res = await axios.post(API.accountStatement, encryptedData, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
+      };
+      const res = await AxiosSecure.post(API.accountStatement, payload);
       const data = res?.data;
 
       if (data?.success) {

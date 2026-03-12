@@ -1,11 +1,9 @@
 import { useQuery } from "@tanstack/react-query";
-import { API, settings } from "../api";
-import handleRandomToken from "../utils/handleRandomToken";
-import handleEncryptData from "../utils/handleEncryptData";
-import { useSelector } from "react-redux";
+import { API } from "../api";
+
+import { AxiosSecure } from "../lib/AxiosSecure";
 
 const useGetNotification = () => {
-  const { token } = useSelector((state) => state.auth);
   const {
     data: notification = "",
     refetch: refetchNotification,
@@ -15,20 +13,8 @@ const useGetNotification = () => {
     queryKey: ["notifications"],
     queryFn: async () => {
       try {
-        const generatedToken = handleRandomToken();
-        const encryptedData = handleEncryptData({
-          token: generatedToken,
-          site: settings.siteUrl,
-        });
-        const response = await fetch(`${API.notification}`, {
-          method: "POST",
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-          body: JSON.stringify(encryptedData),
-        });
+        const { data } = await AxiosSecure.post(`${API.notification}`);
 
-        const data = await response.json();
         if (data.success) {
           return data?.result?.[0];
         }

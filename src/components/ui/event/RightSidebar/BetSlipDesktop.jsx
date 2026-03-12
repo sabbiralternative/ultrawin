@@ -117,7 +117,7 @@ const BetSlipDesktop = () => {
     const payloadData = [
       {
         ...payload,
-        site: settings.siteUrl,
+
         nounce: uuidv4(),
         isbetDelay: settings?.bet_delay,
         apk: closePopupForForever ? true : false,

@@ -1,11 +1,10 @@
 import { useEffect, useRef, useState } from "react";
-import useContextState from "../../../hooks/useContextState";
+
 import handleRandomToken from "../../../utils/handleRandomToken";
 import axios from "axios";
-import { API, settings } from "../../../api";
+import { API } from "../../../api";
 import toast from "react-hot-toast";
 import useCloseModalClickOutside from "../../../hooks/useCloseModalClickOutside";
-import handleEncryptData from "../../../utils/handleEncryptData";
 
 const AddBank = ({ setAddBank, refetchBankData }) => {
   /* Handle close modal click outside */
@@ -14,7 +13,7 @@ const AddBank = ({ setAddBank, refetchBankData }) => {
     setAddBank(false);
   });
   const [isFormValid, setIsFormValid] = useState(false);
-  const { token } = useContextState();
+
   const [bankDetails, setBankDetails] = useState({
     accountName: "",
     ifsc: "",
@@ -32,14 +31,9 @@ const AddBank = ({ setAddBank, refetchBankData }) => {
       accountNumber: bankDetails.accountNumber,
       type: "addBankAccount",
       token: generatedToken,
-      site: settings.siteUrl,
     };
-    const encryptedData = handleEncryptData(bankData);
-    const res = await axios.post(API.bankAccount, encryptedData, {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    });
+
+    const res = await axios.post(API.bankAccount, bankData);
     const data = res?.data;
 
     if (data?.success) {

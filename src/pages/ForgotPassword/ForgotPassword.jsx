@@ -5,9 +5,7 @@ import {
   useGetOtpMutation,
 } from "../../redux/features/auth/authApi";
 import { useForm } from "react-hook-form";
-import handleRandomToken from "../../utils/handleRandomToken";
 import { settings } from "../../api";
-import handleEncryptData from "../../utils/handleEncryptData";
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
@@ -29,14 +27,10 @@ const ForgotPassword = () => {
     }
   };
   const handleOTP = async () => {
-    const generatedToken = handleRandomToken();
     const otpData = {
       mobile,
-      token: generatedToken,
-      site: settings?.siteUrl,
     };
-    const encryptedData = handleEncryptData(otpData);
-    const res = await getOTP(encryptedData).unwrap();
+    const res = await getOTP(otpData).unwrap();
 
     if (res?.success) {
       setOTP({
@@ -50,21 +44,18 @@ const ForgotPassword = () => {
   };
 
   const onSubmit = async (data) => {
-    const generatedToken = handleRandomToken();
     const forgotPasswordData = {
       username: mobile,
       password: data?.password,
       confirmPassword: data?.confirmPassword,
-      site: settings.siteUrl,
-      token: generatedToken,
+
       otp: data?.otp,
       isOtpAvailable: settings.otp,
       orderId: OTP.orderId,
       otpMethod: OTP.otpMethod,
     };
 
-    const encryptedData = handleEncryptData(forgotPasswordData);
-    const result = await handleForgotPassword(encryptedData).unwrap();
+    const result = await handleForgotPassword(forgotPasswordData).unwrap();
     if (result.success) {
       toast.success("Password updated successfully");
       navigate("/login");
