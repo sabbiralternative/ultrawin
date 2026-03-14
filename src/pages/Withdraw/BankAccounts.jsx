@@ -3,6 +3,7 @@ import AddBank from "../../components/modal/bank/AddBank";
 import DeleteBank from "../../components/modal/bank/DeleteBank";
 import useContextState from "../../hooks/useContextState";
 import assets from "../../assets";
+import AddUSDTAccount from "../../components/modal/bank/AddUSDTAccount";
 
 const BankAccounts = ({
   bankData,
@@ -15,6 +16,7 @@ const BankAccounts = ({
 }) => {
   const { addBank, setAddBank } = useContextState();
   const [removeBank, setRemoveBank] = useState("");
+  const [addUSDTAccount, setAddUSDTAccount] = useState(false);
 
   /* select first bank by default */
   useEffect(() => {
@@ -393,7 +395,7 @@ const BankAccounts = ({
           </div>
 
           <div style={{ gap: "1rem", display: "grid" }} className=" "></div>
-          <div className="withdraw-page-buttons  ">
+          <div style={{ display: "flex", gap: "0px 10px", width: "100%" }}>
             <button onClick={() => setAddBank(true)} className="plus-btn  ">
               <img
                 loading="lazy"
@@ -403,6 +405,20 @@ const BankAccounts = ({
               />
               <span className="">Add Bank Account</span>
             </button>
+            <button
+              onClick={() => setAddUSDTAccount(true)}
+              className="plus-btn  "
+            >
+              <img
+                loading="lazy"
+                src="assets/img/plus-logo.svg"
+                alt=""
+                className=""
+              />
+              <span className="">Add USDT Account</span>
+            </button>
+          </div>
+          <div className="withdraw-page-buttons  ">
             <button
               onClick={() => {
                 setConfirmWithdraw(true);
@@ -421,6 +437,12 @@ const BankAccounts = ({
       </div>
       {addBank && (
         <AddBank setAddBank={setAddBank} refetchBankData={refetchBankData} />
+      )}
+      {addUSDTAccount && (
+        <AddUSDTAccount
+          setAddUSDTAccount={setAddUSDTAccount}
+          refetchBankData={refetchBankData}
+        />
       )}
       {removeBank && (
         <DeleteBank

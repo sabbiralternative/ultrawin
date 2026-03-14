@@ -1,67 +1,59 @@
 import { useEffect, useRef, useState } from "react";
-import axios from "axios";
 import { API, settings } from "../../../api";
 import toast from "react-hot-toast";
 import useCloseModalClickOutside from "../../../hooks/useCloseModalClickOutside";
-import { jwtDecode } from "jwt-decode";
 import { AxiosSecure } from "../../../lib/AxiosSecure";
 import { useSelector } from "react-redux";
+import { jwtDecode } from "jwt-decode";
 
-const AddBank = ({ setAddBank, refetchBankData }) => {
+const AddUSDTAccount = ({ setAddUSDTAccount, refetchBankData }) => {
   /* Handle close modal click outside */
   const addBankRef = useRef();
   useCloseModalClickOutside(addBankRef, () => {
-    setAddBank(false);
+    setAddUSDTAccount(false);
   });
+  const [timer, setTimer] = useState(null);
+  const { token } = useSelector((state) => state.auth);
   const [isFormValid, setIsFormValid] = useState(false);
   const [mobile, setMobile] = useState(null);
-  const { token } = useSelector((state) => state.auth);
   const [orderId, setOrderId] = useState(null);
-  const [timer, setTimer] = useState(null);
-  const [bankDetails, setBankDetails] = useState({
-    accountName: "",
-    ifsc: "",
-    accountNumber: "",
-    confirmAccountNumber: "",
-    upiId: "",
+  const [usdtDetails, setUsdtDetails] = useState({
     otp: "",
+    usdt_type: "",
+    wallet_address: "",
   });
 
   /* Handle add bank function */
   const handleAddBank = async (e) => {
     e.preventDefault();
     /* generating random token for post data */
-    if (bankDetails.accountNumber != bankDetails.confirmAccountNumber) {
+    if (usdtDetails.accountNumber != usdtDetails.confirmAccountNumber) {
       return toast.error("Account number not matched!");
     }
 
-    if (mobile && !bankDetails.otp && settings.otp) {
+    if (mobile && !usdtDetails.otp && settings.otp) {
       return toast.error("Please enter otp to add new account");
     }
 
-    let bankData = {
-      accountName: bankDetails.accountName,
-      ifsc: bankDetails.ifsc,
-      accountNumber: bankDetails.accountNumber,
-      upiId: bankDetails.upiId,
-      type: "addBankAccount",
+    let payload = {
+      wallet_address: usdtDetails.wallet_address,
+      usdt_type: usdtDetails.usdt_type,
+      type: "addUSDTAccount",
     };
     if (mobile) {
-      bankData.mobile = mobile;
-      bankData.otp = bankDetails.otp;
-      bankData.orderId = orderId;
+      payload.mobile = mobile;
+      payload.otp = usdtDetails.otp;
+      payload.orderId = orderId;
     }
 
-    const res = await axios.post(API.bankAccount, bankData);
+    const res = await AxiosSecure.post(API.bankAccount, payload);
     const data = res?.data;
 
     if (data?.success) {
-      setBankDetails({
-        accountName: "",
-        ifsc: "",
-        accountNumber: "",
-        confirmAccountNumber: "",
+      setUsdtDetails({
         otp: "",
+        usdt_type: "",
+        wallet_address: "",
       });
       toast.success(data?.result?.message);
       if (refetchBankData) {
@@ -70,29 +62,25 @@ const AddBank = ({ setAddBank, refetchBankData }) => {
       //   if (refetchWithdrawData) {
       //     refetchWithdrawData();
       //   }
-      setAddBank(false);
+      setAddUSDTAccount(false);
     } else {
       toast.error(data?.result?.message);
     }
   };
 
-  const validateForm = (bankDetails) => {
-    const isaccountNameFilled = bankDetails.accountName.trim() !== "";
-    const isaccountNumberFilled = bankDetails.accountNumber.trim() !== "";
-    const isIfscFilled = bankDetails.ifsc.trim() !== "";
-    const isOTPFilled =
-      mobile && settings.otp ? bankDetails.otp.trim() !== "" : true;
+  const validateForm = (usdtDetails) => {
+    const isUSDTTypeFilled = usdtDetails.usdt_type.trim() !== "";
+    const isWalletAddressFilled = usdtDetails.wallet_address.trim() !== "";
+    const isOTPFilled = mobile ? usdtDetails.otp.trim() !== "" : true;
     const isFormValid =
-      isaccountNameFilled &&
-      isIfscFilled &&
-      isaccountNumberFilled &&
-      isOTPFilled;
+      isUSDTTypeFilled && isWalletAddressFilled && isOTPFilled;
     setIsFormValid(isFormValid);
   };
 
   useEffect(() => {
-    validateForm(bankDetails);
-  }, [bankDetails]);
+    validateForm(usdtDetails);
+  }, [usdtDetails]);
+
   const getOtp = async () => {
     const otpData = {
       mobile,
@@ -108,7 +96,6 @@ const AddBank = ({ setAddBank, refetchBankData }) => {
       toast.error(data?.error?.errorMessage);
     }
   };
-
   useEffect(() => {
     const getMobile = () => {
       const decode = jwtDecode(token);
@@ -129,7 +116,6 @@ const AddBank = ({ setAddBank, refetchBankData }) => {
       setTimer(null);
     }
   }, [timer]);
-
   return (
     <div className="Modal-Background  ">
       <div className="card-add-bank card-add-bank-position" ref={addBankRef}>
@@ -137,7 +123,7 @@ const AddBank = ({ setAddBank, refetchBankData }) => {
           <h2>Add Bank Account</h2>
           <div className="close-btn">
             <svg
-              onClick={() => setAddBank(false)}
+              onClick={() => setAddUSDTAccount(false)}
               width="1rem"
               height="1rem"
               viewBox="0 0 14 15"
@@ -157,53 +143,63 @@ const AddBank = ({ setAddBank, refetchBankData }) => {
           <div className="bank-popup">
             <form onSubmit={handleAddBank}>
               <div className="input-box ">
-                <input
-                  onChange={(e) => {
-                    setBankDetails({
-                      ...bankDetails,
-                      accountName: e.target.value,
-                    });
-                  }}
-                  type="text"
-                  placeholder="Enter Account Holder Name"
-                  name=""
-                />
+                <div style={{ display: "flex", gap: "0px 20px" }}>
+                  <div
+                    style={{
+                      display: "flex",
+                      alignItems: "center",
+                      gap: "5px",
+                    }}
+                  >
+                    <p>BEP20</p>
+                    <input
+                      name="usdt-type"
+                      onChange={(e) => {
+                        setUsdtDetails({
+                          ...usdtDetails,
+                          usdt_type: e.target.value,
+                        });
+                      }}
+                      type="radio"
+                      placeholder="Enter Wallet Address"
+                      value="BEP20"
+                    />
+                  </div>
+                  <div
+                    style={{
+                      display: "flex",
+                      alignItems: "center",
+                      gap: "5px",
+                    }}
+                  >
+                    <p>TRC20</p>
+                    <input
+                      name="usdt-type"
+                      onChange={(e) => {
+                        setUsdtDetails({
+                          ...usdtDetails,
+                          usdt_type: e.target.value,
+                        });
+                      }}
+                      type="radio"
+                      placeholder="Enter Wallet Address"
+                      value="TRC20"
+                    />
+                  </div>
+                </div>
               </div>
               <div className="input-box ">
                 <input
                   onChange={(e) => {
-                    setBankDetails({
-                      ...bankDetails,
-                      accountNumber: e.target.value,
+                    setUsdtDetails({
+                      ...usdtDetails,
+                      wallet_address: e.target.value,
                     });
                   }}
-                  placeholder="Enter Account Number"
+                  value={usdtDetails.wallet_address}
+                  placeholder="Enter Wallet Address"
                   type="text"
                 />
-              </div>
-              <div className="input-box ">
-                <input
-                  onChange={(e) => {
-                    setBankDetails({
-                      ...bankDetails,
-                      accountNumber: e.target.value,
-                    });
-                  }}
-                  type="text"
-                  name=""
-                  placeholder="Enter Account Number"
-                />
-              </div>
-              <div
-                onChange={(e) => {
-                  setBankDetails({
-                    ...bankDetails,
-                    ifsc: e.target.value,
-                  });
-                }}
-                className="input-box "
-              >
-                <input type="text" placeholder="IFSC0000001" name="" />
               </div>
               {mobile && settings.otp && (
                 <div style={{ position: "relative" }} className="input-box ">
@@ -242,21 +238,21 @@ const AddBank = ({ setAddBank, refetchBankData }) => {
                       }}
                     >
                       {/* {Settings.otpWhatsapp && (
-                                    <button
-                                      onClick={getOtpOnWhatsapp}
-                                      style={{
-                                        backgroundColor: "var(--color1)",
-                                        borderRadius: "4px",
-                                        padding: "6px 0px",
-                                        width: "110px",
-                                        color: "white",
-                                        fontSize: "11px",
-                                      }}
-                                      type="button"
-                                    >
-                                      Get OTP Whatsapp
-                                    </button>
-                                  )} */}
+                      <button
+                        onClick={getOtpOnWhatsapp}
+                        style={{
+                          backgroundColor: "var(--color1)",
+                          borderRadius: "4px",
+                          padding: "6px 0px",
+                          width: "110px",
+                          color: "white",
+                          fontSize: "11px",
+                        }}
+                        type="button"
+                      >
+                        Get OTP Whatsapp
+                      </button>
+                    )} */}
                       <button
                         onClick={getOtp}
                         style={{
@@ -280,12 +276,12 @@ const AddBank = ({ setAddBank, refetchBankData }) => {
                   <input
                     maxLength={6}
                     onChange={(e) => {
-                      setBankDetails({
-                        ...bankDetails,
+                      setUsdtDetails({
+                        ...usdtDetails,
                         otp: e.target.value,
                       });
                     }}
-                    value={bankDetails.otp}
+                    value={usdtDetails.otp}
                     placeholder="Enter OTP"
                   />
                 </div>
@@ -293,7 +289,7 @@ const AddBank = ({ setAddBank, refetchBankData }) => {
 
               <div className="btn-box ">
                 <button
-                  onClick={() => setAddBank(false)}
+                  onClick={() => setAddUSDTAccount(false)}
                   className="cancel-btn "
                 >
                   <span className="">Cancel</span>
@@ -314,4 +310,4 @@ const AddBank = ({ setAddBank, refetchBankData }) => {
   );
 };
 
-export default AddBank;
+export default AddUSDTAccount;
