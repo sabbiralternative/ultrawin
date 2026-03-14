@@ -1,4 +1,4 @@
-import { API, settings } from "../../api";
+import { API } from "../../api";
 
 import { useEffect, useState } from "react";
 import contactOne from "../../../src/assets/images/contact_one.svg";
@@ -13,10 +13,10 @@ import { CiBank } from "react-icons/ci";
 import toast from "react-hot-toast";
 
 // import QRCode from "qrcode.react";
-import { isDesktop, isAndroid } from "react-device-detect";
-import { ProgressBar } from "react-loader-spinner";
-import { useNavigate } from "react-router-dom";
-import useGetPGStatus from "../../hooks/useGetPGStatus";
+// import { isDesktop, isAndroid } from "react-device-detect";
+// import { ProgressBar } from "react-loader-spinner";
+// import { useNavigate } from "react-router-dom";
+// import useGetPGStatus from "../../hooks/useGetPGStatus";
 import useBankAccount from "../../hooks/useBankAccount";
 import assets from "../../assets";
 
@@ -34,68 +34,75 @@ const PaymentMethods = ({
     amount,
   });
   const [tabs, setTabs] = useState("");
-  const [qrcode, setQrcode] = useState("");
+  // const [qrcode, setQrcode] = useState("");
   const [depositData, setDepositData] = useState({});
-  const [time, setTime] = useState(null);
-  const navigate = useNavigate();
-  const [orderId, setOrderId] = useState("");
-  const [pgPaymentMethods, setPgPaymentMethods] = useState({});
-  const { pgStatus } = useGetPGStatus(orderId, tabs);
+  // const [time, setTime] = useState(null);
+  // const navigate = useNavigate();
+  // const [orderId, setOrderId] = useState("");
+  // const [pgPaymentMethods, setPgPaymentMethods] = useState({});
+  // const { pgStatus } = useGetPGStatus(orderId, tabs);
 
   useEffect(() => {
     refetchBankData();
   }, [refetchBankData]);
 
-  useEffect(() => {
-    if (time && tabs === "pg") {
-      const timer = setInterval(() => {
-        setTime((prevTime) => (prevTime > 0 ? prevTime - 1 : 0));
-      }, 1000);
+  // useEffect(() => {
+  //   if (time && tabs === "pg") {
+  //     const timer = setInterval(() => {
+  //       setTime((prevTime) => (prevTime > 0 ? prevTime - 1 : 0));
+  //     }, 1000);
 
-      return () => clearInterval(timer);
-    }
-  }, [time, tabs]);
+  //     return () => clearInterval(timer);
+  //   }
+  // }, [time, tabs]);
 
-  useEffect(() => {
-    if (time === 0) {
-      navigate("/account");
-    } else if (pgStatus?.success) {
-      setTabs("");
-      setOrderId("");
-      toast.success(pgStatus?.result?.message);
-      navigate("/account");
-    }
-  }, [time, navigate, pgStatus]);
+  // useEffect(() => {
+  //   if (time === 0) {
+  //     navigate("/account");
+  //   } else if (pgStatus?.success) {
+  //     setTabs("");
+  //     setOrderId("");
+  //     toast.success(pgStatus?.result?.message);
+  //     navigate("/account");
+  //   }
+  // }, [time, navigate, pgStatus]);
 
-  const formatTime = (time) => {
-    const minutes = Math.floor(time / 60);
-    const seconds = time % 60;
-    return `${minutes.toString().padStart(2, "0")}:${seconds
-      .toString()
-      .padStart(2, "0")}`;
-  };
+  // const formatTime = (time) => {
+  //   const minutes = Math.floor(time / 60);
+  //   const seconds = time % 60;
+  //   return `${minutes.toString().padStart(2, "0")}:${seconds
+  //     .toString()
+  //     .padStart(2, "0")}`;
+  // };
 
   const handleVisibleBankMethod = async (e, method) => {
     e.preventDefault();
     setTabs(method?.type);
     setPaymentId(method?.paymentId);
 
-    if (method?.type === "pg") {
+    if (
+      method?.type === "upigateway" ||
+      method?.type === "toitgateway" ||
+      method?.type === "i100gateway" ||
+      method?.type === "upiclick"
+    ) {
       const depositDetailForPg = {
         paymentId: method?.paymentId,
         amount,
+        method: method?.type,
       };
       const res = await AxiosSecure.post(API.pg, depositDetailForPg);
       const data = res?.data;
       if (data?.success) {
-        if (settings?.paymentIntent) {
-          setPgPaymentMethods(data?.result);
-          setTime(60 * 20);
-          setQrcode(data?.result?.upi);
-          setOrderId(data?.result?.orderId);
-        } else {
-          window.location.href = data?.result?.link;
-        }
+        window.location.href = data?.result?.link;
+        // if (settings?.paymentIntent) {
+        //   setPgPaymentMethods(data?.result);
+        //   setTime(60 * 20);
+        //   setQrcode(data?.result?.upi);
+        //   setOrderId(data?.result?.orderId);
+        // } else {
+        //   window.location.href = data?.result?.link;
+        // }
       } else {
         toast.error(data?.result?.message);
       }
@@ -103,6 +110,7 @@ const PaymentMethods = ({
       const depositDetail = {
         type: "depositDetails",
         paymentId: method?.paymentId,
+        amount,
       };
 
       const res = await AxiosSecure.post(API.bankAccount, depositDetail);
@@ -114,9 +122,9 @@ const PaymentMethods = ({
     }
   };
 
-  const navigatePGLink = (link) => {
-    window.location.href = link;
-  };
+  // const navigatePGLink = (link) => {
+  //   window.location.href = link;
+  // };
 
   return (
     <div
@@ -702,7 +710,7 @@ const PaymentMethods = ({
           </div>
         </div>
       )}
-      {tabs === "pg" && qrcode && isDesktop && (
+      {/* {tabs === "pg" && qrcode && isDesktop && (
         <div _ngcontent-kdb-c159="" className="paymethod ng-tns-c159-13">
           <div _ngcontent-kdb-c159="" className="accountdetail ng-tns-c159-13">
             <p
@@ -739,7 +747,7 @@ const PaymentMethods = ({
                   _ngcontent-kdb-c159=""
                   className="ng-tns-c159-13"
                 >
-                  {/* <QRCode size={200} value={qrcode} /> */}
+                  <QRCode size={200} value={qrcode} />
                 </div>
               </div>
               <div
@@ -787,8 +795,8 @@ const PaymentMethods = ({
             </div>
           </div>
         </div>
-      )}
-      {tabs === "pg" && qrcode && isAndroid && (
+      )} */}
+      {/* {tabs === "pg" && qrcode && isAndroid && (
         <div _ngcontent-kdb-c159="" className="paymethod ng-tns-c159-13">
           <div _ngcontent-kdb-c159="" className="accountdetail ng-tns-c159-13">
             <p
@@ -898,50 +906,10 @@ const PaymentMethods = ({
                 </div>
               </div>
             )}
-            {/* <div
-              style={{
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-              }}
-              _ngcontent-kdb-c159=""
-              className="accountdetailss ng-tns-c159-13 ng-star-inserted"
-            > */}
-
-            {/*   <div
-                _ngcontent-kdb-c159=""
-                className="accountnum ng-tns-c159-13"
-                style={{ width: "100%", justifyContent: "center" }}
-              >
-                <div
-                  onClick={navigatePGLink}
-                  _ngcontent-kdb-c159=""
-                  className="makepayment ng-tns-c159-13"
-                  style={{ marginTop: "10px" }}
-                >
-                  <div
-                    _ngcontent-kdb-c159=""
-                    className="madepay ng-tns-c159-13"
-                  >
-                    <button _ngcontent-kdb-c159="" className="ng-tns-c159-13">
-                      Pay with any UPI app
-                    </button>
-                  </div>
-                </div>
-              </div> */}
-
-            {/*     <div
-                style={{ display: "flex", alignItems: "center", gap: "10px" }}
-              >
-                <img style={{ height: "40px" }} src={images.phonePay} alt="" />
-                <img style={{ height: "40px" }} src={images.paytm} alt="" />
-                <img style={{ height: "40px" }} src={images.gpay} alt="" />
-                <img style={{ height: "40px" }} src={images.bhim} alt="" />
-              </div> */}
-            {/* </div> */}
+          
           </div>
         </div>
-      )}
+      )} */}
     </div>
   );
 };
