@@ -5,8 +5,7 @@
   },
   "result": {
     "settings": {
-      "siteUrl": "magicwin.zip",
-      "build": "development"
+      "siteUrl": "magicwin.zip"
     },
 
     "endpoint": {

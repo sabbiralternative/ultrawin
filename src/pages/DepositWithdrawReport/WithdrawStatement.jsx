@@ -162,7 +162,7 @@ const WithdrawStatement = ({ withdrawStatement, refetch }) => {
                                   }
                                   className="px-2 py-1 text-xs xs:text-xs sm:text-sm font-semibold text-text_color_primary2 rounded rounded-tr h-fit tracking-normal"
                                 >
-                                  Delete Withdraw
+                                  Cancel Withdraw
                                 </button>
                               )}
 
