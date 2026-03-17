@@ -2,7 +2,6 @@ import axios from "axios";
 import handleRandomToken from "../utils/handleRandomToken";
 import { settings } from "../api";
 import handleEncryptData from "../utils/handleEncryptData";
-import { getSiteURL } from "../utils/getSiteURL";
 
 export const AxiosSecure = axios.create({
   baseURL: "",
@@ -24,10 +23,10 @@ AxiosSecure.interceptors.request.use(
         token: generatedToken,
       };
 
-      const { siteURL } = getSiteURL();
-
-      if (siteURL) {
-        payload.site = siteURL;
+      if (!config.data?.site) {
+        if (settings.site) {
+          payload.site = settings.site;
+        }
       }
 
       if (settings.language) {

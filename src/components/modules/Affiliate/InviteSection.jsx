@@ -6,12 +6,16 @@ import AddNewUser from "../../modal/Affiliate/AddNewUser";
 import assets from "../../../assets";
 import { handleCopyToClipBoard } from "../../../utils/handleCopyToClipBoard";
 import { settings } from "../../../api";
+import { getSiteURL } from "../../../utils/getSiteURL";
 
 const InviteSection = () => {
+  let payload = { type: "get_referral_code" };
+  const { siteURL } = getSiteURL();
+  if (siteURL) {
+    payload.site = siteURL;
+  }
   const [showAddNewUserModal, setShowAddNewUserModal] = useState(false);
-  const { data } = useGetIndex({
-    type: "get_referral_code",
-  });
+  const { data } = useGetIndex(payload);
 
   return (
     <Fragment>
