@@ -216,7 +216,10 @@ const Header = () => {
             ></span>
           </div>
         </div>
-        <div className="logo-wrapper" style={{ gap: "5px" }}>
+        <div
+          className="logo-wrapper"
+          style={{ gap: "5px", alignItems: "center" }}
+        >
           <div
             onClick={() => dispatch(setShowLeftSidebar(true))}
             className="side-bar-icon-div mob-view"
@@ -235,7 +238,11 @@ const Header = () => {
             className="new-whatsapp mob-view"
           >
             <img
-              style={{ height: "100%", width: "100px", objectFit: "contain" }}
+              style={{
+                height: settings.logo_height,
+                width: settings.logo_width,
+                objectFit: "contain",
+              }}
               src={logo}
             />
           </div>

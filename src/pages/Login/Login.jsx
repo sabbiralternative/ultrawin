@@ -95,6 +95,11 @@ const Login = () => {
         <img
           onClick={() => navigate("/")}
           src={logo}
+          style={{
+            height: settings.logo_height,
+            width: settings.logo_width,
+            objectFit: "contain",
+          }}
           alt="website"
           className="logo"
         />

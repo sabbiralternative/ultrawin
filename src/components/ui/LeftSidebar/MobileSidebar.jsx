@@ -87,7 +87,16 @@ const MobileSidebar = () => {
             }}
           >
             <button className="sh-website-title">
-              <img src={logo} alt="" className="sh-website-title-img" />
+              <img
+                src={logo}
+                style={{
+                  height: settings.logo_height,
+                  width: settings.logo_width,
+                  objectFit: "contain",
+                }}
+                alt=""
+                className="sh-website-title-img"
+              />
             </button>
           </div>
           <div className="sh-menu">
