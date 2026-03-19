@@ -21,7 +21,8 @@ const WhatsApp = () => {
           onClick={navigateWhatsApp}
           title="WhatsAppContact"
           style={{
-            position: "absolute",
+            position: "fixed",
+
             cursor: "pointer",
             zIndex: 9999999,
             display: "flex",

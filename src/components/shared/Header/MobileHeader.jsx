@@ -33,12 +33,13 @@ const MobileHeader = () => {
       navigate("/login");
     }
   };
+
   return (
     <>
       {showWarning && (
         <WarningCondition gameInfo={gameInfo} setShowWarning={setShowWarning} />
       )}
-      {!pathname?.includes("/casino" && <WhatsApp />)}
+      {pathname === "/" && <WhatsApp />}
       <div className="rules-regulations-footer web-view">
         <div>Rules &amp; Regulations © 2024</div>
       </div>
