@@ -3,8 +3,8 @@ import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { userToken } from "../../redux/features/auth/authSlice";
 import { API, settings } from "../../api";
-import axios from "axios";
 import toast from "react-hot-toast";
+import { AxiosSecure } from "../../lib/AxiosSecure";
 
 const IFrame = () => {
   const [, setLoading] = useState(false);
@@ -22,12 +22,11 @@ const IFrame = () => {
         gameId: gameId,
         isHome: false,
         mobileOnly: true,
-
         casinoCurrency: settings.casino_currency,
       };
 
       try {
-        const res = await axios.post(API.liveCasinoIFrame, payload);
+        const res = await AxiosSecure.post(API.liveCasinoIFrame, payload);
         const data = res?.data;
         setIFrame(data?.gameUrl);
         setLoading(false);
