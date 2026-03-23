@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import axios from "axios";
+
 import { API, settings } from "../../../api";
 import toast from "react-hot-toast";
 import useCloseModalClickOutside from "../../../hooks/useCloseModalClickOutside";
@@ -52,7 +52,7 @@ const AddBank = ({ setAddBank, refetchBankData }) => {
       bankData.orderId = orderId;
     }
 
-    const res = await axios.post(API.bankAccount, bankData);
+    const res = await AxiosSecure.post(API.bankAccount, bankData);
     const data = res?.data;
 
     if (data?.success) {
@@ -186,12 +186,12 @@ const AddBank = ({ setAddBank, refetchBankData }) => {
                   onChange={(e) => {
                     setBankDetails({
                       ...bankDetails,
-                      accountNumber: e.target.value,
+                      confirmAccountNumber: e.target.value,
                     });
                   }}
                   type="text"
                   name=""
-                  placeholder="Enter Account Number"
+                  placeholder="Re-Enter Account Number"
                 />
               </div>
               <div
