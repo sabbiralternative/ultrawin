@@ -856,7 +856,7 @@ const LeftSidebar = () => {
             <div className="sh-tab-label">Greyhound</div>
           </button>
 
-          <button className="sh-btn">
+          {/* <button className="sh-btn">
             <svg
               width="18"
               height="18"
@@ -1606,7 +1606,7 @@ const LeftSidebar = () => {
               </defs>
             </svg>
             <div className="sh-tab-label">Ice Hockey</div>
-          </button>
+          </button> */}
           <button
             onClick={() => handleNavigate("/multi-markets")}
             className={`sh-btn ${pathname === "/multi-markets" ? "active-sh-btn" : ""}`}
@@ -1830,7 +1830,7 @@ const LeftSidebar = () => {
               </button>
             )}
 
-            <button className=" sh-btn">
+            {/* <button className=" sh-btn">
               <svg
                 width="12"
                 height="12"
@@ -1863,7 +1863,7 @@ const LeftSidebar = () => {
                 ></path>
               </svg>
               <div className="sh-tab-label">My Wallet</div>
-            </button>
+            </button> */}
 
             <button
               onClick={() => handleNavigate("/betting-profit-loss")}
@@ -1884,7 +1884,7 @@ const LeftSidebar = () => {
               </svg>
               <div className="sh-tab-label">Betting Profit &amp; Loss</div>
             </button>
-            <button className=" sh-btn">
+            {/* <button className=" sh-btn">
               <svg
                 width="12"
                 height="12"
@@ -1899,7 +1899,7 @@ const LeftSidebar = () => {
                 ></path>
               </svg>
               <div className="sh-tab-label">Turnover history</div>
-            </button>
+            </button> */}
             <button
               onClick={() => handleNavigate("/deposit-withdraw-report")}
               className=" sh-btn"
@@ -1919,7 +1919,7 @@ const LeftSidebar = () => {
               </svg>
               <div className="sh-tab-label">Deposit Withdraw Report</div>
             </button>
-            <button className=" sh-btn">
+            {/* <button className=" sh-btn">
               <svg
                 width="12"
                 height="12"
@@ -1966,7 +1966,7 @@ const LeftSidebar = () => {
                 ></path>
               </svg>
               <div className="sh-tab-label">My Transaction</div>
-            </button>
+            </button> */}
             <button
               onClick={() => navigate("/stake-setting")}
               className=" sh-btn"
@@ -2003,7 +2003,7 @@ const LeftSidebar = () => {
               </svg>
               <div className="sh-tab-label">Stake Settings</div>
             </button>
-            <button className=" sh-btn">
+            {/* <button className=" sh-btn">
               <svg
                 width="12"
                 height="12"
@@ -2020,7 +2020,7 @@ const LeftSidebar = () => {
                 ></path>
               </svg>
               <div className="sh-tab-label">Game Rules</div>
-            </button>
+            </button> */}
             <button
               onClick={() => handleNavigate("/change-password")}
               className=" sh-btn"

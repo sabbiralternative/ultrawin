@@ -13,6 +13,7 @@ import { navigateTelegramInstagram } from "../../../utils/navigateTelegramInstag
 import { settings } from "../../../api";
 
 const MobileSidebar = () => {
+  const closePopupForForever = localStorage.getItem("closePopupForForever");
   const navigate = useNavigate();
   const { showLeftSidebar } = useSelector((state) => state.global);
   const { token } = useSelector((state) => state.auth);
@@ -684,7 +685,7 @@ const MobileSidebar = () => {
                 <div className="sh-tab-label">tennis</div>
               </button>
 
-              <button className=" sh-btn">
+              {/* <button className=" sh-btn">
                 <svg
                   width={18}
                   height={18}
@@ -817,8 +818,76 @@ const MobileSidebar = () => {
                   </defs>
                 </svg>
                 <div className="sh-tab-label">Baseball</div>
+              </button> */}
+              <button onClick={() => handleSetGroupType(5)} className=" sh-btn">
+                <svg
+                  width="20"
+                  height="20"
+                  viewBox="0 0 20 20"
+                  fill="none"
+                  className="sh-img"
+                  alt=""
+                >
+                  <rect width="20" height="20" rx="10" fill="#000"></rect>
+                  <g clipPath="url(#clip0_4576_1305)">
+                    <path
+                      d="M2.56979 5.42773H17.4264V14.5686H2.56979V5.42773Z"
+                      fill="#29A3EC"
+                    ></path>
+                    <path
+                      d="M2.92664 5.85498H17.0695V14.1407H2.92664V5.85498Z"
+                      fill="#3CDEF6"
+                    ></path>
+                    <path
+                      d="M9.71545 5.14062V14.8552H10.2849V5.14062H9.71545Z"
+                      fill="white"
+                    ></path>
+                    <path
+                      d="M2.14374 6.5708V7.14019H17.8566V6.5708H2.14374Z"
+                      fill="white"
+                    ></path>
+                    <path
+                      d="M2.14374 12.856V13.4296H17.8566V12.856H2.14374Z"
+                      fill="white"
+                    ></path>
+                    <path
+                      d="M3.42606 6.71387V13.2858H3.99973V6.71387H3.42606Z"
+                      fill="white"
+                    ></path>
+                    <path
+                      d="M4.85605 6.71387V13.2858H5.42973V6.71387H4.85605Z"
+                      fill="white"
+                    ></path>
+                    <path
+                      d="M16.0006 6.71387V13.2858H16.5701V6.71387H16.0006Z"
+                      fill="white"
+                    ></path>
+                    <path
+                      d="M14.5706 6.71387V13.2858H15.1443V6.71387H14.5706Z"
+                      fill="white"
+                    ></path>
+                    <path
+                      d="M2 4.85791V15.1425H18V14.8557V4.85791H2ZM2.57032 5.42709H17.4264V14.5688H2.57032V5.42709Z"
+                      fill="#5A3392"
+                    ></path>
+                  </g>
+                  <defs>
+                    <clipPath id="clip0_4576_1305">
+                      <rect
+                        width="16"
+                        height="16"
+                        fill="white"
+                        transform="translate(2 2)"
+                      ></rect>
+                    </clipPath>
+                  </defs>
+                </svg>
+                <div className="sh-tab-label">Kabbadi</div>
               </button>
-              <button className=" sh-btn">
+              <button
+                onClick={() => handleSetGroupType("greyhound-racing")}
+                className=" sh-btn"
+              >
                 <svg
                   width={16}
                   height={16}
@@ -862,7 +931,10 @@ const MobileSidebar = () => {
                 </svg>
                 <div className="sh-tab-label">GreyHound</div>
               </button>
-              <button className=" sh-btn">
+              <button
+                onClick={() => handleSetGroupType("horse-racing")}
+                className=" sh-btn"
+              >
                 <svg
                   width={12}
                   height={14}
@@ -933,7 +1005,7 @@ const MobileSidebar = () => {
                 </svg>
                 <div className="sh-tab-label">Horse Race</div>
               </button>
-              <button className=" sh-btn">
+              {/* <button className=" sh-btn">
                 <svg
                   width={18}
                   height={18}
@@ -1435,7 +1507,11 @@ const MobileSidebar = () => {
                 </svg>
                 <div className="sh-tab-label">Ice Hockey</div>
               </button>
-              <button className=" sh-btn">
+          */}
+              <button
+                onClick={() => handleNavigate("/multi-markets")}
+                className=" sh-btn"
+              >
                 <svg
                   fill="none"
                   viewBox="4.01 4.03 11.99 11.99"
@@ -1533,7 +1609,42 @@ const MobileSidebar = () => {
                   </svg>
                   <div className="sh-tab-label">Withdraw</div>
                 </button>
-                <button className=" sh-btn">
+                <button
+                  onClick={() => handleNavigate("/affiliate")}
+                  className=" sh-btn"
+                >
+                  <svg
+                    width="20"
+                    height="20"
+                    viewBox="0 0 20 20"
+                    fill="none"
+                    className="sh-img "
+                    alt=""
+                  >
+                    <rect width="20" height="20" rx="10" fill=""></rect>
+                    <g clipPath="url(#clip0_3840_369)">
+                      <path
+                        d="M7.06956 7.24381C7.33242 7.02098 7.51054 6.71444 7.57398 6.37573C7.63741 6.03703 7.58229 5.6868 7.41788 5.38395C7.25347 5.0811 6.9898 4.8441 6.6712 4.71278C6.3526 4.58147 5.99851 4.56386 5.66845 4.66291C5.3384 4.76196 5.05251 4.97164 4.85886 5.25668C4.66521 5.54172 4.57561 5.88474 4.60512 6.22807C4.63464 6.57141 4.78146 6.89411 5.02091 7.14192C5.26037 7.38973 5.57784 7.54754 5.91996 7.58881L6.39276 9.16321C5.93048 9.40084 5.53086 9.7443 5.22646 10.1656C4.92207 10.587 4.72151 11.0742 4.64111 11.5878C4.56071 12.1013 4.60276 12.6265 4.76382 13.1207C4.92488 13.6149 5.2004 14.0641 5.56794 14.4316C5.93548 14.7992 6.38465 15.0747 6.87884 15.2358C7.37304 15.3968 7.8983 15.4389 8.41182 15.3585C8.92535 15.2781 9.41262 15.0775 9.83394 14.7731C10.2553 14.4687 10.5987 14.0691 10.8364 13.6068L12.4108 14.079C12.4519 14.4212 12.6096 14.7387 12.8574 14.9783C13.1051 15.2178 13.4278 15.3647 13.7712 15.3943C14.1145 15.4239 14.4576 15.3344 14.7427 15.1408C15.0278 14.9472 15.2376 14.6613 15.3367 14.3313C15.4358 14.0012 15.4182 13.6471 15.2869 13.3284C15.1556 13.0098 14.9186 12.7461 14.6157 12.5816C14.3129 12.4172 13.9626 12.3621 13.6239 12.4255C13.2851 12.489 12.9786 12.6671 12.7558 12.93L11.1808 12.4572C11.268 11.671 11.0686 10.8797 10.6192 10.2288L13.3516 7.49641C13.6724 7.6223 14.0267 7.63388 14.3551 7.52922C14.6834 7.42455 14.9657 7.21002 15.1545 6.9217C15.3432 6.63338 15.427 6.28885 15.3916 5.94605C15.3562 5.60325 15.2038 5.2831 14.9602 5.03941C14.7165 4.79573 14.3963 4.64339 14.0535 4.608C13.7107 4.57262 13.3662 4.65635 13.0779 4.84511C12.7895 5.03388 12.575 5.31616 12.4704 5.6445C12.3657 5.97284 12.3773 6.32721 12.5032 6.64801L9.77076 9.38041C9.1198 8.93103 8.32855 8.73161 7.54236 8.81881L7.06956 7.24381ZM9.99996 12.0996C9.99996 12.3754 9.94564 12.6485 9.84011 12.9032C9.73457 13.158 9.57989 13.3895 9.38488 13.5845C9.18988 13.7795 8.95838 13.9342 8.70359 14.0398C8.44881 14.1453 8.17574 14.1996 7.89996 14.1996C7.62418 14.1996 7.35111 14.1453 7.09632 14.0398C6.84154 13.9342 6.61004 13.7795 6.41504 13.5845C6.22003 13.3895 6.06535 13.158 5.95981 12.9032C5.85428 12.6485 5.79996 12.3754 5.79996 12.0996C5.79996 11.5427 6.02121 11.0085 6.41504 10.6147C6.80886 10.2209 7.343 9.99961 7.89996 9.99961C8.45691 9.99961 8.99106 10.2209 9.38488 10.6147C9.77871 11.0085 9.99996 11.5427 9.99996 12.0996Z"
+                        fill="white"
+                      ></path>
+                    </g>
+                    <defs>
+                      <clipPath id="clip0_3840_369">
+                        <rect
+                          width="12"
+                          height="12"
+                          fill="white"
+                          transform="translate(4 4)"
+                        ></rect>
+                      </clipPath>
+                    </defs>
+                  </svg>
+                  <div className="sh-tab-label">Affiliate</div>
+                </button>
+                <button
+                  onClick={() => handleNavigate("/promotions")}
+                  className=" sh-btn"
+                >
                   <svg
                     width="18"
                     height="18"
@@ -1559,8 +1670,111 @@ const MobileSidebar = () => {
                       </clipPath>
                     </defs>
                   </svg>
-                  <div className="sh-tab-label">Promotions</div>
+                  <div className="sh-tab-label">Promos & Bonus</div>
                 </button>
+                <button
+                  onClick={() => handleNavigate("/lossback-bonus")}
+                  className=" sh-btn"
+                >
+                  <svg
+                    width="18"
+                    height="18"
+                    viewBox="0 0 18 18"
+                    fill="none"
+                    className="sh-img "
+                    alt=""
+                  >
+                    <g clipPath="url(#clip0_5391_128)">
+                      <path
+                        d="M10.8317 2.52006C10.3627 2.79086 10.1514 3.33861 10.2844 3.83863L4.91217 9.43863C4.54943 9.18235 4.05578 9.14319 3.64661 9.37943C3.08603 9.70308 2.89328 10.4224 3.21693 10.983L4.39084 13.0163C4.71449 13.5769 5.43386 13.7696 5.99444 13.446C6.40361 13.2097 6.61651 12.7626 6.57595 12.3204L7.47602 12.0991L7.82813 12.709C8.08933 13.1614 8.60641 13.3847 9.11485 13.2645L11.5003 12.7006C11.6148 12.6735 11.7223 12.6307 11.8206 12.5739C12.0355 12.4498 12.2061 12.2595 12.308 12.0234C12.4565 11.6793 12.4343 11.2958 12.2469 10.9712L12.2242 10.9319L14.1118 10.4679C14.4784 10.8331 15.0584 10.924 15.5274 10.6532C16.088 10.3295 16.2807 9.61018 15.9571 9.0496L12.4353 2.94974C12.1117 2.38917 11.3923 2.19641 10.8317 2.52006ZM5.74637 12.2337C5.85425 12.4205 5.78999 12.6603 5.60314 12.7682C5.41628 12.8761 5.17648 12.8119 5.06859 12.625L3.89468 10.5917C3.7868 10.4049 3.85105 10.1651 4.03791 10.0572C4.22477 9.9493 4.46457 10.0136 4.57245 10.2004L5.74637 12.2337ZM11.5691 11.3624C11.6316 11.4706 11.639 11.5985 11.5895 11.7132C11.54 11.8279 11.4418 11.9101 11.3202 11.9389L8.9348 12.5028C8.76531 12.5429 8.59296 12.4685 8.50589 12.3177L8.26739 11.9046L11.4328 11.1264L11.5691 11.3624ZM13.6632 9.77224L11.539 10.2944C11.5387 10.2945 11.5383 10.2946 11.538 10.2947L6.27719 11.5879L5.39715 10.0636L10.6626 4.57495L13.6632 9.77224ZM15.2793 9.44088C15.3872 9.62774 15.3229 9.86754 15.1361 9.97542C14.9492 10.0833 14.7094 10.0191 14.6015 9.83219L11.0798 3.73236C10.9719 3.5455 11.0362 3.3057 11.223 3.19782C11.4099 3.08993 11.6497 3.15419 11.7576 3.34105L15.2793 9.44088Z"
+                        fill="white"
+                      ></path>
+                    </g>
+                    <defs>
+                      <clipPath id="clip0_5391_128">
+                        <rect
+                          width="12"
+                          height="12"
+                          fill="currentColor"
+                          transform="translate(0.803955 6.80371) rotate(-30)"
+                        ></rect>
+                      </clipPath>
+                    </defs>
+                  </svg>
+                  <div className="sh-tab-label">Lossback Bonus</div>
+                </button>
+                {closePopupForForever && (
+                  <button
+                    onClick={() => handleNavigate("/app-only-bonus")}
+                    className=" sh-btn"
+                  >
+                    <svg
+                      width="18"
+                      height="18"
+                      viewBox="0 0 18 18"
+                      fill="none"
+                      className="sh-img "
+                      alt=""
+                    >
+                      <g clipPath="url(#clip0_5391_128)">
+                        <path
+                          d="M10.8317 2.52006C10.3627 2.79086 10.1514 3.33861 10.2844 3.83863L4.91217 9.43863C4.54943 9.18235 4.05578 9.14319 3.64661 9.37943C3.08603 9.70308 2.89328 10.4224 3.21693 10.983L4.39084 13.0163C4.71449 13.5769 5.43386 13.7696 5.99444 13.446C6.40361 13.2097 6.61651 12.7626 6.57595 12.3204L7.47602 12.0991L7.82813 12.709C8.08933 13.1614 8.60641 13.3847 9.11485 13.2645L11.5003 12.7006C11.6148 12.6735 11.7223 12.6307 11.8206 12.5739C12.0355 12.4498 12.2061 12.2595 12.308 12.0234C12.4565 11.6793 12.4343 11.2958 12.2469 10.9712L12.2242 10.9319L14.1118 10.4679C14.4784 10.8331 15.0584 10.924 15.5274 10.6532C16.088 10.3295 16.2807 9.61018 15.9571 9.0496L12.4353 2.94974C12.1117 2.38917 11.3923 2.19641 10.8317 2.52006ZM5.74637 12.2337C5.85425 12.4205 5.78999 12.6603 5.60314 12.7682C5.41628 12.8761 5.17648 12.8119 5.06859 12.625L3.89468 10.5917C3.7868 10.4049 3.85105 10.1651 4.03791 10.0572C4.22477 9.9493 4.46457 10.0136 4.57245 10.2004L5.74637 12.2337ZM11.5691 11.3624C11.6316 11.4706 11.639 11.5985 11.5895 11.7132C11.54 11.8279 11.4418 11.9101 11.3202 11.9389L8.9348 12.5028C8.76531 12.5429 8.59296 12.4685 8.50589 12.3177L8.26739 11.9046L11.4328 11.1264L11.5691 11.3624ZM13.6632 9.77224L11.539 10.2944C11.5387 10.2945 11.5383 10.2946 11.538 10.2947L6.27719 11.5879L5.39715 10.0636L10.6626 4.57495L13.6632 9.77224ZM15.2793 9.44088C15.3872 9.62774 15.3229 9.86754 15.1361 9.97542C14.9492 10.0833 14.7094 10.0191 14.6015 9.83219L11.0798 3.73236C10.9719 3.5455 11.0362 3.3057 11.223 3.19782C11.4099 3.08993 11.6497 3.15419 11.7576 3.34105L15.2793 9.44088Z"
+                          fill="white"
+                        ></path>
+                      </g>
+                      <defs>
+                        <clipPath id="clip0_5391_128">
+                          <rect
+                            width="12"
+                            height="12"
+                            fill="currentColor"
+                            transform="translate(0.803955 6.80371) rotate(-30)"
+                          ></rect>
+                        </clipPath>
+                      </defs>
+                    </svg>
+                    <div className="sh-tab-label">App Only Bonus</div>
+                  </button>
+                )}
+                <button
+                  onClick={() => handleNavigate("/betting-profit-loss")}
+                  className=" sh-btn"
+                >
+                  <svg
+                    width="12"
+                    height="12"
+                    viewBox="0 0 12 12"
+                    fill="none"
+                    className="sh-img "
+                    alt=""
+                  >
+                    <path
+                      d="M10.855 3.645C10.8085 3.59814 10.7532 3.56094 10.6923 3.53555C10.6313 3.51017 10.566 3.4971 10.5 3.4971C10.434 3.4971 10.3686 3.51017 10.3077 3.53555C10.2468 3.56094 10.1915 3.59814 10.145 3.645L6.99997 6.795L4.85497 4.645C4.80849 4.59814 4.75319 4.56094 4.69226 4.53555C4.63133 4.51017 4.56598 4.4971 4.49997 4.4971C4.43396 4.4971 4.36861 4.51017 4.30768 4.53555C4.24675 4.56094 4.19145 4.59814 4.14497 4.645L1.14497 7.645C1.09811 7.69148 1.06091 7.74678 1.03552 7.80771C1.01014 7.86864 0.99707 7.93399 0.99707 8C0.99707 8.06601 1.01014 8.13136 1.03552 8.19229C1.06091 8.25322 1.09811 8.30852 1.14497 8.355C1.19145 8.40186 1.24675 8.43906 1.30768 8.46445C1.36861 8.48983 1.43396 8.5029 1.49997 8.5029C1.56598 8.5029 1.63133 8.48983 1.69226 8.46445C1.75319 8.43906 1.80849 8.40186 1.85497 8.355L4.49997 5.705L6.64497 7.855C6.69145 7.90186 6.74675 7.93906 6.80768 7.96445C6.86861 7.98983 6.93396 8.0029 6.99997 8.0029C7.06598 8.0029 7.13133 7.98983 7.19226 7.96445C7.25319 7.93906 7.30849 7.90186 7.35497 7.855L10.855 4.355C10.9018 4.30852 10.939 4.25322 10.9644 4.19229C10.9898 4.13136 11.0029 4.06601 11.0029 4C11.0029 3.93399 10.9898 3.86864 10.9644 3.80771C10.939 3.74678 10.9018 3.69148 10.855 3.645Z"
+                      fill="white"
+                    ></path>
+                  </svg>
+                  <div className="sh-tab-label">Betting Profit &amp; Loss</div>
+                </button>
+                <button
+                  onClick={() => handleNavigate("/deposit-withdraw-report")}
+                  className=" sh-btn"
+                >
+                  <svg
+                    width="12"
+                    height="12"
+                    viewBox="0 0 12 12"
+                    fill="none"
+                    className="sh-img "
+                    alt=""
+                  >
+                    <path
+                      d="M11 5.5V3.915L6 1.03L1 3.915V5.5H2V9.5H1V10.5H11V9.5H10V5.5H11ZM2 4.5L6 2.19L10 4.5H2ZM3 9.5V5.5H4V9.5H3ZM5 9.5V5.5H7V9.5H5ZM9 9.5H8V5.5H9V9.5Z"
+                      fill="white"
+                    ></path>
+                  </svg>
+                  <div className="sh-tab-label">Deposit Withdraw Report</div>
+                </button>
+                {/* 
                 <button className=" sh-btn">
                   <svg
                     width="12"
@@ -1655,8 +1869,8 @@ const MobileSidebar = () => {
                     ></path>
                   </svg>
                   <div className="sh-tab-label">Turnover history</div>
-                </button>
-                <button
+                </button> */}
+                {/* <button
                   onClick={() => handleNavigate("/stake-setting")}
                   className=" sh-btn"
                 >
@@ -1674,8 +1888,8 @@ const MobileSidebar = () => {
                     ></path>
                   </svg>
                   <div className="sh-tab-label">Account Statement</div>
-                </button>
-                <button className=" sh-btn">
+                </button> */}
+                {/* <button className=" sh-btn">
                   <svg
                     width="12"
                     height="12"
@@ -1722,7 +1936,7 @@ const MobileSidebar = () => {
                     ></path>
                   </svg>
                   <div className="sh-tab-label">My Transaction</div>
-                </button>
+                </button> */}
                 <button
                   onClick={() => handleNavigate("/stake-setting")}
                   className=" sh-btn"
@@ -1759,7 +1973,29 @@ const MobileSidebar = () => {
                   </svg>
                   <div className="sh-tab-label">Stake Settings</div>
                 </button>
-                <button className=" sh-btn">
+
+                <button
+                  onClick={() => handleNavigate("/change-password")}
+                  className=" sh-btn"
+                >
+                  <svg
+                    width="10"
+                    height="10"
+                    viewBox="0 0 10 10"
+                    fill="none"
+                    className="sh-img "
+                    alt=""
+                  >
+                    <path
+                      fillRule="evenodd"
+                      clipRule="evenodd"
+                      d="M8.28127 8.99999H1.71909C1.36589 8.99999 1.10508 8.65149 1.23829 8.33099C1.85638 6.84899 3.30847 5.99999 4.99993 5.99999C6.6919 5.99999 8.14398 6.84899 8.76207 8.33099C8.89529 8.65149 8.63447 8.99999 8.28127 8.99999ZM2.95833 2.99999C2.95833 1.89699 3.8745 0.999992 4.99993 0.999992C6.12586 0.999992 7.04152 1.89699 7.04152 2.99999C7.04152 4.10299 6.12586 4.99999 4.99993 4.99999C3.8745 4.99999 2.95833 4.10299 2.95833 2.99999ZM9.97784 8.81799C9.60678 7.13849 8.44613 5.89898 6.91851 5.33648C7.728 4.69798 8.20012 3.66547 8.02659 2.53497C7.82549 1.22347 6.7118 0.173988 5.36741 0.0209884C3.51161 -0.190512 1.93754 1.22449 1.93754 2.99999C1.93754 3.94499 2.38465 4.78698 3.08185 5.33648C1.55372 5.89898 0.393582 7.13849 0.022012 8.81799C-0.112733 9.42849 0.389499 9.99999 1.02699 9.99999H8.97286C9.61086 9.99999 10.1131 9.42849 9.97784 8.81799Z"
+                      fill="white"
+                    ></path>
+                  </svg>
+                  <div className="sh-tab-label">Change Password</div>
+                </button>
+                {/* <button className=" sh-btn">
                   <svg
                     width="12"
                     height="12"
@@ -1794,12 +2030,15 @@ const MobileSidebar = () => {
                     ></path>
                   </svg>
                   <div className="sh-tab-label">My Profile</div>
-                </button>
+                </button> */}
               </div>
             )}
             <div className="sh-sub-menu">
               <div className="sh-sub-title">Security &amp; logout</div>
-              <button className=" sh-btn">
+              <button
+                onClick={() => handleNavigate("/terms-conditions")}
+                className=" sh-btn"
+              >
                 <svg
                   width={10}
                   height={12}
