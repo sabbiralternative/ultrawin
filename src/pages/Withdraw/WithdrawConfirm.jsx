@@ -1,11 +1,11 @@
 import { useState } from "react";
 import WithdrawSuccess from "../../components/modal/WithdrawSuccess";
-import axios from "axios";
 import { API } from "../../api";
 
 import toast from "react-hot-toast";
 
 import assets from "../../assets";
+import { AxiosSecure } from "../../lib/AxiosSecure";
 
 const WithdrawConfirm = ({
   bank,
@@ -29,7 +29,7 @@ const WithdrawConfirm = ({
         bankId: bank?.bankId,
       };
 
-      const res = await axios.post(API.bankAccount, bankData);
+      const res = await AxiosSecure.post(API.bankAccount, bankData);
       const data = res?.data;
 
       if (data?.success) {

@@ -1,4 +1,3 @@
-import axios from "axios";
 import useBankAccount from "../../hooks/useBankAccount";
 import { API, Settings } from "../../api";
 import handleRandomToken from "../../utils/handleRandomToken";
@@ -19,6 +18,7 @@ import { ProgressBar } from "react-loader-spinner";
 import { useNavigate } from "react-router-dom";
 import useGetPGStatus from "../../hooks/useGetPGStatus";
 import { AxiosInstance } from "../../lib/AxiosInstance";
+import { AxiosSecure } from "../../lib/AxiosSecure";
 
 /* eslint-disable react/no-unknown-property */
 const PaymentMethods = ({
@@ -106,7 +106,7 @@ const PaymentMethods = ({
         token: generatedToken,
       };
 
-      const res = await axios.post(API.bankAccount, depositDetail);
+      const res = await AxiosSecure.post(API.bankAccount, depositDetail);
 
       const data = res?.data;
       if (data?.success) {
