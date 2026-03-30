@@ -279,6 +279,7 @@ const Bookmaker = ({ data }) => {
                                             : "pointer"
                                         }`,
                                         opacity: `${!teamProfitForGame ? "0.6" : "1"}`,
+                                        padding: "0px 5px",
                                       }}
                                       onClick={() =>
                                         handleCashOutPlaceBet(
