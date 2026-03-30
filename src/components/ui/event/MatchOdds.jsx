@@ -299,7 +299,7 @@ const MatchOdds = ({ data }) => {
                                       <span className="MuiButton-label">
                                         Cashout{" "}
                                         {teamProfitForGame?.profit &&
-                                          `(${teamProfitForGame.profit.toFixed(2)})`}
+                                          `(${teamProfitForGame.profit.toFixed(0)})`}
                                       </span>
                                       <span className="MuiTouchRipple-root"></span>
                                     </button>
