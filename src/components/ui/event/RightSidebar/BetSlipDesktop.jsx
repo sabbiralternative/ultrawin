@@ -18,6 +18,7 @@ import toast from "react-hot-toast";
 import { handleDecreasePrice } from "../../../../utils/handleDecreasePrice";
 import { handleIncreasePrice } from "../../../../utils/handleIncreasePrice";
 import { AxiosJSEncrypt } from "../../../../lib/AxiosJSEncrypt";
+import { isBetDelay, isDelay } from "../../../../utils/isBetDelay";
 
 const BetSlipDesktop = () => {
   const closePopupForForever = localStorage.getItem("closePopupForForever");
@@ -119,22 +120,15 @@ const BetSlipDesktop = () => {
         ...payload,
 
         nounce: uuidv4(),
-        isbetDelay:
-          placeBetValues?.btype === "FANCY" &&
-          placeBetValues?.eventTypeId === "4"
-            ? false
-            : settings.bet_delay,
+        isbetDelay: isBetDelay(placeBetValues),
         apk: closePopupForForever ? true : false,
       },
     ];
     setLoading(true);
     let delay = 0;
-    if (
-      placeBetValues?.btype !== "FANCY" &&
-      placeBetValues?.eventTypeId !== "4"
-    ) {
+    if (isDelay(placeBetValues)) {
       if (
-        (eventTypeId == 4 || eventTypeId == 2) &&
+        eventTypeId == 4 &&
         placeBetValues?.btype === "MATCH_ODDS" &&
         price > 3 &&
         placeBetValues?.name?.length === 2
@@ -142,7 +136,7 @@ const BetSlipDesktop = () => {
         delay = 9000;
       }
       if (
-        (eventTypeId == 4 || eventTypeId == 2) &&
+        eventTypeId == 4 &&
         placeBetValues?.btype === "MATCH_ODDS" &&
         price > 7 &&
         placeBetValues?.name?.length === 3
