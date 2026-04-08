@@ -29,6 +29,7 @@ import AffiliateUserStatement from "../pages/AffiliateUserStatement/AffiliateUse
 import TermsConditions from "../pages/TermsConditions/TermsConditions";
 import MultiMarkets from "../pages/MultiMarkets/MultiMarkets";
 import AppOnlyBonus from "../pages/AppOnlyBonus/AppOnlyBonus";
+import BonusStatement from "../pages/BonusStatement/BonusStatement";
 
 const MainRouter = () => {
   const router = createBrowserRouter(
@@ -138,6 +139,10 @@ const MainRouter = () => {
           {
             path: "/change-password",
             element: <ChangePassword />,
+          },
+          {
+            path: "/bonus-statement",
+            element: <BonusStatement />,
           },
         ],
       },
