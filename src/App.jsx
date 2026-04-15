@@ -13,6 +13,12 @@ const App = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const location = useLocation();
+  const params = new URLSearchParams(location.search);
+  const affnook_token = params.get("token");
+
+  if (affnook_token) {
+    localStorage.setItem("affnook_token", affnook_token);
+  }
 
   useEffect(() => {
     const handleResize = () => {

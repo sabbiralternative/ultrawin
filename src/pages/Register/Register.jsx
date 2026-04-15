@@ -18,6 +18,7 @@ import { navigateTelegramInstagram } from "../../utils/navigateTelegramInstagram
 import useContextState from "../../hooks/useContextState";
 
 const Register = () => {
+  const affnook_token = localStorage.getItem("affnook_token");
   const { logo } = useContextState();
   const navigate = useNavigate();
   const { refetchBalance } = useBalance();
@@ -64,6 +65,7 @@ const Register = () => {
       // referralCode: data?.referralCode,
       orderId: OTP.orderId,
       otpMethod: OTP.otpMethod,
+      affnook_token: affnook_token || null,
     };
 
     const result = await handleRegister(registerData).unwrap();
