@@ -1441,7 +1441,7 @@ div:where(.swal2-container) div:where(.swal2-actions) {
   color: orange !important;
 }
 .card-bg {
-  background-color: #122036;
+  background-color: var(--table-bg);
 }
 
 .ion-app .support::-webkit-scrollbar {
@@ -1452,7 +1452,7 @@ div:where(.swal2-container) div:where(.swal2-actions) {
   background-color: #00000066;
 }
 .bg-bg_color_LoginPopUpBg {
-  background-color: var(--table-container);
+  background-color: var(--table-bg);
 }
 
 .popUpOpenAnimation {
@@ -2156,7 +2156,7 @@ div:where(.swal2-container) div:where(.swal2-actions) {
   font-weight: 700;
 }
 .exch-betslip-ctn .body-ctn .bet-body .header-row .bet-del-btn {
-  color: var(--ion-background-color) !important;
+  color: var(--primary-background-color) !important;
   background: #fff !important;
   border-radius: 100%;
   height: 26px;
@@ -2173,7 +2173,7 @@ div:where(.swal2-container) div:where(.swal2-actions) {
   border-radius: 6px;
   color: #000;
   padding: 8px;
-  background: var(--background-card);
+  background: var(--table-bg);
 }
 .exch-betslip-ctn .body-ctn .bet-body .bet-card .input-row {
   display: flex;
@@ -2245,7 +2245,7 @@ div:where(.swal2-container) div:where(.swal2-actions) {
   .input-row
   .input-row-ctn
   .row-input {
-  background: var(--ion-background-color);
+  background: var(--primary-background-color);
   border-radius: 100px;
   height: 30px;
   display: flex !important;
@@ -2276,7 +2276,7 @@ div:where(.swal2-container) div:where(.swal2-actions) {
   .MuiButton-root {
   max-width: 24px !important;
   min-width: 24px !important;
-  background: var(--bet-slip-btn);
+  background: var(--primary-color);
   border-radius: 0;
   display: flex !important;
   align-items: center;
@@ -2463,7 +2463,7 @@ div:where(.swal2-container) div:where(.swal2-actions) {
 }
 .exch-betslip-ctn .place-section .place-btn {
   padding: 10px 30px;
-  background: var(--bet-slip-btn);
+  background: var(--primary-color);
   box-shadow: 0 14px 40px -20px rgba(0, 0, 0, 0.15);
   border-radius: 6px;
   color: var(--ion--text-light);
@@ -2527,6 +2527,7 @@ div:where(.swal2-container) div:where(.swal2-actions) {
   .MuiTableBody-root
   .MuiTableRow-root {
   background: transparent;
+  margin-bottom: 10px;
 }
 .matchodds-table-ctn
   .matchodds-table-content
@@ -2545,8 +2546,8 @@ div:where(.swal2-container) div:where(.swal2-actions) {
   .MuiTableBody-root
   .MuiTableRow-root
   .MuiTableCell-root {
-  background: var(--market-table-bg);
-  border-bottom: 2px solid var(--background-card) !important;
+  background: var(--primary-background-color);
+  /* border-bottom: 2px solid var(--background-card) !important; */
 }
 /* Mobile Bet slip */
 /* Inplay page header */
@@ -2716,7 +2717,7 @@ div:where(.swal2-container) div:where(.swal2-actions) {
   color: var(--tab-active-text);
   padding: 10px 8px;
   border-radius: 20px;
-  background: var(--tab-active-bg);
+  background: var(--primary-color);
   animation: blink-bg 1s linear infinite;
 }
 @media screen and (max-width: 920px) {

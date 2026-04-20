@@ -56,7 +56,7 @@
 
   .exch-inplay-competitions-menu-section,
   .exch-inplay-events-table-section {
-    background: var(--background-ctn-gradient) !important;
+    background: var(--table-bg) !important;
     border-radius: 15px;
   }
 
@@ -155,7 +155,7 @@
     }
 
     .gradient-border {
-      background: var(--background-ctn-gradient) !important;
+      background: var(--table-bg) !important;
       border: none;
       margin: 1px;
     }

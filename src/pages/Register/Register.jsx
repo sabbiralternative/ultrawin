@@ -96,6 +96,7 @@ const Register = () => {
             height: settings.logo_height,
             width: settings.logo_width,
             objectFit: "contain",
+            background: "transparent",
           }}
           alt="website"
           className="logo"
@@ -168,7 +169,7 @@ const Register = () => {
                     position: "absolute",
                     right: "10px",
                     top: "10px",
-                    background: "var(--custom-btn-bg-variant-2)",
+                    background: "var(--secondary-color)",
                     borderRadius: "2px",
                     padding: "1px 2px",
                   }}

@@ -26,7 +26,7 @@ const BankAccounts = ({
   return (
     <>
       {/* <div
-        style={{ marginTop: "5px", backgroundColor: "#122036" }}
+        style={{ marginTop: "5px", backgroundColor: "var(--table-bg)" }}
         className="active-bonus-card "
       >
         <div className="active-bonus-inner-card ">

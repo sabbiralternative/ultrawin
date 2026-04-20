@@ -102,7 +102,7 @@
   font-weight: 700;
 }
 .exch-betslip-ctn .body-ctn .bet-body .header-row .bet-del-btn {
-  color: var(--ion-background-color) !important;
+  color: var(--primary-background-color) !important;
   background: #fff !important;
   border-radius: 100%;
   height: 26px;
@@ -194,7 +194,7 @@
   .input-row
   .input-row-ctn
   .row-input {
-  background: var(--ion-background-color);
+  background: var(--primary-background-color);
   border-radius: 100px;
   height: 30px;
   display: flex !important;
@@ -330,7 +330,7 @@
   text-transform: capitalize;
 }
 .exch-betslip-ctn .body-ctn .bet-body .bet-card .quick-bet .qb-btn-max {
-  color: var(--ion-background-color);
+  color: var(--primary-background-color);
   background: var(--primary-color);
   border-radius: 100px;
 }
@@ -734,7 +734,7 @@
     .MuiIconButton-root
     .MuiSvgIcon-root {
     width: 16px;
-    color: var(--ion-background-color);
+    color: var(--primary-background-color);
     margin: 0;
   }
   .fm-table-ctn
@@ -908,7 +908,7 @@
   .fm-table
   .MuiTableRow-root
   .MuiTableCell-root {
-  background-color: var(--market-table-bg);
+  background-color: var(--primary-background-color);
   color: var(--ion-text-color-contrast);
   min-height: 36px;
 }
@@ -1321,7 +1321,7 @@
   .MuiTableHead-root
   .MuiTableRow-root
   .MuiTableCell-root.tabs-table-cell {
-  background: var(--ion-background-color);
+  background: var(--primary-background-color);
   border: 1px solid var(--table-head-cell-border) !important;
   border-radius: 20px;
   padding: 2px;
@@ -1403,7 +1403,7 @@
   .fm-table
   .MuiTableBody-root
   .MuiTableRow-root.header-row {
-  background: var(--ion-background-color);
+  background: var(--primary-background-color);
   width: 100%;
   border-radius: 40px;
   border: 1px solid var(--table-head-cell-border) !important;
@@ -4400,7 +4400,7 @@
   .MuiPaper-root
   .matchodds-table
   .MuiTableHead-root {
-  background: var(--table-bg);
+  background: transparent;
   background-attachment: fixed !important;
   background-repeat: no-repeat !important;
   background-size: cover !important;
@@ -4454,7 +4454,7 @@
   .matchodds-table
   .MuiTableHead-root
   .MuiTableRow-root {
-  background: var(--table-sub-header);
+  background: transparent;
 }
 .bm-table-ctn
   .bm-table-content
@@ -4647,7 +4647,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background: var(--table-header);
+  background: var(--primary-background-color);
   border: 1px solid var(--primary-color) !important;
   font-weight: 900;
   font-size: 13px;
@@ -5798,8 +5798,8 @@
   .MuiTableBody-root
   .MuiTableRow-root
   .MuiTableCell-root {
-  background-color: var(--table-bg);
-  border-bottom: 2px solid #122036 !important;
+  /* background-color: var(--table-bg);
+  border-bottom: 2px solid var(--table-bg) !important; */
 }
 .bm-table-ctn
   .bm-table-content
@@ -5849,7 +5849,7 @@
   .matchodds-table
   .MuiTableBody-root
   .MuiTableRow-root.header-row {
-  background: var(--table-container);
+  background: transparent;
 }
 .bm-table-ctn
   .bm-table-content
@@ -7397,7 +7397,7 @@
   padding: 0 3px 3px;
 }
 .open-bets-ctn .exch-open-bets-table {
-  background: var(--background-ctn-gradient);
+  background: var(--table-bg);
   border-collapse: separate;
   border-spacing: 0 2px;
 }
@@ -7554,7 +7554,7 @@
   max-height: 32px !important;
   display: flex;
   align-items: center;
-  background: var(--ion-background-color) !important;
+  background: var(--primary-background-color) !important;
   border-radius: 0;
   border: 2px solid var(--reports-header-border);
 }
@@ -7627,7 +7627,7 @@
   .MuiButtonBase-root.MuiIconButton-root
   svg
   path {
-  fill: var(--ion-background-color);
+  fill: var(--primary-background-color);
 }
 @media screen and (min-width: 720px) {
   .premium-markets-table-ctn
@@ -7687,7 +7687,7 @@
   justify-content: flex-start;
   align-items: center;
   flex-wrap: wrap;
-  background: var(--ion-background-color);
+  background: var(--primary-background-color);
   border-radius: 20px;
   border: 1px solid var(--table-head-cell-border) !important;
   min-height: -webkit-fit-content;
@@ -8423,7 +8423,13 @@
   border-radius: 10px;
 }
 .sr-bb {
-  font-family: roboto, noto, helvetica neue, helvetica, arial, sans-serif;
+  font-family:
+    roboto,
+    noto,
+    helvetica neue,
+    helvetica,
+    arial,
+    sans-serif;
   text-align: left;
   background: var(--scorecard-bg);
 }
@@ -9221,16 +9227,24 @@
   opacity: 0.7;
 }
 .sr-bb .srt-elevation-1 {
-  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.2), 0 1px 3px 0 rgba(0, 0, 0, 0.1);
+  box-shadow:
+    0 1px 2px 0 rgba(0, 0, 0, 0.2),
+    0 1px 3px 0 rgba(0, 0, 0, 0.1);
 }
 .sr-bb .srt-elevation-2 {
-  box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.23), 0 3px 6px 0 rgba(0, 0, 0, 0.16);
+  box-shadow:
+    0 3px 6px 0 rgba(0, 0, 0, 0.23),
+    0 3px 6px 0 rgba(0, 0, 0, 0.16);
 }
 .sr-bb .srt-elevation-3 {
-  box-shadow: 0 6px 6px 0 rgba(0, 0, 0, 0.26), 0 10px 20px 0 rgba(0, 0, 0, 0.19);
+  box-shadow:
+    0 6px 6px 0 rgba(0, 0, 0, 0.26),
+    0 10px 20px 0 rgba(0, 0, 0, 0.19);
 }
 .sr-bb .srt-elevation-center-2 {
-  box-shadow: 0 1px 5px rgba(0, 0, 0, 0.23), 0 1px 5px rgba(0, 0, 0, 0.16);
+  box-shadow:
+    0 1px 5px rgba(0, 0, 0, 0.23),
+    0 1px 5px rgba(0, 0, 0, 0.16);
 }
 .sr-bb .srt-inset-top-1 {
   box-shadow: inset 0 1px 2px 0 rgba(0, 0, 0, 0.23);
@@ -10197,7 +10211,7 @@
 .eam-ctn .eam-competitions-menu-section .scorecard-accordion .scorecard-header,
 .eam-ctn .eam-events-table-section .scorecard-accordion .scorecard-header {
   color: var(--ion-text-light) !important;
-  background: var(--ion-background-color);
+  background: var(--primary-background-color);
   border: 2px solid var(--reports-header-border);
   border-radius: 20px;
   min-height: 32px !important;
@@ -10251,7 +10265,7 @@
   width: 100%;
 }
 .eam-ctn .eam-events-table-section {
-  background: var(--table-container);
+  background: transparent;
   border-radius: 10px;
   margin-top: 12px;
   margin-bottom: 20px;
@@ -10315,7 +10329,7 @@
   display: flex;
   justify-content: flex-start;
   align-items: center;
-  background: var(--primary-color);
+  background: var(--secondary-color);
   background-size: cover;
   border-radius: 30px;
   text-transform: capitalize;
@@ -10488,7 +10502,7 @@
   top: 10px;
 }
 .stream-section .bet-slip-open-bets-ctn {
-  background: var(--table-container);
+  background: var(--table-bg);
   border-radius: 10px;
   padding-bottom: 5px;
   position: relative;
@@ -10558,7 +10572,7 @@
   border-radius: 0 0 10px 10px;
 }
 .stream-accordion {
-  background: var(--background-ctn-gradient);
+  background: var(--table-bg);
   border-radius: 10px;
   padding: 6px;
   margin-bottom: 8px;
@@ -10874,18 +10888,18 @@
     width: unset;
     margin: 0;
     z-index: 111111;
-    background: var(--background-ctn-gradient);
+    background: var(--table-bg);
   }
   .betslip-section .stream-accordion {
     margin-bottom: -1px;
   }
   .betslip-section .stream-accordion .stream-body .open-bets-ctn {
-    background: var(--background-ctn-gradient);
+    background: var(--table-bg);
   }
   .betslip-section .stream-accordion .stream-body .no-bet-data {
     margin: 0 5px 5px;
     width: 98%;
-    background: var(--background-ctn-gradient);
+    background: var(--table-bg);
     color: #fff;
   }
   .betslip-section .stream-accordion.Mui-expanded {

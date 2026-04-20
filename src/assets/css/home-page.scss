@@ -166,7 +166,7 @@
       height: 35px;
       font-size: 15px;
       font-weight: 700;
-      background: var(--bet-slip-btn);
+      background: var(--primary-color);
       text-transform: capitalize;
       border-radius: 40px;
 
@@ -785,7 +785,7 @@
   width: 100%;
   height: 1px;
   /* Adjust the height of the normal line */
-  background: var(--bet-slip-btn);
+  background: var(--primary-color);
   /* Color of the normal line */
   z-index: 0;
   opacity: 0.6;
@@ -798,8 +798,8 @@
   left: 0;
   width: 44px;
   height: 2px;
-  background: var(--bet-slip-btn);
-  box-shadow: 0 0 0px 1px var(--bet-slip-btn);
+  background: var(--primary-color);
+  box-shadow: 0 0 0px 1px var(--primary-color);
   z-index: 0;
   border-radius: 4px;
 }

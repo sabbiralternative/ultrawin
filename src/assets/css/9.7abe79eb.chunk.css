@@ -19,7 +19,7 @@ ion-spinner {
 }
 .notifi-ctn .notifi-accordion .Mui-expanded,
 .notifi-ctn .notifi-accordion .MuiAccordionSummary-root {
-  background-color: var(--ion-background-color);
+  background-color: var(--primary-background-color);
   color: #fff !important;
   border-radius: 20px;
 }

@@ -12180,14 +12180,14 @@ img,
 
 .btn_box {
   align-items: center;
-  background: #212e44;
+  background: var(--secondary-color);
   border-radius: 1.38rem;
   display: flex;
   justify-content: center;
   height: 100%;
   transition: background 0.5s ease;
   width: 100%;
-  color: #d5d9de;
+  color: #fff;
   text-align: center;
   font-size: 0.8em;
   font-style: normal;
@@ -12196,12 +12196,12 @@ img,
 }
 
 .btn_box:active {
-  background-color: #48cd8380;
+  background-color: var(--secondary-color);
 }
 
 .btn_box:focus {
-  border: 1px solid rgba(72, 205, 131, 0.5);
-  background: rgb(26, 53, 46);
+  border: 1px solid var(--secondary-color);
+  background: var(--secondary-color);
 }
 
 .btn_box span {
@@ -13716,7 +13716,7 @@ input {
   align-items: flex-start;
   gap: 1rem;
   border-radius: 0.75rem;
-  background: #122036;
+  background: var(--table-bg);
   margin-top: 1rem;
 }
 
@@ -13837,7 +13837,7 @@ input {
   gap: 1rem;
   border-radius: 0.75rem;
   border: 1px dashed rgba(255, 255, 255, 0.23);
-  background: #122036;
+  background: var(--table-bg);
   margin-top: 1rem;
 }
 
@@ -18168,7 +18168,7 @@ form {
   gap: 1rem;
   border-radius: 0.75rem;
   border: 1px dashed rgba(255, 255, 255, 0.23);
-  background: #122036;
+  background: var(--table-bg);
   margin-top: 1rem;
 }
 
@@ -18847,7 +18847,7 @@ button {
   width: 100%;
   background-color: var(--primary-color);
   /* box-shadow: 0 0 5px var(--color2); */
-  color: #fff;
+  color: #000;
   font-family: "Lato";
   font-size: 14px;
   font-style: normal;
@@ -19753,7 +19753,7 @@ img,
 }
 
 .process-btn > span {
-  color: var(--white, #fff);
+  color: #000;
   font-family: "Lato";
   font-size: 0.875rem;
   font-style: normal;
@@ -25502,12 +25502,12 @@ p {
 .terms-conditions-ctn {
   padding: 10px;
   border-radius: 10px;
-  background: var(--background-ctn-gradient);
+  background: var(--table-bg);
 }
 
 .conditions-paragraph-title {
   font-weight: 900;
-  color: var(--ion-heading-color);
+  color: var(--secondary-color);
   font-size: 14px;
   text-transform: uppercase;
   letter-spacing: 2px;
@@ -25527,7 +25527,7 @@ p {
 }
 
 .note {
-  background: var(--ion-button-bg-2);
+  background: var(--secondary-color);
   color: var(--active-text-color);
   font-size: 13px;
   padding: 5px;
@@ -25543,15 +25543,15 @@ p {
 }
 
 .container {
-  background: var(--ion-color-primary);
-  border: 1px solid var(--reports-header-border);
+  background: var(--primary-background-color);
+  border: 1px solid var(--primary-color);
   border-radius: var(--border-radius);
   overflow: hidden;
 
   .title-container {
     width: 100%;
     height: 32px;
-    background: var(--ion-background-color);
+    background: var(--primary-background-color);
     display: flex;
     align-items: center;
     border-bottom-left-radius: calc(var(--border-radius) - 2px);

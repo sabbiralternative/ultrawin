@@ -60,7 +60,7 @@ const LossBackClaims = () => {
           <div className="sports-view-ctn">
             <div
               style={{
-                backgroundColor: "var(--table-container)",
+                backgroundColor: "var(--table-bg)",
                 textAlign: "start",
                 marginTop: "10px",
                 paddingLeft: "0.625rem", // px-2.5

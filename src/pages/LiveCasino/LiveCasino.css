@@ -83,7 +83,7 @@ button:disabled {
   height: 32px;
   display: flex;
   align-items: center;
-  background: var(--reports-subheader-bg-color);
+  background: var(--primary-background-color);
   border: 1px solid var(--primary-color);
   border-radius: 25px;
 }
@@ -185,7 +185,7 @@ button:disabled {
 }
 
 .dc-page-bg .dc-ctn {
-  background: var(--background-ctn-gradient);
+  background: var(--table-bg);
   padding: 12px;
   border-radius: 10px;
   margin: 6px 4px 10px 10px;
@@ -389,7 +389,7 @@ button:disabled {
 
 .casino-filter-section .casino-filter-text-ctn {
   padding: 10px 20px;
-  color: var(--ion-background-color);
+  color: var(--primary-background-color);
   cursor: pointer;
 }
 
@@ -470,8 +470,10 @@ button:disabled {
 }
 
 .MuiPaper-elevation1 {
-  box-shadow: 0px 2px 1px -1px rgba(0, 0, 0, 0.2),
-    0px 1px 1px 0px rgba(0, 0, 0, 0.14), 0px 1px 3px 0px rgba(0, 0, 0, 0.12);
+  box-shadow:
+    0px 2px 1px -1px rgba(0, 0, 0, 0.2),
+    0px 1px 1px 0px rgba(0, 0, 0, 0.14),
+    0px 1px 3px 0px rgba(0, 0, 0, 0.12);
 }
 
 /*! CSS Used from: Embedded */

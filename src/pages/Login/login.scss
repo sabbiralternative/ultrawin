@@ -14,7 +14,7 @@
   }
 
   .download-apk {
-    background-color: #66bb6a;
+    background-color: var(--secondary-color);
     cursor: pointer;
     width: 400px;
     height: 40px;
@@ -121,7 +121,7 @@
 
     .demo {
       .login-form-btn-demo {
-        background: var(--custom-btn-bg-variant-2);
+        background: var(--secondary-color);
         margin-top: 0px !important;
         padding: 2px 12px !important;
         border-radius: 16px;
@@ -136,7 +136,7 @@
 
   .account-SignUp {
     width: 400px;
-    background: var(--ion-background-color);
+    background: var(--primary-background-color);
     text-align: center;
     padding: 10px 0px;
     border: 2px solid var(--form-ctn-border);
@@ -190,7 +190,7 @@
     display: flex;
     padding: 20px 20px 5px 20px;
     flex-direction: column;
-    background: var(--ion-background-color);
+    background: var(--primary-background-color);
     border-radius: 16px 16px 0px 0px;
     border: 2px solid var(--form-ctn-border);
     border-bottom: none;
@@ -357,7 +357,7 @@
         height: 44px;
         font-size: 13px;
         border-radius: 100px;
-        background: var(--custom-btn-bg-variant-2);
+        background: var(--secondary-color);
         color: var(--custom-btn-text-variant-2) !important;
         font-weight: bold;
         border: 1px solid var(--custom-btn-border-variant-2);

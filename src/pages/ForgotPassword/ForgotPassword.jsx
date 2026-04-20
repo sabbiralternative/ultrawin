@@ -10,8 +10,10 @@ import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { navigateTelegramInstagram } from "../../utils/navigateTelegramInstagram";
+import useContextState from "../../hooks/useContextState";
 
 const ForgotPassword = () => {
+  const { logo } = useContextState();
   const navigate = useNavigate();
   const [handleForgotPassword] = useForgotPasswordMutation();
   const [passType, setPassType] = useState(true);
@@ -66,7 +68,18 @@ const ForgotPassword = () => {
   return (
     <div className="login-ctn">
       <div className="title-row">
-        <img src={assets.title} alt="website" className="logo" />
+        <img
+          onClick={() => navigate("/")}
+          src={logo}
+          style={{
+            height: settings.logo_height,
+            width: settings.logo_width,
+            objectFit: "contain",
+            background: "transparent",
+          }}
+          alt="website"
+          className="logo"
+        />
       </div>
       <div className="login-card">
         <div className="login-form-page">

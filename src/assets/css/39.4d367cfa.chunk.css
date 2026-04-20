@@ -51,7 +51,7 @@ ion-icon {
 }
 .side-header .sh-title {
   height: 49px;
-  background-color: var(--ion-background-color);
+  background-color: var(--primary-background-color);
   position: -webkit-sticky;
   position: sticky;
   top: 0;
@@ -65,7 +65,7 @@ ion-icon {
   width: -webkit-fit-content;
   width: -moz-fit-content;
   width: fit-content;
-  background-color: var(--ion-background-color);
+  background-color: var(--primary-background-color);
 }
 .side-header .sh-title .sh-website-title .sh-website-title-img {
   height: var(--logo-web-height);
@@ -86,7 +86,7 @@ ion-icon {
 .side-header .sh-menu .sh-username-img .short-name {
   height: 36px;
   width: 36px;
-  background-color: var(--ion-background-color);
+  background-color: var(--primary-background-color);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -122,7 +122,7 @@ ion-icon {
   width: 23px;
   padding: 4px;
   border-radius: 50%;
-  background-color: var(--ion-background-color);
+  background-color: var(--primary-background-color);
 }
 .side-header .sh-menu .sh-sub-menu .sh-btn .sh-img.logout-icon path {
   fill: #fff;
@@ -356,7 +356,7 @@ ion-icon {
   height: 30px;
 }
 .app-sub-header .website-title {
-  background-color: var(--ion-background-color);
+  background-color: var(--primary-background-color);
   height: 30px;
   width: 150px;
   margin: 10px 10px 10px 0;
@@ -678,7 +678,7 @@ ion-icon {
 .theme-optionslist .theme-drop-down .theme-options1 .circle1 {
   margin-top: 5px;
   margin-bottom: 5px;
-  background-color: var(--table-head-bg);
+  background-color: var(--table-bg);
   display: flex;
   flex-direction: column;
   align-items: center;

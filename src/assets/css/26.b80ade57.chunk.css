@@ -196,7 +196,7 @@
 .ion-app {
   display: flex;
   flex-direction: row;
-  background-color: var(--ion-background-color);
+  background-color: var(--primary-background-color);
 }
 .ion-app .support {
   display: flex;
@@ -206,7 +206,7 @@
 }
 .rules-regulations-footer {
   width: 90%;
-  background-color: var(--primary-color);
+  background-color: var(--secondary-color);
   padding: 10px;
   display: flex;
   justify-content: center;
@@ -235,7 +235,7 @@
   }
   .mob-header {
     display: block;
-    background: var(--ion-background-color);
+    background: var(--primary-background-color);
   }
 }
 .home-page-ctn,
@@ -353,7 +353,7 @@
   height: 35px;
   font-size: 15px;
   font-weight: 700;
-  background: var(--bet-slip-btn);
+  background: var(--primary-color);
   text-transform: capitalize;
   border-radius: 40px;
 }
@@ -651,14 +651,14 @@
   content: "";
   position: absolute;
   left: 0;
-  background: var(--bet-slip-btn);
+  background: var(--primary-color);
   z-index: 0;
 }
 .border-shadow-container:before {
   bottom: -10.7px;
   width: 44px;
   height: 2px;
-  box-shadow: 0 0 0 1px var(--bet-slip-btn);
+  box-shadow: 0 0 0 1px var(--primary-color);
   border-radius: 4px;
 }
 .site-info-grid {
@@ -889,7 +889,7 @@
   height: 32px;
   display: flex;
   align-items: center;
-  background: var(--reports-subheader-bg-color);
+  background: var(--primary-background-color);
   border: 1px solid var(--primary-color);
   border-radius: 25px;
 }
@@ -1107,8 +1107,8 @@
   text-align: center;
 }
 .cb.cb-variant-2 {
-  background: var(--primary-color);
-  color: black;
+  background: var(--secondary-color);
+  color: #fff;
 }
 .cb.cb-variant-1 {
   background: var(--primary-color);
@@ -1142,7 +1142,7 @@
   color: var(--custom-btn-text-variant-1);
 }
 .promotions-page {
-  background: var(--background-ctn-gradient);
+  background: var(--table-bg);
   border-radius: 10px;
   margin: 12px 24px;
   padding: 16px 12px;
@@ -1164,7 +1164,7 @@
     padding: 10px;
     margin: 0;
     background: transparent;
-    background: var(--ion-background-color);
+    background: var(--primary-background-color);
   }
   .promotion-card-ctn {
     grid-template-columns: repeat(1, 1fr);
@@ -1246,12 +1246,12 @@
   cursor: pointer;
 }
 .dc-page-bg {
-  background: var(--ion-background-color);
+  background: var(--primary-background-color);
   min-height: 100%;
 }
 @media screen and (max-width: 920px) {
   .dc-page-bg {
-    background: var(--background-ctn-gradient);
+    background: var(--table-bg);
   }
   .dc-page-bg.pt-14 {
     padding-top: 14px;
@@ -1340,7 +1340,7 @@
   transform: scale(1.5);
 }
 .dc-page-bg .dc-ctn {
-  background: var(--background-ctn-gradient);
+  background: var(--table-bg);
   padding: 12px;
   border-radius: 10px;
   margin: 6px 4px 10px 10px;
@@ -1362,7 +1362,7 @@
   padding: 1px 10px;
 }
 .dc-page-bg .dc-ctn .casino-header-ctn {
-  background: var(--ion-background-color);
+  background: var(--primary-background-color);
   border-radius: 20px;
   display: flex;
   height: 32px;
@@ -2521,7 +2521,7 @@
 }
 .casino-filter-section .casino-filter-text-ctn {
   padding: 10px 20px;
-  color: var(--ion-background-color);
+  color: var(--primary-background-color);
   cursor: pointer;
 }
 .casino-filter-section .casino-filter-text-ctn:not(:last-child) {

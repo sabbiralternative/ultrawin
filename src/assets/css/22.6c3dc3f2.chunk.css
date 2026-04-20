@@ -1,6 +1,6 @@
 html.ios {
-  --ion-default-font: -apple-system, BlinkMacSystemFont, "Helvetica Neue",
-    "Roboto", sans-serif;
+  --ion-default-font:
+    -apple-system, BlinkMacSystemFont, "Helvetica Neue", "Roboto", sans-serif;
 }
 
 html.md {
@@ -12,7 +12,7 @@ html {
 }
 
 body {
-  background: var(--ion-background-color);
+  background: var(--primary-background-color);
 }
 
 html.ios ion-modal.modal-card .ion-page > ion-header > ion-toolbar:first-child {

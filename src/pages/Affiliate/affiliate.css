@@ -1,5 +1,5 @@
 .nw-affi-how-to-get-bonus {
-  background-color: var(--table-container);
+  background-color: var(--table-bg);
   padding: 10px 15px;
   border: 1px solid #ffffff29;
   border-radius: 8px;
@@ -85,7 +85,7 @@
   padding: 10px 15px;
   border-radius: 8px;
   border: 1px solid #ffffff29;
-  background-color: var(--table-container);
+  background-color: var(--table-bg);
 }
 
 .nw-affi-invite-content-wrapper {
@@ -162,7 +162,7 @@
 
 .nw-affi-qr-invite-code {
   width: 100%;
-  background: var(--table-container);
+  background: var(--table-bg);
   border-radius: 8px;
 }
 
@@ -294,7 +294,7 @@ button:not(:disabled) {
 }
 
 .nw-affi-graph-wrapper {
-  background-color: var(--table-container);
+  background-color: var(--table-bg);
   border: 1px solid #ffffff29;
   border-radius: 8px;
   margin: 20px 0;
@@ -305,7 +305,7 @@ button:not(:disabled) {
 }
 
 .af-graph-img-sec {
-  background: var(--table-container);
+  background: var(--table-bg);
 }
 
 .apexcharts-canvas {
@@ -323,7 +323,7 @@ button:not(:disabled) {
 }
 
 .af-new-user-add-sec {
-  background: var(--table-container);
+  background: var(--table-bg);
   padding: 10px 15px;
   display: flex;
   justify-content: space-between;
@@ -343,7 +343,7 @@ button:not(:disabled) {
 }
 
 .af-top-user-sec table {
-  background-color: var(--table-container);
+  background-color: var(--table-bg);
   border-bottom-left-radius: 5px;
   border-bottom-right-radius: 5px;
 }
@@ -365,7 +365,7 @@ button:not(:disabled) {
 }
 
 .af-top-user-sec table thead {
-  background-color: var(--table-container);
+  background-color: var(--table-bg);
 }
 
 .table > tbody,
@@ -515,7 +515,7 @@ footer[data-v-066114c4] {
 }
 
 .affilate_footer nav[data-v-066114c4] {
-  background-color: var(--table-container);
+  background-color: var(--table-bg);
   padding: 1rem 5px;
   border-radius: 10px;
   box-shadow: 0 1px 15px rgba(0, 0, 0, 0.1);
@@ -688,7 +688,7 @@ tr.tabetdat td {
 }
 
 .aff-report.sub-header-tab.refer-earn-sec .matka-detali-top {
-  background: var(--table-container);
+  background: var(--table-bg);
   margin-top: 15px;
 }
 

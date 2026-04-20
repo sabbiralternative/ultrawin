@@ -1,5 +1,5 @@
 .ds-view-ctn {
-  background-color: var(--ion-background-color);
+  background-color: var(--primary-background-color);
   min-height: 100vh;
 }
 .sports-view-ctn,
@@ -365,7 +365,7 @@
 }
 .events-table-ctn {
   padding: 12px;
-  background: var(--background-ctn-gradient);
+  background: var(--table-bg);
   border-radius: 20px;
   margin-bottom: 30px;
 }

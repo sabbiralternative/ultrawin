@@ -1,5 +1,5 @@
 .ds-view-ctn {
-  background-color: var(--ion-background-color);
+  background-color: var(--primary-background-color);
   min-height: 100vh;
 }
 
@@ -199,9 +199,9 @@
   margin: 3px;
   font-size: 10px;
   font-weight: 700;
-  background-color: var(--primary-color);
   border-radius: 50%;
-  color: #000;
+  background-color: var(--secondary-color);
+  color: #fff;
 }
 
 .market-enabled.bg-none {
@@ -433,7 +433,7 @@
 
 .events-table-ctn {
   padding: 12px;
-  background: var(--table-container);
+  background: var(--table-bg);
   border-radius: 20px;
   margin-bottom: 30px;
 }
@@ -904,7 +904,7 @@
   display: flex;
   position: absolute;
   /* right: 0; */
-  background-color: var(--table-bg);
+  background-color: var(--primary-background-color);
 }
 
 .events-table-ctn
@@ -1214,7 +1214,7 @@
   .events-table
   .MuiTableBody-root
   .MuiTableRow-root:nth-child(odd) {
-  background: transparent;
+  background: var(--primary-background-color);
 }
 
 .events-table-ctn
@@ -1258,7 +1258,7 @@
   .events-table
   .MuiTableBody-root
   .bgc-white {
-  background-color: var(--table-bg) !important;
+  background-color: var(--primary-background-color) !important;
 }
 
 @media screen and (max-width: 720px) {

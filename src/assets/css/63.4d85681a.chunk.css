@@ -13,7 +13,7 @@ ion-spinner {
 .stake-settings {
   margin: 12px 24px;
   padding: 16px 12px;
-  background: var(--table-container);
+  background: var(--table-bg);
   border-radius: 10px;
   font-family: Lato;
   font-size: 16px;

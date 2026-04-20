@@ -99,6 +99,7 @@ const Login = () => {
             height: settings.logo_height,
             width: settings.logo_width,
             objectFit: "contain",
+            background: "transparent",
           }}
           alt="website"
           className="logo"

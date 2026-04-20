@@ -196,7 +196,7 @@
 .ion-app {
   display: flex;
   flex-direction: row;
-  background-color: var(--ion-background-color);
+  background-color: var(--primary-background-color);
 }
 .ion-app .support {
   display: flex;
@@ -239,7 +239,7 @@
     bottom: 0;
     right: 0;
     display: block;
-    background: var(--ion-background-color);
+    background: var(--primary-background-color);
   }
 }
 .home-page-ctn,
@@ -357,7 +357,7 @@
   height: 35px;
   font-size: 15px;
   font-weight: 700;
-  background: var(--bet-slip-btn);
+  background: var(--primary-color);
   text-transform: capitalize;
   border-radius: 40px;
 }
@@ -655,14 +655,14 @@
   content: "";
   position: absolute;
   left: 0;
-  background: var(--bet-slip-btn);
+  background: var(--primary-color);
   z-index: 0;
 }
 .border-shadow-container:before {
   bottom: -10.7px;
   width: 44px;
   height: 2px;
-  box-shadow: 0 0 0 1px var(--bet-slip-btn);
+  box-shadow: 0 0 0 1px var(--primary-color);
   border-radius: 4px;
 }
 .site-info-grid {
@@ -893,7 +893,7 @@
   height: 32px;
   display: flex;
   align-items: center;
-  background: var(--reports-subheader-bg-color);
+  background: var(--primary-background-color);
   border: 1px solid var(--primary-color);
   border-radius: 25px;
 }
@@ -1111,8 +1111,8 @@
   text-align: center;
 }
 .cb.cb-variant-2 {
-  background: var(--primary-color);
-  color: black;
+  background: var(--secondary-color);
+  color: #fff;
 }
 .cb.cb-variant-1 {
   background: var(--primary-color);
@@ -1146,7 +1146,7 @@
   color: var(--custom-btn-text-variant-1);
 }
 .promotions-page {
-  background: var(--background-ctn-gradient);
+  background: var(--table-bg);
   border-radius: 10px;
   margin: 12px 24px;
   padding: 16px 12px;
@@ -1168,7 +1168,7 @@
     padding: 10px;
     margin: 0;
     background: transparent;
-    background: var(--ion-background-color);
+    background: var(--primary-background-color);
   }
   .promotion-card-ctn {
     grid-template-columns: repeat(1, 1fr);

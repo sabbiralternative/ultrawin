@@ -109,7 +109,7 @@
 @media screen and (max-width: 768px) {
   .dashboard-view-ctn,
   .dashboard-view-ctn.not-logged-in {
-    background: var(--background-ctn-gradient);
+    background: var(--table-bg);
   }
 
   .dashboard-view-ctn.not-logged-in {
@@ -480,11 +480,11 @@
   text-transform: capitalize;
   padding: 0 0 0 15px;
   border-radius: 30px;
-  border: 1px solid var(--input-label-border);
-  background: var(--input-label-bg);
+  /* border: 1px solid var(--table-bg);
+  background: var(--table-bg); */
   position: absolute;
   left: 15px;
-  top: -10px;
+  top: -15px;
   z-index: 999;
   font-size: 12px;
   font-weight: 600;
@@ -496,7 +496,7 @@
 }
 
 .cp-ctn .cp-input-template .cp-input .MuiOutlinedInput-root {
-  background-color: var(--input-template-bg) !important;
+  background-color: var(--table-bg) !important;
   border-radius: 30px;
   padding: 0;
 }

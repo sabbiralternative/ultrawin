@@ -1,5 +1,6 @@
 :root {
-  --primary-color: #01fafe;
-  --table-bg: #212e44;
-  --table-container: #122036;
+  --primary-background-color: #333333;
+  --primary-color: #cfe1da;
+  --secondary-color: #009270;
+  --table-bg: #4a4a4a;
 }

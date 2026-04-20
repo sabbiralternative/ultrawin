@@ -1,6 +1,6 @@
 const AmountBox = ({ amount, setAmount, setShowModal }) => {
   return (
-    <div className="amountBox" style={{ backgroundColor: "#122036" }}>
+    <div className="amountBox" style={{ backgroundColor: "var(--table-bg)" }}>
       <div className="withdraw_text ">
         <p style={{ color: "white" }}>Please enter the amount to deposit</p>
       </div>

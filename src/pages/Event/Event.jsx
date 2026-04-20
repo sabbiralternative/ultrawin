@@ -144,8 +144,14 @@ const Event = () => {
                   }}
                 >
                   <div
-                    // className="eam-events-table-section md hydrated"
-                    style={{ width: "100%" }}
+                    className="eam-events-table-section md hydrated"
+                    style={{
+                      width: "100%",
+                      display: "flex",
+                      flexDirection: "column",
+                      gap: "10px",
+                      background: "var(--table-bg)",
+                    }}
                   >
                     <EventHeader setTab={setTab} tab={tab} data={data} />
                     <IFrame tab={tab} setTab={setTab} score={data?.score} />
