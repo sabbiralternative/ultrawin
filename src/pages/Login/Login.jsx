@@ -27,6 +27,7 @@ const Login = () => {
 
       b2c: settings.b2c,
       apk: closePopupForForever ? true : false,
+      nonce: crypto.randomUUID(),
     };
 
     const result = await handleLogin(loginData).unwrap();
@@ -59,6 +60,7 @@ const Login = () => {
 
       b2c: settings.b2c,
       apk: closePopupForForever ? true : false,
+      nonce: crypto.randomUUID(),
     };
     const result = await handleLogin(loginData).unwrap();
     if (result.success) {
