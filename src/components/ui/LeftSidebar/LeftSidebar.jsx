@@ -722,6 +722,26 @@ const LeftSidebar = () => {
           </button>
           <button
             onClick={() => {
+              dispatch(setGroupType(6));
+              navigate("/");
+            }}
+            className={`sh-btn ${group === 6 && pathname === "/" ? "active-sh-btn" : ""}`}
+          >
+            <img
+              className="sh-img"
+              style={{
+                height: "20px",
+                filter: "invert(1)",
+              }}
+              src="/images/poll.svg"
+              alt=""
+            />
+            <div className="sh-tab-label" style={{ marginTop: "5px" }}>
+              Politics
+            </div>
+          </button>
+          <button
+            onClick={() => {
               dispatch(setGroupType("horse-racing"));
               navigate("/");
             }}

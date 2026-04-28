@@ -885,6 +885,23 @@ const MobileSidebar = () => {
                 <div className="sh-tab-label">Kabbadi</div>
               </button>
               <button
+                onClick={() => handleSetGroupType(6)}
+                className={`sh-btn `}
+              >
+                <img
+                  className="sh-img"
+                  style={{
+                    height: "20px",
+                    filter: "invert(1)",
+                  }}
+                  src="/images/poll.svg"
+                  alt=""
+                />
+                <div className="sh-tab-label" style={{ marginTop: "5px" }}>
+                  Politics
+                </div>
+              </button>
+              <button
                 onClick={() => handleSetGroupType("greyhound-racing")}
                 className=" sh-btn"
               >
