@@ -11,37 +11,36 @@ const EventHeader = ({ data, tab, setTab }) => {
   return (
     <>
       <div className="hydrated md mob-stream-section">
-        <div className="hydrated md eam-info-header eam-info-header-name">
+        <div
+          className="hydrated md eam-info-header eam-info-header-name"
+          style={{ display: "block" }}
+        >
           <div className="eam-teams-name">
             <div className="eam-date-ctn">
               <div className="eam-date">
                 <div className="eam-dates">
-                  <div className="eam-date-time">
+                  <div
+                    className="eam-date-time"
+                    style={{ fontSize: "10px", display: "flex", gap: "5px" }}
+                  >
+                    <span style={{ paddingRight: "0px" }}>
+                      {" "}
+                      {data?.result?.length > 0 &&
+                        data?.result?.[0]?.eventName?.split("v")[0]}
+                    </span>
+                    <span>V</span>
                     <span>
                       {" "}
                       {data?.result?.length > 0 &&
-                        data?.result?.[0]?.openDate?.split(" ")[1]}
+                        data?.result?.[0]?.eventName?.split("v")[1]}
                     </span>
-                  </div>
-                  <div className="eam-date-text">
-                    {" "}
-                    {data?.result?.length > 0 &&
-                      data?.result?.[0]?.openDate?.split(" ")[0]}
                   </div>
                 </div>
               </div>
             </div>
             <div className="eam-teams-name-ctn">
               <div className="eam-team-1">
-                {data?.result?.length > 0 &&
-                  data?.result?.[0]?.eventName?.split("v")[0]}
-              </div>
-
-              <span>V</span>
-              <div className="eam-team-2">
-                {" "}
-                {data?.result?.length > 0 &&
-                  data?.result?.[0]?.eventName?.split("v")[1]}
+                {data?.result?.length > 0 && data?.result?.[0]?.openDate}
               </div>
             </div>
           </div>
@@ -179,27 +178,23 @@ const EventHeader = ({ data, tab, setTab }) => {
                   <div className="eam-date-time">
                     <span>
                       {data?.result?.length > 0 &&
-                        data?.result?.[0]?.openDate?.split(" ")[1]}
+                        data?.result?.[0]?.eventName?.split("v")[0]}
+                      <span>V</span>
+                      <span>
+                        {" "}
+                        {data?.result?.length > 0 &&
+                          data?.result?.[0]?.eventName?.split("v")[1]}
+                      </span>
                     </span>
                   </div>
-                  <div className="eam-date-text">
-                    {data?.result?.length > 0 &&
-                      data?.result?.[0]?.openDate?.split(" ")[0]}
-                  </div>
+                  <div className="eam-date-text"></div>
                 </div>
               </div>
             </div>
             <div className="eam-teams-name-ctn">
               <div className="eam-team-1" style={{ color: "white" }}>
                 {" "}
-                {data?.result?.length > 0 &&
-                  data?.result?.[0]?.eventName?.split("v")[0]}
-              </div>
-              <span style={{ color: "white" }}>V</span>
-              <div className="eam-team-2" style={{ color: "white" }}>
-                {" "}
-                {data?.result?.length > 0 &&
-                  data?.result?.[0]?.eventName?.split("v")[1]}
+                {data?.result?.length > 0 && data?.result?.[0]?.openDate}
               </div>
             </div>
           </div>

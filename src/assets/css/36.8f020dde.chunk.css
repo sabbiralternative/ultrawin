@@ -10329,7 +10329,7 @@
   display: flex;
   justify-content: flex-start;
   align-items: center;
-  background: var(--secondary-color);
+  background: var(--enabled-market-bg);
   background-size: cover;
   border-radius: 30px;
   text-transform: capitalize;

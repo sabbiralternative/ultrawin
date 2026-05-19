@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import useSportsBook from "../../hooks/useSportsBook";
 import { useLocation, useNavigate } from "react-router-dom";
 import assets from "../../assets";
@@ -7,6 +7,7 @@ import SuspendedMobile from "../../components/shared/Suspended/SuspendedMobile";
 import InPlayHeaderMobile from "./InPlayHeaderMobile";
 
 const MobileInPlay = () => {
+  const [search, setSearch] = useState("");
   const location = useLocation();
   const params = new URLSearchParams(location.search);
   const group = params.get("group");
@@ -20,10 +21,26 @@ const MobileInPlay = () => {
     navigate(`/${data[keys]?.eventTypeId}/${keys}`);
   };
 
+  const filteredData = useMemo(() => {
+    if (!data) return null;
+    if (!search) return data;
+    const lowerSearch = search.toLowerCase();
+    return Object.entries(data)
+      .filter(([, value]) => {
+        const team1 = value?.player1?.toLowerCase() || "";
+        const team2 = value?.player2?.toLowerCase() || "";
+        return team1.includes(lowerSearch) || team2.includes(lowerSearch);
+      })
+      .reduce((obj, [key, value]) => {
+        obj[key] = value;
+        return obj;
+      }, {});
+  }, [data, search]);
+
   useEffect(() => {
-    if (data) {
+    if (filteredData) {
       const categories = Array.from(
-        new Set(Object.values(data).map((item) => item.eventTypeId)),
+        new Set(Object.values(filteredData).map((item) => item.eventTypeId)),
       );
       const sortedCategories = categories.sort((a, b) => {
         const order = { 4: 0, 1: 1, 2: 2 };
@@ -31,9 +48,9 @@ const MobileInPlay = () => {
       });
       setCategories(sortedCategories);
     }
-  }, [data]);
+  }, [filteredData]);
 
-  if (!data) return;
+  if (!filteredData) return;
 
   return (
     <div className="ios overscroll hydrated">
@@ -54,11 +71,11 @@ const MobileInPlay = () => {
                     }}
                   >
                     {/*  */}
-                    <InPlayHeaderMobile />
+                    <InPlayHeaderMobile setSearch={setSearch} search={search} />
                     {/*  */}
                     <div className="events-table-ctn live-events-ctn">
                       {categories?.map((category) => {
-                        const filteredData = Object.entries(data)
+                        const filterByCategory = Object.entries(filteredData)
                           .filter(([, value]) => value.eventTypeId === category)
                           .reduce((obj, [key, value]) => {
                             obj[key] = value;
@@ -118,7 +135,7 @@ const MobileInPlay = () => {
                                     <tbody className="MuiTableBody-root">
                                       {data &&
                                         Object.values(data).length > 0 &&
-                                        Object.keys(filteredData)
+                                        Object.keys(filterByCategory)
                                           .sort(
                                             (keyA, keyB) =>
                                               data[keyA].sort - data[keyB].sort,
@@ -489,9 +506,12 @@ const MobileInPlay = () => {
                           </div>
                         );
                       })}
+                      {categories.length === 0 && (
+                        <span style={{ color: "white" }}>No events found</span>
+                      )}
                     </div>{" "}
                   </div>
-                  <div
+                  {/* <div
                     className="exch-providers pos-sticky-10 ios hydrated"
                     style={{
                       flex: "0 0calc(calc(12 / var(--ion-grid-columns, 12)) * 100%)",
@@ -555,7 +575,7 @@ const MobileInPlay = () => {
                         </div>
                       </div>
                     </div>{" "}
-                  </div>
+                  </div> */}
                 </div>
               </div>
             </div>

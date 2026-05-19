@@ -16,7 +16,7 @@ const useGetNotification = () => {
         const { data } = await AxiosSecure.post(`${API.notification}`);
 
         if (data.success) {
-          return data?.result?.[0];
+          return data?.result;
         }
       } catch (error) {
         console.error("Error fetching data:", error);

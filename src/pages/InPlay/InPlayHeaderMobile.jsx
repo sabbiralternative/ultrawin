@@ -3,7 +3,7 @@ import useGetNotification from "../../hooks/useGetNotification";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useLatestEvent } from "../../hooks/latestEvent";
 
-const InPlayHeaderMobile = () => {
+const InPlayHeaderMobile = ({ setSearch, search }) => {
   const { data: latestEvent } = useLatestEvent();
   const location = useLocation();
   const params = new URLSearchParams(location.search);
@@ -18,64 +18,58 @@ const InPlayHeaderMobile = () => {
   return (
     <Fragment>
       <div className="noti-header">
-        <div className="animation-notifi">
-          <svg
-            width={120}
-            height={120}
-            viewBox="0 0 120 120"
-            fill="none"
-            className="notification-icon"
-            style={{
-              position: "absolute",
-              left: "5px",
-              zIndex: 11111,
-              height: "30px",
-              width: "30px",
-              background: "var(--notification-bg)",
-              borderRadius: "20px",
-            }}
-          >
-            <path
-              d="M60 25.8333C53.6569 25.8333 47.5736 28.3531 43.0884 32.8384C38.6031 37.3236 36.0833 43.4069 36.0833 49.75V61.804C36.0838 62.334 35.961 62.8569 35.7246 63.3313L29.8582 75.0607C29.5716 75.6337 29.4363 76.2705 29.4651 76.9106C29.4939 77.5506 29.6858 78.1727 30.0227 78.7177C30.3595 79.2627 30.8301 79.7125 31.3897 80.0245C31.9494 80.3364 32.5795 80.5001 33.2202 80.5H86.7798C87.4205 80.5001 88.0506 80.3364 88.6103 80.0245C89.1699 79.7125 89.6405 79.2627 89.9773 78.7177C90.3142 78.1727 90.5061 77.5506 90.5349 76.9106C90.5637 76.2705 90.4284 75.6337 90.1418 75.0607L84.2788 63.3313C84.0412 62.8572 83.9172 62.3343 83.9167 61.804V49.75C83.9167 43.4069 81.3969 37.3236 76.9116 32.8384C72.4264 28.3531 66.3431 25.8333 60 25.8333ZM60 90.75C57.8794 90.7511 55.8107 90.0945 54.079 88.8706C52.3472 87.6468 51.0377 85.916 50.3308 83.9167H69.6692C68.9623 85.916 67.6528 87.6468 65.921 88.8706C64.1893 90.0945 62.1206 90.7511 60 90.75Z"
-              fill="black"
-            />
-          </svg>
-          <div className="marquee-new">
-            <div className="notifi-item">
-              <img
-                src="/static/media/notifi-scroll-icon.d1d3e573.svg"
-                alt=""
-                className="notifi-scroll-icon"
-                loading="lazy"
-                style={{ animationDuration: "31.8s" }}
-              />
-              <span
-                className="notifi-mssage"
-                style={{ animationDuration: "31.8s" }}
-              >
-                {notification?.text}
-              </span>
-              {/* <img
-                src="/static/media/notifi-scroll-icon.d1d3e573.svg"
-                alt=""
-                className="notifi-scroll-icon"
-                loading="lazy"
+        <div>
+          {notification?.length > 0 && (
+            <div className="animation-notifi">
+              <svg
+                width={120}
+                height={120}
+                viewBox="0 0 120 120"
+                fill="none"
+                className="notification-icon"
                 style={{
-                  transform: "scaleX(-1)",
-                  animationDuration: "31.8s",
+                  position: "absolute",
+                  left: "5px",
+                  zIndex: 11111,
+                  height: "30px",
+                  width: "30px",
+                  background: "var(--notification-bg)",
+                  borderRadius: "20px",
                 }}
-              /> */}
+              >
+                <path
+                  d="M60 25.8333C53.6569 25.8333 47.5736 28.3531 43.0884 32.8384C38.6031 37.3236 36.0833 43.4069 36.0833 49.75V61.804C36.0838 62.334 35.961 62.8569 35.7246 63.3313L29.8582 75.0607C29.5716 75.6337 29.4363 76.2705 29.4651 76.9106C29.4939 77.5506 29.6858 78.1727 30.0227 78.7177C30.3595 79.2627 30.8301 79.7125 31.3897 80.0245C31.9494 80.3364 32.5795 80.5001 33.2202 80.5H86.7798C87.4205 80.5001 88.0506 80.3364 88.6103 80.0245C89.1699 79.7125 89.6405 79.2627 89.9773 78.7177C90.3142 78.1727 90.5061 77.5506 90.5349 76.9106C90.5637 76.2705 90.4284 75.6337 90.1418 75.0607L84.2788 63.3313C84.0412 62.8572 83.9172 62.3343 83.9167 61.804V49.75C83.9167 43.4069 81.3969 37.3236 76.9116 32.8384C72.4264 28.3531 66.3431 25.8333 60 25.8333ZM60 90.75C57.8794 90.7511 55.8107 90.0945 54.079 88.8706C52.3472 87.6468 51.0377 85.916 50.3308 83.9167H69.6692C68.9623 85.916 67.6528 87.6468 65.921 88.8706C64.1893 90.0945 62.1206 90.7511 60 90.75Z"
+                  fill="black"
+                />
+              </svg>
+              <div className="marquee-new">
+                <div className="notifi-item">
+                  {notification?.map((item) => {
+                    return (
+                      <span
+                        key={item}
+                        className="notifi-mssage"
+                        style={{ animationDuration: "31.8s" }}
+                      >
+                        {item?.text}
+                      </span>
+                    );
+                  })}
+                </div>
+              </div>
             </div>
-          </div>
+          )}
         </div>
         <div className="search-tab">
           <div className="search-games-ctn">
             <input
+              value={search}
+              onChange={(e) => setSearch(e.target.value)}
               className="search-games-input gradient-border"
               placeholder="search events"
-              defaultValue
             />
             <svg
+              onClick={() => setSearch("")}
               className="MuiSvgIcon-root"
               focusable="false"
               viewBox="0 0 24 24"

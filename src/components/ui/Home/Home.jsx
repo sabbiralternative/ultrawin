@@ -12,11 +12,11 @@ import Sponsors from "./Sponsors";
 // import TopRatedGames from "./TopRatedGames";
 // import TrendingGames from "./TrendingGames";
 import { useSelector } from "react-redux";
-import { Fragment } from "react";
 import BottomTab from "./BottomTab";
 import TopMatches from "./TopMatches";
 import { useGetIndex } from "../../../hooks";
 import CricketBattle from "./CricketBattle";
+import Banner from "./Banner";
 
 const Home = () => {
   const { data } = useGetIndex({
@@ -78,10 +78,19 @@ const Home = () => {
             {/* <Promotion />
             {socialLink?.referral && <CryptoReferTab />} */}
 
-            <div className="banner-container">
-              <div className="banner-cards">
+            <div className="banner-container" style={{ display: "initial" }}>
+              <div
+                className="banner-cards"
+                style={{ display: "initial", width: "100%" }}
+              >
                 {token && (
-                  <Fragment>
+                  <div
+                    style={{
+                      display: "flex",
+                      gap: "10px",
+                      marginBottom: "10px",
+                    }}
+                  >
                     <button
                       style={{ borderRadius: "4px", width: "100%" }}
                       onClick={() => navigate("/deposit")}
@@ -106,26 +115,11 @@ const Home = () => {
                       </span>
                       <span className="MuiTouchRipple-root"></span>
                     </button>
-                  </Fragment>
+                  </div>
                 )}
-
-                {bannerImage?.banner?.slice(0, 2).map((img) => {
-                  return (
-                    <div
-                      style={{ borderRadius: "5px" }}
-                      key={img}
-                      className="inplay-bg banner-card-div"
-                    >
-                      <div className="banner-image">
-                        <img
-                          style={{ borderRadius: "5px" }}
-                          src={img}
-                          alt="Deposit now"
-                        />
-                      </div>
-                    </div>
-                  );
-                })}
+                {bannerImage?.banner?.length > 0 && (
+                  <Banner banner={bannerImage?.banner} />
+                )}
               </div>
             </div>
             <TopMatches />

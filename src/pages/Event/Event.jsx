@@ -150,7 +150,7 @@ const Event = () => {
                       display: "flex",
                       flexDirection: "column",
                       gap: "10px",
-                      background: "var(--table-bg)",
+                      background: "var( --primary-background-color)",
                     }}
                   >
                     <EventHeader setTab={setTab} tab={tab} data={data} />

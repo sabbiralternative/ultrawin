@@ -187,7 +187,7 @@ const Account = () => {
                     <span className="dashboard-item-text">My Transactions</span>
                   </Link>
                 </div>
-                <div className="dashboard-item ios hydrated">
+                {/* <div className="dashboard-item ios hydrated">
                   <Link
                     className="dashboard-item-link"
                     to="/bonus/turnover_history"
@@ -227,7 +227,7 @@ const Account = () => {
                       Deposit Turnover
                     </span>
                   </Link>
-                </div>
+                </div> */}
                 <div className="dashboard-item ios hydrated">
                   <Link className="dashboard-item-link" to="/stake-setting">
                     <svg
