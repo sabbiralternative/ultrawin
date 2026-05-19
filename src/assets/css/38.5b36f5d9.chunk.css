@@ -789,7 +789,7 @@
   display: flex;
   position: absolute;
   /* right: 0; */
-  background-color: var(--table-cell-bg);
+  /* background-color: var(--table-cell-bg); */
 }
 .events-table-ctn
   .events-table-content

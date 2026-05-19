@@ -87,7 +87,7 @@
     hue-rotate(109deg) brightness(104%) contrast(110%);
 
   --mob-header-border: #01fafe;
-  --enabled-market-bg: #0d8893;
+
   --arrow-color: #fff;
   --fancy-book-btn: var(--primary-color);
   --fancy-book-btn-text: #000;
@@ -144,7 +144,7 @@
   --scrollable-box: #222f44;
   --table-header: #071123;
   --table-sub-header: #212e44;
-  --market-table-bg: #31425f;
+
   --border-color: #04a0e2;
   --active-text-color: #000;
   --carousel-arrow-btn: #212e44;

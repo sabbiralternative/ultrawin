@@ -272,7 +272,7 @@ const Header = () => {
             <>
               <div className="bal-exp-btns">
                 <div className="bal-exp-btn username-sb">{user}</div>
-                <div className="bal-exp-btn balance-sb">
+                {/* <div className="bal-exp-btn balance-sb">
                   Bal:{balance?.availBalance}
                   <svg
                     className="MuiSvgIcon-root input-tooltip"
@@ -283,11 +283,12 @@ const Header = () => {
                   >
                     <path d="M11 7h2v2h-2zm0 4h2v6h-2zm1-9C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z"></path>
                   </svg>
-                </div>
+                </div> */}
               </div>
-              <div className="bal-exp-btns">
+              <div className="bal-exp-btns" style={{ marginLeft: "5px" }}>
                 <div className="bal-exp-btn">
-                  Bonus: {bonusBalance?.availBalance}
+                  {/* Bonus: {bonusBalance?.availBalance} */}
+                  Bal:{balance?.availBalance}
                 </div>
                 <div className="bal-exp-btn">
                   Exp:{balance?.deductedExposure}

@@ -238,7 +238,7 @@
 
 @media (max-width: 720px) {
   .exch-betslip-ctn {
-    width: 100vw;
+    /* width: 100vw; */
   }
   .eam-events-table-section {
     display: none;
@@ -2333,8 +2333,8 @@ div:where(.swal2-container) div:where(.swal2-actions) {
   font-weight: 400;
   line-height: 13.5px;
   text-align: center;
-  background: var(--table-bg) !important;
-  color: #fff;
+  background: var(--primary-color) !important;
+  color: #000;
   padding: 5px;
 }
 .exch-betslip-ctn .body-ctn .bet-body .bet-card .quick-bet .qb-btn-allin {

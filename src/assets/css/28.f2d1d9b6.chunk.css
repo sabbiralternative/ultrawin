@@ -136,7 +136,7 @@ ion-icon {
 }
 
 .login-form-page .back-icon .demo .login-form-btn-demo {
-  background-color: var(--secondary-color);
+  background-color: var(--primary-color);
   margin-top: 0 !important;
   padding: 2px 12px !important;
   border-radius: 16px;
@@ -733,7 +733,7 @@ ion-icon {
 
 .login-ctn {
   /* background: var(--login-background); */
-  background-color: var(--ion-background);
+  background-color: var(--primary-background-color);
   background-repeat: no-repeat !important;
   width: 100%;
   height: 100%;
@@ -877,7 +877,7 @@ ion-icon {
 @media screen and (max-width: 600px) {
   .login-ctn {
     /* background-image: url("/images/loginMobBG.55828ab4.webp") !important; */
-    background-color: #26133f;
+    background-color: var(--primary-background-color);
     background-repeat: no-repeat !important;
     background-size: cover !important;
     width: 100%;

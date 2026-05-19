@@ -12,6 +12,7 @@ const Sponsors = () => {
       <div
         className="slick-slider slick-initialized sponsors-container"
         dir="ltr"
+        style={{ paddingBottom: "10px" }}
       >
         <Swiper
           slidesPerView="auto"
@@ -30,7 +31,7 @@ const Sponsors = () => {
               className="slick-track "
               style={{
                 opacity: 1,
-                height: "180px",
+                height: "50px",
                 display: "flex",
                 gap: "100px",
                 overflow: "auto",
@@ -39,7 +40,7 @@ const Sponsors = () => {
               <SwiperSlide
                 style={{
                   width: "100px",
-                  height: "180px",
+                  height: "50px",
                   cursor: "pointer",
                   background: "none",
                 }}
@@ -70,7 +71,7 @@ const Sponsors = () => {
               <SwiperSlide
                 style={{
                   width: "100px",
-                  height: "180px",
+                  height: "50px",
                   cursor: "pointer",
                   background: "none",
                 }}
@@ -100,7 +101,7 @@ const Sponsors = () => {
               <SwiperSlide
                 style={{
                   width: "100px",
-                  height: "180px",
+                  height: "50px",
                   cursor: "pointer",
                   background: "none",
                 }}
@@ -130,7 +131,7 @@ const Sponsors = () => {
               <SwiperSlide
                 style={{
                   width: "100px",
-                  height: "180px",
+                  height: "50px",
                   cursor: "pointer",
                   background: "none",
                 }}
@@ -160,7 +161,7 @@ const Sponsors = () => {
               <SwiperSlide
                 style={{
                   width: "100px",
-                  height: "180px",
+                  height: "50px",
                   cursor: "pointer",
                   background: "none",
                 }}
@@ -190,7 +191,7 @@ const Sponsors = () => {
               <SwiperSlide
                 style={{
                   width: "100px",
-                  height: "180px",
+                  height: "50px",
                   cursor: "pointer",
                   background: "none",
                 }}
@@ -220,7 +221,7 @@ const Sponsors = () => {
               <SwiperSlide
                 style={{
                   width: "100px",
-                  height: "180px",
+                  height: "50px",
                   cursor: "pointer",
                   background: "none",
                 }}
@@ -250,7 +251,7 @@ const Sponsors = () => {
               <SwiperSlide
                 style={{
                   width: "100px",
-                  height: "180px",
+                  height: "50px",
                   cursor: "pointer",
                   background: "none",
                 }}
@@ -280,7 +281,7 @@ const Sponsors = () => {
               <SwiperSlide
                 style={{
                   width: "100px",
-                  height: "180px",
+                  height: "50px",
                   cursor: "pointer",
                   background: "none",
                 }}
@@ -310,7 +311,7 @@ const Sponsors = () => {
               <SwiperSlide
                 style={{
                   width: "100px",
-                  height: "180px",
+                  height: "50px",
                   cursor: "pointer",
                   background: "none",
                 }}
@@ -340,7 +341,7 @@ const Sponsors = () => {
               <SwiperSlide
                 style={{
                   width: "100px",
-                  height: "180px",
+                  height: "50px",
                   cursor: "pointer",
                   background: "none",
                 }}
@@ -370,7 +371,7 @@ const Sponsors = () => {
               <SwiperSlide
                 style={{
                   width: "100px",
-                  height: "180px",
+                  height: "50px",
                   cursor: "pointer",
                   background: "none",
                 }}
@@ -400,7 +401,7 @@ const Sponsors = () => {
               <SwiperSlide
                 style={{
                   width: "100px",
-                  height: "180px",
+                  height: "50px",
                   cursor: "pointer",
                   background: "none",
                 }}
