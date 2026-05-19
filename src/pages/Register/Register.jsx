@@ -2,6 +2,7 @@ import assets from "../../assets";
 import { useDispatch } from "react-redux";
 import {
   useGetOtpMutation,
+  useLoginMutation,
   useRegisterMutation,
 } from "../../redux/features/auth/authApi";
 import { useForm } from "react-hook-form";
@@ -18,6 +19,8 @@ import { navigateTelegramInstagram } from "../../utils/navigateTelegramInstagram
 import useContextState from "../../hooks/useContextState";
 
 const Register = () => {
+  const [handleLogin] = useLoginMutation();
+  const closePopupForForever = localStorage.getItem("closePopupForForever");
   const affnook_token = localStorage.getItem("affnook_token");
   const { logo } = useContextState();
   const navigate = useNavigate();
@@ -86,6 +89,37 @@ const Register = () => {
       toast.error(result?.error?.description);
     }
   };
+
+  const loginWithDemo = async () => {
+    /* Random token generator */
+
+    /* Encrypted the post data */
+    const loginData = {
+      username: "demo",
+      password: "",
+
+      b2c: settings.b2c,
+      apk: closePopupForForever ? true : false,
+      nonce: crypto.randomUUID(),
+    };
+    const result = await handleLogin(loginData).unwrap();
+    if (result.success) {
+      const token = result?.result?.token;
+      const bonusToken = result?.result?.bonusToken;
+      const user = result?.result?.loginName;
+      const game = result?.result?.buttonValue?.game;
+      dispatch(setUser({ user, token }));
+      localStorage.setItem("buttonValue", JSON.stringify(game));
+      localStorage.setItem("token", token);
+      localStorage.setItem("bonusToken", bonusToken);
+      if (token && user) {
+        toast.success("Login successful");
+        navigate("/");
+      }
+    } else {
+      toast.error(result?.error);
+    }
+  };
   return (
     <div className="login-ctn">
       <div className="title-row">
@@ -102,7 +136,7 @@ const Register = () => {
           className="logo"
         />
       </div>
-      <div className="login-card">
+      <div className="login-card" style={{ marginTop: "20px" }}>
         <div className="login-form-page">
           <form onSubmit={handleSubmit(onSubmit)} className="login-form-ctn">
             <div className="back-icon">
@@ -125,6 +159,7 @@ const Register = () => {
                 <button
                   className="MuiButtonBase-root MuiButton-root MuiButton-contained login-form-btn-demo MuiButton-containedPrimary"
                   type="button"
+                  onClick={loginWithDemo}
                 >
                   <span className="MuiButton-label">Demo Login</span>
                   <span className="MuiTouchRipple-root"></span>

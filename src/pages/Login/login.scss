@@ -136,7 +136,7 @@
 
   .account-SignUp {
     width: 400px;
-    background: var(--primary-background-color);
+    background: var(--table-bg);
     text-align: center;
     padding: 10px 0px;
     border: 2px solid var(--form-ctn-border);
@@ -190,7 +190,7 @@
     display: flex;
     padding: 20px 20px 5px 20px;
     flex-direction: column;
-    background: var(--primary-background-color);
+    background: var(--table-bg);
     border-radius: 16px 16px 0px 0px;
     border: 2px solid var(--form-ctn-border);
     border-bottom: none;
@@ -767,7 +767,7 @@
 @media screen and (max-width: 600px) {
   .login-form-page {
     .login-form-ctn {
-      margin-top: 400px;
+      // margin-top: 400px;
     }
   }
 }

@@ -81,7 +81,7 @@ const ForgotPassword = () => {
           className="logo"
         />
       </div>
-      <div className="login-card">
+      <div className="login-card" style={{ marginTop: "50px" }}>
         <div className="login-form-page">
           <form onSubmit={handleSubmit(onSubmit)} className="login-form-ctn">
             <div className="back-icon">
@@ -103,11 +103,14 @@ const ForgotPassword = () => {
             </div>
             <div
               className="card-title"
-              style={{ fontSize: "22px", padding: "10px", fontWeight: "500" }}
+              style={{ fontSize: "16px", fontWeight: "500" }}
             >
               Forgot Username/Password
             </div>
-            <span className="card-login-here" style={{ fontWeight: "400" }}>
+            <span
+              className="card-login-here"
+              style={{ fontWeight: "400", fontSize: "14px" }}
+            >
               We’ll send OTP on your registered number associated with username.
             </span>
 
