@@ -2546,8 +2546,8 @@ div:where(.swal2-container) div:where(.swal2-actions) {
   .MuiTableBody-root
   .MuiTableRow-root
   .MuiTableCell-root {
-  background: var(--market-table-bg);
-  border-bottom: 2px solid var(--background-card) !important;
+  background: var(--table-bg);
+  border-bottom: 2px solid var(--primary-background-color) !important;
 }
 /* Mobile Bet slip */
 /* Inplay page header */

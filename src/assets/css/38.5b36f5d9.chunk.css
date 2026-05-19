@@ -365,7 +365,7 @@
 }
 .events-table-ctn {
   padding: 12px;
-  background: var(--table-bg);
+  /* background: var(--table-bg); */
   border-radius: 20px;
   margin-bottom: 30px;
 }

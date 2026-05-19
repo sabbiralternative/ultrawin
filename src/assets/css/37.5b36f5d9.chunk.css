@@ -433,7 +433,7 @@
 
 .events-table-ctn {
   padding: 12px;
-  background: var(--table-bg);
+  /* background: var(--table-bg); */
   border-radius: 20px;
   margin-bottom: 30px;
 }
@@ -1258,7 +1258,7 @@
   .events-table
   .MuiTableBody-root
   .bgc-white {
-  background-color: var(--market-table-bg) !important;
+  background-color: var(--table-bg) !important;
 }
 
 @media screen and (max-width: 720px) {

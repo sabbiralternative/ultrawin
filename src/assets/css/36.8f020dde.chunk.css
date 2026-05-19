@@ -908,7 +908,7 @@
   .fm-table
   .MuiTableRow-root
   .MuiTableCell-root {
-  background-color: var(--market-table-bg);
+  background-color: var(--table-bg);
   color: var(--ion-text-color-contrast);
   min-height: 36px;
 }
