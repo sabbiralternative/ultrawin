@@ -24,19 +24,14 @@
   align-items: center;
 }
 
-.exch-mob-header-ctn .exch-mob-nav-link .exch-nav-item-ctn .mh-img {
+/* .exch-mob-header-ctn .exch-mob-nav-link .exch-nav-item-ctn .mh-img {
   -webkit-filter: var(--mob-header-icon);
   filter: var(--mob-header-icon);
-}
+} */
 
 .exch-mob-header-ctn .active {
   background: var(--mob-header-active-bg);
   border-top: 4px solid var(--primary-color);
-}
-
-.exch-mob-header-ctn .active .mh-img {
-  -webkit-filter: var(--mob-header-active-icon) !important;
-  filter: var(--mob-header-active-icon) !important;
 }
 
 .exch-mob-header-ctn .active .exch-nav-item-label {

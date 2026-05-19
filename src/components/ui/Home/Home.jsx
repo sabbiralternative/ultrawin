@@ -83,7 +83,7 @@ const Home = () => {
                 {token && (
                   <Fragment>
                     <button
-                      style={{ borderRadius: "4px" }}
+                      style={{ borderRadius: "4px", width: "100%" }}
                       onClick={() => navigate("/deposit")}
                       className="MuiButtonBase-root MuiButton-root MuiButton-text deposit-btn"
                       type="button"
@@ -95,7 +95,7 @@ const Home = () => {
                       <span className="MuiTouchRipple-root"></span>
                     </button>
                     <button
-                      style={{ borderRadius: "4px" }}
+                      style={{ borderRadius: "4px", width: "100%" }}
                       onClick={() => navigate("/withdraw")}
                       className="MuiButtonBase-root MuiButton-root MuiButton-text withdraw-btn"
                       type="button"

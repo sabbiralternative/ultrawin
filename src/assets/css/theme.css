@@ -1,6 +1,8 @@
 :root {
-  --primary-background-color: #333333;
-  --primary-color: #cfe1da;
-  --secondary-color: #009270;
-  --table-bg: #4a4a4a;
+  --primary-background-color: #071123;
+  --primary-color: #01fafe;
+  --secondary-color: #071123;
+  --table-bg: #212e44;
+  --market-table-bg: #31425f;
+  --enabled-market-bg: #0d8893;
 }

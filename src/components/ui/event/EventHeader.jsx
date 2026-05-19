@@ -190,13 +190,13 @@ const EventHeader = ({ data, tab, setTab }) => {
               </div>
             </div>
             <div className="eam-teams-name-ctn">
-              <div className="eam-team-1">
+              <div className="eam-team-1" style={{ color: "white" }}>
                 {" "}
                 {data?.result?.length > 0 &&
                   data?.result?.[0]?.eventName?.split("v")[0]}
               </div>
-              <span>V</span>
-              <div className="eam-team-2">
+              <span style={{ color: "white" }}>V</span>
+              <div className="eam-team-2" style={{ color: "white" }}>
                 {" "}
                 {data?.result?.length > 0 &&
                   data?.result?.[0]?.eventName?.split("v")[1]}
