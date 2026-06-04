@@ -12170,12 +12170,11 @@ img,
 }
 
 .stack-button {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
   gap: 0.75rem;
-  align-self: stretch;
-  height: 2.3125rem;
+  height: 80px;
+  width: 100%;
 }
 
 .btn_box {
