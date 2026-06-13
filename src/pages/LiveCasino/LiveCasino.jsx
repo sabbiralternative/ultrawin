@@ -22,6 +22,8 @@ const LiveCasino = () => {
   const [filteredData, setFilteredData] = useState([]);
   const [searchQuery, setSearchQuery] = useState("");
 
+  console.log(data);
+
   /* Search by games name */
   const handleSearchChange = (e) => {
     setSearchQuery(e.target.value.toLowerCase());
