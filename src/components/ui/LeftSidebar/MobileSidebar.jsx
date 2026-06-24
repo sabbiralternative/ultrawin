@@ -12,8 +12,12 @@ import { logout } from "../../../redux/features/auth/authSlice";
 import { navigateTelegramInstagram } from "../../../utils/navigateTelegramInstagram";
 import { settings } from "../../../api";
 import { latestEvent } from "../../../static/latest-event";
+import { useLanguage } from "../../../context/LanguageProvider";
+import { languageValue } from "../../../utils/language";
+import { LanguageKey } from "../../../const";
 
 const MobileSidebar = () => {
+  const { valueByLanguage } = useLanguage();
   const closePopupForForever = localStorage.getItem("closePopupForForever");
   const navigate = useNavigate();
   const { showLeftSidebar } = useSelector((state) => state.global);
@@ -1001,7 +1005,10 @@ const MobileSidebar = () => {
                     </clipPath>
                   </defs>
                 </svg>
-                <div className="sh-tab-label">cricket</div>
+                <div className="sh-tab-label">
+                  {" "}
+                  {languageValue(valueByLanguage, LanguageKey.CRICKET)}
+                </div>
               </button>
               <button onClick={() => handleSetGroupType(1)} className=" sh-btn">
                 <svg
@@ -1084,7 +1091,10 @@ const MobileSidebar = () => {
                     </clipPath>
                   </defs>
                 </svg>
-                <div className="sh-tab-label">football</div>
+                <div className="sh-tab-label">
+                  {" "}
+                  {languageValue(valueByLanguage, LanguageKey.FOOTBALL)}
+                </div>
               </button>
               <button onClick={() => handleSetGroupType(2)} className=" sh-btn">
                 <svg
@@ -1140,7 +1150,10 @@ const MobileSidebar = () => {
                     </clipPath>
                   </defs>
                 </svg>
-                <div className="sh-tab-label">tennis</div>
+                <div className="sh-tab-label">
+                  {" "}
+                  {languageValue(valueByLanguage, LanguageKey.TENNIS)}
+                </div>
               </button>
 
               {/* <button className=" sh-btn">
@@ -1340,7 +1353,10 @@ const MobileSidebar = () => {
                     </clipPath>
                   </defs>
                 </svg>
-                <div className="sh-tab-label">Kabbadi</div>
+                <div className="sh-tab-label">
+                  {" "}
+                  {languageValue(valueByLanguage, LanguageKey.KABADDI)}
+                </div>
               </button>
               <button
                 onClick={() => handleSetGroupType(6)}
@@ -1404,7 +1420,10 @@ const MobileSidebar = () => {
                     fill="#363030"
                   />
                 </svg>
-                <div className="sh-tab-label">GreyHound</div>
+                <div className="sh-tab-label">
+                  {" "}
+                  {languageValue(valueByLanguage, LanguageKey.GREYHOUND)}
+                </div>
               </button>
               <button
                 onClick={() => handleSetGroupType("horse-racing")}
@@ -1478,7 +1497,10 @@ const MobileSidebar = () => {
                     </clipPath>
                   </defs>
                 </svg>
-                <div className="sh-tab-label">Horse Race</div>
+                <div className="sh-tab-label">
+                  {" "}
+                  {languageValue(valueByLanguage, LanguageKey.HORSE)}
+                </div>
               </button>
               {/* <button className=" sh-btn">
                 <svg
@@ -2050,7 +2072,10 @@ const MobileSidebar = () => {
                       strokeLinejoin="round"
                     ></path>
                   </svg>
-                  <div className="sh-tab-label">Deposit</div>
+                  <div className="sh-tab-label">
+                    {" "}
+                    {languageValue(valueByLanguage, LanguageKey.DEPOSIT)}
+                  </div>
                 </button>
                 <button
                   onClick={() => handleNavigate("/withdraw")}
@@ -2082,7 +2107,10 @@ const MobileSidebar = () => {
                       </clipPath>
                     </defs>
                   </svg>
-                  <div className="sh-tab-label">Withdraw</div>
+                  <div className="sh-tab-label">
+                    {" "}
+                    {languageValue(valueByLanguage, LanguageKey.WITHDRAW)}
+                  </div>
                 </button>
                 <button
                   onClick={() => handleNavigate("/affiliate")}
@@ -2146,7 +2174,13 @@ const MobileSidebar = () => {
                       </clipPath>
                     </defs>
                   </svg>
-                  <div className="sh-tab-label">Bonus Statement</div>
+                  <div className="sh-tab-label">
+                    {" "}
+                    {languageValue(
+                      valueByLanguage,
+                      LanguageKey.BONUS_STATEMENT,
+                    )}
+                  </div>
                 </button>
                 <button
                   onClick={() => handleNavigate("/promotions")}
@@ -2500,7 +2534,13 @@ const MobileSidebar = () => {
                       fill="white"
                     ></path>
                   </svg>
-                  <div className="sh-tab-label">Change Password</div>
+                  <div className="sh-tab-label">
+                    {" "}
+                    {languageValue(
+                      valueByLanguage,
+                      LanguageKey.CHANGE_PASSWORD,
+                    )}
+                  </div>
                 </button>
                 {/* <button className=" sh-btn">
                   <svg
@@ -2589,7 +2629,10 @@ const MobileSidebar = () => {
                       fill="currentColor"
                     ></path>
                   </svg>
-                  <div className="sh-tab-label">Logout</div>
+                  <div className="sh-tab-label">
+                    {" "}
+                    {languageValue(valueByLanguage, LanguageKey.LOGOUT)}
+                  </div>
                 </button>
               )}
             </div>

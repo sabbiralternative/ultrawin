@@ -4,8 +4,12 @@ import { useSelector } from "react-redux";
 import { useState } from "react";
 import { settings } from "../../../api";
 import WarningCondition from "../../ui/WarningCondition/WarningCondition";
+import { useLanguage } from "../../../context/LanguageProvider";
+import { languageValue } from "../../../utils/language";
+import { LanguageKey } from "../../../const";
 
 const MobileHeader = () => {
+  const { valueByLanguage } = useLanguage();
   const [showWarning, setShowWarning] = useState(false);
   const [gameInfo, setGameInfo] = useState({ gameName: "", gameId: "" });
   const { pathname } = useLocation();
@@ -162,7 +166,10 @@ const MobileHeader = () => {
                     ></path>
                   </svg>
                 </div>
-                <div className="exch-nav-item-label">Home</div>
+                <div className="exch-nav-item-label">
+                  {" "}
+                  {languageValue(valueByLanguage, LanguageKey.HOME)}
+                </div>
               </div>{" "}
             </Link>
             <Link

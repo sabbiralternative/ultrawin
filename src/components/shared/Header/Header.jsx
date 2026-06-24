@@ -9,7 +9,7 @@ import {
 } from "../../../redux/features/global/globalSlice";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import useBalance from "../../../hooks/useBalance";
-import useBonusBalance from "../../../hooks/useBonusBalance";
+// import useBonusBalance from "../../../hooks/useBonusBalance";
 import useContextState from "../../../hooks/useContextState";
 import { useEffect, useState } from "react";
 import moment from "moment";
@@ -19,21 +19,31 @@ import Notification from "./Notification";
 import DownloadAPK from "../../modal/DownloadAPK/DownloadAPK";
 import WarningCondition from "../../ui/WarningCondition/WarningCondition";
 import Error from "../../modal/Error/Error";
+import { useLanguage } from "../../../context/LanguageProvider";
+import Language from "../../modal/Language";
+import { languageValue } from "../../../utils/language";
+import { LanguageKey } from "../../../const";
 // import Dropdown from "./Dropdown";
 
 const Header = () => {
+  const { language, valueByLanguage, setLanguage } = useLanguage();
+  const [showLanguage, setShowLanguage] = useState(false);
   const { showAppPopUp, windowWidth, showAPKModal, closePopupForForever } =
     useSelector((state) => state?.global);
   const [showWarning, setShowWarning] = useState(false);
   const [gameInfo, setGameInfo] = useState({ gameName: "", gameId: "" });
   const { logo } = useContextState();
   const { balance } = useBalance();
-  const { bonusBalance } = useBonusBalance();
+  // const { bonusBalance } = useBonusBalance();
   const { token, user } = useSelector((state) => state.auth);
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const location = useLocation();
   const [time, setTime] = useState();
+
+  useEffect(() => {
+    setLanguage(localStorage.getItem("language") || "english");
+  }, [setLanguage]);
 
   useEffect(() => {
     setTimeout(() => {
@@ -128,7 +138,10 @@ const Header = () => {
                   className="MuiButtonBase-root MuiButton-root MuiButton-text nav-link-btn"
                   type="button"
                 >
-                  <span className="MuiButton-label">home</span>
+                  <span className="MuiButton-label">
+                    {" "}
+                    {languageValue(valueByLanguage, LanguageKey.HOME)}
+                  </span>
                   <span className="MuiTouchRipple-root"></span>
                 </button>
               </Link>
@@ -259,13 +272,13 @@ const Header = () => {
                 onClick={() => navigate("/login")}
                 className="cb cb-variant-1 sh-new-btn"
               >
-                login
+                {languageValue(valueByLanguage, LanguageKey.LOGIN)}
               </button>
               <button
                 onClick={() => navigate("/register")}
                 className="cb cb-variant-2 sh-new-btn"
               >
-                signup
+                {languageValue(valueByLanguage, LanguageKey.REGISTER)}
               </button>
             </>
           ) : (
@@ -315,6 +328,42 @@ const Header = () => {
               </span>
               <span className="MuiTouchRipple-root"></span>
             </button>
+          </div>
+          <div style={{ position: "relative", padding: "1px 4px" }}>
+            {settings.language && (
+              <button onClick={() => setShowLanguage((prev) => !prev)}>
+                <div
+                  style={{
+                    display: "flex",
+                    flexDirection: "column",
+                    alignItems: "center",
+                    justifyContent: "end",
+                    background: "transparent",
+                    border: "none",
+                  }}
+                >
+                  <img
+                    style={{
+                      height: "20px",
+                      width: "20px",
+                    }}
+                    src={assets.globe}
+                    alt=""
+                  />
+                  <b
+                    style={{
+                      margin: "0px",
+                      fontSize: "10px",
+                      textTransform: "capitalize",
+                      color: "white",
+                    }}
+                  >
+                    {language || "EN"}
+                  </b>
+                </div>
+              </button>
+            )}
+            {showLanguage && <Language setShowLanguage={setShowLanguage} />}
           </div>
         </div>
       </div>

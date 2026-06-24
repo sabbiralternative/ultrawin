@@ -17,8 +17,12 @@ import useBalance from "../../hooks/useBalance";
 import { useState } from "react";
 import { navigateTelegramInstagram } from "../../utils/navigateTelegramInstagram";
 import useContextState from "../../hooks/useContextState";
+import { useLanguage } from "../../context/LanguageProvider";
+import { languageValue } from "../../utils/language";
+import { LanguageKey } from "../../const";
 
 const Register = () => {
+  const { valueByLanguage } = useLanguage();
   const [handleLogin] = useLoginMutation();
   const closePopupForForever = localStorage.getItem("closePopupForForever");
   const affnook_token = localStorage.getItem("affnook_token");
@@ -166,7 +170,10 @@ const Register = () => {
                 </button>
               </div>
             </div>
-            <div className="card-title">Sign Up</div>
+            <div className="card-title">
+              {" "}
+              {languageValue(valueByLanguage, LanguageKey.REGISTER)}
+            </div>
             <span className="card-login-here">
               Please enter your register details here.
             </span>
@@ -340,7 +347,10 @@ const Register = () => {
                 className="MuiButtonBase-root MuiButton-root MuiButton-contained login-form-btn MuiButton-containedPrimary"
                 type="submit"
               >
-                <span className="MuiButton-label">Register</span>
+                <span className="MuiButton-label">
+                  {" "}
+                  {languageValue(valueByLanguage, LanguageKey.REGISTER)}
+                </span>
                 <span className="MuiTouchRipple-root"></span>
               </button>
             </div>
@@ -354,7 +364,7 @@ const Register = () => {
               onClick={() => navigate("/login")}
               className="back-to-SignUp"
             >
-              Login
+              {languageValue(valueByLanguage, LanguageKey.LOGIN)}
             </span>
           </div>
           <div className="socialMedia-login">

@@ -7,8 +7,12 @@ import { logout } from "../../../redux/features/auth/authSlice";
 import { navigateTelegramInstagram } from "../../../utils/navigateTelegramInstagram";
 import { settings } from "../../../api";
 import { latestEvent } from "../../../static/latest-event";
+import { useLanguage } from "../../../context/LanguageProvider";
+import { languageValue } from "../../../utils/language";
+import { LanguageKey } from "../../../const";
 
 const LeftSidebar = () => {
+  const { valueByLanguage } = useLanguage();
   const closePopupForForever = localStorage.getItem("closePopupForForever");
   const { pathname } = useLocation();
   const navigate = useNavigate();
@@ -593,7 +597,10 @@ const LeftSidebar = () => {
                 </clipPath>
               </defs>
             </svg>
-            <div className="sh-tab-label">football</div>
+            <div className="sh-tab-label">
+              {" "}
+              {languageValue(valueByLanguage, LanguageKey.FOOTBALL)}
+            </div>
           </button>
           <button
             onClick={() => {
@@ -655,7 +662,10 @@ const LeftSidebar = () => {
                 </clipPath>
               </defs>
             </svg>
-            <div className="sh-tab-label">tennis</div>
+            <div className="sh-tab-label">
+              {" "}
+              {languageValue(valueByLanguage, LanguageKey.TENNIS)}
+            </div>
           </button>
           <button
             onClick={() => {
@@ -726,7 +736,10 @@ const LeftSidebar = () => {
                 </clipPath>
               </defs>
             </svg>
-            <div className="sh-tab-label">Kabbadi</div>
+            <div className="sh-tab-label">
+              {" "}
+              {languageValue(valueByLanguage, LanguageKey.KABADDI)}
+            </div>
           </button>
           <button
             onClick={() => {
@@ -827,7 +840,10 @@ const LeftSidebar = () => {
                 </clipPath>
               </defs>
             </svg>
-            <div className="sh-tab-label">Horse Racing</div>
+            <div className="sh-tab-label">
+              {" "}
+              {languageValue(valueByLanguage, LanguageKey.HORSE)}
+            </div>
           </button>
           <button
             onClick={() => {
@@ -881,7 +897,10 @@ const LeftSidebar = () => {
                 fill="#363030"
               ></path>
             </svg>
-            <div className="sh-tab-label">Greyhound</div>
+            <div className="sh-tab-label">
+              {" "}
+              {languageValue(valueByLanguage, LanguageKey.GREYHOUND)}
+            </div>
           </button>
 
           {/* <button className="sh-btn">
@@ -1699,7 +1718,10 @@ const LeftSidebar = () => {
                   strokeLinejoin="round"
                 ></path>
               </svg>
-              <div className="sh-tab-label">Deposit</div>
+              <div className="sh-tab-label">
+                {" "}
+                {languageValue(valueByLanguage, LanguageKey.DEPOSIT)}
+              </div>
             </button>
             <button onClick={() => navigate("/withdraw")} className=" sh-btn">
               <svg
@@ -1728,7 +1750,10 @@ const LeftSidebar = () => {
                   </clipPath>
                 </defs>
               </svg>
-              <div className="sh-tab-label">Withdraw</div>
+              <div className="sh-tab-label">
+                {" "}
+                {languageValue(valueByLanguage, LanguageKey.WITHDRAW)}
+              </div>
             </button>
             <button
               onClick={() => handleNavigate("/affiliate")}
@@ -1792,7 +1817,10 @@ const LeftSidebar = () => {
                   </clipPath>
                 </defs>
               </svg>
-              <div className="sh-tab-label">Bonus Statement</div>
+              <div className="sh-tab-label">
+                {" "}
+                {languageValue(valueByLanguage, LanguageKey.BONUS_STATEMENT)}
+              </div>
             </button>
             <button
               onClick={() => handleNavigate("/promotions")}
@@ -2100,7 +2128,10 @@ const LeftSidebar = () => {
                   fill="white"
                 ></path>
               </svg>
-              <div className="sh-tab-label">Change Password</div>
+              <div className="sh-tab-label">
+                {" "}
+                {languageValue(valueByLanguage, LanguageKey.CHANGE_PASSWORD)}
+              </div>
             </button>
           </div>
         )}
@@ -2146,7 +2177,10 @@ const LeftSidebar = () => {
                   fill="currentColor"
                 ></path>
               </svg>
-              <div className="sh-tab-label">Logout</div>
+              <div className="sh-tab-label">
+                {" "}
+                {languageValue(valueByLanguage, LanguageKey.LOGOUT)}
+              </div>
             </button>
           )}
         </div>

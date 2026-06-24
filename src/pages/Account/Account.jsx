@@ -3,8 +3,12 @@ import { Link, useNavigate } from "react-router-dom";
 import { logout } from "../../redux/features/auth/authSlice";
 import useBalance from "../../hooks/useBalance";
 import { setGroupType } from "../../redux/features/global/globalSlice";
+import { useLanguage } from "../../context/LanguageProvider";
+import { languageValue } from "../../utils/language";
+import { LanguageKey } from "../../const";
 
 const Account = () => {
+  const { valueByLanguage } = useLanguage();
   const dispatch = useDispatch();
   const { balance } = useBalance();
   const navigate = useNavigate();
@@ -78,7 +82,10 @@ const Account = () => {
                         strokeLinejoin="round"
                       />
                     </svg>
-                    <span className="dashboard-item-text">Deposit</span>
+                    <span className="dashboard-item-text">
+                      {" "}
+                      {languageValue(valueByLanguage, LanguageKey.DEPOSIT)}
+                    </span>
                   </Link>
                 </div>
                 <div className="dashboard-item ios hydrated">
@@ -108,7 +115,10 @@ const Account = () => {
                         </clipPath>
                       </defs>
                     </svg>
-                    <span className="dashboard-item-text">Withdraw</span>
+                    <span className="dashboard-item-text">
+                      {" "}
+                      {languageValue(valueByLanguage, LanguageKey.WITHDRAW)}
+                    </span>
                   </Link>
                 </div>
                 <div className="dashboard-item ios hydrated">
@@ -293,7 +303,13 @@ const Account = () => {
                         </clipPath>
                       </defs>
                     </svg>
-                    <span className="dashboard-item-text">Change Password</span>
+                    <span className="dashboard-item-text">
+                      {" "}
+                      {languageValue(
+                        valueByLanguage,
+                        LanguageKey.CHANGE_PASSWORD,
+                      )}
+                    </span>
                   </Link>
                 </div>
               </div>
@@ -332,7 +348,7 @@ const Account = () => {
                         />
                       </svg>
                       <span className="dashboard-item-text logout-text">
-                        Logout
+                        {languageValue(valueByLanguage, LanguageKey.LOGOUT)}
                       </span>
                     </span>
                     <span className="MuiTouchRipple-root" />

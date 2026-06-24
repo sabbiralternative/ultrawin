@@ -11,8 +11,12 @@ import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { navigateTelegramInstagram } from "../../utils/navigateTelegramInstagram";
 import useContextState from "../../hooks/useContextState";
+import { useLanguage } from "../../context/LanguageProvider";
+import { languageValue } from "../../utils/language";
+import { LanguageKey } from "../../const";
 
 const ForgotPassword = () => {
+  const { valueByLanguage } = useLanguage();
   const { logo } = useContextState();
   const navigate = useNavigate();
   const [handleForgotPassword] = useForgotPasswordMutation();
@@ -291,7 +295,7 @@ const ForgotPassword = () => {
                 type="submit"
               >
                 <span style={{ fontWeight: "500" }} className="MuiButton-label">
-                  Reset Password
+                  {languageValue(valueByLanguage, LanguageKey.CHANGE_PASSWORD)}
                 </span>
                 <span className="MuiTouchRipple-root"></span>
               </button>

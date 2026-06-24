@@ -11,8 +11,12 @@ import toast from "react-hot-toast";
 import { Link, useNavigate } from "react-router-dom";
 import { navigateTelegramInstagram } from "../../utils/navigateTelegramInstagram";
 import useContextState from "../../hooks/useContextState";
+import { useLanguage } from "../../context/LanguageProvider";
+import { languageValue } from "../../utils/language";
+import { LanguageKey } from "../../const";
 
 const Login = () => {
+  const { valueByLanguage } = useLanguage();
   const closePopupForForever = localStorage.getItem("closePopupForForever");
   const { logo } = useContextState();
   const navigate = useNavigate();
@@ -137,7 +141,10 @@ const Login = () => {
                 </button>
               </div>
             </div>
-            <div className="card-title">Sign in</div>
+            <div className="card-title">
+              {" "}
+              {languageValue(valueByLanguage, LanguageKey.LOGIN)}
+            </div>
             <span className="card-login-here">
               Please enter your login details here.
             </span>
@@ -213,7 +220,10 @@ const Login = () => {
                 className="MuiButtonBase-root MuiButton-root MuiButton-contained login-form-btn MuiButton-containedPrimary"
                 type="submit"
               >
-                <span className="MuiButton-label">Login</span>
+                <span className="MuiButton-label">
+                  {" "}
+                  {languageValue(valueByLanguage, LanguageKey.LOGIN)}
+                </span>
                 <span className="MuiTouchRipple-root"></span>
               </button>
             </div>
@@ -225,7 +235,7 @@ const Login = () => {
               onClick={() => navigate("/register")}
               className="back-to-SignUp"
             >
-              Sign Up
+              {languageValue(valueByLanguage, LanguageKey.REGISTER)}
             </span>
           </div>
           {settings.apk_link && (

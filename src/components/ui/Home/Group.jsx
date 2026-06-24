@@ -5,8 +5,12 @@ import Suspended from "../../shared/Suspended/Suspended";
 import MobileGroup from "./MobileGroup";
 import { useEffect, useState } from "react";
 import { useLatestEvent } from "../../../hooks/latestEvent";
+import { useLanguage } from "../../../context/LanguageProvider";
+import { languageValue } from "../../../utils/language";
+import { LanguageKey } from "../../../const";
 
 const Group = ({ data }) => {
+  const { valueByLanguage } = useLanguage();
   const { data: latestEvent } = useLatestEvent();
   const [categories, setCategories] = useState([]);
   const navigate = useNavigate();
@@ -19,7 +23,12 @@ const Group = ({ data }) => {
       return data?.[key]?.visible === true;
     });
 
-  const eventName = { 4: "Cricket", 2: "Tennis", 1: "Football", 5: "Kabbadi" };
+  const eventName = {
+    4: languageValue(valueByLanguage, LanguageKey.CRICKET),
+    2: languageValue(valueByLanguage, LanguageKey.TENNIS),
+    1: languageValue(valueByLanguage, LanguageKey.FOOTBALL),
+    5: languageValue(valueByLanguage, LanguageKey.KABADDI),
+  };
   useEffect(() => {
     if (data) {
       const categories = Array.from(
