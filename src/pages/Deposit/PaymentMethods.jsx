@@ -177,6 +177,7 @@ const PaymentMethods = ({
                     {method?.type == "bank" && (
                       <CiBank size={20} color="gray" />
                     )}
+
                     {method?.type == "upi" ||
                     method?.type == "pg" ||
                     method?.gateway === 1 ? (

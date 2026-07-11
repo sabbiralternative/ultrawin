@@ -27,7 +27,7 @@ const Home = () => {
   // const { socialLink } = useGetSocialLink();
   const { bannerImage } = useBannerImage();
 
-  const new_launch = data?.filter((item) => item?.tag === "new_launch");
+  // const new_launch = data?.filter((item) => item?.tag === "new_launch");
   const slot = data?.filter((item) => item?.tag === "slot");
   const recommended_games = data?.filter(
     (item) => item?.tag === "recommended_games",
@@ -126,9 +126,9 @@ const Home = () => {
             </div>
             <TopMatches />
             <CricketBattle />
-            {new_launch?.length > 0 && (
+            {/* {new_launch?.length > 0 && (
               <CasinoThumbnailSlider data={new_launch} title="New Launch" />
-            )}
+            )} */}
             {recommended_games?.length > 0 && (
               <CasinoThumbnailSlider
                 data={recommended_games}
