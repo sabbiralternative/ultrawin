@@ -11,6 +11,7 @@ import RightSidebar from "../../components/ui/event/RightSidebar/RightSidebar";
 import HorseGreyhound from "../../components/ui/event/HorseGreyhound";
 import Bookmaker from "../../components/ui/event/Bookmaker";
 import MatchOdds from "../../components/ui/event/MatchOdds";
+import Premium from "../../components/ui/event/Premium";
 
 const Event = () => {
   const [profit, setProfit] = useState(0);
@@ -161,6 +162,9 @@ const Event = () => {
                         <ScoreCard iscore={data?.iscore} />
                       )}
                     {matchOdds?.length > 0 && <MatchOdds data={matchOdds} />}
+                    {data?.premium && data?.premium?.eventId && (
+                      <Premium premium={data?.premium} />
+                    )}
                     {bookmaker?.length > 0 && <Bookmaker data={bookmaker} />}
                     {data?.result?.length > 0 && <Fancy data={data?.result} />}
 
