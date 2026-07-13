@@ -15,6 +15,7 @@ import { latestEvent } from "../../../static/latest-event";
 import { useLanguage } from "../../../context/LanguageProvider";
 import { languageValue } from "../../../utils/language";
 import { LanguageKey } from "../../../const";
+import { eventNameList } from "../../../static/event-name-list";
 
 const MobileSidebar = () => {
   const { valueByLanguage } = useLanguage();
@@ -1425,6 +1426,18 @@ const MobileSidebar = () => {
                   {languageValue(valueByLanguage, LanguageKey.GREYHOUND)}
                 </div>
               </button>
+              {eventNameList.map((item) => {
+                return (
+                  <button
+                    key={item.id}
+                    onClick={() => handleSetGroupType(5)}
+                    className=" sh-btn"
+                  >
+                    <img src={item.image} className="sh-img" alt="" />
+                    <div className="sh-tab-label"> {item.name}</div>
+                  </button>
+                );
+              })}
               <button
                 onClick={() => handleSetGroupType("horse-racing")}
                 className=" sh-btn"

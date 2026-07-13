@@ -10,6 +10,7 @@ import { latestEvent } from "../../../static/latest-event";
 import { useLanguage } from "../../../context/LanguageProvider";
 import { languageValue } from "../../../utils/language";
 import { LanguageKey } from "../../../const";
+import { eventNameList } from "../../../static/event-name-list";
 
 const LeftSidebar = () => {
   const { valueByLanguage } = useLanguage();
@@ -509,7 +510,6 @@ const LeftSidebar = () => {
                 </button>
               );
             })}
-
           <button
             onClick={() => {
               dispatch(setGroupType(1));
@@ -901,8 +901,27 @@ const LeftSidebar = () => {
               {" "}
               {languageValue(valueByLanguage, LanguageKey.GREYHOUND)}
             </div>
-          </button>
-
+          </button>{" "}
+          {eventNameList.map((item) => {
+            return (
+              <button
+                key={item.id}
+                onClick={() => {
+                  dispatch(setGroupType(item.id));
+                  navigate("/");
+                }}
+                className={`sh-btn ${group === item.id && pathname === "/" ? "active-sh-btn" : ""}`}
+              >
+                <img
+                  className="sh-img"
+                  // style={{ height: "16px" }}
+                  src={item.image}
+                  alt=""
+                />
+                <div className="sh-tab-label"> {item.name}</div>
+              </button>
+            );
+          })}
           {/* <button className="sh-btn">
             <svg
               width="18"
