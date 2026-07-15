@@ -162,9 +162,7 @@ const Event = () => {
                         <ScoreCard iscore={data?.iscore} />
                       )}
                     {matchOdds?.length > 0 && <MatchOdds data={matchOdds} />}
-                    {data?.premium && data?.premium?.eventId && (
-                      <Premium premium={data?.premium} />
-                    )}
+
                     {bookmaker?.length > 0 && <Bookmaker data={bookmaker} />}
                     {data?.result?.length > 0 && <Fancy data={data?.result} />}
 
@@ -172,6 +170,9 @@ const Event = () => {
                       <HorseGreyhound data={data} />
                     ) : null}
                     {tiedMatch?.length > 0 && <MatchOdds data={tiedMatch} />}
+                    {data?.premium && data?.premium?.eventId && (
+                      <Premium premium={data?.premium} />
+                    )}
                   </div>
                   <RightSidebar score={data?.score} />
                 </div>
