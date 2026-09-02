@@ -1,11 +1,11 @@
 import { useState } from "react";
 import WithdrawSuccess from "../../components/modal/WithdrawSuccess";
 import { API } from "../../api";
-
 import toast from "react-hot-toast";
-
 import assets from "../../assets";
 import { AxiosSecure } from "../../lib/AxiosSecure";
+import useLanguage from "../../hooks/use-language";
+import { LanguageKey } from "../../const";
 
 const WithdrawConfirm = ({
   bank,
@@ -15,6 +15,7 @@ const WithdrawConfirm = ({
   setShowBankAccount,
   setConfirmWithdraw,
 }) => {
+  const { getLanguage } = useLanguage();
   const [withdrawSuccess, setWithdrawSuccess] = useState(false);
 
   const [disable, setDisable] = useState(false);
@@ -63,12 +64,12 @@ const WithdrawConfirm = ({
             style={{ color: "white" }}
             className="back-nav-title-bc ellipsis "
           >
-            Back to Select Account
+            {getLanguage(LanguageKey.BACK_TO_SELECT_ACCOUNT)}
           </span>
         </div>
         <div className="withdraw-amount ">
           <span style={{ color: "white" }} className="">
-            Withdrawal Amount
+            {getLanguage(LanguageKey.WITHDRAWL_AMOUNT)}
           </span>
           <div
             style={{ cursor: "pointer" }}
@@ -93,7 +94,7 @@ const WithdrawConfirm = ({
         />
         <div className="bank-account ">
           <span style={{ color: "white" }} className="">
-            Bank Account
+            {getLanguage(LanguageKey.BANK_ACCOUNT)}
           </span>
           <div
             style={{ cursor: "pointer" }}
@@ -130,7 +131,9 @@ const WithdrawConfirm = ({
                 }}
                 className=""
               >
-                <span className="">Bank :-</span>
+                <span className="">
+                  {getLanguage(LanguageKey.BANK_NAME)} :-
+                </span>
                 <span style={{ marginLeft: "0.2rem" }} className="">
                   {bank?.bankName}
                 </span>
@@ -146,7 +149,9 @@ const WithdrawConfirm = ({
                 }}
                 className=""
               >
-                <span className="">IFSC :-</span>
+                <span className="">
+                  {getLanguage(LanguageKey.IFSC_CODE)} :-
+                </span>
                 <span style={{ marginLeft: "0.2rem" }} className="">
                   {bank?.ifsc}
                 </span>
@@ -162,7 +167,9 @@ const WithdrawConfirm = ({
                 }}
                 className=""
               >
-                <span className="">Account No :-</span>
+                <span className="">
+                  {getLanguage(LanguageKey.ACCOUNT_NUMBER)} :-
+                </span>
                 <span className="bank-detail-txt "> {bank?.accountNumber}</span>
               </div>
             </div>
@@ -174,7 +181,7 @@ const WithdrawConfirm = ({
           onClick={handleCoinSubmit}
           className="proceed-btn "
         >
-          <span className="">Proceed</span>
+          <span className="">{getLanguage(LanguageKey.PROCEED)}</span>
         </button>
       </div>
       {withdrawSuccess && (

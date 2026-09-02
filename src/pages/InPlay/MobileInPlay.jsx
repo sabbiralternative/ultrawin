@@ -7,8 +7,11 @@ import SuspendedMobile from "../../components/shared/Suspended/SuspendedMobile";
 import InPlayHeaderMobile from "./InPlayHeaderMobile";
 import LiveVirtual from "../../components/ui/Home/LiveVirtual";
 import { filterLiveVirtual } from "../../utils/filter-live-virtual";
+import useLanguage from "../../hooks/use-language";
+import { LanguageKey } from "../../const";
 
 const MobileInPlay = () => {
+  const { getLanguage } = useLanguage();
   const [liveVirtual, setLiveVirtual] = useState([]);
   const [search, setSearch] = useState("");
   const location = useLocation();
@@ -504,7 +507,9 @@ const MobileInPlay = () => {
                         );
                       })}
                       {categories.length === 0 && (
-                        <span style={{ color: "white" }}>No events found</span>
+                        <span style={{ color: "white" }}>
+                          {getLanguage(LanguageKey.NO_BET_AVAILABLE)}
+                        </span>
                       )}
                     </div>{" "}
                   </div>

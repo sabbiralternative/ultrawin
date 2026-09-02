@@ -1,6 +1,9 @@
 import assets from "../../assets";
+import { LanguageKey } from "../../const";
+import useLanguage from "../../hooks/use-language";
 
 const MultiMarkets = () => {
+  const { getLanguage } = useLanguage();
   return (
     <div className="router-ctn">
       <div className="ds-view-ctn">
@@ -13,7 +16,7 @@ const MultiMarkets = () => {
                     <div className="casino-icon-img">
                       <img src={assets.multipin} />
                     </div>
-                    Multi Markets
+                    {getLanguage(LanguageKey.MULTI_MARKET)}
                   </div>
                   <div className="casino-search-ctn">
                     <div className="eventTypes-menu-tabs" />

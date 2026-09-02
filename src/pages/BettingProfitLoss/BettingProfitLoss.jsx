@@ -1,8 +1,11 @@
 import { useSelector } from "react-redux";
 import useBettingProfitLoss from "../../hooks/useBettingProfitLoss";
 import { useNavigate } from "react-router-dom";
+import useLanguage from "../../hooks/use-language";
+import { LanguageKey } from "../../const";
 
 const BettingProfitLoss = () => {
+  const { getLanguage } = useLanguage();
   const { token } = useSelector((state) => state.auth);
   const { data } = useBettingProfitLoss();
   const navigate = useNavigate();
@@ -36,7 +39,9 @@ const BettingProfitLoss = () => {
                         />
                       </svg>
                     </div>
-                    <div className="report-title">Betting Profit and Loss</div>
+                    <div className="report-title">
+                      {getLanguage(LanguageKey.BETTING_PROFIT_AND_LOSS)}
+                    </div>
                   </div>
                 </div>
               </div>
@@ -57,20 +62,20 @@ const BettingProfitLoss = () => {
                                     className="MuiTableCell-root MuiTableCell-head market-header MuiTableCell-sizeSmall"
                                     scope="col"
                                   >
-                                    Market
+                                    {getLanguage(LanguageKey.MARKET)}
                                   </th>
                                   <th
                                     className="MuiTableCell-root MuiTableCell-head start-time MuiTableCell-sizeSmall"
                                     scope="col"
                                   >
-                                    Start time
+                                    {getLanguage(LanguageKey.START_TIME)}
                                   </th>
 
                                   <th
                                     className="MuiTableCell-root MuiTableCell-head pl-net-win MuiTableCell-sizeSmall"
                                     scope="col"
                                   >
-                                    Net Win
+                                    {getLanguage(LanguageKey.NET_WIN)}
                                   </th>
                                 </tr>
                               </thead>
@@ -132,7 +137,11 @@ const BettingProfitLoss = () => {
                                 minHeight: "40vh",
                               }}
                             >
-                              <h2>No betting profit and loss yet!</h2>
+                              <h2>
+                                {getLanguage(
+                                  LanguageKey.NO_BETTING_PROFIT_LOSS_YET,
+                                )}
+                              </h2>
                             </div>
                           )}
                         </div>
@@ -197,7 +206,7 @@ const BettingProfitLoss = () => {
               minHeight: "40vh",
             }}
           >
-            <h2>No betting profit and loss yet!</h2>
+            <h2>{getLanguage(LanguageKey.NO_BETTING_PROFIT_LOSS_YET)}</h2>
           </div>
         )}
       </div>

@@ -1,7 +1,10 @@
 import assets from "../../assets";
+import { LanguageKey } from "../../const";
+import useLanguage from "../../hooks/use-language";
 import useWithdrawBreakdown from "../../hooks/useWithdrawBreakDown";
 
 const SelectAmount = ({ setAmount, amount, setShowBankAccount }) => {
+  const { getLanguage } = useLanguage();
   const { withdrawBreakdown } = useWithdrawBreakdown();
 
   return (
@@ -55,10 +58,12 @@ const SelectAmount = ({ setAmount, amount, setShowBankAccount }) => {
             </span>
             <div className="wallet-txt ">
               <p className="" style={{ color: "white" }}>
-                Main Wallet
+                {getLanguage(LanguageKey.MAIN_WALLET)}
               </p>
               <div className="with-any ">
-                <p className="">Can withdraw anytime</p>
+                <p className="">
+                  {getLanguage(LanguageKey.CAN_WITHDRAW_ANYTIME)}
+                </p>
               </div>
             </div>
           </div>
@@ -102,7 +107,7 @@ const SelectAmount = ({ setAmount, amount, setShowBankAccount }) => {
         </div> */}
         <div className="amount-input card-bg">
           <p className="amount-text" style={{ color: "white" }}>
-            Please enter the amount to withdraw
+            {getLanguage(LanguageKey.PLEASE_ENTER_THE_AMOUNT_TO_WITHDRAW)}
           </p>
           <form
             style={{ width: "100%" }}
@@ -122,7 +127,8 @@ const SelectAmount = ({ setAmount, amount, setShowBankAccount }) => {
                       placeholder="₹ Amount"
                     />
                     <p className="deposit-input-min-text ">
-                      minimum ₹ {withdrawBreakdown?.minimumWithdraw}
+                      {getLanguage(LanguageKey.MIN)} ₹{" "}
+                      {withdrawBreakdown?.minimumWithdraw}
                     </p>
                   </div>
                 </div>
@@ -138,7 +144,7 @@ const SelectAmount = ({ setAmount, amount, setShowBankAccount }) => {
           onClick={() => setShowBankAccount(true)}
           className="btnn1 "
         >
-          Continue to Select Account
+          {getLanguage(LanguageKey.CONTINUE_TO_SELECT_ACCOUNT)}
         </button>
       </div>
     </div>

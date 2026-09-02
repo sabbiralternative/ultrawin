@@ -4,8 +4,11 @@ import { useIndex } from "../../../hooks";
 import useCloseModalClickOutside from "../../../hooks/useCloseModalClickOutside";
 import { API, settings } from "../../../api";
 import { AxiosSecure } from "../../../lib/AxiosSecure";
+import useLanguage from "../../../hooks/use-language";
+import { LanguageKey } from "../../../const";
 
 const AddNewUser = ({ setShowAddNewUserModal }) => {
+  const { getLanguage } = useLanguage();
   const { mutate: addNewUser } = useIndex();
   const [mobile, setMobile] = useState(null);
   const [timer, setTimer] = useState(null);
@@ -139,7 +142,7 @@ const AddNewUser = ({ setShowAddNewUserModal }) => {
         className="z-2 popUpBoxShadow popUpOpenAnimation absolute w-[90%] sm:w-[85%] md:w-[70%] lg:w-[450px] rounded-[5px] bg-bg_color_LoginPopUpBg text-white p-2 xs:p-5 rounded-md"
       >
         <h2 className="mb-5 text-base md:text-xl font-semibold">
-          Add New User
+          {getLanguage(LanguageKey.ADD_NEW_USER)}
         </h2>
         <div
           onClick={() => setShowAddNewUserModal(false)}
@@ -182,7 +185,7 @@ const AddNewUser = ({ setShowAddNewUserModal }) => {
               <div className="flex flex-col gap-1">
                 <div title="passwordInput" className="w-full  uppercase">
                   <div className="text-[10px] ml-1 md:text-xs lg:text-sm">
-                    Mobile
+                    {getLanguage(LanguageKey.MOBILE_NUMBER)}
                   </div>
                   <div className="flex w-full items-center py-2 bg-bg_color_input_bg border-border_color_primary1  rounded-lg border">
                     <input
@@ -204,7 +207,9 @@ const AddNewUser = ({ setShowAddNewUserModal }) => {
                           className="inline-block leading-normal relative overflow-hidden transition duration-150 ease-in-out -bold h-fit bg-primary text-black transition-all ease-in-out text-xs whitespace-nowrap mr-1 py-1 px-3 rounded active:scale-[0.98] active:opacity-95 disabled:bg-bg_Slate500 disabled:opacity-50 font-medium relative flex items-center justify-center cursor-pointer"
                           type="button"
                         >
-                          <span className=" ">Retry in {timer}</span>
+                          <span className=" ">
+                            {getLanguage(LanguageKey.RETRY_IN)} {timer}
+                          </span>
                           {/* <span className="shimmer"></span> */}
                         </button>
                       ) : (
@@ -216,7 +221,7 @@ const AddNewUser = ({ setShowAddNewUserModal }) => {
                               type="button"
                             >
                               <span className="text-primary">
-                                Get OTP Whatsapp
+                                {getLanguage(LanguageKey.GET_OTP_ON_WHATSAPP)}
                               </span>
                               <span className="shimmer"></span>
                             </button>
@@ -227,7 +232,9 @@ const AddNewUser = ({ setShowAddNewUserModal }) => {
                             className="inline-block leading-normal relative overflow-hidden transition duration-150 ease-in-out -bold h-fit bg-primary text-black transition-all ease-in-out text-xs whitespace-nowrap mr-1 py-1 px-3 rounded active:scale-[0.98] active:opacity-95 disabled:bg-bg_Slate500 disabled:opacity-50 font-medium relative flex items-center justify-center cursor-pointer bg-bg_text_brand_primary"
                             type="button"
                           >
-                            <span className="text-primary">Get OTP SMS</span>
+                            <span className="text-primary">
+                              {getLanguage(LanguageKey.GET_OTP_ON_MESSAGE)}
+                            </span>
                             <span className="shimmer"></span>
                           </button>
                         </div>
@@ -240,7 +247,7 @@ const AddNewUser = ({ setShowAddNewUserModal }) => {
               <div className="flex flex-col gap-1">
                 <div title="passwordInput" className="w-full  uppercase">
                   <div className="text-[10px] ml-1 md:text-xs lg:text-sm">
-                    OTP
+                    {getLanguage(LanguageKey.OTP)}
                   </div>
                   <div className="flex w-full items-center border p-1 bg-bg_color_input_bg border-border_color_primary1  rounded-lg mt-2">
                     <input
@@ -261,14 +268,16 @@ const AddNewUser = ({ setShowAddNewUserModal }) => {
               </div>
               <div className="w-full flex items-center gap-4">
                 <div className="h-px flex-1 bg-gray-600"></div>
-                <span className=" text-sm font-medium uppercase">OR</span>
+                <span className=" text-sm font-medium uppercase">
+                  {getLanguage(LanguageKey.OR)}
+                </span>
                 <div className="h-px flex-1 bg-gray-600"></div>
               </div>
 
               <div className="flex flex-col gap-1">
                 <div title="passwordInput" className="w-full  uppercase">
                   <div className="text-[10px] ml-1 md:text-xs lg:text-sm">
-                    User Id
+                    {getLanguage(LanguageKey.USER_ID)}
                   </div>
                   <div className="flex w-full items-center py-2 px-2 bg-bg_color_input_bg border-border_color_primary1 rounded-lg border">
                     <input
@@ -289,7 +298,7 @@ const AddNewUser = ({ setShowAddNewUserModal }) => {
               <div className="flex flex-col gap-1">
                 <div title="passwordInput" className="w-full  uppercase">
                   <div className="text-[10px] ml-1 md:text-xs lg:text-sm">
-                    Password
+                    {getLanguage(LanguageKey.PASSWORD)}
                   </div>
                   <div className="flex w-full items-center py-2 px-2 bg-bg_color_input_bg  border-border_color_primary1  rounded-lg border">
                     <input
@@ -311,7 +320,7 @@ const AddNewUser = ({ setShowAddNewUserModal }) => {
               <div className="flex flex-col gap-1">
                 <div title="passwordInput" className="w-full  uppercase">
                   <div className="text-[10px] ml-1 md:text-xs lg:text-sm">
-                    Confirm Password
+                    {getLanguage(LanguageKey.CONFIRM_PASSWORD)}
                   </div>
                   <div className="flex w-full items-center py-2 px-2 bg-bg_color_input_bg  border-border_color_primary1 rounded-lg border">
                     <input
@@ -334,7 +343,7 @@ const AddNewUser = ({ setShowAddNewUserModal }) => {
               <div className="flex flex-col gap-1">
                 <div title="passwordInput" className="w-full  uppercase">
                   <div className="text-[10px] ml-1 md:text-xs lg:text-sm">
-                    Self Password
+                    {getLanguage(LanguageKey.SELF_PASSWORD)}
                   </div>
                   <div className="flex w-full items-center py-2 px-2 bg-bg_color_input_bg  border-border_color_primary1 rounded-lg border">
                     <input
@@ -361,7 +370,7 @@ const AddNewUser = ({ setShowAddNewUserModal }) => {
                   type="submit"
                   className="inline-block leading-normal relative overflow-hidden transition duration-150 ease-in-out w-full text-black bg-bg_LoginButtonColor shadow-lg rounded-md xs:text-[15px] px-5 py-2 flex items-center justify-center gap-x-2 -bold font-semibold text-base cursor-pointer bg-primary text-primary disabled:cursor-not-allowed disabled:opacity-50"
                 >
-                  <span>Add New User</span>
+                  <span>{getLanguage(LanguageKey.ADD_NEW_USER)}</span>
                 </button>
               </div>
             </form>

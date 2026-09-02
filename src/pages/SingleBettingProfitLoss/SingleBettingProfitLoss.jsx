@@ -1,7 +1,10 @@
 import { useNavigate, useParams } from "react-router-dom";
 import useSinglePassbook from "../../hooks/useSinglePassbook";
 import moment from "moment";
+import useLanguage from "../../hooks/use-language";
+import { LanguageKey } from "../../const";
 const SingleProfitLoss = () => {
+  const { getLanguage } = useLanguage();
   const { marketId } = useParams();
   const navigate = useNavigate();
   const { singlePassbook } = useSinglePassbook(marketId);
@@ -152,7 +155,7 @@ const SingleProfitLoss = () => {
             style={{ color: "white" }}
             className="deposit-withdraw-head-title  ng-star-inserted"
           >
-            Back
+            {getLanguage(LanguageKey.BACK)}
           </span>
         </div>
         <div className="mat-expansion-panel mat-expanded mat-expansion-panel-spacing">
@@ -191,12 +194,12 @@ const SingleProfitLoss = () => {
               <div className="allbet-datawrap">
                 <div className="allbet-header">
                   <div className="allbet-title">
-                    <h3>Selection</h3>
+                    <h3>{getLanguage(LanguageKey.SELECTION)}</h3>
                   </div>
                   <div className="allbet-headcol">
-                    <h3>Odds</h3>
-                    <h3>Stake</h3>
-                    <h3>Amt</h3>
+                    <h3>{getLanguage(LanguageKey.ODDS)}</h3>
+                    <h3>{getLanguage(LanguageKey.STAKE)}</h3>
+                    <h3>{getLanguage(LanguageKey.AMOUNT)}</h3>
                     <h3>P/L</h3>
                   </div>
                 </div>

@@ -4,8 +4,11 @@ import useWithdrawStatement from "../../hooks/useWithdrawStatement";
 import DepositStatement from "./DepositStatement";
 import WithdrawStatement from "./WithdrawStatement";
 import { useNavigate } from "react-router-dom";
+import useLanguage from "../../hooks/use-language";
+import { LanguageKey } from "../../const";
 
 const DepositWithdrawReport = () => {
+  const { getLanguage } = useLanguage();
   const [selectedReport, setSelectedReport] = useState("deposit");
   const { accountStatement } = useDepositStatement();
   const { withdrawStatement } = useWithdrawStatement();
@@ -44,14 +47,16 @@ const DepositWithdrawReport = () => {
                       />
                     </svg>
                   </div>
-                  <div className="report-title">My Transactions</div>
+                  <div className="report-title">
+                    {getLanguage(LanguageKey.MY_TRANSACTIONS)}
+                  </div>
                 </div>
               </div>
 
               <div className="report-filters rh-web-view">
                 <div className="select-template">
                   <div style={{ color: "white" }} className="st-label">
-                    Transaction Type
+                    {getLanguage(LanguageKey.TRANSACTION_TYPE)}
                   </div>
 
                   <div className="MuiInputBase-root MuiInput-root MuiInput-underline select-compo">
@@ -63,10 +68,10 @@ const DepositWithdrawReport = () => {
                     >
                       <option style={{ color: "black" }} value="deposit">
                         {" "}
-                        Deposit
+                        {getLanguage(LanguageKey.DEPOSIT)}
                       </option>
                       <option style={{ color: "black" }} value="withdraw">
-                        Withdraw
+                        {getLanguage(LanguageKey.WITHDRAW)}
                       </option>
                     </select>
                   </div>
@@ -77,7 +82,7 @@ const DepositWithdrawReport = () => {
                 <div className="two-filters">
                   <div className="select-template">
                     <div style={{ color: "white" }} className="st-label">
-                      Transaction Type
+                      {getLanguage(LanguageKey.TRANSACTION_TYPE)}
                     </div>
                     <div className="MuiInputBase-root MuiInput-root MuiInput-underline select-compo">
                       <select
@@ -88,10 +93,10 @@ const DepositWithdrawReport = () => {
                       >
                         <option style={{ color: "black" }} value="deposit">
                           {" "}
-                          Deposit
+                          {getLanguage(LanguageKey.DEPOSIT)}
                         </option>
                         <option style={{ color: "black" }} value="withdraw">
-                          Withdraw
+                          {getLanguage(LanguageKey.WITHDRAW)}
                         </option>
                       </select>
                     </div>

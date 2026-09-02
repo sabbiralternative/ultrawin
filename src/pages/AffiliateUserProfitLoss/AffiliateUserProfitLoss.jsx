@@ -2,8 +2,11 @@ import { useSelector } from "react-redux";
 import { useLocation } from "react-router-dom";
 import { useGetIndex } from "../../hooks";
 import moment from "moment";
+import useLanguage from "../../hooks/use-language";
+import { LanguageKey } from "../../const";
 
 const AffiliateUserProfitLoss = () => {
+  const { getLanguage } = useLanguage();
   const fromDate = new Date(new Date().setDate(new Date().getDate() - 7))
     .toISOString()
     .split("T")[0];
@@ -50,7 +53,9 @@ const AffiliateUserProfitLoss = () => {
                           {moment(category).format("Do-MMM-YYYY")}
                         </div>
                         <div className="text-xs text-text_color_primary2  font-[600] flex items-center justify-center leading-[140%]">
-                          <span className="text-primary">Total PL</span>
+                          <span className="text-primary">
+                            {getLanguage(LanguageKey.TOTAL_PL)}
+                          </span>
                           <span className="-mt-0.5 ml-1 text-primary">:</span>
                           <span
                             className={`ml-1 ${
@@ -91,7 +96,7 @@ const AffiliateUserProfitLoss = () => {
                               </span>
                             </span>
                             <span className="w-1/2 flex items-center justify-end gap-x-1">
-                              <span>Balance:</span>
+                              <span>{getLanguage(LanguageKey.BALANCE)}:</span>
                               <span className="font-semibold ">
                                 ₹ {item?.balance}
                               </span>
@@ -105,7 +110,7 @@ const AffiliateUserProfitLoss = () => {
               ) : (
                 <div className="flex items-center justify-center w-full pt-20">
                   <h2 className="text-base text-white">
-                    No betting profit and loss yet!
+                    {getLanguage(LanguageKey.NO_BETTING_PROFIT_LOSS_YET)}
                   </h2>
                 </div>
               )}

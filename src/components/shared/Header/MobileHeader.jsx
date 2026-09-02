@@ -4,12 +4,11 @@ import { useSelector } from "react-redux";
 import { useState } from "react";
 import { settings } from "../../../api";
 import WarningCondition from "../../ui/WarningCondition/WarningCondition";
-import { useLanguage } from "../../../context/LanguageProvider";
-import { languageValue } from "../../../utils/language";
 import { LanguageKey } from "../../../const";
+import useLanguage from "../../../hooks/use-language";
 
 const MobileHeader = () => {
-  const { valueByLanguage } = useLanguage();
+  const { getLanguage } = useLanguage();
   const [showWarning, setShowWarning] = useState(false);
   const [gameInfo, setGameInfo] = useState({ gameName: "", gameId: "" });
   const { pathname } = useLocation();
@@ -102,7 +101,9 @@ const MobileHeader = () => {
                     ></path>
                   </svg>
                 </div>
-                <div className="exch-nav-item-label">Sportsbook</div>
+                <div className="exch-nav-item-label">
+                  {getLanguage(LanguageKey.SPORTSBOOK)}
+                </div>
               </div>{" "}
             </a>
             <Link
@@ -141,7 +142,9 @@ const MobileHeader = () => {
                     ></path>
                   </svg>
                 </div>
-                <div className="exch-nav-item-label">In-play</div>
+                <div className="exch-nav-item-label">
+                  {getLanguage(LanguageKey.IN_PLAY)}
+                </div>
               </div>{" "}
             </Link>
             <Link
@@ -168,7 +171,7 @@ const MobileHeader = () => {
                 </div>
                 <div className="exch-nav-item-label">
                   {" "}
-                  {languageValue(valueByLanguage, LanguageKey.HOME)}
+                  {getLanguage(LanguageKey.HOME)}
                 </div>
               </div>{" "}
             </Link>
@@ -284,7 +287,9 @@ const MobileHeader = () => {
                     </defs>
                   </svg>
                 </div>
-                <div className="exch-nav-item-label casino-label">Casino</div>
+                <div className="exch-nav-item-label casino-label">
+                  {getLanguage(LanguageKey.CASINO)}
+                </div>
               </div>{" "}
             </Link>
             <a
@@ -315,7 +320,9 @@ const MobileHeader = () => {
                     </defs>
                   </svg>
                 </div>
-                <div className="exch-nav-item-label">Preferences</div>
+                <div className="exch-nav-item-label">
+                  {getLanguage(LanguageKey.PREFERENCES)}
+                </div>
               </div>
             </a>
           </div>

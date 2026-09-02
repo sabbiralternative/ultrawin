@@ -1,7 +1,10 @@
 import { useRef } from "react";
 import useCloseModalClickOutside from "../../../hooks/useCloseModalClickOutside";
+import useLanguage from "../../../hooks/use-language";
+import { LanguageKey } from "../../../const";
 
 const HowToGetBonus = ({ setOpenGetBonusModal }) => {
+  const { getLanguage } = useLanguage();
   const ref = useRef();
   useCloseModalClickOutside(ref, () => {
     setOpenGetBonusModal(false);
@@ -17,7 +20,7 @@ const HowToGetBonus = ({ setOpenGetBonusModal }) => {
         className="z-2 popUpBoxShadow popUpOpenAnimation absolute w-[90%] sm:w-[85%] md:w-[70%] lg:w-[450px] rounded-[5px] bg-bg_color_LoginPopUpBg text-white p-2 xs:p-5 rounded-md h-[70%] overflow-hidden  pb-10"
       >
         <h2 className="mb-5 text-base md:text-xl font-semibold">
-          How to get bonus ?
+          {getLanguage(LanguageKey.HOW_TO_GET_BONUS)}
         </h2>
         <div
           onClick={() => setOpenGetBonusModal(false)}

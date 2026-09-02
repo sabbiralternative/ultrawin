@@ -1,8 +1,14 @@
+import { LanguageKey } from "../../const";
+import useLanguage from "../../hooks/use-language";
+
 const AmountBox = ({ amount, setAmount, setShowModal }) => {
+  const { getLanguage } = useLanguage();
   return (
     <div className="amountBox" style={{ backgroundColor: "var(--table-bg)" }}>
       <div className="withdraw_text ">
-        <p style={{ color: "white" }}>Please enter the amount to deposit</p>
+        <p style={{ color: "white" }}>
+          {getLanguage(LanguageKey.PLEASE_ENTER_THE_AMOUNT_TO_DEPOSIT)}
+        </p>
       </div>
       <div className="diposit_form ">
         <div className="w-100 deposit_form_input ">
@@ -87,7 +93,7 @@ const AmountBox = ({ amount, setAmount, setShowModal }) => {
         }}
       >
         {" "}
-        Proceed To Select Payment Method
+        {getLanguage(LanguageKey.PROCEED_TO_SELECT_PAYMENT_METHOD)}
       </button>
     </div>
   );

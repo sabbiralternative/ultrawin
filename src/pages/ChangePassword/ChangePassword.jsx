@@ -3,8 +3,11 @@ import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 import { useChangePasswordMutation } from "../../redux/features/auth/authApi";
 import { useState } from "react";
+import useLanguage from "../../hooks/use-language";
+import { LanguageKey } from "../../const";
 
 const ChangePassword = () => {
+  const { getLanguage } = useLanguage();
   const [showPassword, setShowPassword] = useState(false);
   const [showNewPass, setShowNewPass] = useState(false);
   const [showConfirmPass, setShowConfirmPass] = useState(false);
@@ -69,7 +72,9 @@ const ChangePassword = () => {
                         </defs>
                       </svg>
                     </div>
-                    <div className="report-title">My Profile</div>
+                    <div className="report-title">
+                      {getLanguage(LanguageKey.MY_PROFILE)}
+                    </div>
                   </div>
                   <div className="tab-btns" />
                 </div>
@@ -82,7 +87,9 @@ const ChangePassword = () => {
                 autoComplete="off"
               >
                 <span className="cp-input-template">
-                  <div className="cp-label">Enter old password</div>
+                  <div className="cp-label">
+                    {getLanguage(LanguageKey.OLD_PASSWORD)}
+                  </div>
                   <div className="MuiFormControl-root MuiTextField-root cp-input">
                     <div className="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-formControl MuiInputBase-adornedEnd MuiOutlinedInput-adornedEnd">
                       <input
@@ -144,7 +151,9 @@ const ChangePassword = () => {
                   </div>
                 </span>
                 <div className="cp-input-template">
-                  <div className="cp-label">Enter New Password</div>
+                  <div className="cp-label">
+                    {getLanguage(LanguageKey.NEW_PASSWORD)}
+                  </div>
                   <div className="MuiFormControl-root cp-input">
                     <div className="MuiInputBase-root MuiOutlinedInput-root Mui-error Mui-error MuiInputBase-formControl MuiInputBase-adornedEnd MuiOutlinedInput-adornedEnd">
                       <input
@@ -208,7 +217,9 @@ const ChangePassword = () => {
                   </div>
                 </div>
                 <div className="cp-input-template">
-                  <div className="cp-label">Confirm New Password</div>
+                  <div className="cp-label">
+                    {getLanguage(LanguageKey.CONFIRM_PASSWORD)}
+                  </div>
                   <div className="MuiFormControl-root cp-input">
                     <div className="MuiInputBase-root MuiOutlinedInput-root Mui-error Mui-error MuiInputBase-formControl MuiInputBase-adornedEnd MuiOutlinedInput-adornedEnd">
                       <input
@@ -285,10 +296,10 @@ const ChangePassword = () => {
                       })
                     }
                   >
-                    Reset{" "}
+                    {getLanguage(LanguageKey.RESET)}{" "}
                   </button>
                   <button className="cb cb-variant-1 " type="submit">
-                    Save
+                    {getLanguage(LanguageKey.SAVE)}
                   </button>
                 </div>
               </form>

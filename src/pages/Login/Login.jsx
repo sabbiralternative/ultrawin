@@ -11,12 +11,11 @@ import toast from "react-hot-toast";
 import { Link, useNavigate } from "react-router-dom";
 import { navigateTelegramInstagram } from "../../utils/navigateTelegramInstagram";
 import useContextState from "../../hooks/useContextState";
-import { useLanguage } from "../../context/LanguageProvider";
-import { languageValue } from "../../utils/language";
 import { LanguageKey } from "../../const";
+import useLanguage from "../../hooks/use-language";
 
 const Login = () => {
-  const { valueByLanguage } = useLanguage();
+  const { getLanguage } = useLanguage();
   const closePopupForForever = localStorage.getItem("closePopupForForever");
   const { logo } = useContextState();
   const navigate = useNavigate();
@@ -128,7 +127,9 @@ const Login = () => {
                 >
                   <path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"></path>
                 </svg>
-                <span className="back-text">Back</span>
+                <span className="back-text">
+                  {getLanguage(LanguageKey.BACK)}
+                </span>
               </div>
               <div className="demo">
                 <button
@@ -136,21 +137,21 @@ const Login = () => {
                   className="MuiButtonBase-root MuiButton-root MuiButton-contained login-form-btn-demo MuiButton-containedPrimary"
                   type="button"
                 >
-                  <span className="MuiButton-label">Demo Login</span>
+                  <span className="MuiButton-label">
+                    {getLanguage(LanguageKey.DEMO_LOGIN)}
+                  </span>
                   <span className="MuiTouchRipple-root"></span>
                 </button>
               </div>
             </div>
-            <div className="card-title">
-              {" "}
-              {languageValue(valueByLanguage, LanguageKey.LOGIN)}
-            </div>
+            <div className="card-title"> {getLanguage(LanguageKey.LOGIN)}</div>
             <span className="card-login-here">
               Please enter your login details here.
             </span>
             <span className="usr-input">
               <span className="input-labell sc-ion-label-md-h sc-ion-label-md-s md hydrated">
-                Username <span className="red-text">*</span>
+                {getLanguage(LanguageKey.USERNAME)}{" "}
+                <span className="red-text">*</span>
               </span>
               <div className="MuiFormControl-root MuiTextField-root login-input-field user-name">
                 <div
@@ -171,7 +172,8 @@ const Login = () => {
             </span>
             <div className="pwd-input">
               <span className="input-labell sc-ion-label-md-h sc-ion-label-md-s md hydrated">
-                Password <span className="red-text">*</span>
+                {getLanguage(LanguageKey.PASSWORD)}{" "}
+                <span className="red-text">*</span>
               </span>
               <div className="MuiFormControl-root login-input-field pwd-field">
                 <div
@@ -222,7 +224,7 @@ const Login = () => {
               >
                 <span className="MuiButton-label">
                   {" "}
-                  {languageValue(valueByLanguage, LanguageKey.LOGIN)}
+                  {getLanguage(LanguageKey.LOGIN)}
                 </span>
                 <span className="MuiTouchRipple-root"></span>
               </button>
@@ -235,7 +237,7 @@ const Login = () => {
               onClick={() => navigate("/register")}
               className="back-to-SignUp"
             >
-              {languageValue(valueByLanguage, LanguageKey.REGISTER)}
+              {getLanguage(LanguageKey.REGISTER)}
             </span>
           </div>
           {settings.apk_link && (
@@ -248,7 +250,9 @@ const Login = () => {
               >
                 <path d="M6 18c0 .55.45 1 1 1h1v3.5c0 .83.67 1.5 1.5 1.5s1.5-.67 1.5-1.5V19h2v3.5c0 .83.67 1.5 1.5 1.5s1.5-.67 1.5-1.5V19h1c.55 0 1-.45 1-1V8H6v10zM3.5 8C2.67 8 2 8.67 2 9.5v7c0 .83.67 1.5 1.5 1.5S5 17.33 5 16.5v-7C5 8.67 4.33 8 3.5 8zm17 0c-.83 0-1.5.67-1.5 1.5v7c0 .83.67 1.5 1.5 1.5s1.5-.67 1.5-1.5v-7c0-.83-.67-1.5-1.5-1.5zm-4.97-5.84l1.3-1.3c.2-.2.2-.51 0-.71-.2-.2-.51-.2-.71 0l-1.48 1.48C13.85 1.23 12.95 1 12 1c-.96 0-1.86.23-2.66.63L7.85.15c-.2-.2-.51-.2-.71 0-.2.2-.2.51 0 .71l1.31 1.31C6.97 3.26 6 5.01 6 7h12c0-1.99-.97-3.75-2.47-4.84zM10 5H9V4h1v1zm5 0h-1V4h1v1z"></path>
               </svg>
-              <span className="donwload-txt">Download .apk</span>
+              <span className="donwload-txt">
+                {getLanguage(LanguageKey.DOWNLOAD_APK)}
+              </span>
               <HiArrowNarrowDown className="ml-1" color="#fff" />
             </div>
           )}

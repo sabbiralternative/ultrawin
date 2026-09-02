@@ -17,12 +17,11 @@ import useBalance from "../../hooks/useBalance";
 import { useState } from "react";
 import { navigateTelegramInstagram } from "../../utils/navigateTelegramInstagram";
 import useContextState from "../../hooks/useContextState";
-import { useLanguage } from "../../context/LanguageProvider";
-import { languageValue } from "../../utils/language";
 import { LanguageKey } from "../../const";
+import useLanguage from "../../hooks/use-language";
 
 const Register = () => {
-  const { valueByLanguage } = useLanguage();
+  const { getLanguage } = useLanguage();
   const [handleLogin] = useLoginMutation();
   const closePopupForForever = localStorage.getItem("closePopupForForever");
   const affnook_token = localStorage.getItem("affnook_token");
@@ -157,7 +156,9 @@ const Register = () => {
                 >
                   <path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"></path>
                 </svg>
-                <span className="back-text">Back</span>
+                <span className="back-text">
+                  {getLanguage(LanguageKey.BACK)}
+                </span>
               </div>
               <div className="demo">
                 <button
@@ -165,21 +166,24 @@ const Register = () => {
                   type="button"
                   onClick={loginWithDemo}
                 >
-                  <span className="MuiButton-label">Demo Login</span>
+                  <span className="MuiButton-label">
+                    {getLanguage(LanguageKey.DEMO_LOGIN)}
+                  </span>
                   <span className="MuiTouchRipple-root"></span>
                 </button>
               </div>
             </div>
             <div className="card-title">
               {" "}
-              {languageValue(valueByLanguage, LanguageKey.REGISTER)}
+              {getLanguage(LanguageKey.REGISTER)}
             </div>
             <span className="card-login-here">
               Please enter your register details here.
             </span>
             <span className="usr-input">
               <span className="input-labell sc-ion-label-md-h sc-ion-label-md-s md hydrated">
-                Mobile No <span className="red-text">*</span>
+                {getLanguage(LanguageKey.MOBILE_NUMBER)}
+                <span className="red-text">*</span>
               </span>
               <div
                 className="MuiFormControl-root MuiTextField-root login-input-field user-name"
@@ -222,7 +226,7 @@ const Register = () => {
                     className="MuiButton-label"
                     style={{ fontSize: "12px", color: "white" }}
                   >
-                    Get OTP
+                    {getLanguage(LanguageKey.GET_OTP)}
                   </span>
                   <span className="MuiTouchRipple-root"></span>
                 </button>
@@ -230,7 +234,8 @@ const Register = () => {
             </span>
             <span className="usr-input">
               <span className="input-labell sc-ion-label-md-h sc-ion-label-md-s md hydrated">
-                OTP <span className="red-text">*</span>
+                {getLanguage(LanguageKey.OTP)}{" "}
+                <span className="red-text">*</span>
               </span>
               <div className="MuiFormControl-root MuiTextField-root login-input-field user-name">
                 <div
@@ -255,7 +260,8 @@ const Register = () => {
 
             <div className="pwd-input">
               <span className="input-labell sc-ion-label-md-h sc-ion-label-md-s md hydrated">
-                Password <span className="red-text">*</span>
+                {getLanguage(LanguageKey.PASSWORD)}{" "}
+                <span className="red-text">*</span>
               </span>
               <div className="MuiFormControl-root login-input-field pwd-field">
                 <div
@@ -299,7 +305,8 @@ const Register = () => {
             </div>
             <div className="pwd-input">
               <span className="input-labell sc-ion-label-md-h sc-ion-label-md-s md hydrated">
-                Confirm Password <span className="red-text">*</span>
+                {getLanguage(LanguageKey.CONFIRM_PASSWORD)}{" "}
+                <span className="red-text">*</span>
               </span>
               <div className="MuiFormControl-root login-input-field pwd-field">
                 <div
@@ -349,7 +356,7 @@ const Register = () => {
               >
                 <span className="MuiButton-label">
                   {" "}
-                  {languageValue(valueByLanguage, LanguageKey.REGISTER)}
+                  {getLanguage(LanguageKey.REGISTER)}
                 </span>
                 <span className="MuiTouchRipple-root"></span>
               </button>
@@ -364,7 +371,7 @@ const Register = () => {
               onClick={() => navigate("/login")}
               className="back-to-SignUp"
             >
-              {languageValue(valueByLanguage, LanguageKey.LOGIN)}
+              {getLanguage(LanguageKey.LOGIN)}
             </span>
           </div>
           <div className="socialMedia-login">

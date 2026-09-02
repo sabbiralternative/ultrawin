@@ -4,8 +4,11 @@ import { useEditButtonValuesMutation } from "../../redux/features/events/events"
 import { useNavigate } from "react-router-dom";
 import assets from "../../assets";
 import { useState } from "react";
+import useLanguage from "../../hooks/use-language";
+import { LanguageKey } from "../../const";
 
 const StakeSetting = () => {
+  const { getLanguage } = useLanguage();
   const [editButtonValue] = useEditButtonValuesMutation();
   const navigate = useNavigate();
   const buttonGameValues = JSON.parse(localStorage.getItem("buttonValue"));
@@ -117,10 +120,14 @@ const StakeSetting = () => {
                       </defs>
                     </svg>
                   </div>
-                  <div className="report-title">Stake Settings</div>
+                  <div className="report-title">
+                    {getLanguage(LanguageKey.STAKE_SETTINGS)}
+                  </div>
                 </div>
                 <div className="tab-btns">
-                  <button className="tab-btn black-font">save</button>
+                  <button className="tab-btn black-font">
+                    {getLanguage(LanguageKey.SAVE)}
+                  </button>
                 </div>
               </div>
               <div className="report-filters rh-web-view">
@@ -141,7 +148,9 @@ const StakeSetting = () => {
                 return (
                   <div key={i} className="indv-stake-btn">
                     <div className="label-number">
-                      <div className="label-text-sub">Input Value</div>
+                      <div className="label-text-sub">
+                        {getLanguage(LanguageKey.STAKE_VALUE)}
+                      </div>
                       <div className="support-add-stake-input">
                         <div className="add-stake-input">
                           <div
@@ -163,8 +172,8 @@ const StakeSetting = () => {
                                 prevValues.map((item, index) =>
                                   index === i
                                     ? { ...item, value: e.target.value }
-                                    : item
-                                )
+                                    : item,
+                                ),
                               )
                             }
                             type="number"

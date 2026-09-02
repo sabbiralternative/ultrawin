@@ -1,8 +1,11 @@
 import { useState } from "react";
 import { useIndex } from "../../../hooks";
 import moment from "moment";
+import useLanguage from "../../../hooks/use-language";
+import { LanguageKey } from "../../../const";
 
 const ProfitLoss = () => {
+  const { getLanguage } = useLanguage();
   const from = new Date(new Date().setDate(new Date().getDate() - 7))
     .toISOString()
     .split("T")[0];
@@ -28,7 +31,7 @@ const ProfitLoss = () => {
     <section data-v-81c2ddd8 className="nw-affi-user-wrapper affi-pd-bot">
       <div data-v-81c2ddd8 className>
         <h3 data-v-81c2ddd8 className="nw-affi-heading-text">
-          User Profit / Loss
+          {getLanguage(LanguageKey.USER_PROFIT_LOSS)}
         </h3>
         <form
           onSubmit={handleSubmit}
@@ -43,7 +46,7 @@ const ProfitLoss = () => {
             <li data-v-81c2ddd8>
               <div data-v-81c2ddd8 className="form-group">
                 <label data-v-81c2ddd8 className="label-pl12">
-                  From Date
+                  {getLanguage(LanguageKey.FROM_DATE)}
                 </label>
                 <input
                   onChange={(e) => setFromDate(e.target.value)}
@@ -58,7 +61,7 @@ const ProfitLoss = () => {
             <li data-v-81c2ddd8>
               <div data-v-81c2ddd8 className="form-group">
                 <label data-v-81c2ddd8 className="label-pl12">
-                  To Date
+                  {getLanguage(LanguageKey.TO_DATE)}
                 </label>
                 <input
                   onChange={(e) => setToDate(e.target.value)}
@@ -79,7 +82,7 @@ const ProfitLoss = () => {
               data-bs-toggle="modal"
               data-v-4c49d924
             >
-              <span data-v-4c49d924>Submit</span>
+              <span data-v-4c49d924>{getLanguage(LanguageKey.SUBMIT)}</span>
             </button>
           </div>
         </form>
@@ -132,7 +135,7 @@ const ProfitLoss = () => {
                             </span>
                           </span>
                           <span className=" w-1/2 flex items-center justify-end gap-x-1 text-white">
-                            <span>Amount:</span>
+                            <span>{getLanguage(LanguageKey.AMOUNT)}:</span>
                             <span
                               className={`font-semibold ${
                                 item?.amount > 0
@@ -155,7 +158,9 @@ const ProfitLoss = () => {
           })}
         {isSuccess && getUniqueDate?.length === 0 && (
           <div className="flex items-center justify-center w-full pt-20">
-            <h2 className="text-base ">No betting profit and loss yet!</h2>
+            <h2 className="text-base ">
+              {getLanguage(LanguageKey.NO_BETTING_PROFIT_LOSS_YET)}
+            </h2>
           </div>
         )}
       </div>

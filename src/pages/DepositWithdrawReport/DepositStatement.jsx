@@ -1,4 +1,8 @@
+import { LanguageKey } from "../../const";
+import useLanguage from "../../hooks/use-language";
+
 const DepositStatement = ({ accountStatement }) => {
+  const { getLanguage } = useLanguage();
   return (
     <div className="tr-table-ctn md hydrated">
       <div className="reports-ctn my-bets-ctn">
@@ -16,43 +20,43 @@ const DepositStatement = ({ accountStatement }) => {
                         className="MuiTableCell-root MuiTableCell-head MuiTableCell-sizeSmall"
                         scope="col"
                       >
-                        Transaction Time
+                        {getLanguage(LanguageKey.TRANSACTION_TIME)}
                       </th>
                       <th
                         className="MuiTableCell-root MuiTableCell-head MuiTableCell-sizeSmall"
                         scope="col"
                       >
-                        Transaction ID
+                        {getLanguage(LanguageKey.TRANSACTION_ID)}
                       </th>
                       <th
                         className="MuiTableCell-root MuiTableCell-head MuiTableCell-sizeSmall"
                         scope="col"
                       >
-                        Transaction Type
+                        {getLanguage(LanguageKey.TRANSACTION_TYPE)}
                       </th>
                       <th
                         className="MuiTableCell-root MuiTableCell-head MuiTableCell-sizeSmall"
                         scope="col"
                       >
-                        Amount
+                        {getLanguage(LanguageKey.AMOUNT)}
                       </th>
                       <th
                         className="MuiTableCell-root MuiTableCell-head MuiTableCell-sizeSmall"
                         scope="col"
                       >
-                        Transaction Status
+                        {getLanguage(LanguageKey.TRANSACTION_STATUS)}
                       </th>
                       <th
                         className="MuiTableCell-root MuiTableCell-head MuiTableCell-sizeSmall"
                         scope="col"
                       >
-                        Notes
+                        {getLanguage(LanguageKey.NOTES)}
                       </th>
                       <th
                         className="MuiTableCell-root MuiTableCell-head MuiTableCell-sizeSmall"
                         scope="col"
                       >
-                        Payment Method
+                        {getLanguage(LanguageKey.PAYMENT_METHODS)}
                       </th>
                     </tr>
 
@@ -97,7 +101,7 @@ const DepositStatement = ({ accountStatement }) => {
                             {data?.referenceNo}
                           </td>
                           <td className="MuiTableCell-root MuiTableCell-body text-capitalize MuiTableCell-alignLeft MuiTableCell-sizeSmall">
-                            deposit
+                            {getLanguage(LanguageKey.DEPOSIT)}
                           </td>
                           <td className="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft MuiTableCell-sizeSmall">
                             {data?.amount}
@@ -138,13 +142,13 @@ const DepositStatement = ({ accountStatement }) => {
               <div className="mct">
                 <div className="mct-h">
                   <div className="mct-h-c0 mct-h-c" style={{ width: "40%" }}>
-                    Transaction Type
+                    {getLanguage(LanguageKey.TRANSACTION_TYPE)}
                   </div>
                   <div className="mct-h-c1 mct-h-c" style={{ width: "20%" }}>
-                    Status
+                    {getLanguage(LanguageKey.TRANSACTION_STATUS)}
                   </div>
                   <div className="mct-h-c2 mct-h-c" style={{ width: "20%" }}>
-                    Amount
+                    {getLanguage(LanguageKey.AMOUNT)}
                   </div>
                   <div className="mct-h-c3 mct-h-c" style={{ width: "20%" }}>
                     Txn ID
@@ -165,7 +169,9 @@ const DepositStatement = ({ accountStatement }) => {
                               style={{ width: "40%" }}
                             >
                               <div className="mb-event-name-date">
-                                <div className="b-700">WITHDRAW</div>
+                                <div className="b-700">
+                                  {getLanguage(LanguageKey.WITHDRAW)}
+                                </div>
                                 {/* <div className="mb-bet-date">
                               04-11-24, 5:24:58 PM
                             </div> */}
@@ -223,7 +229,9 @@ const DepositStatement = ({ accountStatement }) => {
                                 }}
                                 className="display-flex"
                               >
-                                <div className="b-500">Payment Method:</div>
+                                <div className="b-500">
+                                  {getLanguage(LanguageKey.PAYMENT_METHODS)}:
+                                </div>
                                 <div className="b-400">N/A</div>
                               </div>
                             </div>
@@ -239,7 +247,9 @@ const DepositStatement = ({ accountStatement }) => {
                                 }}
                                 className="display-flex space-between"
                               >
-                                <div className="b-700">Notes:</div>
+                                <div className="b-700">
+                                  {getLanguage(LanguageKey.NOTES)}:
+                                </div>
                                 <div className="b-400">{data?.remark}</div>
                               </div>
                             </div>

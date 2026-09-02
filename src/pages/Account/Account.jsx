@@ -3,12 +3,11 @@ import { Link, useNavigate } from "react-router-dom";
 import { logout } from "../../redux/features/auth/authSlice";
 import useBalance from "../../hooks/useBalance";
 import { setGroupType } from "../../redux/features/global/globalSlice";
-import { useLanguage } from "../../context/LanguageProvider";
-import { languageValue } from "../../utils/language";
 import { LanguageKey } from "../../const";
+import useLanguage from "../../hooks/use-language";
 
 const Account = () => {
-  const { valueByLanguage } = useLanguage();
+  const { getLanguage } = useLanguage();
   const dispatch = useDispatch();
   const { balance } = useBalance();
   const navigate = useNavigate();
@@ -44,7 +43,7 @@ const Account = () => {
               <div className="header-content">
                 <div className="user-details-section">
                   <div className="user-balance">
-                    <div>Available Balance</div>
+                    <div>{getLanguage(LanguageKey.AVAILABLE_BALANCE)}</div>
                     <div>{balance?.availBalance}</div>
                   </div>
                 </div>
@@ -54,14 +53,20 @@ const Account = () => {
                   <div className="header-amount">
                     {balance?.deductedExposure}
                   </div>
-                  <div className="header-content-text">Exposure</div>
+                  <div className="header-content-text">
+                    {getLanguage(LanguageKey.EXPOSURE)}
+                  </div>
                 </div>
                 <div className="bonus-credit">
                   <div className="header-amount">0.00</div>
-                  <div className="header-content-text">Bonus Rewarded</div>
+                  <div className="header-content-text">
+                    {getLanguage(LanguageKey.BONUS_REWARDED)}
+                  </div>
                 </div>
               </div>
-              <div className="reports-header">Reports Menu</div>
+              <div className="reports-header">
+                {getLanguage(LanguageKey.REPORTS_MENU)}
+              </div>
               <div
                 style={{ gap: "5px" }}
                 className="dashboard-cards-ctn ios hydrated"
@@ -84,7 +89,7 @@ const Account = () => {
                     </svg>
                     <span className="dashboard-item-text">
                       {" "}
-                      {languageValue(valueByLanguage, LanguageKey.DEPOSIT)}
+                      {getLanguage(LanguageKey.DEPOSIT)}
                     </span>
                   </Link>
                 </div>
@@ -117,7 +122,7 @@ const Account = () => {
                     </svg>
                     <span className="dashboard-item-text">
                       {" "}
-                      {languageValue(valueByLanguage, LanguageKey.WITHDRAW)}
+                      {getLanguage(LanguageKey.WITHDRAW)}
                     </span>
                   </Link>
                 </div>
@@ -137,7 +142,9 @@ const Account = () => {
                         fill="white"
                       />
                     </svg>
-                    <span className="dashboard-item-text">My Bets</span>
+                    <span className="dashboard-item-text">
+                      {getLanguage(LanguageKey.MY_BETS)}
+                    </span>
                   </Link>
                 </div>
                 <div className="dashboard-item ios hydrated">
@@ -157,7 +164,9 @@ const Account = () => {
                         fill="white"
                       />
                     </svg>
-                    <span className="dashboard-item-text">D/W Report</span>
+                    <span className="dashboard-item-text">
+                      {getLanguage(LanguageKey.DEPOSIT_WITHDRAW_REPORT)}
+                    </span>
                   </Link>
                 </div>
                 <div className="dashboard-item ios hydrated">
@@ -177,7 +186,9 @@ const Account = () => {
                         fill="white"
                       />
                     </svg>
-                    <span className="dashboard-item-text">P/L Statement</span>
+                    <span className="dashboard-item-text">
+                      {getLanguage(LanguageKey.PL_STATEMENT)}
+                    </span>
                   </Link>
                 </div>
                 <div className="dashboard-item ios hydrated">
@@ -194,7 +205,9 @@ const Account = () => {
                         fill="white"
                       />
                     </svg>
-                    <span className="dashboard-item-text">My Transactions</span>
+                    <span className="dashboard-item-text">
+                      {getLanguage(LanguageKey.MY_TRANSACTIONS)}
+                    </span>
                   </Link>
                 </div>
                 {/* <div className="dashboard-item ios hydrated">
@@ -269,7 +282,9 @@ const Account = () => {
                         </clipPath>
                       </defs>
                     </svg>
-                    <span className="dashboard-item-text">Stake Settings</span>
+                    <span className="dashboard-item-text">
+                      {getLanguage(LanguageKey.STAKE_SETTINGS)}
+                    </span>
                   </Link>
                 </div>
                 <div className="dashboard-item ios hydrated">
@@ -305,10 +320,7 @@ const Account = () => {
                     </svg>
                     <span className="dashboard-item-text">
                       {" "}
-                      {languageValue(
-                        valueByLanguage,
-                        LanguageKey.CHANGE_PASSWORD,
-                      )}
+                      {getLanguage(LanguageKey.CHANGE_PASSWORD)}
                     </span>
                   </Link>
                 </div>
@@ -348,7 +360,7 @@ const Account = () => {
                         />
                       </svg>
                       <span className="dashboard-item-text logout-text">
-                        {languageValue(valueByLanguage, LanguageKey.LOGOUT)}
+                        {getLanguage(LanguageKey.LOGOUT)}
                       </span>
                     </span>
                     <span className="MuiTouchRipple-root" />

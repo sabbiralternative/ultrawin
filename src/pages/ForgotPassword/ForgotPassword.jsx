@@ -11,12 +11,11 @@ import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { navigateTelegramInstagram } from "../../utils/navigateTelegramInstagram";
 import useContextState from "../../hooks/useContextState";
-import { useLanguage } from "../../context/LanguageProvider";
-import { languageValue } from "../../utils/language";
 import { LanguageKey } from "../../const";
+import useLanguage from "../../hooks/use-language";
 
 const ForgotPassword = () => {
-  const { valueByLanguage } = useLanguage();
+  const { getLanguage } = useLanguage();
   const { logo } = useContextState();
   const navigate = useNavigate();
   const [handleForgotPassword] = useForgotPasswordMutation();
@@ -102,14 +101,16 @@ const ForgotPassword = () => {
                 >
                   <path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"></path>
                 </svg>
-                <span className="back-text">Back</span>
+                <span className="back-text">
+                  {getLanguage(LanguageKey.BACK)}
+                </span>
               </div>
             </div>
             <div
               className="card-title"
               style={{ fontSize: "16px", fontWeight: "500" }}
             >
-              Forgot Username/Password
+              {getLanguage(LanguageKey.FORGOT_PASSWORD)}
             </div>
             <span
               className="card-login-here"
@@ -165,7 +166,7 @@ const ForgotPassword = () => {
                   style={{ fontWeight: "400", fontSize: "15px" }}
                   className="MuiButton-label"
                 >
-                  Send OTP
+                  {getLanguage(LanguageKey.SEND_OTP)}
                 </span>
                 <span className="MuiTouchRipple-root"></span>
               </button>
@@ -295,7 +296,7 @@ const ForgotPassword = () => {
                 type="submit"
               >
                 <span style={{ fontWeight: "500" }} className="MuiButton-label">
-                  {languageValue(valueByLanguage, LanguageKey.CHANGE_PASSWORD)}
+                  {getLanguage(LanguageKey.CHANGE_PASSWORD)}
                 </span>
                 <span className="MuiTouchRipple-root"></span>
               </button>
@@ -308,7 +309,7 @@ const ForgotPassword = () => {
               onClick={() => navigate("/register")}
               className="back-to-SignUp"
             >
-              Sign Up
+              {getLanguage(LanguageKey.REGISTER)}
             </span>
           </div>
           <div className="socialMedia-login">

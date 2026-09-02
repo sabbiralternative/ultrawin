@@ -1,7 +1,10 @@
 import { useRef } from "react";
 import useCloseModalClickOutside from "../../hooks/useCloseModalClickOutside";
+import useLanguage from "../../hooks/use-language";
+import { LanguageKey } from "../../const";
 
 const Ladder = ({ setLadderData, ladderData, eventName }) => {
+  const { getLanguage } = useLanguage();
   const ladderRef = useRef();
   useCloseModalClickOutside(ladderRef, () => {
     setLadderData([]);
@@ -91,7 +94,7 @@ const Ladder = ({ setLadderData, ladderData, eventName }) => {
                         className="MuiTableCell-root MuiTableCell-head"
                         scope="col"
                       >
-                        Profit/Loss
+                        {getLanguage(LanguageKey.PROFIT_LOSS)}
                       </th>
                     </tr>
                   </thead>

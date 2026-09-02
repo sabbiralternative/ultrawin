@@ -5,15 +5,14 @@ import Suspended from "../../shared/Suspended/Suspended";
 import MobileGroup from "./MobileGroup";
 import { useEffect, useState } from "react";
 import { useLatestEvent } from "../../../hooks/latestEvent";
-import { useLanguage } from "../../../context/LanguageProvider";
-import { languageValue } from "../../../utils/language";
 import { LanguageKey } from "../../../const";
 import LiveVirtual from "./LiveVirtual";
 import { filterLiveVirtual } from "../../../utils/filter-live-virtual";
+import useLanguage from "../../../hooks/use-language";
 
 const Group = ({ data }) => {
   const [liveVirtual, setLiveVirtual] = useState([]);
-  const { valueByLanguage } = useLanguage();
+  const { getLanguage } = useLanguage();
   const { data: latestEvent } = useLatestEvent();
   const [categories, setCategories] = useState([]);
   const navigate = useNavigate();
@@ -27,10 +26,10 @@ const Group = ({ data }) => {
     });
 
   const eventName = {
-    4: languageValue(valueByLanguage, LanguageKey.CRICKET),
-    2: languageValue(valueByLanguage, LanguageKey.TENNIS),
-    1: languageValue(valueByLanguage, LanguageKey.FOOTBALL),
-    5: languageValue(valueByLanguage, LanguageKey.KABADDI),
+    4: getLanguage(LanguageKey.CRICKET),
+    2: getLanguage(LanguageKey.TENNIS),
+    1: getLanguage(LanguageKey.FOOTBALL),
+    5: getLanguage(LanguageKey.KABADDI),
   };
   useEffect(() => {
     if (data) {

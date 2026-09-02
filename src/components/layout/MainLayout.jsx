@@ -3,10 +3,13 @@ import Header from "../shared/Header/Header";
 import LeftSidebar from "../ui/LeftSidebar/LeftSidebar";
 import MobileHeader from "../shared/Header/MobileHeader";
 import MobileSidebar from "../ui/LeftSidebar/MobileSidebar";
+import { settings } from "../../api";
 
 const MainLayout = () => {
   return (
     <>
+      <meta name="description" content={settings.metaDescription} />
+      <meta name="keywords" content={settings.metaKeywords} />
       <div className="MuiBox-root jss31"></div>
       <div className="ion-app md ion-page hydrated">
         <div className="web-view" style={{ position: "fixed" }}>

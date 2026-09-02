@@ -1,8 +1,11 @@
 import toast from "react-hot-toast";
 import moment from "moment";
 import { useBonusMutation, useBonusQuery } from "../../hooks/bonus";
+import useLanguage from "../../hooks/use-language";
+import { LanguageKey } from "../../const";
 
 const BonusStatement = () => {
+  const { getLanguage } = useLanguage();
   const { data, refetch } = useBonusQuery({
     type: "viewStatement",
   });
@@ -10,11 +13,23 @@ const BonusStatement = () => {
 
   const handleShowMessage = (item) => {
     if (item?.is_claimed == 1) {
-      return <span className="text-green-500">Bonus Claimed</span>;
+      return (
+        <span className="text-green-500">
+          {getLanguage(LanguageKey.BONUS_CLAIMED)}
+        </span>
+      );
     } else if (item?.is_claimed == 2) {
-      return <span className="text-orange-500">Claim Pending</span>;
+      return (
+        <span className="text-orange-500">
+          {getLanguage(LanguageKey.CLAIM_PENDING)}
+        </span>
+      );
     } else if (item?.is_claimed == 3) {
-      return <span className="text-red-500">Rejected</span>;
+      return (
+        <span className="text-red-500">
+          {getLanguage(LanguageKey.REJECTED)}
+        </span>
+      );
     } else if (item?.is_claimed == 0) {
       if (item?.is_wagering_complete == 1) {
         return (
@@ -22,11 +37,15 @@ const BonusStatement = () => {
             onClick={() => handleClaimBonus(item)}
             className="bg-[var(--primary-color)] px-2 rounded-sm py-1 text-black font-semibold text-xs"
           >
-            Claim
+            {getLanguage(LanguageKey.CLAIM)}
           </button>
         );
       } else if (item?.is_wagering_complete == 0) {
-        return <span className="text-red-500">Wagering Incomplete</span>;
+        return (
+          <span className="text-red-500">
+            {getLanguage(LanguageKey.WAGERING_INCOMPLETE)}
+          </span>
+        );
       }
     }
   };
@@ -73,14 +92,16 @@ const BonusStatement = () => {
                   >
                     <div className="w-full bg-bg_color_primary px-2.5 py-2 flex items-center justify-between  text-xs sm:text-sm">
                       <span className="text-white w-1/2 border-r border-r-oddInputColor flex items-center justify-start gap-x-1">
-                        <span>Bonus Amount:</span>
+                        <span>{getLanguage(LanguageKey.BONUS_AMOUNT)}:</span>
                         <span className="font-semibold text-text_Success">
                           ₹ {item?.amount}
                         </span>
                       </span>
 
                       <span className="text-white w-1/2 flex items-center justify-end gap-x-1">
-                        <span>Wagering Required:</span>
+                        <span>
+                          {getLanguage(LanguageKey.WAGERING_REQUIRED)}:
+                        </span>
                         <span
                           className={`font-semibold ${
                             item?.wagering_amount > 0
@@ -94,7 +115,9 @@ const BonusStatement = () => {
                     </div>
                     <div className="w-full bg-bg_Quaternary1 px-2.5 py-2 flex items-center justify-between  text-xs sm:text-sm">
                       <span className="text-white w-1/2 border-r border-r-oddInputColor flex items-center justify-start gap-x-1">
-                        <span>Wagering Complete Amount:</span>
+                        <span>
+                          {getLanguage(LanguageKey.WAGERING_COMPLETED_AMOUNT)}:
+                        </span>
                         <span
                           className={`font-semibold ${
                             item?.is_wagering_complete == 0
@@ -110,7 +133,7 @@ const BonusStatement = () => {
                         </span>
                       </span>
                       <span className="text-white w-1/2 flex items-center justify-end gap-x-1">
-                        <span>Date Added:</span>
+                        <span>{getLanguage(LanguageKey.DATE_ADDED)}:</span>
                         <span className={`font-semibold `}>
                           {formateDate(item?.date_added)}
                         </span>
@@ -118,7 +141,7 @@ const BonusStatement = () => {
                     </div>
                     <div className="w-full bg-bg_Quaternary1 px-2.5 py-2 flex items-center justify-between  text-xs sm:text-sm">
                       <span className="text-white w-1/2 border-r border-r-oddInputColor flex items-center justify-start gap-x-1">
-                        <span>Expiry Date:</span>
+                        <span>{getLanguage(LanguageKey.EXPIRY_DATE)}:</span>
                         <span className="font-semibold">
                           {formateDate(item?.expiry_date)}
                         </span>
@@ -138,14 +161,14 @@ const BonusStatement = () => {
                   >
                     <div className="w-full bg-bg_color_primary px-2.5 py-2 flex items-center justify-between  text-xs sm:text-sm">
                       <span className="text-white w-1/2 border-r border-r-oddInputColor flex items-center justify-start gap-x-1">
-                        <span>Bonus Amount:</span>
+                        <span>{getLanguage(LanguageKey.BONUS_AMOUNT)}:</span>
                         <span className="font-semibold text-text_Success">
                           ₹ {item?.amount}
                         </span>
                       </span>
 
                       <span className="text-white w-1/2 flex items-center justify-end gap-x-1">
-                        <span>Date Added:</span>
+                        <span>{getLanguage(LanguageKey.DATE_ADDED)}:</span>
                         <span className={`font-semibold `}>
                           {formateDate(item?.date_added)}
                         </span>
@@ -167,7 +190,9 @@ const BonusStatement = () => {
           })
         ) : (
           <div className="flex items-center justify-center w-full pt-20">
-            <h2 className="text-base text-white">No bonus statement yet!</h2>
+            <h2 className="text-base text-white">
+              {getLanguage(LanguageKey.NO_BONUS_STATEMENT_YET)}
+            </h2>
           </div>
         )}
       </div>

@@ -19,14 +19,13 @@ import Notification from "./Notification";
 import DownloadAPK from "../../modal/DownloadAPK/DownloadAPK";
 import WarningCondition from "../../ui/WarningCondition/WarningCondition";
 import Error from "../../modal/Error/Error";
-import { useLanguage } from "../../../context/LanguageProvider";
 import Language from "../../modal/Language";
-import { languageValue } from "../../../utils/language";
 import { LanguageKey } from "../../../const";
+import useLanguage from "../../../hooks/use-language";
 // import Dropdown from "./Dropdown";
 
 const Header = () => {
-  const { language, valueByLanguage, setLanguage } = useLanguage();
+  const { language, getLanguage, setLanguage } = useLanguage();
   const [showLanguage, setShowLanguage] = useState(false);
   const { showAppPopUp, windowWidth, showAPKModal, closePopupForForever } =
     useSelector((state) => state?.global);
@@ -140,7 +139,7 @@ const Header = () => {
                 >
                   <span className="MuiButton-label">
                     {" "}
-                    {languageValue(valueByLanguage, LanguageKey.HOME)}
+                    {getLanguage(LanguageKey.HOME)}
                   </span>
                   <span className="MuiTouchRipple-root"></span>
                 </button>
@@ -156,7 +155,9 @@ const Header = () => {
                   className="MuiButtonBase-root MuiButton-root MuiButton-text nav-link-btn"
                   type="button"
                 >
-                  <span className="MuiButton-label">Inplay</span>
+                  <span className="MuiButton-label">
+                    {getLanguage(LanguageKey.IN_PLAY)}
+                  </span>
                   <span className="MuiTouchRipple-root"></span>
                 </button>
               </Link>
@@ -172,7 +173,9 @@ const Header = () => {
                   className="MuiButtonBase-root MuiButton-root MuiButton-text nav-link-btn"
                   type="button"
                 >
-                  <span className="MuiButton-label">Sportsbook</span>
+                  <span className="MuiButton-label">
+                    {getLanguage(LanguageKey.SPORTSBOOK)}
+                  </span>
                   <span className="MuiTouchRipple-root"></span>
                 </button>
               </a>
@@ -188,7 +191,9 @@ const Header = () => {
                   className="MuiButtonBase-root MuiButton-root MuiButton-text nav-link-btn"
                   type="button"
                 >
-                  <span className="MuiButton-label">Live Casino</span>
+                  <span className="MuiButton-label">
+                    {getLanguage(LanguageKey.LIVE_CASINO)}
+                  </span>
                   <span className="MuiTouchRipple-root"></span>
                 </button>
               </Link>
@@ -204,7 +209,9 @@ const Header = () => {
                   className="MuiButtonBase-root MuiButton-root MuiButton-text nav-link-btn"
                   type="button"
                 >
-                  <span className="MuiButton-label">Multi Markets</span>
+                  <span className="MuiButton-label">
+                    {getLanguage(LanguageKey.MULTI_MARKET)}
+                  </span>
                   <span className="MuiTouchRipple-root"></span>
                 </button>
               </Link>
@@ -218,7 +225,9 @@ const Header = () => {
                   className="MuiButtonBase-root MuiButton-root MuiButton-text check-bonus-btn check-bt-blink-animation"
                   type="button"
                 >
-                  <span className="MuiButton-label">Check Bonuses</span>
+                  <span className="MuiButton-label">
+                    {getLanguage(LanguageKey.CHECK_BONUSES)}
+                  </span>
                   <span className="MuiTouchRipple-root"></span>
                 </button>
               </Link>
@@ -272,13 +281,13 @@ const Header = () => {
                 onClick={() => navigate("/login")}
                 className="cb cb-variant-1 sh-new-btn"
               >
-                {languageValue(valueByLanguage, LanguageKey.LOGIN)}
+                {getLanguage(LanguageKey.LOGIN)}
               </button>
               <button
                 onClick={() => navigate("/register")}
                 className="cb cb-variant-2 sh-new-btn"
               >
-                {languageValue(valueByLanguage, LanguageKey.REGISTER)}
+                {getLanguage(LanguageKey.REGISTER)}
               </button>
             </>
           ) : (

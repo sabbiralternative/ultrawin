@@ -3,8 +3,11 @@ import toast from "react-hot-toast";
 import { useBonusMutation, useBonusQuery } from "../../hooks/bonus";
 import { useEffect, useState } from "react";
 import assets from "../../assets";
+import useLanguage from "../../hooks/use-language";
+import { LanguageKey } from "../../const";
 
 const AppOnlyBonus = () => {
+  const { getLanguage } = useLanguage();
   const bonusMessage = [
     "Lossback can be claimed only if you have a net loss on the specified date. If your total bets result in any profit, you are not eligible for this lossback bonus.Loss is calculated after all wins, losses, and settlements for that date.",
     "लॉसबैक का दावा केवल उसी स्थिति में किया जा सकता है जब निर्धारित तिथि पर आपका कुल शुद्ध नुकसान (नेट लॉस) हो। यदि उस दिन आपकी कुल बेटिंग का परिणाम किसी भी प्रकार का मुनाफ़ा (प्रॉफिट) दिखाता है, तो आप इस लॉसबैक बोनस के लिए पात्र नहीं होंगे। लॉस की गणना उस तिथि की सभी जीत, हार और सेटलमेंट को जोड़ने के बाद की जाएगी।",
@@ -95,7 +98,7 @@ const AppOnlyBonus = () => {
                     >
                       <div className="flex items-start gap-3">
                         <h4 className="font-bold text-white text-[12px] mb-2 tracking-wide min-w-fit">
-                          Title :
+                          {getLanguage(LanguageKey.TITLE)} :
                         </h4>
                         <p className="text-white text-[12px] leading-relaxed ">
                           {item?.title}
@@ -103,7 +106,7 @@ const AppOnlyBonus = () => {
                       </div>
                       <div className="flex items-start gap-3">
                         <h4 className="font-bold text-white text-[12px] mb-2 tracking-wide min-w-fit">
-                          Minimum Loss Amount :
+                          {getLanguage(LanguageKey.MINIMUM_LOSS_AMOUNT)} :
                         </h4>
                         <p className="text-white text-[12px] leading-relaxed ">
                           {item?.minimum_loss_amount}
@@ -111,7 +114,7 @@ const AppOnlyBonus = () => {
                       </div>
                       <div className="flex items-start gap-3">
                         <h4 className="font-bold text-white text-[12px] mb-2 tracking-wide min-w-fit">
-                          Maximum Bonus Amount :
+                          {getLanguage(LanguageKey.MAXIMUM_BONUS_AMOUNT)} :
                         </h4>
                         <p className="text-white text-[12px] leading-relaxed">
                           {item?.maximum_bonus_amount}
@@ -119,7 +122,7 @@ const AppOnlyBonus = () => {
                       </div>
                       <div className="flex items-start gap-3">
                         <h4 className="font-bold text-white text-[12px] mb-2 tracking-wide min-w-fit">
-                          Status :
+                          {getLanguage(LanguageKey.STATUS)} :
                         </h4>
                         <p
                           className={`text-[12px] leading-relaxed ${item?.status === "ACTIVE" ? "text-green-500" : item?.status === "INACTIVE" ? "text-orange-500" : "text-red-500"}`}
@@ -129,7 +132,7 @@ const AppOnlyBonus = () => {
                       </div>
                       <div className="flex items-start gap-3">
                         <h4 className="font-bold text-white text-[12px] mb-2 tracking-wide min-w-fit">
-                          Expiry :
+                          {getLanguage(LanguageKey.EXPIRY)} :
                         </h4>
                         <p className="text-white text-[12px] leading-relaxed">
                           {item?.expires_at}
@@ -143,7 +146,7 @@ const AppOnlyBonus = () => {
                           className="relative overflow-hidden bg-primary py-1 px-4 rounded-md active:scale-[99%] transition-all duration-300 text-primary  text-sm font-bold"
                           type="button"
                         >
-                          Claim
+                          {getLanguage(LanguageKey.CLAIM)}
                         </button>
                       )}
                     </div>

@@ -4,8 +4,11 @@ import useCloseModalClickOutside from "../../../hooks/useCloseModalClickOutside"
 import assets from "../../../assets";
 import { handleCopyToClipBoard } from "../../../utils/handleCopyToClipBoard";
 import { settings } from "../../../api";
+import useLanguage from "../../../hooks/use-language";
+import { LanguageKey } from "../../../const";
 
 const ShareAffiliateLink = ({ setShowShareAffiliateLink }) => {
+  const { getLanguage } = useLanguage();
   const { data } = useGetIndex();
   const ref = useRef();
   useCloseModalClickOutside(ref, () => {
@@ -26,7 +29,7 @@ const ShareAffiliateLink = ({ setShowShareAffiliateLink }) => {
         className="z-2 popUpBoxShadow popUpOpenAnimation absolute w-[90%] sm:w-[85%] md:w-[70%] lg:w-[450px] rounded-[5px] bg-bg_color_LoginPopUpBg text-white p-2 xs:p-5 rounded-md  overflow-hidden  pb-10"
       >
         <h2 className="mb-5 text-base md:text-xl font-semibold">
-          Share Affiliate link or Code
+          {getLanguage(LanguageKey.SHARE_AFFILIATE_LINK_OR_CODE)}
         </h2>
         <div
           onClick={() => setShowShareAffiliateLink(false)}
@@ -67,14 +70,14 @@ const ShareAffiliateLink = ({ setShowShareAffiliateLink }) => {
                 <img src={assets.share} alt="af-share-img" />
               </div>
               <div className="af-share-link-wrapper">
-                <p>Share Link</p>
+                <p>{getLanguage(LanguageKey.SHARE_LINK)}</p>
                 <div className="af-share-link-sec">
                   <span>{data?.link}</span>
                   <button
                     onClick={() => handleCopyToClipBoard(data?.text)}
                     className="thm-but btn-gradient"
                   >
-                    Copy
+                    {getLanguage(LanguageKey.COPY)}
                   </button>
                 </div>
               </div>
@@ -85,7 +88,7 @@ const ShareAffiliateLink = ({ setShowShareAffiliateLink }) => {
                 <div className="af-share-link-wrapper">
                   <div className="affilate-cmn-footer">
                     <div className="shre-text-title">
-                      <p>Share this link via</p>
+                      <p>{getLanguage(LanguageKey.SHARE_THIS_LINK_VIA)}</p>
                     </div>
                     <div className="af-share-social-link-sec">
                       {(settings?.branchWhatsapplink ||

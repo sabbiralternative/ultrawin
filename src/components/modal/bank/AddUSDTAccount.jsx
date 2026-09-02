@@ -5,8 +5,11 @@ import useCloseModalClickOutside from "../../../hooks/useCloseModalClickOutside"
 import { AxiosSecure } from "../../../lib/AxiosSecure";
 import { useSelector } from "react-redux";
 import { jwtDecode } from "jwt-decode";
+import useLanguage from "../../../hooks/use-language";
+import { LanguageKey } from "../../../const";
 
 const AddUSDTAccount = ({ setAddUSDTAccount, refetchBankData }) => {
+  const { getLanguage } = useLanguage();
   /* Handle close modal click outside */
   const addBankRef = useRef();
   useCloseModalClickOutside(addBankRef, () => {
@@ -120,7 +123,7 @@ const AddUSDTAccount = ({ setAddUSDTAccount, refetchBankData }) => {
     <div className="Modal-Background  ">
       <div className="card-add-bank card-add-bank-position" ref={addBankRef}>
         <div className="card-header">
-          <h2>Add Bank Account</h2>
+          <h2>{getLanguage(LanguageKey.ADD_USDT_ACCOUNT)}</h2>
           <div className="close-btn">
             <svg
               onClick={() => setAddUSDTAccount(false)}
@@ -227,7 +230,7 @@ const AddUSDTAccount = ({ setAddUSDTAccount, refetchBankData }) => {
                         justifyContent: "center",
                       }}
                     >
-                      Retry in {timer}
+                      {getLanguage(LanguageKey.RETRY_IN)} {timer}
                     </div>
                   ) : (
                     <div
@@ -265,7 +268,7 @@ const AddUSDTAccount = ({ setAddUSDTAccount, refetchBankData }) => {
                         }}
                         type="button"
                       >
-                        Get OTP Message
+                        {getLanguage(LanguageKey.GET_OTP_ON_MESSAGE)}
                       </button>
                     </div>
                   )}
@@ -292,14 +295,16 @@ const AddUSDTAccount = ({ setAddUSDTAccount, refetchBankData }) => {
                   onClick={() => setAddUSDTAccount(false)}
                   className="cancel-btn "
                 >
-                  <span className="">Cancel</span>
+                  <span className="">{getLanguage(LanguageKey.CANCEL)}</span>
                 </button>
                 <button
                   disabled={!isFormValid}
                   className="add-btn "
                   type="submit"
                 >
-                  <span className="">Add Bank Account</span>
+                  <span className="">
+                    {getLanguage(LanguageKey.ADD_USDT_ACCOUNT)}
+                  </span>
                 </button>
               </div>
             </form>

@@ -4,6 +4,8 @@ import DeleteBank from "../../components/modal/bank/DeleteBank";
 import useContextState from "../../hooks/useContextState";
 import assets from "../../assets";
 import AddUSDTAccount from "../../components/modal/bank/AddUSDTAccount";
+import useLanguage from "../../hooks/use-language";
+import { LanguageKey } from "../../const";
 
 const BankAccounts = ({
   bankData,
@@ -14,6 +16,7 @@ const BankAccounts = ({
   setBank,
   bank,
 }) => {
+  const { getLanguage } = useLanguage();
   const { addBank, setAddBank } = useContextState();
   const [removeBank, setRemoveBank] = useState("");
   const [addUSDTAccount, setAddUSDTAccount] = useState(false);
@@ -96,7 +99,7 @@ const BankAccounts = ({
               className="back-nav-title-bc ellipsis "
               style={{ color: "white" }}
             >
-              Back to Amount
+              {getLanguage(LanguageKey.BACK_TO_AMOUNT)}
             </span>
           </div>
 
@@ -155,7 +158,9 @@ const BankAccounts = ({
                         }}
                         className=""
                       >
-                        <span className="">Bank :-</span>
+                        <span className="">
+                          {getLanguage(LanguageKey.BANK_NAME)} :-
+                        </span>
                         <span className="bank-detail-txt ">
                           {data?.bankName}
                         </span>
@@ -182,7 +187,9 @@ const BankAccounts = ({
                         }}
                         className=""
                       >
-                        <span className="">IFSC :-</span>
+                        <span className="">
+                          {getLanguage(LanguageKey.IFSC_CODE)} :-
+                        </span>
                         <span className="bank-detail-txt ">{data?.ifsc}</span>
                       </div>
                     </div>
@@ -196,7 +203,9 @@ const BankAccounts = ({
                         }}
                         className=""
                       >
-                        <span className="">Account No :-</span>
+                        <span className="">
+                          {getLanguage(LanguageKey.ACCOUNT_NUMBER)} :-
+                        </span>
                         <span className="bank-detail-txt ">
                           {data?.accountNumber}
                         </span>
@@ -403,7 +412,9 @@ const BankAccounts = ({
                 alt=""
                 className=""
               />
-              <span className="">Add Bank Account</span>
+              <span className="">
+                {getLanguage(LanguageKey.ADD_BANK_ACCOUNT)}
+              </span>
             </button>
             <button
               onClick={() => setAddUSDTAccount(true)}
@@ -415,7 +426,9 @@ const BankAccounts = ({
                 alt=""
                 className=""
               />
-              <span className="">Add USDT Account</span>
+              <span className="">
+                {getLanguage(LanguageKey.ADD_USDT_ACCOUNT)}
+              </span>
             </button>
           </div>
           <div className="withdraw-page-buttons  ">
@@ -428,7 +441,7 @@ const BankAccounts = ({
               className="process-btn "
               disabled={!bank}
             >
-              <span className="">Proceed</span>
+              <span className="">{getLanguage(LanguageKey.PROCEED)}</span>
             </button>
           </div>
 

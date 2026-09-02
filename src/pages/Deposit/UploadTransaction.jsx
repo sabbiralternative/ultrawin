@@ -7,8 +7,11 @@ import toast from "react-hot-toast";
 import { FaSpinner } from "react-icons/fa";
 import { useSelector } from "react-redux";
 import { AxiosSecure } from "../../lib/AxiosSecure";
+import useLanguage from "../../hooks/use-language";
+import { LanguageKey } from "../../const";
 
 const UploadTransaction = ({ paymentId, amount }) => {
+  const { getLanguage } = useLanguage();
   const { token } = useSelector((state) => state.auth);
   const navigate = useNavigate();
   const [utr, setUtr] = useState(null);
@@ -136,7 +139,7 @@ const UploadTransaction = ({ paymentId, amount }) => {
                       </svg>
                       <div className="uploadtxt ng-tns-c159-0 ng-star-inserted">
                         <p className="ng-tns-c159-0" style={{ color: "white" }}>
-                          Upload Transaction Image
+                          {getLanguage(LanguageKey.UPLOAD_TRANSACTION_IMAGE)}
                         </p>
                       </div>
                       <div className="frame ng-tns-c159-0 ng-star-inserted">
@@ -152,7 +155,7 @@ const UploadTransaction = ({ paymentId, amount }) => {
                           htmlFor="fileInput"
                           className="uploadbtn ng-tns-c159-0"
                         >
-                          Upload
+                          {getLanguage(LanguageKey.UPLOAD)}
                         </label>
                       </div>
                     </div>
@@ -257,7 +260,9 @@ const UploadTransaction = ({ paymentId, amount }) => {
         className="makepayment ng-tns-c159-2"
       >
         <div className="madepay ng-tns-c159-2">
-          <button className="ng-tns-c159-2">I have Made The Payment</button>
+          <button className="ng-tns-c159-2">
+            {getLanguage(LanguageKey.I_HAVE_MADE_THE_PAYMENT)}
+          </button>
         </div>
       </div>
     </div>

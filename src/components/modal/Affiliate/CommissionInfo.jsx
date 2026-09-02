@@ -1,7 +1,10 @@
 import { useRef } from "react";
 import useCloseModalClickOutside from "../../../hooks/useCloseModalClickOutside";
+import useLanguage from "../../../hooks/use-language";
+import { LanguageKey } from "../../../const";
 
 const CommissionInfo = ({ setOpenCommissionModal }) => {
+  const { getLanguage } = useLanguage();
   const ref = useRef();
   useCloseModalClickOutside(ref, () => {
     setOpenCommissionModal(false);
@@ -17,7 +20,7 @@ const CommissionInfo = ({ setOpenCommissionModal }) => {
         className="z-2 popUpBoxShadow popUpOpenAnimation absolute w-[90%] sm:w-[85%] md:w-[70%] lg:w-[450px] rounded-[5px] bg-bg_color_LoginPopUpBg text-white p-2 xs:p-5 rounded-md h-[70%] overflow-hidden"
       >
         <h2 className="mb-5 text-base md:text-xl font-semibold">
-          How to get commission?
+          {getLanguage(LanguageKey.HOW_TO_GET_COMMISSION)}
         </h2>
         <div
           onClick={() => setOpenCommissionModal(false)}
@@ -57,7 +60,9 @@ const CommissionInfo = ({ setOpenCommissionModal }) => {
               data-v-4c49d924
               className="affi-how-bonus-list affi-how-to-get-bonus"
             >
-              <h5 data-v-4c49d924>💸 How You Earn Commission</h5>
+              <h5 data-v-4c49d924>
+                💸 {getLanguage(LanguageKey.HOW_TO_EARN_COMMISSION)}
+              </h5>
               <li data-v-4c49d924>
                 You get bonus of the total amount your users lose every day
                 based on below slabs.

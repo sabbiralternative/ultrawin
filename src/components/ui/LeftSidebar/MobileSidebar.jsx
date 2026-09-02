@@ -12,13 +12,12 @@ import { logout } from "../../../redux/features/auth/authSlice";
 import { navigateTelegramInstagram } from "../../../utils/navigateTelegramInstagram";
 import { settings } from "../../../api";
 import { latestEvent } from "../../../static/latest-event";
-import { useLanguage } from "../../../context/LanguageProvider";
-import { languageValue } from "../../../utils/language";
 import { LanguageKey } from "../../../const";
 import { eventNameList } from "../../../static/event-name-list";
+import useLanguage from "../../../hooks/use-language";
 
 const MobileSidebar = () => {
-  const { valueByLanguage } = useLanguage();
+  const { getLanguage } = useLanguage();
   const closePopupForForever = localStorage.getItem("closePopupForForever");
   const navigate = useNavigate();
   const { showLeftSidebar } = useSelector((state) => state.global);
@@ -1008,7 +1007,7 @@ const MobileSidebar = () => {
                 </svg>
                 <div className="sh-tab-label">
                   {" "}
-                  {languageValue(valueByLanguage, LanguageKey.CRICKET)}
+                  {getLanguage(LanguageKey.CRICKET)}
                 </div>
               </button>
               <button onClick={() => handleSetGroupType(1)} className=" sh-btn">
@@ -1094,7 +1093,7 @@ const MobileSidebar = () => {
                 </svg>
                 <div className="sh-tab-label">
                   {" "}
-                  {languageValue(valueByLanguage, LanguageKey.FOOTBALL)}
+                  {getLanguage(LanguageKey.FOOTBALL)}
                 </div>
               </button>
               <button onClick={() => handleSetGroupType(2)} className=" sh-btn">
@@ -1153,7 +1152,7 @@ const MobileSidebar = () => {
                 </svg>
                 <div className="sh-tab-label">
                   {" "}
-                  {languageValue(valueByLanguage, LanguageKey.TENNIS)}
+                  {getLanguage(LanguageKey.TENNIS)}
                 </div>
               </button>
 
@@ -1356,7 +1355,7 @@ const MobileSidebar = () => {
                 </svg>
                 <div className="sh-tab-label">
                   {" "}
-                  {languageValue(valueByLanguage, LanguageKey.KABADDI)}
+                  {getLanguage(LanguageKey.KABADDI)}
                 </div>
               </button>
               <button
@@ -1423,7 +1422,7 @@ const MobileSidebar = () => {
                 </svg>
                 <div className="sh-tab-label">
                   {" "}
-                  {languageValue(valueByLanguage, LanguageKey.GREYHOUND)}
+                  {getLanguage(LanguageKey.GREYHOUND)}
                 </div>
               </button>
               {eventNameList.map((item) => {
@@ -1512,7 +1511,7 @@ const MobileSidebar = () => {
                 </svg>
                 <div className="sh-tab-label">
                   {" "}
-                  {languageValue(valueByLanguage, LanguageKey.HORSE)}
+                  {getLanguage(LanguageKey.HORSE)}
                 </div>
               </button>
               {/* <button className=" sh-btn">
@@ -2087,7 +2086,7 @@ const MobileSidebar = () => {
                   </svg>
                   <div className="sh-tab-label">
                     {" "}
-                    {languageValue(valueByLanguage, LanguageKey.DEPOSIT)}
+                    {getLanguage(LanguageKey.DEPOSIT)}
                   </div>
                 </button>
                 <button
@@ -2122,7 +2121,7 @@ const MobileSidebar = () => {
                   </svg>
                   <div className="sh-tab-label">
                     {" "}
-                    {languageValue(valueByLanguage, LanguageKey.WITHDRAW)}
+                    {getLanguage(LanguageKey.WITHDRAW)}
                   </div>
                 </button>
                 <button
@@ -2189,10 +2188,7 @@ const MobileSidebar = () => {
                   </svg>
                   <div className="sh-tab-label">
                     {" "}
-                    {languageValue(
-                      valueByLanguage,
-                      LanguageKey.BONUS_STATEMENT,
-                    )}
+                    {getLanguage(LanguageKey.BONUS_STATEMENT)}
                   </div>
                 </button>
                 <button
@@ -2549,10 +2545,7 @@ const MobileSidebar = () => {
                   </svg>
                   <div className="sh-tab-label">
                     {" "}
-                    {languageValue(
-                      valueByLanguage,
-                      LanguageKey.CHANGE_PASSWORD,
-                    )}
+                    {getLanguage(LanguageKey.CHANGE_PASSWORD)}
                   </div>
                 </button>
                 {/* <button className=" sh-btn">
@@ -2644,7 +2637,7 @@ const MobileSidebar = () => {
                   </svg>
                   <div className="sh-tab-label">
                     {" "}
-                    {languageValue(valueByLanguage, LanguageKey.LOGOUT)}
+                    {getLanguage(LanguageKey.LOGOUT)}
                   </div>
                 </button>
               )}
