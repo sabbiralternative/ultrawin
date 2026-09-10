@@ -58,6 +58,8 @@ export const API = {
 };
 
 export const settings = {
+  registration_mobile: "",
+  registration_username: "",
   metaKeywords: "",
   metaDescription: "",
   apk_banner: "",

@@ -10,17 +10,20 @@ import { useForm } from "react-hook-form";
 import { settings } from "../../api";
 
 import { setUser } from "../../redux/features/auth/authSlice";
-
+import { FaRegUser, FaMobileAlt } from "react-icons/fa";
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 import useBalance from "../../hooks/useBalance";
-import { useState } from "react";
+import { Fragment, useState } from "react";
 import { navigateTelegramInstagram } from "../../utils/navigateTelegramInstagram";
 import useContextState from "../../hooks/useContextState";
 import { LanguageKey } from "../../const";
 import useLanguage from "../../hooks/use-language";
 
 const Register = () => {
+  const [tab, setTab] = useState(
+    settings.registration_mobile ? "mobile" : "username",
+  );
   const { getLanguage } = useLanguage();
   const [handleLogin] = useLoginMutation();
   const closePopupForForever = localStorage.getItem("closePopupForForever");
@@ -61,17 +64,19 @@ const Register = () => {
 
   const onSubmit = async (data) => {
     const registerData = {
-      username: "",
+      username: data?.username,
       password: data?.password,
       confirmPassword: data?.confirmPassword,
       mobile: mobile,
 
       otp: data?.otp,
       isOtpAvailable: settings.otp,
-      // referralCode: data?.referralCode,
+      //  referralCode: referralCode || user.referralCode,
       orderId: OTP.orderId,
       otpMethod: OTP.otpMethod,
       affnook_token: affnook_token || null,
+      registration_mobile: settings.registration_mobile,
+      registration_username: settings.registration_username,
     };
 
     const result = await handleRegister(registerData).unwrap();
@@ -180,83 +185,178 @@ const Register = () => {
             <span className="card-login-here">
               Please enter your register details here.
             </span>
-            <span className="usr-input">
-              <span className="input-labell sc-ion-label-md-h sc-ion-label-md-s md hydrated">
-                {getLanguage(LanguageKey.MOBILE_NUMBER)}
-                <span className="red-text">*</span>
-              </span>
+            {settings.registration_mobile && settings.registration_username && (
               <div
-                className="MuiFormControl-root MuiTextField-root login-input-field user-name"
-                style={{ position: "relative" }}
+                style={{
+                  width: "100%",
+                  background:
+                    "color-mix(in srgb, var(--bg-primary) 30%, transparent)",
+                  marginBottom: "12px",
+                }}
               >
                 <div
-                  style={{ padding: "0px", height: "100%" }}
-                  className="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-formControl"
-                >
-                  <input
-                    maxLength={10}
-                    onChange={(e) => handleMobileInputChange(e)}
-                    style={{
-                      padding: "0px 5px",
-                      width: "100%",
-                      height: "100%",
-                    }}
-                    aria-invalid="false"
-                    name="username"
-                    placeholder="username"
-                    type="text"
-                    className="MuiInputBase-input MuiOutlinedInput-input"
-                    value={mobile}
-                  />
-                </div>
-                <button
-                  onClick={handleOTP}
                   style={{
-                    position: "absolute",
-                    right: "10px",
-                    top: "10px",
-                    background: "var(--secondary-color)",
-                    borderRadius: "2px",
-                    padding: "1px 2px",
+                    display: "flex",
+                    flexDirection: "row",
+                    alignItems: "center",
+                    justifyContent: "flex-start",
+                    position: "relative",
+                    width: "100%",
                   }}
-                  className="MuiButtonBase-root MuiButton-root MuiButton-contained login-form-btn-demo MuiButton-containedPrimary"
-                  type="button"
                 >
-                  <span
-                    className="MuiButton-label"
-                    style={{ fontSize: "12px", color: "white" }}
-                  >
-                    {getLanguage(LanguageKey.GET_OTP)}
-                  </span>
-                  <span className="MuiTouchRipple-root"></span>
-                </button>
-              </div>
-            </span>
-            <span className="usr-input">
-              <span className="input-labell sc-ion-label-md-h sc-ion-label-md-s md hydrated">
-                {getLanguage(LanguageKey.OTP)}{" "}
-                <span className="red-text">*</span>
-              </span>
-              <div className="MuiFormControl-root MuiTextField-root login-input-field user-name">
-                <div
-                  style={{ padding: "0px", height: "100%" }}
-                  className="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-formControl"
-                >
-                  <input
+                  <div
+                    onClick={() => setTab("mobile")}
                     style={{
-                      padding: "0px 5px",
+                      cursor: "pointer",
+                      display: "flex",
+                      flexDirection: "row",
+                      alignItems: "center",
+                      justifyContent: "center",
+                      padding: "5px",
                       width: "100%",
-                      height: "100%",
+                      gap: "6px",
+                      color: tab === "mobile" ? "white" : "black",
+                      background:
+                        tab === "mobile" ? "var(--bg-primary)" : undefined,
                     }}
-                    {...register("otp", { required: true })}
-                    aria-invalid="false"
-                    placeholder="username"
-                    type="text"
-                    className="MuiInputBase-input MuiOutlinedInput-input"
-                  />
+                  >
+                    <FaMobileAlt />
+
+                    <span>{getLanguage(LanguageKey.BY_PHONE)}</span>
+                  </div>
+
+                  <div
+                    onClick={() => setTab("username")}
+                    style={{
+                      cursor: "pointer",
+                      display: "flex",
+                      flexDirection: "row",
+                      alignItems: "center",
+                      justifyContent: "center",
+                      padding: "5px",
+                      width: "100%",
+                      gap: "6px",
+                      color: tab === "username" ? "white" : "black",
+                      background:
+                        tab === "username" ? "var(--bg-primary)" : undefined,
+                    }}
+                  >
+                    <FaRegUser />
+
+                    <span>{getLanguage(LanguageKey.BY_USERNAME)}</span>
+                  </div>
                 </div>
               </div>
-            </span>
+            )}
+            {tab === "mobile" && settings.registration_mobile && (
+              <Fragment>
+                <span className="usr-input">
+                  <span className="input-labell sc-ion-label-md-h sc-ion-label-md-s md hydrated">
+                    {getLanguage(LanguageKey.MOBILE_NUMBER)}
+                    <span className="red-text">*</span>
+                  </span>
+                  <div
+                    className="MuiFormControl-root MuiTextField-root login-input-field user-name"
+                    style={{ position: "relative" }}
+                  >
+                    <div
+                      style={{ padding: "0px", height: "100%" }}
+                      className="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-formControl"
+                    >
+                      <input
+                        maxLength={10}
+                        onChange={(e) => handleMobileInputChange(e)}
+                        style={{
+                          padding: "0px 5px",
+                          width: "100%",
+                          height: "100%",
+                        }}
+                        aria-invalid="false"
+                        name="username"
+                        placeholder="mobile"
+                        type="text"
+                        className="MuiInputBase-input MuiOutlinedInput-input"
+                        value={mobile}
+                      />
+                    </div>
+                    <button
+                      onClick={handleOTP}
+                      style={{
+                        position: "absolute",
+                        right: "10px",
+                        top: "10px",
+                        background: "var(--secondary-color)",
+                        borderRadius: "2px",
+                        padding: "1px 2px",
+                      }}
+                      className="MuiButtonBase-root MuiButton-root MuiButton-contained login-form-btn-demo MuiButton-containedPrimary"
+                      type="button"
+                    >
+                      <span
+                        className="MuiButton-label"
+                        style={{ fontSize: "12px", color: "white" }}
+                      >
+                        {getLanguage(LanguageKey.GET_OTP)}
+                      </span>
+                      <span className="MuiTouchRipple-root"></span>
+                    </button>
+                  </div>
+                </span>
+                <span className="usr-input">
+                  <span className="input-labell sc-ion-label-md-h sc-ion-label-md-s md hydrated">
+                    {getLanguage(LanguageKey.OTP)}{" "}
+                    <span className="red-text">*</span>
+                  </span>
+                  <div className="MuiFormControl-root MuiTextField-root login-input-field user-name">
+                    <div
+                      style={{ padding: "0px", height: "100%" }}
+                      className="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-formControl"
+                    >
+                      <input
+                        style={{
+                          padding: "0px 5px",
+                          width: "100%",
+                          height: "100%",
+                        }}
+                        {...register("otp", { required: true })}
+                        aria-invalid="false"
+                        placeholder="otp"
+                        type="text"
+                        className="MuiInputBase-input MuiOutlinedInput-input"
+                      />
+                    </div>
+                  </div>
+                </span>
+              </Fragment>
+            )}
+
+            {tab === "username" && settings.registration_username && (
+              <span className="usr-input">
+                <span className="input-labell sc-ion-label-md-h sc-ion-label-md-s md hydrated">
+                  {getLanguage(LanguageKey.USERNAME)}{" "}
+                  <span className="red-text">*</span>
+                </span>
+                <div className="MuiFormControl-root MuiTextField-root login-input-field user-name">
+                  <div
+                    style={{ padding: "0px", height: "100%" }}
+                    className="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-formControl"
+                  >
+                    <input
+                      style={{
+                        padding: "0px 5px",
+                        width: "100%",
+                        height: "100%",
+                      }}
+                      {...register("username", { required: true })}
+                      aria-invalid="false"
+                      placeholder="username"
+                      type="text"
+                      className="MuiInputBase-input MuiOutlinedInput-input"
+                    />
+                  </div>
+                </div>
+              </span>
+            )}
 
             <div className="pwd-input">
               <span className="input-labell sc-ion-label-md-h sc-ion-label-md-s md hydrated">

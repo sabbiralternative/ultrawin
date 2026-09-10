@@ -488,6 +488,8 @@ export const LanguageKey = {
   ACTION: "ACTION",
   SEND_OTP: "SEND_OTP",
   CAN_WITHDRAW_ANYTIME: "CAN_WITHDRAW_ANYTIME",
+  BY_USERNAME: "BY_USERNAME",
+  BY_PHONE: "BY_PHONE",
 };
 
 export const settingsAPI = "https://api7.live/api/exchange/diamond/settings";
