@@ -8,8 +8,17 @@ import { settings } from "../../api";
 const MainLayout = () => {
   return (
     <>
-      <meta name="description" content={settings.metaDescription} />
-      <meta name="keywords" content={settings.metaKeywords} />
+      {Settings.metaDescription && (
+        <meta name="description" content={Settings.metaDescription} />
+      )}
+      {Settings.metaKeywords && (
+        <meta name="keywords" content={Settings.metaKeywords} />
+      )}
+      {Settings.gscTag && (
+        <meta name="google-site-verification" content={Settings.gscTag} />
+      )}
+      {Settings.metaTitle && <title>{Settings.metaTitle}</title>}
+      <meta name="robots" content="index, follow" />
       <div className="MuiBox-root jss31"></div>
       <div className="ion-app md ion-page hydrated">
         <div className="web-view" style={{ position: "fixed" }}>
